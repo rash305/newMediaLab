@@ -13,7 +13,7 @@ public class MockupSignRepository implements ISignRepository<Sign> {
 
     Sign[] signs = {
             new Sign("Dog"),
-            new Sign("Cat"),
+            new Sign("Konijn"),
     };
     @Override
     public List<Sign> getAll() {
