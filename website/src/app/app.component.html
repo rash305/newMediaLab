@@ -1,14 +1,36 @@
-WeSign!
-<hr>
-<button>
-  <span>Categorieën</span>
-</button>
-<button>
-  <span>Leren</span>
-</button>
-<button>
-  <span>Zoeken</span>
-</button>
-<hr>
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary m-0 p-0">
+    <div class="d-flex flex-fill justify-content-between bd-highlight mb-3">
+      <div class="p-2 bd-highlight">
+      </div>
 
-<router-outlet></router-outlet>
+      <div class="p-2 bd-highlight">
+      <a class="navbar-brand " href="#">WeSign!</a>
+      </div>
+      <div class="bd-highlight" id="navbarColor01">
+        <button type="button" class="btn btn-secondary">Sign up</button>
+      </div>
+    </div>
+
+  </nav>
+  <div>
+  </div>
+  <div class="header">
+    <div class="btn-settings">
+    </div>
+    <hr>
+    <div>
+      <button class="btn btn-primary" routerLink="/categories" routerLinkActive="active">
+        <span>Categorieën</span>
+      </button>
+      <button class="btn btn-primary" routerLink="/learn" routerLinkActive="active">
+        <span>Leren</span>
+      </button>
+      <button class="btn btn-primary" routerLink="/search" routerLinkActive="active">
+        <span>Zoeken</span>
+      </button>
+    </div>
+    <hr>
+  </div>
+  <router-outlet></router-outlet>
+</div>
