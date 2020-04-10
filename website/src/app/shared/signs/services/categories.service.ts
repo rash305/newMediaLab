@@ -23,7 +23,7 @@ export class CategoriesService {
   getCategories(): Observable<CategoryModel[]> {
     return this.http.get<CategoryModel[]>(this.categoryUrl)
       .pipe(
-        catchError(this.handleError('getCategories', []))
+        catchError(this.handleError('getCategories', null))
       );
   }
 
@@ -33,7 +33,7 @@ export class CategoriesService {
     // Todo: User guid might be added by a guard or something -> investigate later
     return this.http.get<CategoryModel[]>(this.categoryUrl)
       .pipe(
-        catchError(this.handleError('getPersonalCategories', []))
+        catchError(this.handleError('getPersonalCategories', null))
       );
   }
 }

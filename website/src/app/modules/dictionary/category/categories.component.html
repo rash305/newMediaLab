@@ -3,3 +3,6 @@
     <span class="badge">{{ category.title }}</span>
   </li>
 </ul>
+<span *ngIf="(!loading) && ( categories && categories.length == 0)"  >U heeft nog geen gebaren opgeslagen.</span>
+<span *ngIf="(!loading) && (!categories)"  > Categorieën kunnen niet worden opgehaald.</span>
+

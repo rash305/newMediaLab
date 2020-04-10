@@ -6,9 +6,11 @@ import { CategoriesComponent } from './modules/dictionary/category/categories.co
 import {RouterModule, Routes} from '@angular/router';
 import { LearnComponent } from './modules/learn/learn.component';
 import { SearchComponent } from './modules/search/search.component';
-import { SettingsComponent } from './modules/settings/settings.component';
+import { CreateAccountComponent } from './modules/settings/account/create/create-account.component';
 import { HttpClientModule } from '@angular/common/http';
 import {HttpErrorHandler} from './common/network/http-error-handler.service';
+import { SignsComponent } from './modules/dictionary/signs/signs.component';
+import { SettingsPopupComponent } from './modules/settings/popup/settings-popup.component';
 const appRoutes: Routes = [
   {
     path: 'home',
@@ -28,7 +30,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsComponent,
+    component: SettingsPopupComponent,
   },
   {
     path: '',
@@ -43,7 +45,9 @@ const appRoutes: Routes = [
     CategoriesComponent,
     LearnComponent,
     SearchComponent,
-    SettingsComponent
+    CreateAccountComponent,
+    SignsComponent,
+    SettingsPopupComponent
   ],
   imports: [
     BrowserModule,

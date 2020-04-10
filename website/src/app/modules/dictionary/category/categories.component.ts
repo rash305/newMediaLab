@@ -9,6 +9,7 @@ import {CategoriesService} from '../../../shared/signs/services/categories.servi
 })
 export class CategoriesComponent implements OnInit {
 
+  loading = false;
   categories: CategoryModel[];
   constructor(private  categoriesService: CategoriesService) {
   }
@@ -19,6 +20,10 @@ export class CategoriesComponent implements OnInit {
 
   getCategories(): void {
     this.categoriesService.getPersonalCategories()
-      .subscribe(categories => (this.categories = categories));
+      .subscribe(categories => {
+        this.categories = categories,
+          this.loading = false;
+        console.log(this.categories);
+      });
   }
 }
