@@ -7,8 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'website';
+  isLoggedIn = false;
+  createAccountIsTrue = false;
   constructor() {
-    console.log('website');
+  }
+
+  showCreateAccountPopup() {
+    this.createAccountIsTrue = !this.createAccountIsTrue;
   }
 
 }
