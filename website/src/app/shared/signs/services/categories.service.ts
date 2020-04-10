@@ -3,6 +3,7 @@ import {HandleError, HttpErrorHandler} from '../../../common/network/http-error-
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {CategoryModel} from '../models/category.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
