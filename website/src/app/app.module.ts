@@ -26,6 +26,10 @@ const appRoutes: Routes = [
     component: SearchComponent,
   },
   {
+    path: 'settings',
+    component: SettingsComponent,
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'

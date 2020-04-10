@@ -2,3 +2,20 @@
   float:right;
   position: fixed;
 }
+
+.btn-secondary {
+  width: calc(100%/3);
+}
+.settings {
+  color: white;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0 !important;
+}
+
+i {
+  font-size: 300%;
+}
+
