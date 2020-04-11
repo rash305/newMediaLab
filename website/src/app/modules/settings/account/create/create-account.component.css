@@ -1,26 +1,52 @@
+
 /* Full-width inputs */
 input[type=text], input[type=password] {
-  width: 100%;
-  padding: 8px 20px;
+  width: 90%;
+  padding: 8px 1px;
   margin: 5px 0px 8px 0px;
   display: inline-block;
-  border: 1px solid #ccc;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 1px solid #ccc;
   box-sizing: border-box;
-}
-
-span.register {
-  font-size: 150%;
-  padding-left: 5%;
-}
-
-/* Set button position */
-button {
-  margin: 8px auto;
-  display: block;
 }
 
 /* Add padding to containers */
 .container {
-  padding-left: 50px;
-  padding-right: 50px;
+  width: 90%;
+  border-top: 2px solid rebeccapurple;
+  border-left: 2px solid rebeccapurple;
+  border-right: 2px solid rebeccapurple;
+  padding: 2% 5% 2% 5%;
 }
+
+.register-container {
+  text-align: center;
+  font-size: 110%;
+  background: lightgray;
+}
+
+.btn-container {
+  border-top: 0px;
+  border-bottom: 2px solid rebeccapurple;
+  padding: 2%;
+}
+
+.register-button {
+  float: right;
+}
+
+.btn-container {
+  padding-left: -5px;
+}
+
+i {
+  width: 10%;
+  font-size: 150%;
+}
+
+.btn-i {
+  width: 25px;
+}
+
