@@ -1,8 +1,8 @@
-<ul class="heroes">
-  <li *ngFor="let category of categories">
-    <span class="badge">{{ category.title }}</span>
-  </li>
-</ul>
-<span *ngIf="(!loading) && ( categories && categories.length == 0)"  >U heeft nog geen gebaren opgeslagen.</span>
-<span *ngIf="(!loading) && (!categories)"  > Categorieën kunnen niet worden opgehaald.</span>
+<div class="row">
+  <span *ngIf="(!loading) && ( categories && categories.length == 0)">U heeft nog geen gebaren opgeslagen.</span>
+  <span *ngIf="(!loading) && (!categories)"> Categorieën kunnen niet worden opgehaald.</span>
 
+  <div *ngFor="let category of categories" class="col-md-3 col-4">
+    <app-square-overview-tile [content]="category"></app-square-overview-tile>
+  </div>
+</div>

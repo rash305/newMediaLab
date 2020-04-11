@@ -4,6 +4,7 @@ import {HandleError, HttpErrorHandler} from '../../../common/network/http-error-
 import {Observable} from 'rxjs';
 import {SignModel} from '../models/sign.model';
 import {catchError} from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +17,7 @@ const httpOptions = {
 })
 export class SignStoreService {
   private handleError: HandleError;
-  signsUrl = 'api/signs';  // URL to web api
+  signsUrl = environment.baseUrl + 'signs';  // URL to web api
 
   constructor( private http: HttpClient,
                httpErrorHandler: HttpErrorHandler,

@@ -1,16 +1,16 @@
 package com.newmedia.deafapi.api.models;
 
-public class Sign {
+public class Category {
 
     private String id;
     private String title;
 
-    public Sign(String id, String title) {
-        this.id = id;
+    public Category(String title) {
         this.title = title;
     }
 
-    public Sign(String title) {
+    public Category(String id, String title) {
+        this.id = id;
         this.title = title;
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryModel} from '../../../shared/signs/models/category.model';
 import {CategoriesService} from '../../../shared/signs/services/categories.service';
 
@@ -11,6 +11,7 @@ export class CategoriesComponent implements OnInit {
 
   loading = false;
   categories: CategoryModel[];
+
   constructor(private  categoriesService: CategoriesService) {
   }
 
@@ -21,9 +22,8 @@ export class CategoriesComponent implements OnInit {
   getCategories(): void {
     this.categoriesService.getPersonalCategories()
       .subscribe(categories => {
-        this.categories = categories,
-          this.loading = false;
-        console.log(this.categories);
+        this.categories = categories;
+        this.loading = false;
       });
   }
 }

@@ -2,9 +2,8 @@ package com.newmedia.deafapi.api.dtos;
 
 import java.io.Serializable;
 
-public class SignDto implements Serializable {
+public class CategoryDto implements Serializable {
     private String id;
-
     private String title;
 
     public String getTitle() {
@@ -12,11 +11,6 @@ public class SignDto implements Serializable {
     }
 
     public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public SignDto(String id, String title) {
-        this.id = id;
         this.title = title;
     }
 

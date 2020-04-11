@@ -1,16 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { CategoriesComponent } from './modules/dictionary/category/categories.component';
+import {AppComponent} from './app.component';
+import {CategoriesComponent} from './modules/dictionary/category/categories.component';
 import {RouterModule, Routes} from '@angular/router';
-import { LearnComponent } from './modules/learn/learn.component';
-import { SearchComponent } from './modules/search/search.component';
-import { CreateAccountComponent } from './modules/settings/account/create/create-account.component';
-import { HttpClientModule } from '@angular/common/http';
+import {LearnComponent} from './modules/learn/learn.component';
+import {SearchComponent} from './modules/search/search.component';
+import {CreateAccountComponent} from './modules/settings/account/create/create-account.component';
+import {HttpClientModule} from '@angular/common/http';
 import {HttpErrorHandler} from './common/network/http-error-handler.service';
-import { SignsComponent } from './modules/dictionary/signs/signs.component';
-import { SettingsPopupComponent } from './modules/settings/popup/settings-popup.component';
+import {SignsComponent} from './modules/dictionary/signs/signs.component';
+import {SettingsPopupComponent} from './modules/settings/popup/settings-popup.component';
+import {SquareOverviewTileComponent} from './shared/signs/components/square-overview-tile/square-overview-tile.component';
+
 const appRoutes: Routes = [
   {
     path: 'home',
@@ -18,7 +20,10 @@ const appRoutes: Routes = [
   },
   {
     path: 'categories',
-    component: CategoriesComponent,
+    component: CategoriesComponent
+  },
+  {
+    path: 'categories/:id', component: SignsComponent
   },
   {
     path: 'learn',
@@ -47,7 +52,8 @@ const appRoutes: Routes = [
     SearchComponent,
     CreateAccountComponent,
     SignsComponent,
-    SettingsPopupComponent
+    SettingsPopupComponent,
+    SquareOverviewTileComponent
   ],
   imports: [
     BrowserModule,
@@ -63,4 +69,5 @@ const appRoutes: Routes = [
     HttpErrorHandler],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

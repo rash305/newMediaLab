@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {CategoryModel} from '../models/category.model';
 import {HttpClient} from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import {HttpClient} from '@angular/common/http';
 export class CategoriesService {
 
   private handleError: HandleError;
-  categoryUrl = 'api/categories';  // URL to web api
+  categoryUrl = environment.baseUrl + '/categories';  // URL to web api
 
   constructor( private http: HttpClient,
                httpErrorHandler: HttpErrorHandler,
