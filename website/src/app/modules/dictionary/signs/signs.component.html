@@ -1,1 +1,15 @@
-<p>signs works!</p>
+<div class="row back-button">
+  <div class="col-12 ">
+    <div routerLink="/categories">
+      <i class="fa fa-arrow-circle-left"></i>
+      <span> Terug</span>
+    </div>
+  </div>
+  <hr>
+</div>
+<div class="row">
+  <div *ngFor="let sign of signs" class="col-md-3 col-4">
+    <app-square-overview-tile [content]="sign"></app-square-overview-tile>
+  </div>
+</div>
+<span *ngIf="(noMoreSignsAvailable && signs.length == 0)">Er zijn geen gebaren.</span>

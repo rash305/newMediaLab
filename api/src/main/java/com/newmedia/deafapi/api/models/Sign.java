@@ -4,10 +4,12 @@ public class Sign {
 
     private String id;
     private String title;
+    private String categoryId;
 
-    public Sign(String id, String title) {
+    public Sign(String id, String title, String categoryId) {
         this.id = id;
         this.title = title;
+        this.categoryId = categoryId;
     }
 
     public Sign(String title) {
@@ -28,5 +30,13 @@ public class Sign {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }
