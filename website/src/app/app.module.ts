@@ -7,11 +7,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {LearnComponent} from './modules/learn/learn.component';
 import {SearchComponent} from './modules/search/search.component';
 import {CreateAccountComponent} from './modules/settings/account/create/create-account.component';
+import {LoginAccountComponent} from './modules/settings/account/login/login-account.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpErrorHandler} from './common/network/http-error-handler.service';
 import {SignsComponent} from './modules/dictionary/signs/signs.component';
 import {SettingsPopupComponent} from './modules/settings/popup/settings-popup.component';
 import {SquareOverviewTileComponent} from './shared/signs/components/square-overview-tile/square-overview-tile.component';
+import {FormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   {
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
     LearnComponent,
     SearchComponent,
     CreateAccountComponent,
+    LoginAccountComponent,
     SignsComponent,
     SettingsPopupComponent,
     SquareOverviewTileComponent
@@ -62,7 +65,8 @@ const appRoutes: Routes = [
       appRoutes, {
         useHash: false
       }
-    )
+    ),
+    FormsModule
   ],
   providers: [
     HttpClientModule,
