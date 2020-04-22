@@ -2,20 +2,25 @@
   <i class="fa fa-user-plus"></i><span><b>Registreren</b></span>
 </div>
 <div class="container">
+  <div class="alert alert-danger" role="alert" [hidden]="!usernameError">
+    {{usernameError}}
+  </div>
   <i class="fa fa-user-circle"></i>
-  <input type="text" placeholder="Gebruikersnaam" name="geb_naam" required>
-
+  <input type="text" placeholder="Gebruikersnaam" name="geb_naam" required [(ngModel)]="username" >
+  <div class="alert alert-danger" role="alert" [hidden]="!emailError">
+    {{emailError}}
+  </div>
   <i class="fa fa-at"></i>
-  <input type="text" placeholder="E-mailadress" name="email" required>
+  <input type="text" placeholder="E-mailadress" name="email" required [(ngModel)]="emailAddress">
 
   <i class="fa fa-unlock-alt"></i>
-  <input type="password" placeholder="Wachtwoord" name="ww" required>
+  <input type="password" placeholder="Wachtwoord" name="ww" required [(ngModel)]="password">
 
   <i class="fa fa-unlock-alt"></i>
-  <input type="password" placeholder="Herhaal wachtwoord" name="ww2" required>
+  <input type="password" placeholder="Herhaal wachtwoord" name="ww2" required [(ngModel)]="repeatedPassword">
 
 </div>
 <div class="container btn-container">
   <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left btn-i"></i>Terug</button>
-  <button type="button" class="btn btn-primary register-button"><i class="fa fa-sign-in btn-i"></i>Inloggen</button>
+  <button type="button" class="btn btn-primary register-button" (click)="createAccount()" ><i class="fa fa-sign-in btn-i"></i>Inloggen</button>
 </div>

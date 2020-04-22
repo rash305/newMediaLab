@@ -9,7 +9,7 @@ import {CategoriesService} from '../../../shared/signs/services/categories.servi
 })
 export class CategoriesComponent implements OnInit {
 
-  loading = false;
+  loading = true;
   categories: CategoryModel[];
 
   constructor(private  categoriesService: CategoriesService) {

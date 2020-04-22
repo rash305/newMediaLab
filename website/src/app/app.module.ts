@@ -12,6 +12,7 @@ import {HttpErrorHandler} from './common/network/http-error-handler.service';
 import {SignsComponent} from './modules/dictionary/signs/signs.component';
 import {SettingsPopupComponent} from './modules/settings/popup/settings-popup.component';
 import {SquareOverviewTileComponent} from './shared/signs/components/square-overview-tile/square-overview-tile.component';
+import {FormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   {
@@ -55,15 +56,16 @@ const appRoutes: Routes = [
     SettingsPopupComponent,
     SquareOverviewTileComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(
-      appRoutes, {
-        useHash: false
-      }
-    )
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        RouterModule.forRoot(
+            appRoutes, {
+                useHash: false
+            }
+        ),
+        FormsModule
+    ],
   providers: [
     HttpClientModule,
     HttpErrorHandler],
