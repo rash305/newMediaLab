@@ -7,6 +7,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LearnComponent} from './modules/learn/learn.component';
 import {SearchComponent} from './modules/search/search.component';
 import {CreateAccountComponent} from './modules/settings/account/create/create-account.component';
+import {LoginAccountComponent} from './modules/settings/account/login/login-account.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpErrorHandler} from './common/network/http-error-handler.service';
 import {SignsComponent} from './modules/dictionary/signs/signs.component';
@@ -52,20 +53,21 @@ const appRoutes: Routes = [
     LearnComponent,
     SearchComponent,
     CreateAccountComponent,
+    LoginAccountComponent,
     SignsComponent,
     SettingsPopupComponent,
     SquareOverviewTileComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        RouterModule.forRoot(
-            appRoutes, {
-                useHash: false
-            }
-        ),
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(
+      appRoutes, {
+        useHash: false
+      }
+    ),
+    FormsModule
+  ],
   providers: [
     HttpClientModule,
     HttpErrorHandler],
