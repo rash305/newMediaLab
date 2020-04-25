@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-settings-popup',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings-popup.component.css']
 })
 export class SettingsPopupComponent implements OnInit {
+  isLoggedIn = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  receiveLoginStatus($event: boolean) {
+    this.isLoggedIn = $event;
+  }
 }

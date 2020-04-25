@@ -3,7 +3,7 @@
 input[type=text], input[type=password] {
   width: 90%;
   padding: 8px 1px;
-  margin: 5px 0px 8px 0px;
+  margin: 8px 0px 5px 0px;
   display: inline-block;
   border-top: 0px;
   border-left: 0px;
@@ -15,9 +15,9 @@ input[type=text], input[type=password] {
 /* Add padding to containers */
 .container {
   width: 90%;
-  border-top: 2px solid rebeccapurple;
-  border-left: 2px solid rebeccapurple;
-  border-right: 2px solid rebeccapurple;
+  border-top: 2px solid #593196;
+  border-left: 2px solid #593196;
+  border-right: 2px solid #593196;
   padding: 2% 5% 2% 5%;
 }
 
@@ -27,9 +27,13 @@ input[type=text], input[type=password] {
   background: #e5e5e5;
 }
 
-.btn-container {
+.middle-container {
+  height: 300px;
+}
+
+.bottom-container {
   border-top: 0px;
-  border-bottom: 2px solid rebeccapurple;
+  border-bottom: 2px solid #593196;
   padding: 2%;
 }
 
@@ -37,7 +41,7 @@ input[type=text], input[type=password] {
   float: right;
 }
 
-.btn-container {
+.bottom-container {
   padding-left: -5px;
 }
 
@@ -46,7 +50,25 @@ i {
   font-size: 150%;
 }
 
+.alert-danger {
+  padding: 1px 1px 1px 5px;
+  font-size: 75%;
+}
+.alert-container {
+  height: 18px;
+  padding-left: 10%;
+}
+
 .btn-i {
   width: 25px;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.btn {
+  border-radius: 5px;
 }
 

@@ -8,6 +8,12 @@
       <a class="navbar-brand " href="#">WeSign!</a>
       </div>
       <div class="p-2 bd-highlight" id="navbarColor01">
+        <button class="btn settings" routerLink="/not-logged-in-message" routerLinkActive="active" [hidden]="isLoggedIn">
+          <span><i class="fa fa-video-camera" style="font-size: 120%; color: #bfbfbf"></i></span>
+        </button>
+        <button class="btn settings" routerLink="/add-sign" routerLinkActive="active" [hidden]="!isLoggedIn">
+          <span><i class="fa fa-video-camera" style="font-size: 120%"></i></span>
+        </button>
         <button class="btn settings" routerLink="/settings" routerLinkActive="active">
           <span><i class="fa fa-cog" style="font-size: 120%"></i></span>
         </button>
@@ -22,7 +28,7 @@
     <hr>
     <div>
       <button class="btn btn-secondary" routerLink="/categories" routerLinkActive="active">
-        <span><i class="fa fa-heart"></i><br />Woordenboek</span>
+        <span><i class="fa fa-heart"></i><br />Favorieten</span>
       </button>
       <button class="btn btn-secondary" routerLink="/learn" routerLinkActive="active">
         <span><i class="fa fa-graduation-cap"></i><br />Leren</span>

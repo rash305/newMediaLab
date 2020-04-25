@@ -5,7 +5,10 @@
 
 .btn-secondary {
   width: calc(100%/3);
+  border-color: #593196;
+  border-radius: 5px;
 }
+
 .settings {
   color: white;
 }
@@ -14,6 +17,12 @@
   outline: none;
   box-shadow: 0 0 0 0 !important;
 }
+
+.btn-secondary:active,
+.btn-secondary.active{
+  border-color: #593196 !important;
+  background-color: #593196 !important;
+ }
 
 i {
   font-size: 300%;

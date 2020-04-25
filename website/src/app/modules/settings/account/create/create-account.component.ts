@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-account',
@@ -14,44 +16,42 @@ export class CreateAccountComponent implements OnInit {
 
   password: string;
   passwordError: string;
-  repeatedPassword: string;
-  passwordError2: string;
+  password2: string;
+  password2Error: string;
 
-  private requiredError = 'This field is required';
-  constructor() { }
+  private requiredError = ' moet worden ingevuld';
+
+  @Output() messageLoginStatus = new EventEmitter<boolean>();
+
+  constructor(private router: Router,
+              private location: Location) { }
 
   ngOnInit(): void {
   }
 
   createAccount(): void {
-    // temp variable to remember errors
-    let errorOccurred = false;
-
     // All validation checks
-    if (!this.validateUsername(this.username)) {
-      errorOccurred = true;
-    }
-    if (!this.validateEmail(this.emailAddress)) {
-      errorOccurred = true;
-    }
+    if ([this.validateUsername(this.username),
+        this.validateEmail(this.emailAddress),
+        this.validatePassword(this.password),
+        this.validatePassword2(this.password2, this.password)].every(Boolean)) {
+      // Send object to backend API
+      this.doSomethingInService();
 
-    // Cancel account creation if any error  occurred
-    if (errorOccurred) {
-      return;
+      // send message that you are logged in to activate camera
+      this.messageLoginStatus.emit(true);
+      // Go to categories page (and be logged in)
+      this.router.navigate(['/categories']);
     }
-
-    // Send object to backend API
-    this.doSomethingInService();
   }
-
 
   validateUsername(username): boolean {
     if (!username) {
-      this.usernameError = this.requiredError;
+      this.usernameError = 'Gebruikersnaam' + this.requiredError;
       return false;
     }
     if (username.length < 5) {
-      this.usernameError = 'Username is too short';
+      this.usernameError = 'Gebruikersnaam moet minimaal 5 tekens bevatten';
       return false;
     }
 
@@ -61,17 +61,17 @@ export class CreateAccountComponent implements OnInit {
 
   validateEmail(email): boolean {
     if (!email) {
-      this.emailError = this.requiredError;
+      this.emailError = 'E-mailadres' + this.requiredError;
       return false;
     }
 
     if (email.length < 1) {
-      this.emailError = 'Email address is too short';
+      this.emailError = 'E-mailadres is te kort';
       return false;
     }
 
     if (!this.validateEmailRegex(email)) {
-      this.emailError = 'Email format is incorrect';
+      this.emailError = 'E-mailadres heeft het verkeerde opbouw';
       return false;
     }
 
@@ -85,7 +85,52 @@ export class CreateAccountComponent implements OnInit {
     return re.test(String(email).toLowerCase());
   }
 
+  validatePassword(password): boolean {
+    if (!password) {
+      this.passwordError = 'Wachtwoord' + this.requiredError;
+      return false;
+    }
+
+    if (password.length < 8) {
+      this.passwordError = 'Wachtwoord moet minimaal 8 tekens bevatten';
+      return false;
+    }
+
+    if (!this.validatePasswordRegex(password)) {
+      this.passwordError = 'Wachtwoord moet tenminste 1 speciaal teken bevatten';
+      return false;
+    }
+
+    this.passwordError = '';
+    return true;
+  }
+
+  validatePasswordRegex(password): boolean {
+    // tslint:disable-next-line:max-line-length
+    const re = new RegExp('^(?=.*[!@#$%^&*])');
+    return re.test(String(password));
+  }
+
+  validatePassword2(password2, password): boolean {
+    if (!password2) {
+      this.password2Error = 'Wachtwoord' + this.requiredError;
+      return false;
+    }
+
+    if (!(password2 === password)) {
+      this.password2Error = 'Wachtwoorden moeten overeenkomen';
+      return false;
+    }
+
+    this.password2Error = '';
+    return true;
+  }
+
   private doSomethingInService(): void {
 
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

@@ -1,14 +1,27 @@
 <div class="container top-container">
   <i class="fa fa-sign-in"></i><span><b>Inloggen</b></span>
 </div>
-<div class="container" style="height: 225px;">
+<div class="container middle-container">
   <i class="fa fa-user-circle"></i>
-  <input type="text" placeholder="Gebruikersnaam of e-mail" name="uname" required>
+  <input type="text" placeholder="Gebruikersnaam of e-mail" name="uname" required [(ngModel)]="username">
+  <div class="alert-container">
+    <div class="alert-danger" role="alert" [hidden]="!usernameError">
+      {{usernameError}}
+    </div></div>
 
   <i class="fa fa-unlock-alt"></i>
-  <input type="password" placeholder="Wachtwoord" name="pw" required>
+  <input type="password" placeholder="Wachtwoord" name="pw" required [(ngModel)]="password">
+  <div class="alert-container">
+    <div class="alert-danger" role="alert" [hidden]="!passwordError">
+      {{passwordError}}
+    </div></div>
+
+  <div class="alert-danger" role="alert" style="padding: 15px; font-size: 100%;" [hidden]="!incorrectLoginError">
+    {{incorrectLoginError}}
+  </div>
+
 </div>
-<div class="container btn-container">
-  <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left btn-i"></i>Terug</button>
-  <button type="button" class="btn btn-primary right-button"><i class="fa fa-sign-in btn-i"></i>Inloggen</button>
+<div class="container bottom-container">
+  <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i>Terug</button>
+  <button type="button" class="btn btn-primary right-button" (click)="logIn()"><i class="fa fa-sign-in btn-i"></i>Inloggen</button>
 </div>

@@ -1,7 +1,7 @@
-<p>popup works!</p>
+<p [hidden]="isLoggedIn">popup works!</p>
 <!-- inside the popup -->
 <!-- there could be buttons -->
 <!-- or the account module <app-create-account></app-create-account>
 -->
-<app-login-account></app-login-account>
+<app-create-account (messageLoginStatus)="receiveLoginStatus($event)"></app-create-account>
 
