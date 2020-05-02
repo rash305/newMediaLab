@@ -1,11 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login-account',
   templateUrl: './login-account.component.html',
-  styleUrls: ['./login-account.component.css', '../account.component.css']
+  styleUrls: ['./login-account.component.css', '../../settings-style.component.css']
 })
 export class LoginAccountComponent implements OnInit {
 
@@ -19,10 +18,9 @@ export class LoginAccountComponent implements OnInit {
 
   private requiredError = ' moet worden ingevuld';
 
-  @Output() messageLoginStatus = new EventEmitter<boolean>();
+  @Output() messageSettingsStatus = new EventEmitter<string>();
 
-  constructor(private router: Router,
-              private location: Location) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,8 +35,6 @@ export class LoginAccountComponent implements OnInit {
         // Send object to backend API
         this.doSomethingInService();
 
-        // send message that you are logged in to activate camera
-        this.messageLoginStatus.emit(true);
         // Go to categories page (and be logged in)
         this.router.navigate(['/categories']);
       }
@@ -66,7 +62,7 @@ export class LoginAccountComponent implements OnInit {
   }
 
   private validateLogin(username: string, password: string) {
-    // something with server to check correctness of login
+    // something with service to check correctness of login
     // login is incorrect
     if (username.includes('a')) {
       this.incorrectLoginError = 'Combinatie van gebruikersnaam en wachtwoord is incorrect';
@@ -83,6 +79,7 @@ export class LoginAccountComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    this.messageSettingsStatus.emit('account');
+    this.router.navigate(['/settings']);
   }
 }

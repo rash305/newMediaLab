@@ -1,0 +1,85 @@
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 90%;
+  padding: 8px 1px;
+  margin: 8px 0px 5px 0px;
+  display: inline-block;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  width: 90%;
+  background-color: white; /* Black w/ opacity */
+  border-top: 2px solid #593196;
+  border-left: 2px solid #593196;
+  border-right: 2px solid #593196;
+  padding: 2% 5% 2% 5%;
+}
+
+.top-container {
+  text-align: center;
+  font-size: 110%;
+  background: #eeeeee;
+}
+
+.middle-container {
+  height: 300px;
+}
+
+.bottom-container {
+  border-top: 0px;
+  border-bottom: 2px solid #593196;
+  padding: 2%;
+}
+
+.right-button {
+  float: right;
+}
+
+.bottom-container {
+  padding-left: -5px;
+}
+i {
+  font-size: 150%;
+  width: 10%;
+}
+
+.btn-i {
+  width: 25px;
+}
+
+.alert-danger {
+  padding: 1px 1px 1px 5px;
+  font-size: 75%;
+}
+.alert-container {
+  height: 18px;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.btn {
+  border-radius: 5px;
+}
+
+.middle-container-bar {
+  padding: 0;
+}
+
+.btn-bar {
+  text-align: left;
+  width: 100%;
+  height: 50px;
+  border-radius: 0;
+  border-bottom: 2px solid #593196;
+}
+

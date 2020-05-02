@@ -1,7 +1,15 @@
-<p [hidden]="isLoggedIn">popup works!</p>
+<p>popup works!</p>
 <!-- inside the popup -->
 <!-- there could be buttons -->
 <!-- or the account module <app-create-account></app-create-account>
 -->
-<app-create-account (messageLoginStatus)="receiveLoginStatus($event)"></app-create-account>
+<div class="modal">
+  <app-settings-start [hidden]="!show('start')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-settings-start>
 
+  <app-account [hidden]="!show('account')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-account>
+  <app-login-account [hidden]="!show('login')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-login-account>
+  <app-create-account [hidden]="!show('register')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-create-account>
+  <app-change-account [hidden]="!show('change')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-change-account>
+
+  <app-help [hidden]="!show('help')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-help>
+</div>

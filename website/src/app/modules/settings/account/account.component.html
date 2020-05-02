@@ -1,0 +1,48 @@
+<div class="container top-container">
+  <i class="fa fa-user-circle"></i><span><b>Account</b></span>
+</div>
+<div class="container middle-container middle-container-bar">
+  <button class="btn btn-bar" (click)="toLogin()" [hidden]="isLoggedIn()">
+    <div class="row">
+      <div style="width: 90%; padding-left: 5%">
+        <i class="fa fa-sign-in btn-i"></i>  Inloggen
+      </div>
+      <div style="width: 10%">
+        <i class="fa fa-chevron-right"></i>
+      </div>
+    </div>
+  </button>
+  <button class="btn btn-bar" (click)="toRegister()" [hidden]="isLoggedIn()">
+    <div class="row">
+      <div style="width: 90%; padding-left: 5%">
+        <i class="fa fa-user-plus btn-i"></i>  Regristreren
+      </div>
+      <div style="width: 10%">
+        <i class="fa fa-chevron-right"></i>
+      </div>
+    </div>
+  </button>
+  <button class="btn btn-bar" (click)="toChangeAccount()" [hidden]="isLoggedIn()">
+    <div class="row">
+      <div style="width: 90%; padding-left: 5%">
+        <i class="fa fa-pencil btn-i"></i>  Wijzigen
+      </div>
+      <div style="width: 10%">
+        <i class="fa fa-chevron-right"></i>
+      </div>
+    </div>
+  </button>
+  <button class="btn btn-bar" (click)="toLogout()" [hidden]="isLoggedIn()">
+    <div class="row">
+      <div style="width: 90%; padding-left: 5%">
+        <i class="fa fa-sign-out btn-i"></i>  Uitloggen
+      </div>
+      <div style="width: 10%">
+        <i class="fa fa-chevron-right"></i>
+      </div>
+    </div>
+  </button>
+</div>
+<div class="container bottom-container">
+  <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+</div>

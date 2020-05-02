@@ -1,22 +1,23 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-create-account',
-  templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.css', '../../settings-style.component.css']
+  selector: 'app-change-account',
+  templateUrl: './change-account.component.html',
+  styleUrls: ['./change-account.component.css', '../../settings-style.component.css']
 })
-export class CreateAccountComponent implements OnInit {
+export class ChangeAccountComponent implements OnInit {
 
   username: string;
   usernameError: string;
   emailAddress: string;
   emailError: string;
 
-  password: string;
-  passwordError: string;
-  password2: string;
-  password2Error: string;
+  oldPassword: string;
+  oldPasswordError: string;
+  newPassword: string;
+  newPasswordError: string;
+  newPassword2: string;
 
   private requiredError = ' moet worden ingevuld';
 
@@ -27,17 +28,17 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createAccount(): void {
+  saveChanges(): void {
     // All validation checks
-    if ([this.validateUsername(this.username),
-        this.validateEmail(this.emailAddress),
-        this.validatePassword(this.password),
-        this.validatePassword2(this.password2, this.password)].every(Boolean)) {
+    if ([ // this.validateUsername(this.username),
+      // this.validateEmail(this.emailAddress),
+      this.validateOldPassword(this.oldPassword),
+      this.validateNewPassword(this.newPassword, this.newPassword2)].every(Boolean)) {
 
       // Send object to backend API
       this.doSomethingInService();
 
-      // Go to categories page (and be logged in)
+      // Go to categories page (and have changes saved)
       this.router.navigate(['/categories']);
     }
   }
@@ -82,23 +83,19 @@ export class CreateAccountComponent implements OnInit {
     return re.test(String(email).toLowerCase());
   }
 
-  validatePassword(password): boolean {
+  validateOldPassword(password): boolean {
     if (!password) {
-      this.passwordError = 'Wachtwoord' + this.requiredError;
+      this.oldPasswordError = 'Huidig wachtwoord' + this.requiredError;
       return false;
     }
 
-    if (password.length < 8) {
-      this.passwordError = 'Wachtwoord moet minimaal 8 tekens bevatten';
+    // Check in service if password is correct
+    if (password.includes('a')) {
+      this.oldPasswordError = 'Huidig wachtwoord is incorrect';
       return false;
     }
 
-    if (!this.validatePasswordRegex(password)) {
-      this.passwordError = 'Wachtwoord moet tenminste 1 speciaal teken bevatten';
-      return false;
-    }
-
-    this.passwordError = '';
+    this.oldPasswordError = '';
     return true;
   }
 
@@ -108,18 +105,28 @@ export class CreateAccountComponent implements OnInit {
     return re.test(String(password));
   }
 
-  validatePassword2(password2, password): boolean {
-    if (!password2) {
-      this.password2Error = 'Wachtwoord' + this.requiredError;
+  validateNewPassword(password, password2): boolean {
+    if (!password || !password2) {
+      this.newPasswordError = 'Nieuw wachtwoord' + this.requiredError;
       return false;
     }
 
-    if (!(password2 === password)) {
-      this.password2Error = 'Wachtwoorden moeten overeenkomen';
+    if (password.length < 8) {
+      this.newPasswordError = 'Nieuw wachtwoord moet minimaal 8 tekens bevatten';
       return false;
     }
 
-    this.password2Error = '';
+    if (!this.validatePasswordRegex(password)) {
+      this.newPasswordError = 'Nieuw wachtwoord moet tenminste 1 speciaal teken bevatten';
+      return false;
+    }
+
+    if (!(password === password2)) {
+      this.newPasswordError = 'Wachtwoorden moeten overeenkomen';
+      return false;
+    }
+
+    this.newPasswordError = '';
     return true;
   }
 

@@ -14,6 +14,10 @@ import {SignsComponent} from './modules/dictionary/signs/signs.component';
 import {SettingsPopupComponent} from './modules/settings/popup/settings-popup.component';
 import {SquareOverviewTileComponent} from './shared/signs/components/square-overview-tile/square-overview-tile.component';
 import {FormsModule} from '@angular/forms';
+import {SettingsStartComponent} from './modules/settings/start/settings-start.component';
+import { AccountComponent } from './modules/settings/account/account.component';
+import { HelpComponent } from './modules/settings/help/help.component';
+import { ChangeAccountComponent } from './modules/settings/account/change/change-account.component';
 
 const appRoutes: Routes = [
   {
@@ -52,11 +56,15 @@ const appRoutes: Routes = [
     CategoriesComponent,
     LearnComponent,
     SearchComponent,
+    SettingsPopupComponent,
+    SettingsStartComponent,
     CreateAccountComponent,
     LoginAccountComponent,
     SignsComponent,
-    SettingsPopupComponent,
-    SquareOverviewTileComponent
+    SquareOverviewTileComponent,
+    AccountComponent,
+    HelpComponent,
+    ChangeAccountComponent
   ],
   imports: [
     BrowserModule,
