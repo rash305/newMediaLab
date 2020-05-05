@@ -18,6 +18,9 @@ import {SettingsStartComponent} from './modules/settings/start/settings-start.co
 import { AccountComponent } from './modules/settings/account/account.component';
 import { HelpComponent } from './modules/settings/help/help.component';
 import { ChangeAccountComponent } from './modules/settings/account/change/change-account.component';
+import { ForgotPwComponent } from './modules/settings/account/login/forgot-pw/forgot-pw.component';
+import { ForgotPwCodeComponent } from './modules/settings/account/login/forgot-pw-code/forgot-pw-code.component';
+import { ForgotPwNewComponent } from './modules/settings/account/login/forgot-pw-new/forgot-pw-new.component';
 
 const appRoutes: Routes = [
   {
@@ -64,7 +67,10 @@ const appRoutes: Routes = [
     SquareOverviewTileComponent,
     AccountComponent,
     HelpComponent,
-    ChangeAccountComponent
+    ChangeAccountComponent,
+    ForgotPwComponent,
+    ForgotPwCodeComponent,
+    ForgotPwNewComponent
   ],
   imports: [
     BrowserModule,

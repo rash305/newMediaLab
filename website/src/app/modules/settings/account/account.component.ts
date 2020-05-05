@@ -33,9 +33,7 @@ export class AccountComponent implements OnInit {
   toLogout(): void {
     // do some service magic
 
-    // not sure where this should go to
-    this.messageSettingsStatus.emit('start');
-    this.router.navigate(['/settings']);
+    this.router.navigate(['/categories']);
   }
 
   isLoggedIn(): boolean {

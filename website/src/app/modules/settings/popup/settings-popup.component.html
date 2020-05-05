@@ -12,4 +12,9 @@
   <app-change-account [hidden]="!show('change')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-change-account>
 
   <app-help [hidden]="!show('help')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-help>
+
+  <app-forgot-pw [hidden]="!show('forgotPw')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw>
+  <app-forgot-pw-code [hidden]="!show('forgotPwCode')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-code>
+  <app-forgot-pw-new [hidden]="!show('forgotPwNew')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-new>
+
 </div>

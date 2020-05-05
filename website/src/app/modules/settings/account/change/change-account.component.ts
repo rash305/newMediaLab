@@ -38,8 +38,8 @@ export class ChangeAccountComponent implements OnInit {
       // Send object to backend API
       this.doSomethingInService();
 
-      // Go to categories page (and have changes saved)
-      this.router.navigate(['/categories']);
+      // Go to account page (and have changes saved)
+      this.messageSettingsStatus.emit('account');
     }
   }
 
@@ -136,6 +136,6 @@ export class ChangeAccountComponent implements OnInit {
 
   goBack(): void {
     this.messageSettingsStatus.emit('account');
-    this.router.navigate(['/settings']);
+    // this.router.navigate(['/settings']);
   }
 }
