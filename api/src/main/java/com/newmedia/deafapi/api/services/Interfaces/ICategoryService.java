@@ -1,6 +1,7 @@
 package com.newmedia.deafapi.api.services.Interfaces;
 
 import com.newmedia.deafapi.api.models.Category;
+import com.newmedia.deafapi.api.utils.CustomError;
 
 import java.util.List;
 
@@ -8,6 +9,6 @@ import java.util.List;
 // A interface describes all accessible functionallity
 public interface ICategoryService<C> {
     List<Category> getCategories();
-    void createCategory();
-    void updateCategory();
+    Category createCategory(Category category);
+    void updateCategory(Category category) throws CustomError;
 }

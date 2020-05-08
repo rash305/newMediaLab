@@ -1,20 +1,23 @@
-package com.newmedia.deafapi.api.models;
+package com.newmedia.deafapi.api.dataservices.docModels;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Category {
+@Document
+public class DocCategory {
 
+    @Id
     private String id;
+    @Indexed(name = "meta_title_category_index_unique", unique = true)
     private String title;
 
-    public Category() {}
-    public Category(String title) {
+    public DocCategory() {}
+    public DocCategory(String title) {
         this.title = title;
     }
 
-    public Category(String id, String title) {
+    public DocCategory(String id, String title) {
         this.id = id;
         this.title = title;
     }

@@ -1,7 +1,10 @@
 package com.newmedia.deafapi.api.dtos;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.io.Serializable;
 
+@JsonSerialize
 public class CategoryDto implements Serializable {
     private String id;
     private String title;
@@ -20,5 +23,8 @@ public class CategoryDto implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public CategoryDto() {
     }
 }

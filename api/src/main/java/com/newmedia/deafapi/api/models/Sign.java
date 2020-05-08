@@ -1,5 +1,8 @@
 package com.newmedia.deafapi.api.models;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+
 public class Sign {
 
     private String id;
