@@ -19,8 +19,10 @@ export class SettingsPopupComponent implements OnInit {
   receiveSettingStatus($event: string) {
     if ($event === 'close') {
       this.SettingsMinimalizeEvent.emit(true);
+      this.settingsStatus = 'start';
+    } else {
+      this.settingsStatus = $event;
     }
-    this.settingsStatus = $event;
   }
 
   show(status: string): boolean {
