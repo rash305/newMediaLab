@@ -14,6 +14,7 @@ export class AccountService {
 
   private handleError: HandleError;
   accountsUrl = environment.baseUrl + '/accounts';  // URL to web api
+  accountValidationUrl = environment.baseUrl + '/validation/account/';  // URL to web api
 
   constructor(private http: HttpClient,
               httpErrorHandler: HttpErrorHandler) {
@@ -25,6 +26,20 @@ export class AccountService {
     return this.http.post<Account>(this.accountsUrl, account)
       .pipe(
         catchError(this.handleError('createAccount', null))
+      );
+  }
+
+  checkEmailAvailability(email: Observable<boolean>) {
+    return this.http.post<boolean>(this.accountValidationUrl + 'email', email)
+      .pipe(
+        catchError(this.handleError('checkEmailAvailability', false))
+      );
+  }
+
+  checkUsernameAvailability(username: Observable<boolean>) {
+    return this.http.post<boolean>(this.accountValidationUrl + 'username', username)
+      .pipe(
+        catchError(this.handleError('checkUsernameAvailability', false))
       );
   }
 }

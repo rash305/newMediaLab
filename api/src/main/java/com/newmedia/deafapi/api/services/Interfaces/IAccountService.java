@@ -10,4 +10,6 @@ import java.util.List;
 // A interface describes all accessible functionallity
 public interface IAccountService<C> {
     Account createAccount(Account account);
+    boolean isEmailAvailable(String email);
+    boolean isUsernameAvailable(String username);
 }

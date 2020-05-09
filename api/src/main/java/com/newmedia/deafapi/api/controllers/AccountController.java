@@ -43,7 +43,6 @@ public class AccountController {
                     HttpStatus.NOT_FOUND, "No username is provided.");
         }
 
-
         accountModel = accountService.createAccount(accountModel);
         return ObjectMapperUtils.map(accountModel, AccountDto.class);
     }
