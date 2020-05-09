@@ -136,6 +136,5 @@ export class ChangeAccountComponent implements OnInit {
 
   goBack(): void {
     this.messageSettingsStatus.emit('account');
-    // this.router.navigate(['/settings']);
   }
 }

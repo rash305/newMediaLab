@@ -8,12 +8,12 @@ import {Component} from '@angular/core';
 export class AppComponent {
   title = 'website';
   isLoggedIn = false;
-  createAccountIsTrue = false;
+  hideSettingsPopup = true;
   constructor() {
   }
 
-  showCreateAccountPopup() {
-    this.createAccountIsTrue = !this.createAccountIsTrue;
+  ShowSettingsPopup() {
+    this.hideSettingsPopup = !this.hideSettingsPopup;
   }
 
   receiveLoginStatus($event: boolean) {

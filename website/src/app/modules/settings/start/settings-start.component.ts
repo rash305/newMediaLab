@@ -19,15 +19,13 @@ export class SettingsStartComponent implements OnInit {
 
   toAccount() {
     this.messageSettingsStatus.emit('account');
-    this.router.navigate(['/settings']);
   }
 
   toHelp() {
     this.messageSettingsStatus.emit('help');
-    this.router.navigate(['/settings']);
   }
 
   goBack(): void {
-    this.location.back();
+    this.messageSettingsStatus.emit('close');
   }
 }

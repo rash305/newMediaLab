@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-settings-popup',
@@ -7,14 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPopupComponent implements OnInit {
 
-  private settingsStatus = 'start';
+  private settingsStatus: string;
+  @Output() SettingsMinimalizeEvent = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+    this.settingsStatus = 'start';
   }
 
   receiveSettingStatus($event: string) {
+    if ($event === 'close') {
+      this.SettingsMinimalizeEvent.emit(true);
+    }
     this.settingsStatus = $event;
   }
 

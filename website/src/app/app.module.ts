@@ -43,10 +43,6 @@ const appRoutes: Routes = [
     component: SearchComponent,
   },
   {
-    path: 'settings',
-    component: SettingsPopupComponent,
-  },
-  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'
