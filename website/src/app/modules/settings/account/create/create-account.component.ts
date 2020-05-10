@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import {Account} from '../../../../shared/account/models/account';
+import {AccountService} from '../../../../shared/account/services/account.service';
 
 @Component({
   selector: 'app-create-account',
@@ -22,7 +24,9 @@ export class CreateAccountComponent implements OnInit {
 
   @Output() messageSettingsStatus = new EventEmitter<string>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private accountService: AccountService) {
+  }
 
   ngOnInit(): void {
   }
@@ -34,8 +38,9 @@ export class CreateAccountComponent implements OnInit {
         this.validatePassword(this.password),
         this.validatePassword2(this.password2, this.password)].every(Boolean)) {
 
+      const account = new Account(this.username, this.password, this.emailAddress);
       // Send object to backend API
-      this.doSomethingInService();
+      this.createAccountOnServer(account);
 
       // Go to categories page (and be logged in)
       this.router.navigate(['/categories']);
@@ -123,12 +128,22 @@ export class CreateAccountComponent implements OnInit {
     return true;
   }
 
-  private doSomethingInService(): void {
+  private createAccountOnServer(account: Account): void {
+    this.accountService.createAccount(account)
+      .subscribe(jwt => {
+        if (jwt === null) {
+          // Account is not created
+          // Toaster message is enough for now
+        } else {
+          // log user in
+          window.alert('TODO: Login with the received JWT token.');
+        }
+      });
 
   }
 
+
   goBack(): void {
     this.messageSettingsStatus.emit('account');
-    this.router.navigate(['/settings']);
   }
 }

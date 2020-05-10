@@ -1,5 +1,6 @@
 package com.newmedia.deafapi.api.services;
 
+import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
 import com.newmedia.deafapi.api.dataservices.interfaces.ISignRepository;
 import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
@@ -14,20 +15,20 @@ import java.util.List;
 public class CrudSignService implements ISignService {
 
     @Autowired
-    private ISignRepository<Sign> signISignRepository;
+    private MongoSignRepository signISignRepository;
 
     @Override
     public List<Sign> getSigns() {
-        return new ArrayList( signISignRepository.getAll());
+        return new ArrayList( signISignRepository.findAll());
     }
 
     @Override
-    public void createSign() {
+    public void createSign(Sign sign) {
 
     }
 
     @Override
-    public void updateSign() {
+    public void updateSign(Sign sign) {
 
     }
 }

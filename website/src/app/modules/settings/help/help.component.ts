@@ -17,6 +17,5 @@ export class HelpComponent implements OnInit {
 
   goBack(): void {
     this.messageSettingsStatus.emit('start');
-    this.router.navigate(['/settings']);
   }
 }

@@ -1,4 +1,4 @@
-package com.newmedia.deafapi.api.dataservices.impl;
+package com.newmedia.deafapi.api.dataservices.impl.mockups;
 
 import com.newmedia.deafapi.api.dataservices.interfaces.ISignRepository;
 import com.newmedia.deafapi.api.models.Sign;

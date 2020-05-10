@@ -9,9 +9,7 @@ import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -31,12 +29,23 @@ public class CategoryController {
     @GetMapping("/api/categories")
     public List<CategoryDto> getSignList() {
         List<Category> categories = ICategoryService.getCategories();
-        if(categories == null){
+        if (categories == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No categories can be requested.");
         }
 
         List<CategoryDto> categoryDtos = ObjectMapperUtils.mapAll(categories, CategoryDto.class);
         return categoryDtos;
+    }
+
+    @PostMapping("/api/categories")
+    public CategoryDto createSign(@RequestBody CategoryDto category) {
+        Category categoryModel = ObjectMapperUtils.map(category, Category.class);
+        if(categoryModel == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "No category is given.");
+        }
+        categoryModel = ICategoryService.createCategory(categoryModel);
+        return ObjectMapperUtils.map(categoryModel, CategoryDto.class);
     }
 }

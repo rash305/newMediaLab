@@ -14,7 +14,7 @@
         <button class="btn settings" routerLink="/add-sign" routerLinkActive="active" [hidden]="!isLoggedIn">
           <span><i class="fa fa-video-camera" style="font-size: 120%"></i></span>
         </button>
-        <button class="btn settings" routerLink="/settings" routerLinkActive="active">
+        <button class="btn settings" (click)="ShowSettingsPopup()">
           <span><i class="fa fa-cog" style="font-size: 120%"></i></span>
         </button>
       </div>
@@ -40,4 +40,5 @@
     <hr>
   </div>
   <router-outlet></router-outlet>
+  <app-settings-popup [hidden]="hideSettingsPopup" (SettingsMinimalizeEvent)="hideSettingsPopup = $event"  ></app-settings-popup>
 </div>

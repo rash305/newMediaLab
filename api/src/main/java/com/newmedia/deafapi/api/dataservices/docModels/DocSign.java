@@ -1,21 +1,28 @@
-package com.newmedia.deafapi.api.models;
+package com.newmedia.deafapi.api.dataservices.docModels;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Category {
+@Document
+public class DocSign {
 
+    @Id
     private String id;
+    @Indexed(unique = true)
     private String title;
+    private String categoryId;
 
-    public Category() {}
-    public Category(String title) {
-        this.title = title;
+    public DocSign() {
     }
 
-    public Category(String id, String title) {
+    public DocSign(String id, String title, String categoryId) {
         this.id = id;
+        this.title = title;
+        this.categoryId = categoryId;
+    }
+
+    public DocSign(String title) {
         this.title = title;
     }
 
@@ -35,4 +42,11 @@ public class Category {
         this.title = title;
     }
 
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
 }

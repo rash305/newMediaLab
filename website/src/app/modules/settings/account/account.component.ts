@@ -17,17 +17,14 @@ export class AccountComponent implements OnInit {
 
   toLogin(): void {
     this.messageSettingsStatus.emit('login');
-    this.router.navigate(['/settings']);
   }
 
   toRegister(): void {
     this.messageSettingsStatus.emit('register');
-    this.router.navigate(['/settings']);
   }
 
   toChangeAccount(): void {
     this.messageSettingsStatus.emit('change');
-    this.router.navigate(['/settings']);
   }
 
   toLogout(): void {
@@ -43,6 +40,5 @@ export class AccountComponent implements OnInit {
 
   goBack(): void {
     this.messageSettingsStatus.emit('start');
-    this.router.navigate(['/settings']);
   }
 }

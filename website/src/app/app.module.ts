@@ -21,6 +21,8 @@ import { ChangeAccountComponent } from './modules/settings/account/change/change
 import { ForgotPwComponent } from './modules/settings/account/login/forgot-pw/forgot-pw.component';
 import { ForgotPwCodeComponent } from './modules/settings/account/login/forgot-pw-code/forgot-pw-code.component';
 import { ForgotPwNewComponent } from './modules/settings/account/login/forgot-pw-new/forgot-pw-new.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 import { NotLoggedInComponent } from './modules/add-sign/not-logged-in/not-logged-in.component';
 import { AddSignComponent } from './modules/add-sign/add-sign/add-sign.component';
 
@@ -44,10 +46,6 @@ const appRoutes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
-  },
-  {
-    path: 'settings',
-    component: SettingsPopupComponent,
   },
   {
     path: 'add-sign-not-logged-in',
@@ -87,6 +85,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes, {
