@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'website';
-  isLoggedIn = false;
+  isLoggedIn = true;
   createAccountIsTrue = false;
   constructor() {
   }

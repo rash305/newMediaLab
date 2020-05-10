@@ -1,1 +1,30 @@
-<p>learn works!</p>
+<div class="div-learn">
+  <i class="fa fa-calendar"></i> Gebaar van de dag:
+  <button class="btn btn-learn" (click)="toSignOfDay()">
+    <div class="row">
+      <div style="width: 90%; padding-left: 5%">
+        <i class="fa fa-signing" style="font-size: 90px"></i>
+        <span style="display: block;">{{signOfDay}}</span>
+      </div>
+      <div class="chevron">
+        <i class="fa fa-chevron-right"></i>
+      </div>
+    </div>
+  </button>
+</div>
+
+<div class="div-learn">
+  <i class="fa fa-graduation-cap"></i> Leren:
+  <button class="btn btn-learn" (click)="toTest()">
+    <div class="row">
+      <div style="width: 90%; padding-left: 5%;">
+        <i class="fa fa-check-square-o" style="font-size: 90px"></i>
+        <span style="display: block;">Test</span>
+      </div>
+      <div class="chevron">
+        <i class="fa fa-chevron-right"></i>
+      </div>
+    </div>
+  </button>
+</div>
+

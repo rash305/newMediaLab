@@ -21,6 +21,8 @@ import { ChangeAccountComponent } from './modules/settings/account/change/change
 import { ForgotPwComponent } from './modules/settings/account/login/forgot-pw/forgot-pw.component';
 import { ForgotPwCodeComponent } from './modules/settings/account/login/forgot-pw-code/forgot-pw-code.component';
 import { ForgotPwNewComponent } from './modules/settings/account/login/forgot-pw-new/forgot-pw-new.component';
+import { NotLoggedInComponent } from './modules/add-sign/not-logged-in/not-logged-in.component';
+import { AddSignComponent } from './modules/add-sign/add-sign/add-sign.component';
 
 const appRoutes: Routes = [
   {
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     component: CategoriesComponent
   },
   {
-    path: 'categories/:id', component: SignsComponent
+    path: 'categories/:id',
+    component: SignsComponent
   },
   {
     path: 'learn',
@@ -45,6 +48,14 @@ const appRoutes: Routes = [
   {
     path: 'settings',
     component: SettingsPopupComponent,
+  },
+  {
+    path: 'add-sign-not-logged-in',
+    component: NotLoggedInComponent,
+  },
+  {
+    path: 'add-sign',
+    component: AddSignComponent,
   },
   {
     path: '',
@@ -70,7 +81,9 @@ const appRoutes: Routes = [
     ChangeAccountComponent,
     ForgotPwComponent,
     ForgotPwCodeComponent,
-    ForgotPwNewComponent
+    ForgotPwNewComponent,
+    NotLoggedInComponent,
+    AddSignComponent
   ],
   imports: [
     BrowserModule,

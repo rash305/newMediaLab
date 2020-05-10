@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-settings-popup',
   templateUrl: './settings-popup.component.html',
-  styleUrls: ['./settings-popup.component.css']
+  styleUrls: ['./settings-popup.component.css', '../settings-style.component.css']
 })
 export class SettingsPopupComponent implements OnInit {
 
