@@ -43,7 +43,7 @@ export class CreateAccountComponent implements OnInit {
       this.createAccountOnServer(account);
 
       // Go to categories page (and be logged in)
-      this.router.navigate(['/categories']);
+      // this.router.navigate(['/categories']);
     }
   }
 
@@ -56,9 +56,15 @@ export class CreateAccountComponent implements OnInit {
       this.usernameError = 'Gebruikersnaam moet minimaal 5 tekens bevatten';
       return false;
     }
-
-    this.usernameError = '';
-    return true;
+    this.accountService.checkUsernameAvailability(username)
+      .subscribe(result => {
+        if ( result) {
+          this.usernameError = '';
+          return true;
+        }
+        this.usernameError = 'Gebruikersnaam kan niet worden gebruikt';
+        return false;
+      });
   }
 
   validateEmail(email): boolean {
@@ -77,11 +83,20 @@ export class CreateAccountComponent implements OnInit {
       return false;
     }
 
-    this.emailError = '';
-    return true;
+    this.emailError = 'Valideren...';
+
+    this.accountService.checkEmailAvailability(email)
+      .subscribe(result => {
+        if ( result) {
+          this.emailError = '';
+          return true;
+        }
+        this.emailError = 'E-mailadres kan niet worden gebruikt';
+        return false;
+      });
   }
 
-  validateEmailRegex(email) {
+  private validateEmailRegex(email) {
     // tslint:disable-next-line:max-line-length
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -107,7 +122,7 @@ export class CreateAccountComponent implements OnInit {
     return true;
   }
 
-  validatePasswordRegex(password): boolean {
+  private validatePasswordRegex(password): boolean {
     // tslint:disable-next-line:max-line-length
     const re = new RegExp('^(?=.*[!@#$%^&*])');
     return re.test(String(password));

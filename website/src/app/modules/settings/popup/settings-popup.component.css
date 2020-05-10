@@ -1,6 +1,6 @@
 .modal {
   display: block;
-  position: fixed; /* Stay in place */
+  position: absolute; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
@@ -9,4 +9,11 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0,0,0,0.1); /* Black w/ opacity */
   padding-top: 160px;
+}
+
+.popupLayer{
+  z-index: 1; /* Sit on top */
+  position: absolute; /* Stay in place */
+  display: block;
+
 }

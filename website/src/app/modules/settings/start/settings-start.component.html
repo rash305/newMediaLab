@@ -1,28 +1,32 @@
-<div class="container top-container">
-  <i class="fa fa-cog"></i><span><b>Instellingen</b></span>
+<div class="row container-border top-container">
+  <div class="col-12">
+    <i class="fa fa-cog"></i><span><b>Instellingen</b></span>
+  </div>
 </div>
-<div class="container middle-container middle-container-bar">
-  <button class="btn btn-bar" (click)="toAccount()">
-    <div class="row">
-      <div style="width: 90%; padding-left: 5%">
-        <i class="fa fa-user-circle btn-i"></i>  Account
+<div class="row container-border middle-container middle-container-bar">
+    <button class="col-12 btn btn-bar" (click)="toAccount()">
+      <div class="row">
+        <div style="width: 90%; padding-left: 5%">
+          <i class="fa fa-user-circle btn-i"></i> Account
+        </div>
+        <div style="width: 10%">
+          <i class="fa fa-chevron-right"></i>
+        </div>
       </div>
-      <div style="width: 10%">
-        <i class="fa fa-chevron-right"></i>
+    </button>
+    <button class="col-12 btn btn-bar" (click)="toHelp()">
+      <div class="row">
+        <div style="width: 90%; padding-left: 5%">
+          <i class="fa fa-question-circle btn-i"></i> Help
+        </div>
+        <div style="width: 10%">
+          <i class="fa fa-chevron-right"></i>
+        </div>
       </div>
-    </div>
-  </button>
-  <button class="btn btn-bar" (click)="toHelp()">
-    <div class="row">
-      <div style="width: 90%; padding-left: 5%">
-        <i class="fa fa-question-circle btn-i"></i>  Help
-      </div>
-      <div style="width: 10%">
-        <i class="fa fa-chevron-right"></i>
-      </div>
-    </div>
-  </button>
+    </button>
+
 </div>
-<div class="container bottom-container">
-  <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+<div class="row container-border bottom-container">
+    <button type="button" class="col-12 btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug
+    </button>
 </div>

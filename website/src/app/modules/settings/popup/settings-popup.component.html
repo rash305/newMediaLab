@@ -2,18 +2,28 @@
 <!-- there could be buttons -->
 <!-- or the account module <app-create-account></app-create-account>
 -->
-<div class="modal">
-  <app-settings-start [hidden]="!show('start')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-settings-start>
-
-  <app-account [hidden]="!show('account')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-account>
-  <app-login-account [hidden]="!show('login')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-login-account>
-  <app-create-account [hidden]="!show('register')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-create-account>
-  <app-change-account [hidden]="!show('change')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-change-account>
-
-  <app-help [hidden]="!show('help')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-help>
-
-  <app-forgot-pw [hidden]="!show('forgotPw')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw>
-  <app-forgot-pw-code [hidden]="!show('forgotPwCode')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-code>
-  <app-forgot-pw-new [hidden]="!show('forgotPwNew')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-new>
-
+<div class="modal" (click)="receiveSettingStatus('close')">
 </div>
+<div class="popupLayer container">
+  <div class="col-12">
+    <app-settings-start [hidden]="!show('start')"
+                        (messageSettingsStatus)="receiveSettingStatus($event)"></app-settings-start>
+
+    <app-account [hidden]="!show('account')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-account>
+    <app-login-account [hidden]="!show('login')"
+                       (messageSettingsStatus)="receiveSettingStatus($event)"></app-login-account>
+    <app-create-account [hidden]="!show('register')"
+                        (messageSettingsStatus)="receiveSettingStatus($event)"></app-create-account>
+    <app-change-account [hidden]="!show('change')"
+                        (messageSettingsStatus)="receiveSettingStatus($event)"></app-change-account>
+
+    <app-help [hidden]="!show('help')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-help>
+
+    <app-forgot-pw [hidden]="!show('forgotPw')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw>
+    <app-forgot-pw-code [hidden]="!show('forgotPwCode')"
+                        (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-code>
+    <app-forgot-pw-new [hidden]="!show('forgotPwNew')"
+                       (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-new>
+  </div>
+</div>
+

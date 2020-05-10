@@ -13,13 +13,10 @@ input[type=text], input[type=password] {
 }
 
 /* Add padding to containers */
-.container {
-  width: 90%;
-  background-color: white; /* Black w/ opacity */
+.container-border {
   border-top: 2px solid #593196;
   border-left: 2px solid #593196;
   border-right: 2px solid #593196;
-  padding: 2% 5% 2% 5%;
 }
 
 .top-container {
@@ -30,21 +27,21 @@ input[type=text], input[type=password] {
 
 .middle-container {
   height: 300px;
+  background: white;
 }
 
 .bottom-container {
   border-top: 0px;
   border-bottom: 2px solid #593196;
   padding: 2%;
+  background: white;
 }
 
 .right-button {
   float: right;
 }
 
-.bottom-container {
-  padding-left: -5px;
-}
+
 i {
   font-size: 150%;
   width: 10%;

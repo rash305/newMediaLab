@@ -1,37 +1,37 @@
-<div class="container top-container">
+<div class="container-border top-container">
   <i class="fa fa-user-plus"></i><span><b>Registreren</b></span>
 </div>
-<div class="container middle-container">
+<div class="container-border middle-container">
   <i class="fa fa-user-circle"></i>
-  <input type="text" placeholder="Gebruikersnaam" name="uname" required [(ngModel)]="username" >
+  <input type="text" placeholder="Gebruikersnaam" name="uname" required (focusout)="validateUsername(username)" [(ngModel)]="username" >
   <div class="alert-container">
     <div class="alert-danger" role="alert" [hidden]="!usernameError">
       {{usernameError}}
     </div></div>
 
   <i class="fa fa-at"></i>
-  <input type="text" placeholder="E-mailadress" name="email" required [(ngModel)]="emailAddress">
+  <input type="text" placeholder="E-mailadress" name="email" required (focusout)="validateEmail(emailAddress)" [(ngModel)]="emailAddress">
   <div class="alert-container">
     <div class="alert-danger" role="alert" [hidden]="!emailError">
       {{emailError}}
     </div></div>
 
   <i class="fa fa-unlock-alt"></i>
-  <input type="password" placeholder="Wachtwoord" name="pw" required [(ngModel)]="password">
+  <input type="password" placeholder="Wachtwoord" name="pw" required  (focusout)="validatePassword(password)" [(ngModel)]="password">
   <div class="alert-container">
     <div class="alert-danger" role="alert" [hidden]="!passwordError">
     {{passwordError}}
     </div></div>
 
   <i class="fa fa-unlock-alt"></i>
-  <input type="password" placeholder="Herhaal wachtwoord" name="pw2" required [(ngModel)]="password2">
+  <input type="password" placeholder="Herhaal wachtwoord" name="pw2" required  (focusout)="validatePassword2(password, password2)" [(ngModel)]="password2">
   <div class="alert-container">
     <div class="alert-danger" role="alert" [hidden]="!password2Error">
     {{password2Error}}
     </div></div>
 
 </div>
-<div class="container bottom-container">
+<div class="container-border bottom-container">
   <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
   <button type="button" class="btn btn-primary right-button" (click)="createAccount()"><i class="fa fa-sign-in btn-i"></i>Aanmelden</button>
 </div>
