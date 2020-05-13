@@ -1,23 +1,30 @@
-<div class="container top-container">
-  <i class="fa fa-unlock-alt"></i><span><b>Wachtwoord vergeten</b></span>
-</div>
-<div class="container middle-container">
-  <div>
-    Vul hier je nieuwe wachtwoord in:
+<div class="content-container purple-border ">
+
+  <div class="col-12 purple-border top-container">
+    <i class="fa fa-unlock-alt"></i><span><b>Wachtwoord vergeten</b></span>
   </div>
+  <div class=" purple-border middle-container d-flex flex-column ">
+    <div class="p-4">
+      <div>
+        Vul hier je nieuwe wachtwoord in:
+      </div>
 
-  <i class="fa fa-unlock-alt"></i>
-  <input type="password" placeholder="Wachtwoord" name="pw" required [(ngModel)]="password">
+      <i class="fa fa-unlock-alt"></i>
+      <input type="password" placeholder="Wachtwoord" name="pw" required [(ngModel)]="password">
 
-  <i class="fa fa-unlock-alt"></i>
-  <input type="password" placeholder="Herhaal wachtwoord" name="pw2" required [(ngModel)]="password2">
-  <div class="alert-container">
-    <div class="alert-danger" role="alert" [hidden]="!passwordError">
-      {{passwordError}}
-    </div></div>
-
-</div>
-<div class="container bottom-container">
-  <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-  <button type="button" class="btn btn-primary right-button" (click)="saveNewPW()"><i class="fa fa-save btn-i"></i>Opslaan</button>
+      <i class="fa fa-unlock-alt"></i>
+      <input type="password" placeholder="Herhaal wachtwoord" name="pw2" required [(ngModel)]="password2">
+      <div class="alert-container">
+        <div class="alert-danger" role="alert" [hidden]="!passwordError">
+          {{passwordError}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 bottom-container">
+    <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug
+    </button>
+    <button type="button" class="btn btn-primary right-button" (click)="saveNewPW()"><i class="fa fa-save btn-i"></i>Opslaan
+    </button>
+  </div>
 </div>

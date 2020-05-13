@@ -1,19 +1,27 @@
-<div class="container top-container">
-  <i class="fa fa-unlock-alt"></i><span><b>Wachtwoord vergeten</b></span>
-</div>
-<div class="container middle-container">
-  <div>
-    Wij sturen je een mail waarmee je het wachtwoord opnieuw kan instellen:
+<div class="content-container purple-border ">
+  <div class="col-12 purple-border top-container">
+    <i class="fa fa-unlock-alt"></i><span><b>Wachtwoord vergeten</b></span>
   </div>
-  <i class="fa fa-at"></i>
-  <input type="text" placeholder="E-mailadress" name="email" required [(ngModel)]="emailAddress">
-  <div class="alert-container">
-    <div class="alert-danger" role="alert" [hidden]="!emailError">
-      {{emailError}}
-    </div></div>
+  <div class=" purple-border middle-container d-flex flex-column ">
+    <div class="p-4">
+      <span>Wij sturen je een mail waarmee je het wachtwoord opnieuw kan instellen:</span>
 
-</div>
-<div class="container bottom-container">
-  <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-  <button type="button" class="btn btn-primary right-button" (click)="continue()"><i class="fa fa-arrow-right btn-i"></i>Verder</button>
+      <div class="col-12">
+        <i class="fa fa-at"></i>
+        <input type="text" placeholder="E-mailadress" name="email" required [(ngModel)]="emailAddress">
+        <div class="alert-container">
+          <div class="alert-danger" role="alert" [hidden]="!emailError">
+            {{emailError}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 bottom-container">
+    <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug
+    </button>
+    <button type="button" class="btn btn-primary right-button" (click)="continue()"><i
+      class="fa fa-arrow-right btn-i"></i>Verder
+    </button>
+  </div>
 </div>

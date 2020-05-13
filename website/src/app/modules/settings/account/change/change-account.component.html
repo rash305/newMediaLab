@@ -1,53 +1,59 @@
-<div class="row container-border top-container">
-  <div class="col-12">
-    <i class="fa fa-pencil"></i><span><b>Wijzigen</b></span>
-  </div>
-</div>
-<div class="row container-border middle-container">
-  <div class="col-12">
+<div class="content-container purple-border ">
 
-    <i class="fa fa-user-circle"></i>
-    <input type="text" placeholder="Gebruikersnaam" name="uname" required [(ngModel)]="username">
-  </div>
+  <div class="col-12 purple-border top-container">
 
-  <div class="col-12">
-    <i class="fa fa-at"></i>
-    <input type="text" placeholder="E-mailadress" name="email" required [(ngModel)]="emailAddress">
-  </div>
-
-  <div class="col-12">
-    <i class="fa fa-unlock-alt"></i>
-    <input type="password" placeholder="Huidig wachtwoord" name="opw" required [(ngModel)]="oldPassword">
-    <div class="alert-container" [hidden]="!oldPasswordError">
-      <div class="alert-danger" role="alert">
-        {{oldPasswordError}}
-      </div>
+    <div class="col-12">
+      <i class="fa fa-pencil"></i><span><b>Wijzigen</b></span>
     </div>
   </div>
+  <div class=" purple-border middle-container d-flex flex-column ">
+    <div class="col-12">
+    <div class="col-12">
 
-  <div class="col-12">
-    <i class="fa fa-unlock-alt"></i>
-    <input type="password" placeholder="Nieuw wachtwoord" name="npw" required [(ngModel)]="newPassword">
-  </div>
+      <i class="fa fa-user-circle"></i>
+      <input type="text" placeholder="Gebruikersnaam" name="uname" required [(ngModel)]="username">
+    </div>
 
-  <div class="col-12">
-    <i class="fa fa-unlock-alt"></i>
-    <input type="password" placeholder="Herhaal nieuw wachtwoord" name="npw2" required [(ngModel)]="newPassword2">
-  </div>
-  <div class="col-12">
-    <div class="alert-container">
-      <div class="alert-danger" role="alert" [hidden]="!newPasswordError">
-        {{newPasswordError}}
+    <div class="col-12">
+      <i class="fa fa-at"></i>
+      <input type="text" placeholder="E-mailadress" name="email" required [(ngModel)]="emailAddress">
+    </div>
+
+    <div class="col-12">
+      <i class="fa fa-unlock-alt"></i>
+      <input type="password" placeholder="Huidig wachtwoord" name="opw" required [(ngModel)]="oldPassword">
+      <div class="alert-container" [hidden]="!oldPasswordError">
+        <div class="alert-danger" role="alert">
+          {{oldPasswordError}}
+        </div>
       </div>
     </div>
-  </div>
 
-</div>
-<div class="row container-border bottom-container">
-  <div class="col-12">
-    <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug
-    </button>
-    <button type="button" class="btn btn-primary right-button" (click)="saveChanges()"><i class="fa fa-save btn-i"></i>Opslaan
-    </button>
+    <div class="col-12">
+      <i class="fa fa-unlock-alt"></i>
+      <input type="password" placeholder="Nieuw wachtwoord" name="npw" required [(ngModel)]="newPassword">
+    </div>
+
+    <div class="col-12">
+      <i class="fa fa-unlock-alt"></i>
+      <input type="password" placeholder="Herhaal nieuw wachtwoord" name="npw2" required [(ngModel)]="newPassword2">
+    </div>
+    <div class="col-12">
+      <div class="alert-container">
+        <div class="alert-danger" role="alert" [hidden]="!newPasswordError">
+          {{newPasswordError}}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="col-12 bottom-container">
+    <div class="col-12">
+      <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug
+      </button>
+      <button type="button" class="btn btn-primary right-button" (click)="saveChanges()"><i
+        class="fa fa-save btn-i"></i>Opslaan
+      </button>
+    </div>
   </div>
 </div>

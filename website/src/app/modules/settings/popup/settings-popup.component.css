@@ -11,9 +11,12 @@
   padding-top: 160px;
 }
 
-.popupLayer{
+.popup-layer{
   z-index: 1; /* Sit on top */
   position: absolute; /* Stay in place */
   display: block;
+  top: 85px;
+  height: calc(90% - 85px);
 
 }
+
