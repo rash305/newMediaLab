@@ -11,15 +11,6 @@
 //  padding-top: 160px;
 //}
 
-.popup-layer{
-  z-index: 1; /* Sit on top */
-  position: absolute; /* Stay in place */
-  display: block;
-  top: 140px;
-  height: calc(70% - 140px);
-}
-
-
 
 /* Create an overlay */
 .modal {
@@ -31,111 +22,121 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.1); /* Black w/ opacity */
+  background-color: rgba(0, 0, 0, 0.1); /* Black w/ opacity */
   padding-top: 160px;
 }
 
-/* Full-width inputs */
-input[type=text], input[type=password] {
-  width: 90%;
-  padding: 8px 1px;
-  margin: 8px 0px 5px 0px;
-  display: inline-block;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
-  border-bottom: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-/* Add padding to containers */
+.popup-layer {
+  z-index: 1; /* Sit on top */
+  position: absolute; /* Stay in place */
+  display: block;
+  top: 140px;
+  height: calc(70% - 140px);
 
 
-.top-container {
-  text-align: center;
-  font-size: 1.2em;
-  line-height: 2.5em;
-  background: #eeeeee;
-  height: 45px;
-}
-
-.middle-container {
-  padding: 0px;
-  height: calc(100% - 45px);
-  background: white;
-}
-
-.bottom-container {
-  padding-left: -5px;
-  height: 45px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.content-container{
-  height: 100%;
-  position: relative;
-  background: white;
-  max-height: 1000px !important;}
-
-.right-button {
-  float: right;
-}
-
-i {
-  font-size: 150%;
-  width: 10%;
-}
-
-.btn-i {
-  width: 25px;
-}
-
-.alert-danger {
-  padding: 1px 1px 1px 5px;
-  font-size: 75%;
-}
-.alert-container {
-  height: 18px;
-}
-
-.btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 0 !important;
-}
-
-.btn-block {
-  text-align: left;
-}
-
-.back-button, .right-button{
-  min-width: 100px;
-  font-size: 1em;
-  .fa {
-    margin-left: -15px;
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    width: 90%;
+    padding: 8px 1px;
+    margin: 8px 0px 5px 0px;
+    display: inline-block;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
   }
-}
 
-.text-padded {
-  padding: 25px;
-}
-
-.purple-border{
-  border-bottom: 1px solid #593196 !important;
-  border-top: 1px solid #593196 !important;
-  border-left: 1px solid #593196 !important;
-  border-right: 1px solid #593196 !important;
-}
-
-.purple-border-b{
-  border-bottom: 1px solid #593196 !important;
-}
+  /* Add padding to containers */
 
 
-.input-list{
-  padding-left: 25px;
-  padding-right: 25px;
-  //line-height: 1.2em!important;
- // font-size: 1.2em;
+  .top-container {
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 2.5em;
+    background: #eeeeee;
+    height: 45px;
+  }
+
+  .middle-container {
+    padding: 0px;
+    height: calc(100% - 45px);
+    background: white;
+  }
+
+  .bottom-container {
+    padding-left: -5px;
+    height: 45px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .content-container {
+    height: 100%;
+    position: relative;
+    background: white;
+    max-height: 1000px !important;
+  }
+
+  .right-button {
+    float: right;
+  }
+
+  i {
+    font-size: 150%;
+    width: 10%;
+  }
+
+  .btn-i {
+    width: 25px;
+  }
+
+  .alert-danger {
+    padding: 1px 1px 1px 5px;
+    font-size: 75%;
+  }
+
+  .alert-container {
+    height: 18px;
+  }
+
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0 !important;
+  }
+
+  .btn-block {
+    text-align: left;
+  }
+
+  .back-button, .right-button {
+    min-width: 100px;
+    font-size: 1em;
+
+    .fa {
+      margin-left: -15px;
+    }
+  }
+
+  .text-padded {
+    padding: 25px;
+  }
+
+  .purple-border {
+    border-bottom: 1px solid #593196 !important;
+    border-top: 1px solid #593196 !important;
+    border-left: 1px solid #593196 !important;
+    border-right: 1px solid #593196 !important;
+  }
+
+  .purple-border-b {
+    border-bottom: 1px solid #593196 !important;
+  }
+
+
+  .input-list {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
 }
