@@ -31,7 +31,8 @@
   position: absolute; /* Stay in place */
   display: block;
   top: 140px;
-  height: calc(70% - 140px);
+  height: calc(70% - 100px);
+  min-height: 380px;
 
 
   /* Full-width inputs */
