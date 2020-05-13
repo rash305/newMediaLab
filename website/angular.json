@@ -25,6 +25,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/popup-styles.scss",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
