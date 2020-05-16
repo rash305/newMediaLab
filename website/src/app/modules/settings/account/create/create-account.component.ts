@@ -145,7 +145,7 @@ export class CreateAccountComponent implements OnInit {
 
   private createAccountOnServer(account: Account): void {
     this.accountService.createAccount(account)
-      .subscribe(jwt => {
+      .subscribe(jwt =>       {
         if (jwt === null) {
           // Account is not created
           // Toaster message is enough for now
