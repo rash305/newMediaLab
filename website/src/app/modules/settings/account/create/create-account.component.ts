@@ -157,7 +157,6 @@ export class CreateAccountComponent implements OnInit {
 
   }
 
-
   goBack(): void {
     this.messageSettingsStatus.emit('account');
   }
