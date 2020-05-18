@@ -37,6 +37,7 @@ export class LoginAccountComponent implements OnInit {
 
         // Go to categories page (and be logged in)
         this.router.navigate(['/categories']);
+        this.messageSettingsStatus.emit('close');
       }
     }
   }

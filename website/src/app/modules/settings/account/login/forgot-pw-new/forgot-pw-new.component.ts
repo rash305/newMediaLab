@@ -27,8 +27,8 @@ export class ForgotPwNewComponent implements OnInit {
       // Send object to backend API
       this.doSomethingInService();
 
-      // Go to favorites (and be logged in)
-      this.router.navigate(['/categories']);
+      // Go to log in page
+      this.messageSettingsStatus.emit('login');
     }
   }
 
