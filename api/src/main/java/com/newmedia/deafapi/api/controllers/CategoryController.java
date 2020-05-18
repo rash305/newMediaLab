@@ -26,8 +26,8 @@ public class CategoryController {
 
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
-    @GetMapping("/api/categories/")
-    public List<CategoryDto> getSignList() {
+    @GetMapping("/api/categories")
+    public List<CategoryDto> getCategoriesList() {
         List<Category> categories = ICategoryService.getCategories();
         if (categories == null) {
             throw new ResponseStatusException(

@@ -34,8 +34,8 @@ const appRoutes: Routes = [
     component: CategoriesComponent,
   },
   {
-    path: 'categories',
-    component: CategoriesComponent
+    path: 'personal',
+    component: PersonalDictionaryComponent
   },
   {
     path: 'categories/:id',
