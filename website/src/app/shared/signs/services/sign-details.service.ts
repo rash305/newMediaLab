@@ -13,7 +13,7 @@ import { Observable, of } from 'rxjs';
 export class SignDetailsService {
 
   private handleError: HandleError;
-  categoryUrl = environment.baseUrl + '/categories';  // URL to web api
+  signsUrl = environment.baseUrl + '/signs/details/';  // URL to web api
 
   constructor( private http: HttpClient,
                httpErrorHandler: HttpErrorHandler,
@@ -23,7 +23,6 @@ export class SignDetailsService {
 
   /** GET heroes from the server */
   getSignDetails(id: string): Observable<SignDetailsModel> {
-    // tslint:disable-next-line:no-unused-expression
     const model  = new SignDetailsModel('5ec2fee0136b986d2a531100', 'Konijn', '5eb5ebeb0c57e73817dbfb1a'  );
     model.id = '5ec2fee0136b986d2a531100';
     model.image = 'https://w.wallhaven.cc/full/2e/wallhaven-2evglg.jpg';
