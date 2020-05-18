@@ -27,6 +27,7 @@ import { NotLoggedInComponent } from './modules/add-sign/not-logged-in/not-logge
 import { AddSignComponent } from './modules/add-sign/add-sign/add-sign.component';
 import { PersonalDictionaryComponent } from './modules/dictionary/personal-dictionary/personal-dictionary.component';
 import { LogoutAccountComponent } from './modules/settings/account/logout/logout-account.component';
+import { SignDetailsComponent } from './modules/dictionary/sign-details/sign-details.component';
 
 const appRoutes: Routes = [
   {
@@ -36,6 +37,10 @@ const appRoutes: Routes = [
   {
     path: 'personal',
     component: PersonalDictionaryComponent
+  },
+  {
+    path: 'signs/details/:id',
+    component: SignDetailsComponent
   },
   {
     path: 'categories/:id',
@@ -85,7 +90,8 @@ const appRoutes: Routes = [
     NotLoggedInComponent,
     AddSignComponent,
     LogoutAccountComponent,
-    PersonalDictionaryComponent
+    PersonalDictionaryComponent,
+    SignDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -39,7 +39,7 @@ public class CategoryController {
     }
 
     @PostMapping("/api/categories")
-    public CategoryDto createSign(@RequestBody CategoryDto category) {
+    public CategoryDto createCategory(@RequestBody CategoryDto category) {
         Category categoryModel = ObjectMapperUtils.map(category, Category.class);
         if(categoryModel == null) {
             throw new ResponseStatusException(

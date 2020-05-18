@@ -15,6 +15,9 @@ public class Sign {
         this.categoryId = categoryId;
     }
 
+    public Sign() {
+    }
+
     public Sign(String title) {
         this.title = title;
     }
