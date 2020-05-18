@@ -28,9 +28,7 @@ export class AccountComponent implements OnInit {
   }
 
   toLogout(): void {
-    // do some service magic
-
-    this.router.navigate(['/categories']);
+    this.messageSettingsStatus.emit('logout');
   }
 
   isLoggedIn(): boolean {

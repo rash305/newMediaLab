@@ -25,6 +25,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import { NotLoggedInComponent } from './modules/add-sign/not-logged-in/not-logged-in.component';
 import { AddSignComponent } from './modules/add-sign/add-sign/add-sign.component';
+import { LogoutAccountComponent } from './modules/settings/account/logout/logout-account.component';
 
 const appRoutes: Routes = [
   {
@@ -81,7 +82,8 @@ const appRoutes: Routes = [
     ForgotPwCodeComponent,
     ForgotPwNewComponent,
     NotLoggedInComponent,
-    AddSignComponent
+    AddSignComponent,
+    LogoutAccountComponent
   ],
   imports: [
     BrowserModule,
