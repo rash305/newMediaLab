@@ -8,10 +8,10 @@
       <a class="navbar-brand " href="#">WeSign!</a>
       </div>
       <div class="p-2 bd-highlight" style="text-align: right" id="navbarColor01">
-        <button class="btn settings" routerLink="/add-sign-not-logged-in" routerLinkActive="active" [hidden]="isLoggedIn">
+        <button class="btn settings" (click)="ShowNotLoggedInPopup()" [hidden]="isLoggedIn">
           <span><i class="fa fa-video-camera" style="font-size: 120%; color: #bfbfbf"></i></span>
         </button>
-        <button class="btn settings" routerLink="/add-sign" routerLinkActive="active" [hidden]="!isLoggedIn">
+        <button class="btn settings" (click)="ShowAddSignPopup()" [hidden]="!isLoggedIn">
           <span><i class="fa fa-video-camera" style="font-size: 120%"></i></span>
         </button>
         <button class="btn settings" (click)="ShowSettingsPopup()">
@@ -40,5 +40,7 @@
     <hr>
   </div>
   <router-outlet></router-outlet>
-  <app-settings-popup [hidden]="hideSettingsPopup" (SettingsMinimalizeEvent)="hideSettingsPopup = $event"  ></app-settings-popup>
+  <app-not-logged-in [hidden]="hideNotLoggedInPopup" (NotLoggedInMinimalizeEvent)="hideNotLoggedInPopup = $event"></app-not-logged-in>
+  <app-add-sign [hidden]="hideAddSignPopup" (AddSignMinimalizeEvent)="hideAddSignPopup = $event"></app-add-sign>
+  <app-settings-popup [hidden]="hideSettingsPopup" (SettingsMinimalizeEvent)="hideSettingsPopup = $event"></app-settings-popup>
 </div>

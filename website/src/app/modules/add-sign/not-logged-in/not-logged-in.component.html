@@ -1,13 +1,23 @@
-<div class="modal">
-  <div class="container top-container">
-    <i class="fa fa-video-camera"></i><span><b>Gebaar toevoegen</b></span>
-  </div>
-  <div class="container middle-container middle-container-bar">
-    <div class="text-padded">Om gebaren op te nemen en aan het Woordenboek toe te voegen,
-      moet je ingelogd zijn.
-      Ga naar Instellingen<i class="fa fa-cog" style="text-align: center"></i>om in te loggen.</div>
-  </div>
-  <div class="container bottom-container">
-    <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+<div class="modal" (click)="this.NotLoggedInMinimalizeEvent.emit(true)">
+</div>
+<div class="popup-layer container">
+  <div class="h-100">
+    <div class="content-container">
+      <div class="col-12 purple-border top-container">
+        <i class="fa fa-video-camera"></i><span><b>Gebaar toevoegen</b></span>
+      </div>
+      <div class="container-border purple-border middle-container middle-container-bar">
+        <div class="p-4">
+          <span>Om gebaren op te nemen en aan het Woordenboek toe te voegen,
+                moet je ingelogd zijn.
+                Ga naar Instellingen<i class="fa fa-cog"style="text-align: center"></i>om in te loggen.
+          </span>
+        </div>
+      </div>
+      <div class="col-12 bottom-container">
+        <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+      </div>
+    </div>
   </div>
 </div>
+

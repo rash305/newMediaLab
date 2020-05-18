@@ -7,13 +7,24 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'website';
-  isLoggedIn = false;
+  isLoggedIn = true;
   hideSettingsPopup = true;
+  hideAddSignPopup = true;
+  hideNotLoggedInPopup = true;
+
   constructor() {
   }
 
   ShowSettingsPopup() {
     this.hideSettingsPopup = !this.hideSettingsPopup;
+  }
+
+  ShowAddSignPopup() {
+    this.hideAddSignPopup = !this.hideAddSignPopup;
+  }
+
+  ShowNotLoggedInPopup() {
+    this.hideNotLoggedInPopup = !this.hideNotLoggedInPopup;
   }
 
   receiveLoginStatus($event: boolean) {

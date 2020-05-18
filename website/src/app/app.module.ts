@@ -26,6 +26,7 @@ import {ToastrModule} from 'ngx-toastr';
 import { NotLoggedInComponent } from './modules/add-sign/not-logged-in/not-logged-in.component';
 import { AddSignComponent } from './modules/add-sign/add-sign/add-sign.component';
 import { PersonalDictionaryComponent } from './modules/dictionary/personal-dictionary/personal-dictionary.component';
+import { LogoutAccountComponent } from './modules/settings/account/logout/logout-account.component';
 
 const appRoutes: Routes = [
   {
@@ -33,8 +34,8 @@ const appRoutes: Routes = [
     component: CategoriesComponent,
   },
   {
-    path: 'personal',
-    component: PersonalDictionaryComponent
+    path: 'categories',
+    component: CategoriesComponent
   },
   {
     path: 'categories/:id',
@@ -83,6 +84,7 @@ const appRoutes: Routes = [
     ForgotPwNewComponent,
     NotLoggedInComponent,
     AddSignComponent,
+    LogoutAccountComponent,
     PersonalDictionaryComponent
   ],
   imports: [

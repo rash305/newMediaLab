@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {CategoryModel} from '../../../shared/signs/models/category.model';
 import {CategoriesService} from '../../../shared/signs/services/categories.service';
@@ -7,7 +6,7 @@ import {CategoriesService} from '../../../shared/signs/services/categories.servi
 @Component({
   selector: 'app-add-sign',
   templateUrl: './add-sign.component.html',
-  styleUrls: ['./add-sign.component.css', '../../settings/settings-style.component.css']
+  styleUrls: ['./add-sign.component.css']
 })
 export class AddSignComponent implements OnInit {
 
@@ -25,11 +24,10 @@ export class AddSignComponent implements OnInit {
 
   categories: CategoryModel[];
 
-  @Output() messageSettingsStatus = new EventEmitter<string>();
+  @Output() AddSignMinimalizeEvent = new EventEmitter();
 
   constructor(private router: Router,
-              private location: Location,
-              private  categoriesService: CategoriesService) { }
+              private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
     this.getCategories();
@@ -52,6 +50,7 @@ export class AddSignComponent implements OnInit {
       this.doSomethingInService();
 
       // Go to categories page (and be logged in)
+      this.AddSignMinimalizeEvent.emit(true);
       this.router.navigate(['/categories']);
     }
   }
@@ -91,18 +90,20 @@ export class AddSignComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    this.AddSignMinimalizeEvent.emit(true);
   }
 
   addCamera() {
     // open camera to make a video
     this.video = 'Show a pretty video';
+    this.validateVideo(this.video);
     this.videoSelected = true;
   }
 
   addGallery() {
     // open gallery to select a video
     this.video = 'Show a pretty video';
+    this.validateVideo(this.video);
     this.videoSelected = true;
   }
 }

@@ -16,6 +16,8 @@
                         (messageSettingsStatus)="receiveSettingStatus($event)"></app-create-account>
     <app-change-account [hidden]="!show('change')"
                         (messageSettingsStatus)="receiveSettingStatus($event)"></app-change-account>
+    <app-logout-account [hidden]="!show('logout')"
+                        (messageSettingsStatus)="receiveSettingStatus($event)"></app-logout-account>
 
     <app-help [hidden]="!show('help')" (messageSettingsStatus)="receiveSettingStatus($event)"></app-help>
 

@@ -1,51 +1,63 @@
-<div class="modal">
-  <div class="container top-container">
-    <i class="fa fa-video-camera"></i><span><b>Gebaar toevoegen</b></span>
-  </div>
-  <div class="container middle-container">
-    <i class="fa fa-question-circle"></i>
-    <input type="text" placeholder="Geef een betekenis" name="meaning" required [(ngModel)]="meaning">
-    <div class="alert-container">
-      <div class="alert-danger" role="alert" [hidden]="!meaningError">
-        {{meaningError}}
-      </div></div>
+<div class="modal" (click)="this.AddSignMinimalizeEvent.emit(true)">
+</div>
+<div class="popup-layer container">
+  <div class="h-100">
+    <div class="content-container">
+      <div class="col-12 purple-border top-container">
+        <i class="fa fa-video-camera"></i><span><b>Gebaar toevoegen</b></span>
+      </div>
+      <div class="purple-border middle-container f-flex flex-column">
+        <div class="col-12 input-list">
+          <i class="fa fa-question-circle"></i>
+          <input type="text" placeholder="Geef een betekenis" name="meaning" required (focusout)="validateMeaning(meaning)" [(ngModel)]="meaning">
+          <div class="alert-container">
+            <div class="alert-danger" role="alert" [hidden]="!meaningError">
+              {{meaningError}}
+            </div>
+          </div>
 
-    <i class="fa fa-list"></i>
-    <select type="text" name="category" [(ngModel)]="category">
-      <option value="" selected>Kies een categorie</option>
-      <option *ngFor="let category of categories"
-              [value]="category.title">
-        {{category.title}}
-      </option>
-    </select>
-    <div class="alert-container">
-      <div class="alert-danger" role="alert" [hidden]="!categoryError">
-        {{categoryError}}
-      </div></div>
+          <i class="fa fa-list"></i>
+          <select type="text" name="category" (focusout)="validateCategory(category)" [(ngModel)]="category">
+            <option value="" selected>Kies een categorie</option>
+            <option *ngFor="let category of categories"
+                    [value]="category.title">
+              {{category.title}}
+            </option>
+          </select>
+          <div class="alert-container">
+            <div class="alert-danger" role="alert" [hidden]="!categoryError">
+              {{categoryError}}
+            </div>
+          </div>
 
-    <div class="row">
-      <i class="fa fa-video-camera"></i>
-      <div class="column" [hidden]="videoSelected" style="width: 90%">
-        Video toevoegen:
-        <div style="padding-top: 5px; padding-bottom: 5px;">
-          <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-camera btn-i"></i> Camera</button>
-          <button type="button" class="btn btn-outline-primary" (click)="addGallery()"><i class="fa fa-image btn-i"></i> Gallerij</button>
+          <div class="row">
+            <i class="fa fa-video-camera"></i>
+            <div class="col-" [hidden]="videoSelected">
+              Video toevoegen:
+              <div style="padding-top: 5px; padding-bottom: 5px;">
+                <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-camera btn-i"></i> Camera</button>
+                <button type="button" class="btn btn-outline-primary" (click)="addGallery()"><i class="fa fa-image btn-i"></i> Gallerij</button>
+              </div>
+            </div>
+            <div class="col-8" [hidden]="!videoSelected" style="height: 125px; background-color: #8769e0">
+              {{video}}
+            </div>
+            <div class="col-1 float-left" [hidden]="!videoSelected" style="padding-left: 0">
+              <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-camera btn-i"></i></button>
+              <button type="button" class="btn btn-outline-primary" (click)="addGallery()"><i class="fa fa-image btn-i"></i></button>
+            </div>
+          </div>
+          <div class="alert-container">
+            <div class="alert-danger" role="alert" [hidden]="!videoError">
+              {{videoError}}
+            </div>
+          </div>
         </div>
       </div>
-        <div class="column" [hidden]="!videoSelected" style="width: 70%; height: 125px; background-color: #8769e0">
-          {{video}}
-        </div>
-        <div class="column" [hidden]="!videoSelected" style="width: 20%;">
-          <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-camera btn-i"></i></button>
-          <button type="button" class="btn btn-outline-primary" (click)="addGallery()"><i class="fa fa-image btn-i"></i></button>
-        </div>
+      <div class="col-12 bottom-container">
+        <button type="button" class="back-button btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+        <button type="button" class="btn btn-primary right-button" (click)="addSign()"><i class="fa fa-plus-circle btn-i"></i> Toevoegen</button>
+      </div>
     </div>
-    <div class="alert-container">
-      <div class="alert-danger" role="alert" [hidden]="!videoError">
-        {{videoError}}
-      </div></div>  </div>
-  <div class="container bottom-container">
-    <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-    <button type="button" class="btn btn-primary right-button" (click)="addSign()"><i class="fa fa-plus-circle btn-i"></i> Toevoegen</button>
   </div>
 </div>
