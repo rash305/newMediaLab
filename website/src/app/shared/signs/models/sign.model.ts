@@ -10,4 +10,5 @@ export class SignModel implements ISignTemplate {
     this.title = title;
     this.categoryId = categoryId;
   }
+
 }
