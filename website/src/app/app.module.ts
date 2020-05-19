@@ -8,7 +8,7 @@ import {LearnComponent} from './modules/learn/learn.component';
 import {SearchComponent} from './modules/search/search.component';
 import {CreateAccountComponent} from './modules/settings/account/create/create-account.component';
 import {LoginAccountComponent} from './modules/settings/account/login/login-account.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpErrorHandler} from './common/network/http-error-handler.service';
 import {SignsComponent} from './modules/dictionary/signs/signs.component';
 import {SettingsPopupComponent} from './modules/settings/popup/settings-popup.component';
@@ -28,6 +28,8 @@ import { AddSignComponent } from './modules/add-sign/add-sign/add-sign.component
 import { PersonalDictionaryComponent } from './modules/dictionary/personal-dictionary/personal-dictionary.component';
 import { LogoutAccountComponent } from './modules/settings/account/logout/logout-account.component';
 import { SignDetailsComponent } from './modules/dictionary/sign-details/sign-details.component';
+import {NetworkErrorInterceptor} from './common/network/network-error-interceptor';
+import {JwtAuthInterceptor} from './common/network/jwt-auth-interceptor';
 
 const appRoutes: Routes = [
   {
@@ -107,8 +109,11 @@ const appRoutes: Routes = [
   ],
   providers: [
     HttpClientModule,
-    HttpErrorHandler],
-  bootstrap: [AppComponent]
+    HttpErrorHandler,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: NetworkErrorInterceptor, multi: true },
+  ],
+bootstrap: [AppComponent]
 })
 export class AppModule {
 }

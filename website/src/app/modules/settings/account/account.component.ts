@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../../../shared/account/services/authentication.service';
 
 @Component({
   selector: 'app-account',
@@ -9,8 +10,14 @@ import {Router} from '@angular/router';
 export class AccountComponent implements OnInit {
 
   @Output() messageSettingsStatus = new EventEmitter<string>();
+  isLoggedIn: boolean;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, authenticationService: AuthenticationService) {
+    authenticationService.isLoggedInEmitter.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+    authenticationService.isLoggedIn();
+  }
 
   ngOnInit(): void {
   }
@@ -29,11 +36,6 @@ export class AccountComponent implements OnInit {
 
   toLogout(): void {
     this.messageSettingsStatus.emit('logout');
-  }
-
-  isLoggedIn(): boolean {
-    // get login status from service
-    return false;
   }
 
   goBack(): void {

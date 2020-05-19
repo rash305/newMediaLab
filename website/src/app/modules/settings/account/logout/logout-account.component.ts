@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../../../../shared/account/services/authentication.service';
 
 @Component({
   selector: 'app-logout-account',
@@ -10,7 +11,7 @@ export class LogoutAccountComponent implements OnInit {
 
   @Output() messageSettingsStatus = new EventEmitter<string>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authServer: AuthenticationService) { }
 
   ngOnInit(): void {
   }
@@ -21,7 +22,7 @@ export class LogoutAccountComponent implements OnInit {
 
   logout(): void {
     // Do some service magic
-
-    this.messageSettingsStatus.emit('close');
+    this.authServer.logout();
+    location.reload(true);
   }
 }

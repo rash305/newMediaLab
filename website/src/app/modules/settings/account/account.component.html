@@ -3,8 +3,8 @@
     <i class="fa fa-user-circle"></i><span><b>Account</b></span>
   </div>
   <div class="purple-border middle-container d-flex flex-column">
-    <div class="purple-border-b">
-      <button class="btn btn-block btn-lg" (click)="toLogin()" [hidden]="isLoggedIn()">
+    <div class="purple-border-b" *ngIf="!isLoggedIn" >
+      <button class="btn btn-block btn-lg" (click)="toLogin()">
         <div class="row">
           <div class="col-10">
             <i class="fa fa-sign-in btn-i"></i> Inloggen
@@ -15,8 +15,8 @@
         </div>
       </button>
     </div>
-    <div class="purple-border-b">
-      <button class="btn btn-block btn-lg" (click)="toRegister()" [hidden]="isLoggedIn()">
+    <div class="purple-border-b" *ngIf="!isLoggedIn">
+      <button class="btn btn-block btn-lg" (click)="toRegister()">
         <div class="row">
           <div class="col-10">
             <i class="fa fa-user-plus btn-i"></i> Registreren
@@ -27,8 +27,8 @@
         </div>
       </button>
     </div>
-    <div class="purple-border-b">
-      <button class="btn btn-block btn-lg" (click)="toChangeAccount()" [hidden]="isLoggedIn()">
+    <div class="purple-border-b" *ngIf="isLoggedIn">
+      <button class="btn btn-block btn-lg" (click)="toChangeAccount()">
         <div class="row">
           <div class="col-10">
             <i class="fa fa-pencil btn-i"></i> Wijzigen
@@ -39,8 +39,8 @@
         </div>
       </button>
     </div>
-    <div class="purple-border-b">
-      <button class="btn btn-block btn-lg" (click)="toLogout()" [hidden]="isLoggedIn()">
+    <div class="purple-border-b" *ngIf="isLoggedIn">
+      <button class="btn btn-block btn-lg" (click)="toLogout()">
         <div class="row">
           <div class="col-10">
             <i class="fa fa-sign-out btn-i"></i>
