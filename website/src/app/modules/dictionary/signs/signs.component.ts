@@ -12,7 +12,8 @@ import {AppComponent} from '../../../app.component';
 })
 export class SignsComponent implements OnInit {
 
-  private currentSignCategory: string;
+  currentSignCategory: string;
+  currentSignCategoryTitle: string;
   noMoreSignsAvailable = false;
   signs: SignModel[];
 
