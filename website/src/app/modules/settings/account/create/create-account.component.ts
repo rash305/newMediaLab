@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Router} from '@angular/router';
 import {Account} from '../../../../shared/account/models/account';
 import {AccountService} from '../../../../shared/account/services/account.service';
+import {AuthenticationService} from '../../../../shared/account/services/authentication.service';
 
 @Component({
   selector: 'app-create-account',
@@ -25,7 +26,8 @@ export class CreateAccountComponent implements OnInit {
   @Output() messageSettingsStatus = new EventEmitter<string>();
 
   constructor(private router: Router,
-              private accountService: AccountService) {
+              private accountService: AccountService,
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -33,10 +35,11 @@ export class CreateAccountComponent implements OnInit {
 
   createAccount(): void {
     // All validation checks
+
     if ([this.validateUsername(this.username),
-        this.validateEmail(this.emailAddress),
-        this.validatePassword(this.password),
-        this.validatePassword2(this.password2, this.password)].every(Boolean)) {
+      this.validateEmail(this.emailAddress),
+      this.validatePassword(this.password),
+      this.validatePassword2(this.password2, this.password)].every(Boolean)) {
 
       const account = new Account(this.username, this.password, this.emailAddress);
       // Send object to backend API
@@ -57,45 +60,52 @@ export class CreateAccountComponent implements OnInit {
       this.usernameError = 'Gebruikersnaam moet minimaal 5 tekens bevatten';
       return false;
     }
+
+    let returnValue = true;
     this.accountService.checkUsernameAvailability(username)
-      .subscribe(result => {
-        if ( result) {
+      .toPromise().then(result => {
+        if (result) {
           this.usernameError = '';
-          return true;
+          returnValue = true;
+        } else {
+          this.usernameError = 'Gebruikersnaam kan niet worden gebruikt';
+          returnValue = false;
         }
-        this.usernameError = 'Gebruikersnaam kan niet worden gebruikt';
-        return false;
       });
+
+    return returnValue;
   }
 
-  validateEmail(email): boolean {
-    if (!email) {
-      this.emailError = 'E-mailadres' + this.requiredError;
-      return false;
-    }
+   validateEmail(email): boolean {
+     if (!email) {
+       this.emailError = 'E-mailadres' + this.requiredError;
+       return false;
+     }
 
-    if (email.length < 1) {
-      this.emailError = 'E-mailadres is te kort';
-      return false;
-    }
+     if (email.length < 1) {
+       this.emailError = 'E-mailadres is te kort';
+       return false;
+     }
 
-    if (!this.validateEmailRegex(email)) {
-      this.emailError = 'E-mailadres heeft het verkeerde opbouw';
-      return false;
-    }
+     if (!this.validateEmailRegex(email)) {
+       this.emailError = 'E-mailadres heeft het verkeerde opbouw';
+       return false;
+     }
 
-    this.emailError = 'Valideren...';
+     this.emailError = 'Valideren...';
+     let returnValue = true;
+     this.accountService.checkEmailAvailability(email)
+       .toPromise().then(result => {
+         if (result) {
+           this.emailError = '';
+           returnValue = true;
+         } else {
+           this.emailError = 'E-mailadres kan niet worden gebruikt';
+           returnValue =  false;         }
 
-    this.accountService.checkEmailAvailability(email)
-      .subscribe(result => {
-        if ( result) {
-          this.emailError = '';
-          return true;
-        }
-        this.emailError = 'E-mailadres kan niet worden gebruikt';
-        return false;
-      });
-  }
+       });
+     return returnValue;
+   }
 
   private validateEmailRegex(email) {
     // tslint:disable-next-line:max-line-length
@@ -146,16 +156,28 @@ export class CreateAccountComponent implements OnInit {
 
   private createAccountOnServer(account: Account): void {
     this.accountService.createAccount(account)
-      .subscribe(jwt =>       {
+      .subscribe(jwt => {
         if (jwt === null) {
           // Account is not created
           // Toaster message is enough for now
         } else {
           // log user in
-          window.alert('TODO: Login with the received JWT token.');
+          this.login(account);
         }
       });
+  }
 
+  private login(account: Account) {
+    this.authenticationService.login(account.username, account.password)
+      .subscribe(accountId =>       {
+        if (accountId === null) {
+          // Account is not created
+          // Toaster message is enough for now
+        } else {
+          // log user in
+          location.reload(true);
+        }
+      });
   }
 
   goBack(): void {

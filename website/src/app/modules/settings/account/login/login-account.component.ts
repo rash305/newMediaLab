@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import {Account} from '../../../../shared/account/models/account';
+import {AccountService} from '../../../../shared/account/services/account.service';
+import {AuthenticationService} from '../../../../shared/account/services/authentication.service';
 
 @Component({
   selector: 'app-login-account',
@@ -20,7 +23,7 @@ export class LoginAccountComponent implements OnInit {
 
   @Output() messageSettingsStatus = new EventEmitter<string>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
@@ -33,11 +36,7 @@ export class LoginAccountComponent implements OnInit {
       // check if login is valid
       if (this.validateLogin(this.username, this.password)) {
         // Send object to backend API
-        this.doSomethingInService();
-
-        // Go to categories page (and be logged in)
-        this.router.navigate(['/categories']);
-        this.messageSettingsStatus.emit('close');
+        this.loginOnApi();
       }
     }
   }
@@ -75,8 +74,18 @@ export class LoginAccountComponent implements OnInit {
     return true;
   }
 
-  private doSomethingInService(): void {
 
+  private loginOnApi(): void {
+    this.authService.login(this.username, this.password)
+      .subscribe(accountId =>       {
+        if (accountId === null) {
+          // Account is not created
+          // Toaster message is enough for now
+        } else {
+          // log user in
+          location.reload(true);
+        }
+      });
   }
 
   goBack(): void {

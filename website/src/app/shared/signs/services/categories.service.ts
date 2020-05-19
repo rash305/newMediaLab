@@ -22,7 +22,7 @@ export class CategoriesService {
 
   /** GET heroes from the server */
   getCategories(): Observable<CategoryModel[]> {
-    return this.http.get<CategoryModel[]>(this.categoryUrl)
+    return this.http.get<any[]>(this.categoryUrl)
       .pipe(
         catchError(this.handleError('getCategories', null))
       );
