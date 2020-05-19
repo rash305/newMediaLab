@@ -13,12 +13,16 @@ import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.ignoreCase;
 
 // By notating this class as service it is possible to autowire this class
@@ -67,5 +71,17 @@ public class AccountService implements IAccountService {
 
     private void hashPassword(Account account){
         account.setPassword(passwordEncoder.encode(account.getPassword()));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username_or_email) throws UsernameNotFoundException {
+        DocAccount account = accountRepository.findByUsername(username_or_email);
+        if (account == null){
+            account = accountRepository.findByEmailAddress(username_or_email);
+        }
+        if (account == null) {
+            throw new UsernameNotFoundException(username_or_email);
+        }
+        return new User(account.getUsername(), account.getPassword(), emptyList());
     }
 }

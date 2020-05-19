@@ -23,9 +23,11 @@ export class ChangeAccountComponent implements OnInit {
 
   @Output() messageSettingsStatus = new EventEmitter<string>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
+
   }
 
   saveChanges(): void {
