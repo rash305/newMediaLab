@@ -17,10 +17,10 @@
           </div>
 
           <i class="fa fa-list"></i>
-          <select type="text" name="category" (focusout)="validateCategory(category)" [(ngModel)]="category">
+          <select type="text" name="category" (focusout)="validateCategory(categoryId)" [(ngModel)]="categoryId">
             <option value="" selected>Kies een categorie</option>
             <option *ngFor="let category of categories"
-                    [value]="category.title">
+                    [value]="category.id">
               {{category.title}}
             </option>
           </select>

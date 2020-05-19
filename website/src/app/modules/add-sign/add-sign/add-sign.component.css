@@ -8,6 +8,7 @@ select[type=text] {
   border-right: 0px;
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
+  background-color: #ffffff;
 }
 
 .btn-outline-primary {

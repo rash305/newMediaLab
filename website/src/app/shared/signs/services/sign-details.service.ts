@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import {SignDetailsModel} from '../models/sign-details.model';
 import { Observable, of } from 'rxjs';
+import {Account} from '../../account/models/account';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,10 @@ export class SignDetailsService {
     model.video = 'unknown';
     model.category = 'Marit';
     return of(model);
+  }
+
+  /** Add sign to database */
+  addSign(signDetail: SignDetailsModel) {
+
   }
 }
