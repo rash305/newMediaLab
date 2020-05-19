@@ -1,11 +1,15 @@
 package com.newmedia.deafapi.api.controllers;
 
+import com.newmedia.deafapi.api.dtos.CategoryDto;
 import com.newmedia.deafapi.api.dtos.SignDto;
+import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import org.springframework.web.server.ResponseStatusException;
@@ -34,5 +38,17 @@ public class SignController {
 
         List<SignDto> signDtos = ObjectMapperUtils.mapAll(signs, SignDto.class);
         return signDtos;
+    }
+
+
+    @PostMapping("/api/signs")
+    public SignDto createSign(@RequestBody SignDto sign) {
+        Sign signModel = ObjectMapperUtils.map(sign, Sign.class);
+        if(signModel == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "No sign is given.");
+        }
+        signModel = ISignService.createSign(signModel);
+        return ObjectMapperUtils.map(signModel, SignDto.class);
     }
 }

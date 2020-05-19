@@ -1,0 +1,60 @@
+<div class="content-container">
+  <div class="col-12 purple-border top-container">
+    <i class="fa fa-user-circle"></i><span><b>Account</b></span>
+  </div>
+  <div class="purple-border middle-container d-flex flex-column">
+    <div class="purple-border-b" *ngIf="!isLoggedIn" >
+      <button class="btn btn-block btn-lg" (click)="toLogin()">
+        <div class="row">
+          <div class="col-10">
+            <i class="fa fa-sign-in btn-i"></i> Inloggen
+          </div>
+          <div class="col-2">
+            <i class="fa fa-chevron-right float-right"></i>
+          </div>
+        </div>
+      </button>
+    </div>
+    <div class="purple-border-b" *ngIf="!isLoggedIn">
+      <button class="btn btn-block btn-lg" (click)="toRegister()">
+        <div class="row">
+          <div class="col-10">
+            <i class="fa fa-user-plus btn-i"></i> Registreren
+          </div>
+          <div class="col-2">
+            <i class="fa fa-chevron-right float-right"></i>
+          </div>
+        </div>
+      </button>
+    </div>
+    <div class="purple-border-b" *ngIf="isLoggedIn">
+      <button class="btn btn-block btn-lg" (click)="toChangeAccount()">
+        <div class="row">
+          <div class="col-10">
+            <i class="fa fa-pencil btn-i"></i> Wijzigen
+          </div>
+          <div class="col-2">
+            <i class="fa fa-chevron-right float-right"></i>
+          </div>
+        </div>
+      </button>
+    </div>
+    <div class="purple-border-b" *ngIf="isLoggedIn">
+      <button class="btn btn-block btn-lg" (click)="toLogout()">
+        <div class="row">
+          <div class="col-10">
+            <i class="fa fa-sign-out btn-i"></i>
+            Uitloggen
+          </div>
+          <div class="col-2">
+            <i class="fa fa-chevron-right float-right"></i>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="col-12 bottom-container">
+    <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+  </div>
+</div>

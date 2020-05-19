@@ -4,11 +4,17 @@
       <div class="p-2 bd-highlight">
       </div>
 
-      <div class="p-2 bd-highlight">
+      <div class="p-2 bd-highlight" style="text-align: center">
       <a class="navbar-brand " href="#">WeSign!</a>
       </div>
-      <div class="p-2 bd-highlight" id="navbarColor01">
-        <button class="btn settings" routerLink="/settings" routerLinkActive="active">
+      <div class="p-2 bd-highlight" style="text-align: right" id="navbarColor01">
+        <button class="btn settings" (click)="ShowNotLoggedInPopup()" [hidden]="isLoggedIn">
+          <span><i class="fa fa-video-camera" style="font-size: 120%; color: #bfbfbf"></i></span>
+        </button>
+        <button class="btn settings" (click)="ShowAddSignPopup()" [hidden]="!isLoggedIn">
+          <span><i class="fa fa-video-camera" style="font-size: 120%"></i></span>
+        </button>
+        <button class="btn settings" (click)="ShowSettingsPopup()">
           <span><i class="fa fa-cog" style="font-size: 120%"></i></span>
         </button>
       </div>
@@ -21,17 +27,20 @@
     </div>
     <hr>
     <div>
-      <button class="btn btn-secondary" routerLink="/categories" routerLinkActive="active">
-        <span><i class="fa fa-heart"></i><br />Woordenboek</span>
+      <button class="btn btn-secondary" routerLink="/personal" routerLinkActive="active">
+        <span><i class="fa fa-heart"></i><br />Favorieten</span>
       </button>
       <button class="btn btn-secondary" routerLink="/learn" routerLinkActive="active">
         <span><i class="fa fa-graduation-cap"></i><br />Leren</span>
       </button>
       <button class="btn btn-secondary" routerLink="/search" routerLinkActive="active">
-        <span><i class="fa fa-search"></i><br />Zoeken</span>
+        <span><i class="fa fa-search"></i><br />Woordenboek</span>
       </button>
     </div>
     <hr>
   </div>
   <router-outlet></router-outlet>
+  <app-not-logged-in [hidden]="hideNotLoggedInPopup" (NotLoggedInMinimalizeEvent)="hideNotLoggedInPopup = $event"></app-not-logged-in>
+  <app-add-sign [hidden]="hideAddSignPopup" (AddSignMinimalizeEvent)="hideAddSignPopup = $event"></app-add-sign>
+  <app-settings-popup [hidden]="hideSettingsPopup" (SettingsMinimalizeEvent)="hideSettingsPopup = $event"></app-settings-popup>
 </div>

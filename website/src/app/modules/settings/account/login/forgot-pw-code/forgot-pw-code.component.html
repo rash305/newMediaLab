@@ -1,0 +1,35 @@
+<div class="content-container">
+
+  <div class="col-12 purple-border top-container">
+    <i class="fa fa-unlock-alt"></i><span><b>Wachtwoord vergeten</b></span>
+  </div>
+  <div class=" purple-border middle-container d-flex flex-column ">
+    <div class="p-4">
+      <div>
+        Vul hier de verificatiecode in die we je hebben gemaild:
+      </div>
+      <i class="fa fa-check-circle"></i>
+      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="1" name="1"
+             required [(ngModel)]="one">
+      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="2" name="2"
+             required [(ngModel)]="two">
+      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="3" name="3"
+             required [(ngModel)]="three">
+      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="4" name="4"
+             required [(ngModel)]="four">
+
+      <div class="alert-container">
+        <div class="alert-danger" role="alert" [hidden]="!codeError">
+          {{codeError}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 bottom-container">
+    <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+
+    <button type="button" class="btn btn-primary right-button" (click)="continue()"><i
+      class="fa fa-arrow-right btn-i"></i>Verder
+    </button>
+  </div>
+</div>

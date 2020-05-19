@@ -1,0 +1,26 @@
+i {
+  font-size: 300%;
+}
+
+.div-learn {
+  padding: 5% 5% 0;
+}
+
+.chevron {
+  width: 10%;
+  position: relative;
+  top: 35px;
+}
+
+.btn-learn {
+  text-align: left;
+  width: 100%;
+  border-radius: 15px;
+  background-color: #eeeeee;
+  margin: 10px 0px;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0 !important;
+}
