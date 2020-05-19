@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {AuthenticationService} from './shared/account/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,11 @@ export class AppComponent {
   hideAddSignPopup = true;
   hideNotLoggedInPopup = true;
 
-  constructor() {
+  constructor(authenticationService: AuthenticationService) {
+    authenticationService.isLoggedInEmitter.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+    authenticationService.isLoggedIn();
   }
 
   ShowSettingsPopup() {

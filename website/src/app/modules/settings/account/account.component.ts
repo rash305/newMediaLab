@@ -16,7 +16,6 @@ export class AccountComponent implements OnInit {
     authenticationService.isLoggedInEmitter.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
     });
-    authenticationService.isLoggedInEmitter.next();
     authenticationService.isLoggedIn();
   }
 
