@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AuthenticationService} from './shared/account/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,32 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'website';
-  isLoggedIn = false;
-  createAccountIsTrue = false;
-  constructor() {
+  isLoggedIn = true;
+  hideSettingsPopup = true;
+  hideAddSignPopup = true;
+  hideNotLoggedInPopup = true;
+
+  constructor(authenticationService: AuthenticationService) {
+    authenticationService.isLoggedInEmitter.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+    authenticationService.isLoggedIn();
   }
 
-  showCreateAccountPopup() {
-    this.createAccountIsTrue = !this.createAccountIsTrue;
+  ShowSettingsPopup() {
+    this.hideSettingsPopup = !this.hideSettingsPopup;
+  }
+
+  ShowAddSignPopup() {
+    this.hideAddSignPopup = !this.hideAddSignPopup;
+  }
+
+  ShowNotLoggedInPopup() {
+    this.hideNotLoggedInPopup = !this.hideNotLoggedInPopup;
+  }
+
+  receiveLoginStatus($event: boolean) {
+    this.isLoggedIn = $event;
   }
 
 }

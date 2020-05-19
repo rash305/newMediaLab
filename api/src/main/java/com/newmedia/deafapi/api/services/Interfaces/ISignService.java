@@ -8,6 +8,6 @@ import java.util.List;
 // A interface describes all accessible functionallity
 public interface ISignService {
     List<Sign> getSigns();
-    void createSign();
-    void updateSign();
+    Sign createSign(Sign sign);
+    void updateSign(Sign sign);
 }

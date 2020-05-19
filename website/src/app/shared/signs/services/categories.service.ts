@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {CategoryModel} from '../models/category.model';
 import {HttpClient} from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import {HttpClient} from '@angular/common/http';
 export class CategoriesService {
 
   private handleError: HandleError;
-  categoryUrl = 'api/categories';  // URL to web api
+  categoryUrl = environment.baseUrl + '/categories';  // URL to web api
 
   constructor( private http: HttpClient,
                httpErrorHandler: HttpErrorHandler,
@@ -21,9 +22,9 @@ export class CategoriesService {
 
   /** GET heroes from the server */
   getCategories(): Observable<CategoryModel[]> {
-    return this.http.get<CategoryModel[]>(this.categoryUrl)
+    return this.http.get<any[]>(this.categoryUrl)
       .pipe(
-        catchError(this.handleError('getCategories', []))
+        catchError(this.handleError('getCategories', null))
       );
   }
 
@@ -33,7 +34,7 @@ export class CategoriesService {
     // Todo: User guid might be added by a guard or something -> investigate later
     return this.http.get<CategoryModel[]>(this.categoryUrl)
       .pipe(
-        catchError(this.handleError('getPersonalCategories', []))
+        catchError(this.handleError('getPersonalCategories', null))
       );
   }
 }

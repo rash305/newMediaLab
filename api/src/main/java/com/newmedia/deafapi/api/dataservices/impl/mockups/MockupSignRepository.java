@@ -1,4 +1,4 @@
-package com.newmedia.deafapi.api.dataservices.impl;
+package com.newmedia.deafapi.api.dataservices.impl.mockups;
 
 import com.newmedia.deafapi.api.dataservices.interfaces.ISignRepository;
 import com.newmedia.deafapi.api.models.Sign;
@@ -12,8 +12,8 @@ import java.util.List;
 public class MockupSignRepository implements ISignRepository<Sign> {
 
     Sign[] signs = {
-            new Sign("Dog"),
-            new Sign("Konijn"),
+            new Sign("1", "Dog", "1"),
+            new Sign("2","Konijn", "1"),
     };
     @Override
     public List<Sign> getAll() {

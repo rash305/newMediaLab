@@ -1,0 +1,24 @@
+select[type=text] {
+  width: 90%;
+  padding: 8px 1px;
+  margin: 8px 0px 5px 0px;
+  display: inline-block;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.btn-outline-primary {
+  background-color: #eeeeee;
+  margin: 0px 10px 10px;
+}
+
+.btn-outline-primary:hover {
+  color: #593196;
+}
+
+.row {
+  margin: 8px 0px 0px;
+}
