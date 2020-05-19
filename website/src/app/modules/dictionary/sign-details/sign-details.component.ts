@@ -11,15 +11,14 @@ import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model'
 export class SignDetailsComponent implements OnInit {
 
   sign: SignDetailsModel;
+  likes = 30;
+  isDeleted = false;
 
-  constructor(
-    private signDetailsService: SignDetailsService,
-  ) {
+  constructor(private signDetailsService: SignDetailsService) {
   }
 
   ngOnInit(): void {
-  this.getSign();
-  console.log(this.sign);
+    this.getSign();
   }
 
   getSign(): void {
@@ -30,4 +29,8 @@ export class SignDetailsComponent implements OnInit {
 
   }
 
+  delete() {
+    // Do something in service to remove sign from favorites
+    this.isDeleted = true;
+  }
 }
