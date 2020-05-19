@@ -10,6 +10,12 @@ import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model'
 })
 export class SignDetailsComponent implements OnInit {
 
+  isPersonalDictionary = false;
+  isAddedToPersonal = false;
+  purpleIcon = {
+    color: '#444444'
+  };
+
   sign: SignDetailsModel;
   likes = 30;
   isDeleted = false;
@@ -27,6 +33,22 @@ export class SignDetailsComponent implements OnInit {
         this.sign = data;
       });
 
+  }
+
+  addToPersonal() {
+    this.purpleIcon = {
+      color: '#593196'
+    };
+    this.likes += 1;
+    this.isAddedToPersonal = !this.isAddedToPersonal;
+  }
+  removeFromPersonal() {
+    // Change hartjes color
+    this.purpleIcon = {
+      color: '#444444'
+    };
+    this.likes -= 1;
+    this.isAddedToPersonal = !this.isAddedToPersonal;
   }
 
   delete() {

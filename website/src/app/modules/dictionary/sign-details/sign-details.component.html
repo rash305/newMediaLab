@@ -29,10 +29,14 @@
       {{this.sign.video}}
     </div>
   </div>
-  <div class="col-2 align-self-end sidebar">
+  <div class="col-2 align-self-end sidebar" [hidden]="!isPersonalDictionary">
     <i class="fa fa-3x fa-trash purple-icon" (click)="delete()"></i>
   </div>
+  <div class="col-2 sidebar" [hidden]="isPersonalDictionary">
+    <i class="fa fa-3x fa-heart-o purple-icon" (click)="addToPersonal()" [hidden]="isAddedToPersonal"></i>
+    <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal()" [hidden]="!isAddedToPersonal"></i>
+  </div>
   <div class="col-12">
-    <i class="fa fa-heart purple-icon"></i> {{this.likes}}x
+    <i class="fa fa-heart" style="{{this.purpleIcon}}"></i> {{this.likes}}x
   </div>
 </div>
