@@ -3,7 +3,7 @@ import {HandleError, HttpErrorHandler} from '../../../common/network/http-error-
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {CategoryModel} from '../models/category.model';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class CategoriesService {
   getPersonalCategories(): Observable<CategoryModel[]> {
     // Todo: Add user guid in the body to filter categories
     // Todo: User guid might be added by a guard or something -> investigate later
-    return this.http.get<CategoryModel[]>(this.categoryUrl)
+    return this.http.get<CategoryModel[]>(this.categoryUrl, { params: new HttpParams().set('personal', 'true') })
       .pipe(
         catchError(this.handleError('getPersonalCategories', null))
       );
