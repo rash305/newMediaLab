@@ -73,7 +73,6 @@ export class AddSignComponent implements OnInit {
   }
 
   validateCategory(categoryId): boolean {
-    console.log(categoryId);
     if (!categoryId) {
       this.categoryError = 'Categorie' + this.requiredError;
       return false;
@@ -99,10 +98,8 @@ export class AddSignComponent implements OnInit {
       if (sign === null) {
         // Failed to add sign
         // Toaster message is enough for now
-        console.log('Marit failed');
       } else {
         // close popup
-        console.log('Marit succeded');
         this.AddSignMinimalizeEvent.emit(true);
       }
     });
