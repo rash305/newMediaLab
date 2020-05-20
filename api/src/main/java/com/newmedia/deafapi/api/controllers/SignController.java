@@ -7,10 +7,7 @@ import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -29,8 +26,14 @@ public class SignController {
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
     @GetMapping("/api/signs")
-    public List<SignDto> getSignList() {
-        List<Sign> signs = ISignService.getSigns();
+    public List<SignDto> getSignList(@RequestParam("category") String category) {
+        List<Sign> signs;
+
+        if(category == null){
+            signs = ISignService.getSigns();
+        } else{
+            signs = ISignService.getSigns();
+        }
         if(signs == null){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No signs can be requested.");

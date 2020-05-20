@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.newmedia.deafapi.api.security.SecurityConstants.HEADER_STRING;
-import static com.newmedia.deafapi.api.security.SecurityConstants.TOKEN_PREFIX;
-import static com.newmedia.deafapi.api.security.SecurityConstants.SECRET;
+import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static com.newmedia.deafapi.api.security.SecurityConstants.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     public JWTAuthorizationFilter(AuthenticationManager authManager) {
@@ -29,9 +28,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                                     FilterChain chain) throws IOException, ServletException {
         String header = req.getHeader(HEADER_STRING);
 
-        if (header == null || !header.startsWith(TOKEN_PREFIX)) {
+        if (header == null || (!header.startsWith(TOKEN_PREFIX) && !header.startsWith(DEVICE_TOKEN_PREFIX))) {
             chain.doFilter(req, res);
             return;
+        }
+
+        if (header.startsWith(DEVICE_TOKEN_PREFIX)) {
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
         }
 
         UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
@@ -48,6 +51,29 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();
+
+
+            if (user != null) {
+                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            }
+            return null;
+        }
+        return null;
+    }
+
+    private UsernamePasswordAuthenticationToken  AcceptAnyDeviceId(HttpServletRequest request) {
+        String tokenString = request.getHeader(HEADER_STRING);
+        if (tokenString != null) {
+            String token = JWT.create()
+                    .withSubject(tokenString)
+                    //.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                    .sign(HMAC512(SECRET.getBytes()));
+            // parse the token.
+            String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
+                    .build()
+                    .verify(token.replace(DEVICE_TOKEN_PREFIX, ""))
+                    .getSubject();
+
 
             if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());

@@ -26,7 +26,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        JWTAuthenticationFilter JWTAuthFilter = new JWTAuthenticationFilter(authenticationManager());
+        JWTAuthenticationFilter JWTAuthFilter = new JWTAuthenticationFilter(authenticationManager(), userDetailsService);
         JWTAuthFilter.setFilterProcessesUrl("/api/auth/login");
 
         http.cors().and().csrf().disable().authorizeRequests()
@@ -37,7 +37,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/accounts**").permitAll()
                 .antMatchers("/api/admin**").permitAll()
                 .antMatchers("/api/accounts**").permitAll()
-//                .anyRequest().authenticated()
+               .anyRequest().authenticated()
                 .and()
                 .addFilter(JWTAuthFilter)
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))

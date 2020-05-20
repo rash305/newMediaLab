@@ -9,6 +9,10 @@ import java.util.List;
 // A interface describes all accessible functionallity
 public interface ICategoryService<C> {
     List<Category> getCategories();
+    List<Category> getPersonalCategories(String id);
+
     Category createCategory(Category category);
     void updateCategory(Category category) throws CustomError;
+
+
 }

@@ -1,7 +1,9 @@
 package com.newmedia.deafapi.api.services;
 
 import com.newmedia.deafapi.api.dataservices.docModels.DocCategory;
+import com.newmedia.deafapi.api.dataservices.docModels.DocFavoriteSign;
 import com.newmedia.deafapi.api.dataservices.docModels.DocSign;
+import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoFavoriteSignRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
 import com.newmedia.deafapi.api.dataservices.interfaces.ISignRepository;
 import com.newmedia.deafapi.api.models.Category;
@@ -21,6 +23,8 @@ public class CrudSignService implements ISignService {
 
     @Autowired
     private MongoSignRepository signISignRepository;
+    @Autowired
+    private MongoFavoriteSignRepository favoriteSignRepository;
 
     @Override
     public List<Sign> getSigns() {
@@ -38,6 +42,15 @@ public class CrudSignService implements ISignService {
     @Override
     public void updateSign(Sign sign) {
 
+    }
+
+    @Override
+    public void favoriteSign(String signId, String CategoryId, String userId) {
+        DocFavoriteSign probe = new DocFavoriteSign();
+        probe.setSignId(signId);
+        probe.setCategoryId(CategoryId);
+        probe.setPersonId(userId);
+        favoriteSignRepository.save(probe);
     }
 
     @Override

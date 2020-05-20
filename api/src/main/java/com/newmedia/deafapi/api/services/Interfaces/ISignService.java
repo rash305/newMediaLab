@@ -11,5 +11,7 @@ public interface ISignService {
     Sign createSign(Sign sign);
     void updateSign(Sign sign);
 
+    void favoriteSign(String signId, String CategoryId, String userId);
+
     Sign getSignDetails(String id);
 }

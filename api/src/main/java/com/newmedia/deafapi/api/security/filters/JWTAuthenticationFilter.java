@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newmedia.deafapi.api.models.Account;
 import com.newmedia.deafapi.api.security.JWTToken;
+import com.newmedia.deafapi.api.services.Interfaces.IAccountService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,9 +29,11 @@ import static com.newmedia.deafapi.api.security.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
+    private IAccountService userDetailsService;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, IAccountService userDetailsService) {
         this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -56,19 +59,20 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
+        Account account = userDetailsService.getAccountByUsername(((User) auth.getPrincipal()).getUsername());
 
         String token = JWT.create()
-                .withSubject(((User) auth.getPrincipal()).getUsername())
+                .withSubject(account.getId())
                 //.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
 
-        if(req.getRequestURI().equals("/api/auth/login")){
+        if (req.getRequestURI().equals("/api/auth/login")) {
             ObjectMapper mapper = new ObjectMapper();
             JWTToken tokenModel = new JWTToken();
             tokenModel.setToken(TOKEN_PREFIX + token);
             res.setHeader("Content-Type", "application/json");
-            res.getWriter().write( mapper.writeValueAsString(tokenModel));
+            res.getWriter().write(mapper.writeValueAsString(tokenModel));
         }
     }
 }
