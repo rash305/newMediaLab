@@ -45,6 +45,7 @@ export class SignDetailsComponent implements OnInit {
     };
     this.likes += 1;
     this.isAddedToPersonal = !this.isAddedToPersonal;
+    this.signDetailsService.favorite(this.sign).subscribe();
   }
 
   removeFromPersonal() {

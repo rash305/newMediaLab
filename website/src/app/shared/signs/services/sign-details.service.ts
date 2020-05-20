@@ -14,7 +14,8 @@ import {Account} from '../../account/models/account';
 export class SignDetailsService {
 
   private handleError: HandleError;
-  signUrl = environment.baseUrl + '/signdetails/';  // URL to web api
+  signDetailsUrl = environment.baseUrl + '/signdetails/';  // URL to web api
+  signUrl = environment.baseUrl + '/signs';  // URL to web api
 
   constructor( private http: HttpClient,
                httpErrorHandler: HttpErrorHandler) {
@@ -32,7 +33,7 @@ export class SignDetailsService {
   // }
 
   getSignDetails(id: string): Observable<SignDetailsModel> {
-    const detailsUrl = this.signUrl + id;
+    const detailsUrl = this.signDetailsUrl + id;
     return this.http.get<any[]>(detailsUrl)
       .pipe(
         catchError(this.handleError('getSignDetails', null))
@@ -41,7 +42,17 @@ export class SignDetailsService {
 
   /** Add sign to database */
   addSign(signDetails: SignDetailsModel): Observable<string> {
-    return this.http.post<SignDetailsModel>(this.signUrl, signDetails)
+    return this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
+      .pipe(map(x => {
+          return true;
+        })
+      )
+      .pipe(
+        catchError(this.handleError('createSignDetails', null))
+      );
+  }
+  favorite(sign: SignDetailsModel): Observable<boolean> {
+    return this.http.post<SignDetailsModel>(this.signUrl + '/favorite', sign)
       .pipe(map(x => {
           return true;
         })
