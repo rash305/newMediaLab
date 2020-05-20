@@ -28,10 +28,10 @@ export class CategoriesComponent implements OnInit {
 
   getPersonalCategories(): void {
     this.categoriesService.getPersonalCategories()
-        .subscribe(categories => {
-          this.categories = categories;
-          this.loading = false;
-        });
+      .subscribe(categories => {
+        this.categories = categories;
+        this.loading = false;
+      });
   }
 
   getCategories(): void {
@@ -39,5 +39,6 @@ export class CategoriesComponent implements OnInit {
       .subscribe(categories => {
         this.categories = categories;
         this.loading = false;
-      });  }
+      });
+  }
 }

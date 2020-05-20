@@ -33,11 +33,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
+        UsernamePasswordAuthenticationToken authentication;
         if (header.startsWith(DEVICE_TOKEN_PREFIX)) {
-            UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+            authentication = AcceptAnyDeviceId(req);
+        } else {
+            authentication = getAuthentication(req);
         }
-
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(req, res);
