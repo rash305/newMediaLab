@@ -50,9 +50,11 @@ export class AddSignComponent implements OnInit {
       this.validateCategory(this.categoryId),
       this.validateVideo(this.video)].every(Boolean)) {
 
+      const categoryTitle = this.categories.find(x => x.id === this.categoryId).title;
+
       // Send object to backend API
       const signDetails = new SignDetailsModel(null, this.meaning, this.categoryId,
-        'Dieren', 'https://w.wallhaven.cc/full/2e/wallhaven-2evglg.jpg', this.video);
+        categoryTitle, 'https://w.wallhaven.cc/full/2e/wallhaven-2evglg.jpg', this.video);
       this.addSignToApp(signDetails);
 
       // Go to categories page (and be logged in)

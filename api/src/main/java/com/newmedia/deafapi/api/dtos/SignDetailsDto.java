@@ -10,10 +10,14 @@ public class SignDetailsDto implements Serializable {
     private String image;
     private String video;
 
-    public SignDetailsDto(String id, String title, String categoryId) {
+    public SignDetailsDto(String id, String title, String categoryId,
+                          String category, String image, String video) {
         this.id = id;
         this.title = title;
         this.categoryId = categoryId;
+        this.category = category;
+        this.image = image;
+        this.video = video;
     }
 
     public SignDetailsDto() {
