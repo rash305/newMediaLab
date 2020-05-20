@@ -33,11 +33,8 @@ export class LoginAccountComponent implements OnInit {
     if ([this.validateUsername(this.username),
       this.validatePassword(this.password)].every(Boolean)) {
 
-      // check if login is valid
-      if (this.validateLogin(this.username, this.password)) {
-        // Send object to backend API
-        this.loginOnApi();
-      }
+      // log in on api
+      this.loginOnApi();
     }
   }
 
@@ -61,26 +58,13 @@ export class LoginAccountComponent implements OnInit {
     return true;
   }
 
-  private validateLogin(username: string, password: string) {
-    // something with service to check correctness of login
-    // login is incorrect
-    if (username.includes('a')) {
-      this.incorrectLoginError = 'Combinatie van gebruikersnaam en wachtwoord is incorrect';
-      return false;
-    }
-
-    // login is correct
-    this.incorrectLoginError = '';
-    return true;
-  }
-
-
   private loginOnApi(): void {
     this.authService.login(this.username, this.password)
       .subscribe(accountId =>       {
         if (accountId === null) {
-          // Account is not created
+          // Login failed
           // Toaster message is enough for now
+          this.incorrectLoginError = 'Combinatie van gebruikersnaam en wachtwoord is incorrect';
         } else {
           // log user in
           location.reload(true);
