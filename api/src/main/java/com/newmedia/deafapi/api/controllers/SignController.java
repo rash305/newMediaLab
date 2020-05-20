@@ -26,7 +26,7 @@ public class SignController {
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
     @GetMapping("/api/signs")
-    public List<SignDto> getSignList(@RequestParam("category") String category) {
+    public List<SignDto> getSignList(@RequestParam( value = "category", required = false) String category) {
         List<Sign> signs;
 
         if(category == null){

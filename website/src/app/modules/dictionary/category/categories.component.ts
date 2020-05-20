@@ -19,7 +19,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.isPersonalDictionary == null) {
+    if (!this.isPersonalDictionary) {
       this.getCategories();
     } else {
       this.getPersonalCategories();
@@ -35,6 +35,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   getCategories(): void {
-    throw new DOMException('Not implemented');
-  }
+    this.categoriesService.getCategories()
+      .subscribe(categories => {
+        this.categories = categories;
+        this.loading = false;
+      });  }
 }

@@ -3,6 +3,7 @@ package com.newmedia.deafapi.api.controllers;
 import com.newmedia.deafapi.api.dtos.SignDetailsDto;
 import com.newmedia.deafapi.api.dtos.SignDto;
 import com.newmedia.deafapi.api.models.Sign;
+import com.newmedia.deafapi.api.models.SignDetails;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
