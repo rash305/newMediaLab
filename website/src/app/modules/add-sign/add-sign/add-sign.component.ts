@@ -51,11 +51,11 @@ export class AddSignComponent implements OnInit {
       this.validateVideo(this.video)].every(Boolean)) {
 
       // Send object to backend API
-      const signDetails = new SignDetailsModel('an_id', this.meaning, this.categoryId);
+      const signDetails = new SignDetailsModel(null, this.meaning, this.categoryId,
+        'Dieren', 'https://w.wallhaven.cc/full/2e/wallhaven-2evglg.jpg', this.video);
       this.addSignToApp(signDetails);
 
       // Go to categories page (and be logged in)
-      this.AddSignMinimalizeEvent.emit(true);
       // this.router.navigate(['/personal']);
     }
   }
@@ -93,7 +93,17 @@ export class AddSignComponent implements OnInit {
 
   private addSignToApp(signDetails: SignDetailsModel): void {
     // Add sign to app
-    this.signDetailsService.addSign(signDetails);
+    this.signDetailsService.addSign(signDetails).subscribe(sign => {
+      if (sign === null) {
+        // Failed to add sign
+        // Toaster message is enough for now
+        console.log('Marit failed');
+      } else {
+        // close popup
+        console.log('Marit succeded');
+        this.AddSignMinimalizeEvent.emit(true);
+      }
+    });
   }
 
   goBack(): void {

@@ -16,23 +16,27 @@ export class SignDetailsComponent implements OnInit {
     color: '#444444'
   };
 
+  currentSignId: string;
   sign: SignDetailsModel;
   likes = 30;
   isDeleted = false;
 
-  constructor(private signDetailsService: SignDetailsService) {
+  constructor(private route: ActivatedRoute,
+              private signDetailsService: SignDetailsService) {
   }
 
   ngOnInit(): void {
+    // Retrieve the parameter value of the parameter defined in the route in app.module.ts
+    this.currentSignId = this.route.snapshot.paramMap.get('id');
+    // Get details of sign
     this.getSign();
   }
 
   getSign(): void {
-    this.signDetailsService.getSignDetails('this_is_an_id')
+    this.signDetailsService.getSignDetails(this.currentSignId)
       .subscribe(data => {
         this.sign = data;
       });
-
   }
 
   addToPersonal() {
@@ -42,8 +46,8 @@ export class SignDetailsComponent implements OnInit {
     this.likes += 1;
     this.isAddedToPersonal = !this.isAddedToPersonal;
   }
+
   removeFromPersonal() {
-    // Change hartjes color
     this.purpleIcon = {
       color: '#444444'
     };

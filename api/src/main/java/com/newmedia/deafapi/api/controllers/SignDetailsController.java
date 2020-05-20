@@ -23,9 +23,9 @@ public class SignDetailsController {
 
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
-    @GetMapping("/api/signsdetails/{id}")
+    @GetMapping("/api/signdetails/{id}")
     public SignDetailsDto getSignDetails(@PathVariable("id") String id) {
-        Sign signDetails = ISignService.getSignDetails(id);
+        SignDetails signDetails = ISignService.getSignDetails(id);
         if(signDetails == null){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign can be requested.");
@@ -35,4 +35,15 @@ public class SignDetailsController {
         return signDetailsDto;
     }
 
+
+    @PostMapping("/api/signdetails")
+    public SignDetailsDto createSignDetails(@RequestBody SignDetailsDto sign) {
+        SignDetails signDetails = ObjectMapperUtils.map(sign, SignDetails.class);
+        if(signDetails == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "No sign is given.");
+        }
+        signDetails = ISignService.createSignDetails(signDetails);
+        return ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
+    }
 }

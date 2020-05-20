@@ -1,6 +1,8 @@
 package com.newmedia.deafapi.api.services.Interfaces;
 
 import com.newmedia.deafapi.api.models.Sign;
+import com.newmedia.deafapi.api.models.SignDetails;
+
 
 import java.util.List;
 
@@ -9,9 +11,10 @@ import java.util.List;
 public interface ISignService {
     List<Sign> getSigns();
     Sign createSign(Sign sign);
+    SignDetails createSignDetails(SignDetails signDetails);
     void updateSign(Sign sign);
 
     void favoriteSign(String signId, String CategoryId, String userId);
 
-    Sign getSignDetails(String id);
+    SignDetails getSignDetails(String id);
 }
