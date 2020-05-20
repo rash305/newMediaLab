@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // By notating this class as service it is possible to autowire this class
 @Service
@@ -37,5 +38,16 @@ public class CrudSignService implements ISignService {
     @Override
     public void updateSign(Sign sign) {
 
+    }
+
+    @Override
+    public Sign getSignDetails(String id) {
+        Optional<DocSign> s = signISignRepository.findById(id);
+        if(s.isPresent()) {
+            return ObjectMapperUtils.map(s.get(), Sign.class);
+        }
+        else {
+            return null;
+        }
     }
 }

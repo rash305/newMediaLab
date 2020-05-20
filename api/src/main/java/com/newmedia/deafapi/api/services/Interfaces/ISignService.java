@@ -10,4 +10,6 @@ public interface ISignService {
     List<Sign> getSigns();
     Sign createSign(Sign sign);
     void updateSign(Sign sign);
+
+    Sign getSignDetails(String id);
 }
