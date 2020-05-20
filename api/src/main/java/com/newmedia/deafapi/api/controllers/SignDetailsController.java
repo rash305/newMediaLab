@@ -3,6 +3,7 @@ package com.newmedia.deafapi.api.controllers;
 import com.newmedia.deafapi.api.dtos.SignDetailsDto;
 import com.newmedia.deafapi.api.dtos.SignDto;
 import com.newmedia.deafapi.api.models.Sign;
+import com.newmedia.deafapi.api.models.SignDetails;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class SignDetailsController {
 
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
-    @GetMapping("/api/signs/{id}")
+    @GetMapping("/api/signdetails/{id}")
     public SignDetailsDto getSignDetails(@PathVariable("id") String id) {
-        Sign signDetails = ISignService.getSignDetails(id);
+        SignDetails signDetails = ISignService.getSignDetails(id);
         if(signDetails == null){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign can be requested.");
@@ -36,14 +37,14 @@ public class SignDetailsController {
     }
 
 
-    @PostMapping("/api/signs")
-    public SignDto createSign(@RequestBody SignDto sign) {
-        Sign signModel = ObjectMapperUtils.map(sign, Sign.class);
-        if(signModel == null) {
+    @PostMapping("/api/signdetails")
+    public SignDetailsDto createSignDetails(@RequestBody SignDetailsDto sign) {
+        SignDetails signDetails = ObjectMapperUtils.map(sign, SignDetails.class);
+        if(signDetails == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign is given.");
         }
-        signModel = ISignService.createSign(signModel);
-        return ObjectMapperUtils.map(signModel, SignDto.class);
+        signDetails = ISignService.createSignDetails(signDetails);
+        return ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
     }
 }

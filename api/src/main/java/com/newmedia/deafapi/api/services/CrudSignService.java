@@ -6,6 +6,7 @@ import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
 import com.newmedia.deafapi.api.dataservices.interfaces.ISignRepository;
 import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
+import com.newmedia.deafapi.api.models.SignDetails;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +37,23 @@ public class CrudSignService implements ISignService {
     }
 
     @Override
+    public SignDetails createSignDetails(SignDetails sign) {
+        DocSign s = ObjectMapperUtils.map(sign, DocSign.class);
+        signISignRepository.insert(s);
+        // return category with ID
+        return ObjectMapperUtils.map(s, SignDetails.class);
+    }
+
+    @Override
     public void updateSign(Sign sign) {
 
     }
 
     @Override
-    public Sign getSignDetails(String id) {
+    public SignDetails getSignDetails(String id) {
         Optional<DocSign> s = signISignRepository.findById(id);
         if(s.isPresent()) {
-            return ObjectMapperUtils.map(s.get(), Sign.class);
+            return ObjectMapperUtils.map(s.get(), SignDetails.class);
         }
         else {
             return null;
