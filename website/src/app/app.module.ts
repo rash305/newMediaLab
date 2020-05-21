@@ -30,6 +30,7 @@ import { LogoutAccountComponent } from './modules/settings/account/logout/logout
 import { SignDetailsComponent } from './modules/dictionary/sign-details/sign-details.component';
 import {NetworkErrorInterceptor} from './common/network/network-error-interceptor';
 import {JwtAuthInterceptor} from './common/network/jwt-auth-interceptor';
+import { SignOfDayComponent } from './modules/learn/sign-of-day/sign-of-day.component';
 
 const appRoutes: Routes = [
   {
@@ -51,6 +52,10 @@ const appRoutes: Routes = [
   {
     path: 'learn',
     component: LearnComponent,
+  },
+  {
+    path: 'learn/sign-of-day/:id',
+    component: SignOfDayComponent,
   },
   {
     path: 'search',
@@ -93,7 +98,8 @@ const appRoutes: Routes = [
     AddSignComponent,
     LogoutAccountComponent,
     PersonalDictionaryComponent,
-    SignDetailsComponent
+    SignDetailsComponent,
+    SignOfDayComponent
   ],
   imports: [
     BrowserModule,

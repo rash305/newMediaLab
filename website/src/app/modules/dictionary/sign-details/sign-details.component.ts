@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
 import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
@@ -9,6 +9,9 @@ import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model'
   styleUrls: ['./sign-details.component.css']
 })
 export class SignDetailsComponent implements OnInit {
+
+  @Input()
+  backRouterLink: string;
 
   isPersonalDictionary = false;
   isAddedToPersonal = false;
@@ -36,6 +39,10 @@ export class SignDetailsComponent implements OnInit {
     this.signDetailsService.getSignDetails(this.currentSignId)
       .subscribe(data => {
         this.sign = data;
+        if (!this.backRouterLink) {
+          this.backRouterLink = '/categories/' + this.sign.categoryId;
+        }
+        console.log(this.backRouterLink);
       });
   }
 
