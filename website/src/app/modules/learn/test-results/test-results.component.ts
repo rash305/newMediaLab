@@ -28,7 +28,7 @@ export class TestResultsComponent implements OnInit {
 
   getAnswers(): void {
     this.signService.personalSigns.subscribe(s => {
-      this.learnedSigns = s.filter(x => x.categoryId === '5eb5ebeb0c57e73817dbfb1a');
+      this.learnedSigns = s.filter(x => x.category.id === '5eb5ebeb0c57e73817dbfb1a');
       this.learnedSigns = this.learnedSigns.slice(0, 2);
     });
   }

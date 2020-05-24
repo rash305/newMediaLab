@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-sign-of-day',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignOfDayComponent implements OnInit {
 
-  constructor() { }
+  currentSignId: string;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.currentSignId = this.route.snapshot.paramMap.get('id');
   }
 
 }

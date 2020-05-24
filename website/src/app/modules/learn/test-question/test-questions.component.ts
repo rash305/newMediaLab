@@ -32,7 +32,7 @@ export class TestQuestionsComponent implements OnInit {
 
   getAnswers(): void {
     this.signService.personalSigns.subscribe(s => {
-      this.answers = s.filter(x => x.categoryId === '5eb5ebeb0c57e73817dbfb1a');
+      this.answers = s.filter(x => x.category.id === '5eb5ebeb0c57e73817dbfb1a');
       this.answers = this.answers.slice(0, 4);
       this.correctAnswer = this.answers[0];
     });

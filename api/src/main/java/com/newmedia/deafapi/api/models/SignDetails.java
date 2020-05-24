@@ -4,16 +4,13 @@ public class SignDetails {
 
     private String id;
     private String title;
-    private String categoryId;
-    private String category;
+    private Category category;
     private String image;
     private String video;
 
-    public SignDetails(String id, String title, String categoryId,
-                       String category, String image, String video) {
+    public SignDetails(String id, String title, Category category, String image, String video) {
         this.id = id;
         this.title = title;
-        this.categoryId = categoryId;
         this.category = category;
         this.image = image;
         this.video = video;
@@ -42,19 +39,11 @@ public class SignDetails {
         this.title = title;
     }
 
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

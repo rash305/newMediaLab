@@ -13,9 +13,6 @@ public class DocCategory {
     private String title;
 
     public DocCategory() {}
-    public DocCategory(String title) {
-        this.title = title;
-    }
 
     public DocCategory(String id, String title) {
         this.id = id;

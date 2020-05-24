@@ -7,12 +7,12 @@ public class Sign {
 
     private String id;
     private String title;
-    private String categoryId;
+    private Category category;
 
-    public Sign(String id, String title, String categoryId) {
+    public Sign(String id, String title, Category category) {
         this.id = id;
         this.title = title;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 
     public Sign() {
@@ -38,11 +38,11 @@ public class Sign {
         this.title = title;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

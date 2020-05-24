@@ -33,7 +33,7 @@ public class SignFavoriteController {
                     HttpStatus.NOT_FOUND, "No valid sign is given.");
         }
 
-        ISignService.favoriteSign(sign.getId(), sign.getCategoryId(), UserId);
+        ISignService.favoriteSign(sign.getId(), sign.getCategory().getId(), UserId);
 
 
     }

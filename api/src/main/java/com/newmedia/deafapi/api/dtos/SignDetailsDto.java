@@ -5,16 +5,14 @@ import java.io.Serializable;
 public class SignDetailsDto implements Serializable {
     private String id;
     private String title;
-    private String category;
-    private String categoryId;
+    private CategoryDto category;
     private String image;
     private String video;
 
-    public SignDetailsDto(String id, String title, String categoryId,
-                          String category, String image, String video) {
+    public SignDetailsDto(String id, String title, CategoryDto category,
+                          String image, String video) {
         this.id = id;
         this.title = title;
-        this.categoryId = categoryId;
         this.category = category;
         this.image = image;
         this.video = video;
@@ -33,15 +31,6 @@ public class SignDetailsDto implements Serializable {
 
     public String getId() {
         return id;
-    }
-
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getImage() {
@@ -64,11 +53,11 @@ public class SignDetailsDto implements Serializable {
         this.id = id;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public CategoryDto getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(CategoryDto category) {
+        this.category = category;
     }
 }

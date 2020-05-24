@@ -1,16 +1,18 @@
 package com.newmedia.deafapi.api.dtos;
 
+import com.newmedia.deafapi.api.models.Category;
+
 import java.io.Serializable;
 
 public class SignDto implements Serializable {
     private String id;
     private String title;
-    private String categoryId;
+    private CategoryDto category;
 
-    public SignDto(String id, String title, String categoryId) {
+    public SignDto(String id, String title, CategoryDto category) {
         this.id = id;
         this.title = title;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 
     public SignDto() {
@@ -32,11 +34,11 @@ public class SignDto implements Serializable {
         this.id = id;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public CategoryDto getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(CategoryDto category) {
+        this.category = category;
     }
 }

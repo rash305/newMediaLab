@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SignTemplateService} from '../../shared/signs/services/sign-template.service';
 import {SignModel} from '../../shared/signs/models/sign.model';
 
@@ -11,7 +11,8 @@ export class LearnComponent implements OnInit {
 
   signOfDay: SignModel;
 
-  constructor(private signService: SignTemplateService) { }
+  constructor(private signService: SignTemplateService) {
+  }
 
   ngOnInit(): void {
     this.getSignOfDay();

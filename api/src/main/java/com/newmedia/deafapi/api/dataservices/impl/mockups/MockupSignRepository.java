@@ -12,8 +12,8 @@ import java.util.List;
 public class MockupSignRepository implements ISignRepository<Sign> {
 
     Sign[] signs = {
-            new Sign("1", "Dog", "1"),
-            new Sign("2","Konijn", "1"),
+            new Sign("1", "Dog", null),
+            new Sign("2","Konijn", null),
     };
     @Override
     public List<Sign> getAll() {
