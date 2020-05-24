@@ -12,7 +12,10 @@ export class SignTemplateService {
   private numberOfDownloadedSigns = 0;
   // tslint:disable-next-line:variable-name
   private _personalSigns: BehaviorSubject<SignModel[]> = new BehaviorSubject([]);
+  // tslint:disable-next-line:variable-name
+  private _publicSigns: BehaviorSubject<SignModel[]> = new BehaviorSubject([]);
   public readonly personalSigns: Observable<SignModel[]> = this._personalSigns.asObservable();
+  public readonly publicSigns: Observable<SignModel[]> = this._publicSigns.asObservable();
 
   constructor(private signBackendService: SignTemplateStoreService) {
     this.loadInitialData();
@@ -35,16 +38,16 @@ export class SignTemplateService {
     const promise = new Promise((resolve, reject) => {
       // Get signs from backend
       if (isPersonal) {
-        this.signBackendService.getPersonalSigns(category).subscribe(result => resolve(this.signsResult(result)));
+        this.signBackendService.getPersonalSigns(category).subscribe(result => resolve(this.signsResult(result, true)));
       } else {
-        this.signBackendService.getSigns();
+        this.signBackendService.getSigns().subscribe(result => resolve(this.signsResult(result)));
       }
     });
 
     return promise;
   }
 
-  signsResult(result: any): number {
+  signsResult(result: any, personal = false): number {
     let addedSigns = 0;
     const signList = this._personalSigns.getValue();
     const retrievedSigns = result as SignModel[];
@@ -57,8 +60,13 @@ export class SignTemplateService {
       }
     });
 
-    // Set signList as current list of signs
-    this._personalSigns.next(signList);
+    if (personal) {
+      // Set signList as current list of signs
+      this._personalSigns.next(signList);
+    } else {
+      this._publicSigns.next(signList);
+    }
+
 
     // Notify how many signs are added
     return addedSigns;

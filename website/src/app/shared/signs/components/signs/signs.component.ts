@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {CategoriesService} from '../../../shared/signs/services/categories.service';
-import {SignModel} from '../../../shared/signs/models/sign.model';
-import {SignTemplateService} from '../../../shared/signs/services/sign-template.service';
-import {AppComponent} from '../../../app.component';
-import {ISignTemplate} from '../../../shared/signs/models/isign-template';
+import {CategoriesService} from '../../services/categories.service';
+import {SignModel} from '../../models/sign.model';
+import {SignTemplateService} from '../../services/sign-template.service';
+import {AppComponent} from '../../../../app.component';
+import {ISignTemplate} from '../../models/isign-template';
 
 @Component({
   selector: 'app-signs',

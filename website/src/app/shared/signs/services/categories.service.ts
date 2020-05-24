@@ -23,7 +23,7 @@ export class CategoriesService {
   /** GET heroes from the server */
   getCategories(): Observable<CategoryModel[]> {
     return this.http.get<any[]>(this.categoryUrl)
-      .pipe(map(res => res as CategoryModel[]))
+      .pipe(map(res => res.map(categoryData => new CategoryModel().deserialize(categoryData))))
       .pipe(
         catchError(this.handleError('getCategories', null))
       );

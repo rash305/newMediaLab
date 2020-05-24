@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CategoryModel} from '../../../shared/signs/models/category.model';
-import {CategoriesService} from '../../../shared/signs/services/categories.service';
-import {ISignTemplate} from '../../../shared/signs/models/isign-template';
+import {CategoryModel} from '../../models/category.model';
+import {CategoriesService} from '../../services/categories.service';
+import {ISignTemplate} from '../../models/isign-template';
 
 @Component({
   selector: 'app-categories',

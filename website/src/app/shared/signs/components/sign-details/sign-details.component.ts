@@ -1,9 +1,9 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
-import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
+import {SignDetailsService} from '../../services/sign-details.service';
+import {SignDetailsModel} from '../../models/sign-details.model';
 import {EventEmitter} from '@angular/core';
-import {CategoryModel} from '../../../shared/signs/models/category.model';
+import {CategoryModel} from '../../models/category.model';
 
 @Component({
   selector: 'app-sign-details',

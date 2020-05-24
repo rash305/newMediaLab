@@ -1,5 +1,5 @@
 import {ISignTemplate} from './isign-template';
-import {SignDetailsComponent} from '../../../modules/dictionary/sign-details/sign-details.component';
+import {SignDetailsComponent} from '../components/sign-details/sign-details.component';
 import {SignModel} from './sign.model';
 import {CategoryModel} from './category.model';
 

@@ -2,15 +2,15 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {CategoriesComponent} from './modules/dictionary/category/categories.component';
+import {CategoriesComponent} from './shared/signs/components/category/categories.component';
 import {RouterModule, Routes} from '@angular/router';
 import {LearnComponent} from './modules/learn/learn.component';
-import {SearchComponent} from './modules/search/search.component';
+import {SearchComponent} from './modules/dictionary/public-dictionary/search/search.component';
 import {CreateAccountComponent} from './modules/settings/account/create/create-account.component';
 import {LoginAccountComponent} from './modules/settings/account/login/login-account.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpErrorHandler} from './common/network/http-error-handler.service';
-import {SignsComponent} from './modules/dictionary/signs/signs.component';
+import {SignsComponent} from './shared/signs/components/signs/signs.component';
 import {SettingsPopupComponent} from './modules/settings/popup/settings-popup.component';
 import {SquareOverviewTileComponent} from './shared/signs/components/square-overview-tile/square-overview-tile.component';
 import {FormsModule} from '@angular/forms';
@@ -27,12 +27,13 @@ import { NotLoggedInComponent } from './modules/add-sign/not-logged-in/not-logge
 import { AddSignComponent } from './modules/add-sign/add-sign/add-sign.component';
 import { PersonalDictionaryComponent } from './modules/dictionary/personal-dictionary/personal-dictionary.component';
 import { LogoutAccountComponent } from './modules/settings/account/logout/logout-account.component';
-import { SignDetailsComponent } from './modules/dictionary/sign-details/sign-details.component';
+import { SignDetailsComponent } from './shared/signs/components/sign-details/sign-details.component';
 import {NetworkErrorInterceptor} from './common/network/network-error-interceptor';
 import {JwtAuthInterceptor} from './common/network/jwt-auth-interceptor';
 import { SignOfDayComponent } from './modules/learn/sign-of-day/sign-of-day.component';
 import { TestQuestionsComponent } from './modules/learn/test-question/test-questions.component';
 import { TestResultsComponent } from './modules/learn/test-results/test-results.component';
+import { PublicDictionaryComponent } from './modules/dictionary/public-dictionary/public-dictionary.component';
 
 const appRoutes: Routes = [
   {
@@ -68,8 +69,8 @@ const appRoutes: Routes = [
     component: TestResultsComponent,
   },
   {
-    path: 'search',
-    component: SearchComponent,
+    path: 'dictionary',
+    component: PublicDictionaryComponent,
   },
   {
     path: 'add-sign-not-logged-in',
@@ -98,6 +99,7 @@ const appRoutes: Routes = [
     LoginAccountComponent,
     SignsComponent,
     SquareOverviewTileComponent,
+    PublicDictionaryComponent,
     AccountComponent,
     HelpComponent,
     ChangeAccountComponent,
