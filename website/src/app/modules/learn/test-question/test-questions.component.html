@@ -1,0 +1,31 @@
+<div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 75%; text-align: left" aria-valuenow="75"  aria-valuemin="0" aria-valuemax="100">
+    {{this.questionNr}}/{{this.maxQuestion}} eigenwijs (maar... eigenwijs is ook wijs)
+  </div>
+</div>
+
+<div class="row justify-content-center" style="margin: 40px 0px 0px;">
+  <div class="col-8">
+    <div style="height:140px; text-align: center; background-color: #a6ffc7">
+      Pretty video
+    </div>
+  </div>
+  <div class="w-100" style="margin: 5px"></div>
+  <div class="col-6">
+    <div class="row">
+      <div *ngFor="let answer of answers" class="col-6">
+        <div class="tile" (click)="this.checkAnswer(answer.title)">
+          <img class="{{this.imgFocus}}" src="https://picsum.photos/200/200" alt="{{answer.title}}" >
+          <i class="fa fa-4x fa-times wrong" [hidden]="!this.wrong"></i>
+          <i class="fa fa-4x fa-check correct" [hidden]="!this.correct"></i>
+          {{answer.title}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12" style="position: absolute; bottom: 15px">
+  <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left"></i> Terug</button>
+  <button type="button" class="btn btn-primary" style="float: right" (click)="goFurther()">Verder <i class="fa fa-arrow-right"></i></button>
+</div>
