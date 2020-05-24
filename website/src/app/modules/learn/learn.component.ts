@@ -27,12 +27,4 @@ export class LearnComponent implements OnInit {
       this.signOfDay = signs[index];
     });
   }
-
-  toSignOfDay() {
-    // Go to sign of the day page
-  }
-
-  toTest() {
-    // Go to do a test
-  }
 }
