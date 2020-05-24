@@ -7,6 +7,10 @@ import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,14 +30,20 @@ public class SignController {
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
     @GetMapping("/api/signs")
-    public List<SignDto> getSignList(@RequestParam( value = "category", required = false) String category) {
+    public List<SignDto> getSignList(@RequestParam( value = "category", required = false) String categoryId, @RequestParam(required = false) boolean personal) {
         List<Sign> signs;
 
-        if(category == null){
-            signs = ISignService.getSigns();
-        } else{
-            signs = ISignService.getSigns();
+        if(personal) {
+            String userId = GetAuthorizedUser();
+            if (userId == null) {
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "No valid user token is given.");
+            }
+            signs = ISignService.getPersonalSigns(userId, categoryId);
+        } else {
+            signs = ISignService.getSigns(categoryId);
         }
+
         if(signs == null){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No signs can be requested.");
@@ -53,5 +63,17 @@ public class SignController {
         }
         signModel = ISignService.createSign(signModel);
         return ObjectMapperUtils.map(signModel, SignDto.class);
+    }
+
+    private String GetAuthorizedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            Object principal = authentication.getPrincipal();
+            if(principal != null){
+                return principal.toString();
+            }
+
+        }
+        return null;
     }
 }

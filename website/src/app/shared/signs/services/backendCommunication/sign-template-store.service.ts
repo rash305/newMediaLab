@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HandleError, HttpErrorHandler} from '../../../../common/network/http-error-handler.service';
 import {environment} from '../../../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SignModel} from '../../models/sign.model';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {CategoryModel} from '../../models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,20 @@ export class SignTemplateStoreService {
     this.handleError = httpErrorHandler.createHandleError('SignStoreService');
   }
   /** GET signs from the server */
-  getPersonalSigns(): Observable<object[]> {
+  getSigns(): Observable<object[]> {
     return this.http.get<object[]>(this.signsUrl)
+      .pipe(
+        catchError(this.handleError('getSigns', []))
+      );
+  }
+  /** GET signs from the server */
+  getPersonalSigns(category): Observable<object[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('category', category);
+    httpParams = httpParams.append('personal', 'true');
+
+    return this.http.get<object[]>(this.signsUrl, {params: httpParams})
+      .pipe(map(res => res.map(categoryData => new SignModel().deserialize(categoryData))))
       .pipe(
         catchError(this.handleError('getPersonalSigns', []))
       );

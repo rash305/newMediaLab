@@ -50,7 +50,7 @@ public class CrudCategoryService implements ICategoryService<Category> {
         // Create terms how to match the example with the objects in database
         ExampleMatcher modelMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
-                .withMatcher("email", ignoreCase());
+                .withMatcher("categoryId", ignoreCase());
         // Example object
         DocFavoriteSign probe = new DocFavoriteSign();
         probe.setPersonId(id);

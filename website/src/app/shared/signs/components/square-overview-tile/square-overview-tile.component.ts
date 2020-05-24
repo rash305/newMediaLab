@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ISignTemplate} from '../../models/isign-template';
+import {CategoryModel} from '../../models/category.model';
+import {SignModel} from '../../models/sign.model';
 
 @Component({
   selector: 'app-square-overview-tile',
@@ -10,13 +12,15 @@ export class SquareOverviewTileComponent implements OnInit {
 
   @Input()
   content: ISignTemplate;
+  @Output() clickNavigationEmitter = new EventEmitter<ISignTemplate>();
 
   @Input()
   referencedDomain: string;
 
-  constructor() { }
+  constructor() {
+    this.clickNavigationEmitter.subscribe(x => console.log(x));
+  }
 
   ngOnInit(): void {
   }
-
 }

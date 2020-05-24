@@ -39,7 +39,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'personal',
-    component: PersonalDictionaryComponent
+    component: PersonalDictionaryComponent,
   },
   {
     path: 'signs/details/:id',

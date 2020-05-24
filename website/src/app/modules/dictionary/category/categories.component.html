@@ -1,8 +1,10 @@
 <div class="row" style="margin: 0;">
+  <div class="col-12">
+
   <span *ngIf="(!loading) && ( categories && categories.length == 0)">U heeft nog geen gebaren opgeslagen.</span>
   <span *ngIf="(!loading) && (!categories)"> Categorieën kunnen niet worden opgehaald.</span>
-
+  </div>
   <div *ngFor="let category of categories" class="col-md-3 col-4">
-    <app-square-overview-tile [content]="category" [referencedDomain]="'categories'"></app-square-overview-tile>
+    <app-square-overview-tile [content]="category" (clickNavigationEmitter)="clickEventsEmitter.emit($event)"></app-square-overview-tile>
   </div>
 </div>

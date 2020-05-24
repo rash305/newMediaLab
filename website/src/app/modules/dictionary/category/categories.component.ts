@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CategoryModel} from '../../../shared/signs/models/category.model';
 import {CategoriesService} from '../../../shared/signs/services/categories.service';
+import {ISignTemplate} from '../../../shared/signs/models/isign-template';
 
 @Component({
   selector: 'app-categories',
@@ -11,12 +12,12 @@ export class CategoriesComponent implements OnInit {
 
   @Input()
   isPersonalDictionary = false;
+  @Output() clickEventsEmitter = new EventEmitter<ISignTemplate>();
 
   loading = true;
   categories: CategoryModel[];
 
-  constructor(private  categoriesService: CategoriesService) {
-  }
+  constructor(private  categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
     if (!this.isPersonalDictionary) {

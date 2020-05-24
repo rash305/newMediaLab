@@ -31,7 +31,8 @@ export class AddSignComponent implements OnInit {
 
   constructor(private router: Router,
               private categoriesService: CategoriesService,
-              private signDetailsService: SignDetailsService) { }
+              private signDetailsService: SignDetailsService) {
+  }
 
   ngOnInit(): void {
     this.getCategories();
@@ -51,10 +52,12 @@ export class AddSignComponent implements OnInit {
       this.validateVideo(this.video)].every(Boolean)) {
 
       const categoryTitle = this.categories.find(x => x.id === this.categoryId).title;
-
       // Send object to backend API
-      const signDetails = new SignDetailsModel(null, this.meaning, this.categoryId,
-        categoryTitle, 'https://w.wallhaven.cc/full/2e/wallhaven-2evglg.jpg', this.video);
+      const signDetails = new SignDetailsModel().deserialize({
+          title: this.meaning, categoryId: this.categoryId,
+          category: categoryTitle, image: 'https://w.wallhaven.cc/full/2e/wallhaven-2evglg.jpg', video: this.video
+        })
+      ;
       this.addSignToApp(signDetails);
 
       // Go to categories page (and be logged in)

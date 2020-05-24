@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
 import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
+import {EventEmitter} from '@angular/core';
+import {CategoryModel} from '../../../shared/signs/models/category.model';
 
 @Component({
   selector: 'app-sign-details',
@@ -10,8 +12,8 @@ import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model'
 })
 export class SignDetailsComponent implements OnInit {
 
-  @Input()
-  backRouterLink: string;
+
+  @Output() parentId = new EventEmitter();
 
   isPersonalDictionary = false;
   isAddedToPersonal = false;
@@ -19,8 +21,8 @@ export class SignDetailsComponent implements OnInit {
     color: '#444444'
   };
 
-  currentSignId: string;
-  sign: SignDetailsModel;
+  @Input() currentSignId: string;
+  @Input() sign: SignDetailsModel;
   likes = 30;
   isDeleted = false;
 
@@ -30,7 +32,7 @@ export class SignDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // Retrieve the parameter value of the parameter defined in the route in app.module.ts
-    this.currentSignId = this.route.snapshot.paramMap.get('id');
+    // this.currentSignId = this.route.snapshot.paramMap.get('id');
     // Get details of sign
     this.getSign();
   }
@@ -38,11 +40,10 @@ export class SignDetailsComponent implements OnInit {
   getSign(): void {
     this.signDetailsService.getSignDetails(this.currentSignId)
       .subscribe(data => {
-        this.sign = data;
-        if (!this.backRouterLink) {
-          this.backRouterLink = '/categories/' + this.sign.categoryId;
+        if (data) {
+          this.sign = data;
+          this.parentId.emit(data.category);
         }
-        console.log(this.backRouterLink);
       });
   }
 
