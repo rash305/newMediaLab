@@ -35,7 +35,7 @@ export class SignsComponent implements OnInit {
         this.signs = s.filter(x => x.category.id === this.currentSignCategory);
       });
     } else {
-      this.signService.personalSigns.subscribe(s => {
+      this.signService.publicSigns.subscribe(s => {
         this.signs = s.filter(x => x.category.id === this.currentSignCategory);
       });
     }

@@ -22,7 +22,7 @@ export class SignTemplateService {
   }
 
   private loadInitialData() {
-    this.signBackendService.getSigns()
+    this.signBackendService.getSigns(null)
       .subscribe(
         res => {
           const signModels = (res.map((jsonSign: any) =>
@@ -40,7 +40,7 @@ export class SignTemplateService {
       if (isPersonal) {
         this.signBackendService.getPersonalSigns(category).subscribe(result => resolve(this.signsResult(result, true)));
       } else {
-        this.signBackendService.getSigns().subscribe(result => resolve(this.signsResult(result)));
+        this.signBackendService.getSigns(category).subscribe(result => resolve(this.signsResult(result)));
       }
     });
 
