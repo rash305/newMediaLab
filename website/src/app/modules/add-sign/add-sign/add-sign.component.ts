@@ -51,11 +51,11 @@ export class AddSignComponent implements OnInit {
       this.validateCategory(this.categoryId),
       this.validateVideo(this.video)].every(Boolean)) {
 
-      const categoryTitle = this.categories.find(x => x.id === this.categoryId).title;
+      const categoryModel = this.categories.find(x => x.id === this.categoryId);
       // Send object to backend API
       const signDetails = new SignDetailsModel().deserialize({
           title: this.meaning, categoryId: this.categoryId,
-          category: categoryTitle, image: 'https://w.wallhaven.cc/full/2e/wallhaven-2evglg.jpg', video: this.video
+          category: categoryModel, image: 'https://w.wallhaven.cc/full/2e/wallhaven-2evglg.jpg', video: this.video
         })
       ;
       this.addSignToApp(signDetails);
