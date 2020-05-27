@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {SignTemplateService} from '../../../shared/signs/services/sign-template.service';
 import {SignModel} from '../../../shared/signs/models/sign.model';
 import {Router} from '@angular/router';
+import {LearnTaskService} from '../../../shared/learn/service/learn-task.service';
+import {LearnTask} from '../../../shared/learn/models/learn-task';
 
 @Component({
   selector: 'app-quiz-question',
@@ -10,12 +12,7 @@ import {Router} from '@angular/router';
 })
 export class QuizQuestionComponent implements OnInit {
 
-  constructor(
-    private signService: SignTemplateService,
-    private router: Router) {
-  }
-
-  maxQuestion = 2;
+  maxQuestion = 3;
   questionNr = 1;
   correctIndices = [];
   wrongIndices = [];
@@ -23,9 +20,25 @@ export class QuizQuestionComponent implements OnInit {
   progressPercentage = (this.questionNr / this.maxQuestion) * 100;
   correctAnswerIndex;
   answers: SignModel[];
+  learnTask: LearnTask;
+
+  constructor(
+    private signService: SignTemplateService,
+    private learnTaskService: LearnTaskService,
+    private router: Router) {
+  }
 
   ngOnInit(): void {
+    this.getLearnTask();
     this.getAnswers();
+  }
+
+  getLearnTask(): void {
+    this.learnTaskService.getLearnTask()
+      .subscribe(learnTask => {
+          this.learnTask = learnTask;
+          this.questionNr = Number(this.learnTask.currentLearnTaskIndex);
+        });
   }
 
   getAnswers(): void {

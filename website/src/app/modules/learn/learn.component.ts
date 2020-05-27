@@ -14,7 +14,8 @@ export class LearnComponent implements OnInit {
   signOfDay: SignModel;
   learnTask: LearnTask;
 
-  constructor(private signService: SignTemplateService, private learnTaskService: LearnTaskService) {
+  constructor(private signService: SignTemplateService,
+              private learnTaskService: LearnTaskService) {
     this.getLearnTask();
   }
 
@@ -43,6 +44,5 @@ export class LearnComponent implements OnInit {
       this.learnTaskService.getLearnTask()
         .subscribe(learnTask => this.learnTask = learnTask);
     }
-
   }
 }
