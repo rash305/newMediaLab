@@ -1,9 +1,5 @@
 <app-search></app-search>
-<div class="row">
-  <div class="col-12 ">
-  </div>
-  <hr>
-</div>
+
 <div class="row" >
   <div class="col-12" (click)="navigateBack()" [hidden]="!this.childType || this.childType === categoryType">
     <div class="row"  style="margin: 0" >
@@ -19,6 +15,7 @@
   </div>
   <hr>
 </div>
+
 <app-categories [isPersonalDictionary]=false (clickEventsEmitter)="ObjectClickedEventHandler($event)" *ngIf="childType === categoryType"></app-categories>
 <app-signs [isPersonalDictionary]=false *ngIf="childType === signType" (ObjectClickedEventHandler)="ObjectClickedEventHandler($event)" [currentSignCategory]="childId"></app-signs>
 <app-sign-details [currentSignId]="childId" *ngIf="childType === signDetailsType" (parentId)="navigateBackModel = $event" ></app-sign-details>

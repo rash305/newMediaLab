@@ -30,6 +30,7 @@ export class LearnComponent implements OnInit {
       const index = Math.floor(Math.random() * signs.length);
       this.signOfDay = signs[index];
     });
+    this.signService.loadNextBatchSigns(null);
   }
 
   getLearnTask() {

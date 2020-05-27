@@ -36,8 +36,13 @@ public class CrudSignService implements ISignService {
     private MongoCategoryRepository categoryRepository;
     @Override
     public List<Sign> getSigns(String categoryId) {
-        List<DocSign> all = signISignRepository.findByCategoryId(categoryId);
+        List<DocSign> all;
 
+        if(categoryId == null){
+            all = signISignRepository.findAll();
+        } else {
+            all = signISignRepository.findByCategoryId(categoryId);
+        }
         return ObjectMapperUtils.mapAll(all, Sign.class);
     }
 
@@ -54,12 +59,13 @@ public class CrudSignService implements ISignService {
     private List<String> getPersonalSignIds(String userid, String categoryId) {
         // Create terms how to match the example with the objects in database
         ExampleMatcher modelMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withMatcher("category", ignoreCase());
-                // Example object
+                .withIgnorePaths("id");
+        // Example object
         DocFavoriteSign probe = new DocFavoriteSign();
         probe.setPersonId(userid);
-        probe.setCategoryId(categoryId);
+        if(categoryId != null){
+            probe.setCategoryId(categoryId);
+        }
         // Create the example with matcher and example object
         Example<DocFavoriteSign> example = Example.of(probe, modelMatcher);
         List<DocFavoriteSign> s = favoriteSignRepository.findAll(example);

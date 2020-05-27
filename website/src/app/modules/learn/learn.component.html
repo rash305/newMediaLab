@@ -1,6 +1,6 @@
 <div class="div-learn" *ngIf="this.signOfDay">
   <i class="fa fa-calendar"></i> Gebaar van de dag:
-  <button class="btn btn-learn" routerLink="/learn/sign-of-day/{{this.signOfDay.id}}" routerLinkActive="active">
+  <button class="btn btn-learn" [routerLink]="['/learn/sign-of-day/', this.signOfDay?.id]" routerLinkActive="active">
     <div class="row justify-content-between">
       <div class="col-4 col-lg-2">
         <app-square-overview-tile [content]="this.signOfDay" [referencedDomain]="'learn/sign-of-day'"></app-square-overview-tile>
@@ -14,7 +14,7 @@
 
 <div class="div-learn">
   <i class="fa fa-graduation-cap"></i> Leren:
-  <button class="btn btn-learn" [routerLink]="['/learn/test-questions', learnTask?.currentLearnTaskId ]" routerLinkActive="active">
+  <button class="btn btn-learn" [routerLink]="['/learn/test-questions/', learnTask?.currentLearnTaskId]" routerLinkActive="active">
     <div class="row justify-content-between">
       <div class="col-4 col-lg-2">
         <i class="fa fa-check-square-o" style="font-size: 90px"></i>

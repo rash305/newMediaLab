@@ -61,7 +61,7 @@ const appRoutes: Routes = [
     component: SignOfDayComponent,
   },
   {
-    path: 'learn/test-questions',
+    path: 'learn/test-questions/:id',
     component: TestQuestionsComponent,
   },
   {
