@@ -40,23 +40,28 @@ export class LearnComponent implements OnInit {
     const temporaryDemoValuePleaseRemove = true;
     if (temporaryDemoValuePleaseRemove) {
       this.learnTask = new LearnTask();
-      this.learnTask.currentLearnTaskIndex = '1';
+      this.learnTask.currentLearnTaskIndex = 1;
       const subTask1 = new LearnSubTask();
       const correctAnswer = new SignDetailsModel();
       correctAnswer.title = 'test';
       correctAnswer.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
       correctAnswer.id = '1';
+      correctAnswer.video = 'Pretty video';
 
       const option1 = new SignModel();
-      correctAnswer.title = 'Kip';
-      correctAnswer.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
-      correctAnswer.id = '2';
-      const option2 = new SignDetailsModel();
-      correctAnswer.title = 'Honkbal';
-      correctAnswer.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
-      correctAnswer.id = '3';
+      option1.title = 'Kip';
+      option1.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
+      option1.id = '2';
+      const option2 = new SignModel();
+      option2.title = 'Honkbal';
+      option2.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
+      option2.id = '3';
+      const option3 = new SignModel();
+      option3.title = 'Korfbal';
+      option3.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
+      option3.id = '4';
       subTask1.question = correctAnswer;
-      subTask1.optionalAnswers = [option1, option2];
+      subTask1.optionalAnswers = [option1, correctAnswer, option3, option2];
 
       this.learnTask.learnTasks = [subTask1, subTask1, subTask1];
     } else {

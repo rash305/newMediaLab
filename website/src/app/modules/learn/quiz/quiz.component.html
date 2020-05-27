@@ -1,0 +1,13 @@
+<div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 75%; text-align: left" aria-valuenow="75"  aria-valuemin="0" aria-valuemax="100">
+    {{this.questionNr}}/{{this.maxQuestion}} (To-Do)
+  </div>
+</div>
+
+<app-quiz-question *ngIf="show('question')"
+                   (messageQuizStatus)="receiveQuizStatus($event)"
+                   [learnSubTask]="learnTask.getCurrentLearnTask()"></app-quiz-question>
+
+<app-quiz-results *ngIf="show('results')"
+                  (messageQuizStatus)="receiveQuizStatus($event)"
+                  [learnedSigns]="this.getLearnedSigns()"></app-quiz-results>

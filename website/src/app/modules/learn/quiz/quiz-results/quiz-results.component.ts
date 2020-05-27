@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {SignModel} from '../../../shared/signs/models/sign.model';
-import {SignTemplateService} from '../../../shared/signs/services/sign-template.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SignModel} from '../../../../shared/signs/models/sign.model';
+import {SignTemplateService} from '../../../../shared/signs/services/sign-template.service';
 import {Router} from '@angular/router';
-import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
+import {SignDetailsService} from '../../../../shared/signs/services/sign-details.service';
 
 @Component({
   selector: 'app-quiz-results',
@@ -11,23 +11,15 @@ import {SignDetailsService} from '../../../shared/signs/services/sign-details.se
 })
 export class QuizResultsComponent implements OnInit {
 
-  learnedSigns: SignModel[];
+  @Output() messageQuizStatus = new EventEmitter<string>();
+
+  @Input() learnedSigns: SignModel[];
   addedToPersonal = [];
 
-  constructor(
-    private signService: SignTemplateService,
-    private signDetailsService: SignDetailsService) {
+  constructor(private signDetailsService: SignDetailsService) {
   }
 
   ngOnInit(): void {
-    this.getAnswers();
-  }
-
-  getAnswers(): void {
-    this.signService.publicSigns.subscribe(s => {
-      this.learnedSigns = s;
-      this.learnedSigns = this.learnedSigns.slice(0, 4);
-    });
   }
 
   addToPersonal(sign: SignModel) {

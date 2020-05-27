@@ -1,11 +1,11 @@
 <div class="div-learn">
-  <i class="fa fa-3x fa-lightbulb-o"></i> Deze nieuwe gebaren heb je geleerd:
+  <i class="fa fa-3x fa-calendar"></i> Deze nieuwe gebaren heb je geleerd:
   <div class="row justify-content-center" style="margin: 7px 0px;">
     <div *ngFor="let sign of learnedSigns" class="col-4">
       <div class="row no-gutters" >
       <div class="col-10">
         <div class="tile">
-          <img src="https://picsum.photos/200/200" alt="{{sign.title}}" >
+          <img src="{{sign.image}}" alt="{{sign.title}}" >
           {{sign.title}}
         </div>
       </div>
@@ -18,7 +18,7 @@
 
 <div class="div-learn">
   <i class="fa fa-3x fa-graduation-cap"></i> Meer leren:
-  <button class="btn btn-learn" routerLink="/learn/quiz-question/1" routerLinkActive="active">
+  <button class="btn btn-learn" (click)="this.messageQuizStatus.emit('restart')">
     <div class="row justify-content-between">
       <div class="col-4 col-lg-2">
         <i class="fa fa-check-square-o" style="font-size: 90px"></i>
