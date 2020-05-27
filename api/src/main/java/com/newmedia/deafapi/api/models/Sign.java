@@ -1,18 +1,17 @@
 package com.newmedia.deafapi.api.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-
 public class Sign {
 
     private String id;
     private String title;
-    private String categoryId;
+    private Category category;
+    private String image;
 
-    public Sign(String id, String title, String categoryId) {
+    public Sign(String id, String title, Category category, String image) {
         this.id = id;
         this.title = title;
-        this.categoryId = categoryId;
+        this.category = category;
+        this.image = image;
     }
 
     public Sign() {
@@ -38,11 +37,19 @@ public class Sign {
         this.title = title;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

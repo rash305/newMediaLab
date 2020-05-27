@@ -4,6 +4,7 @@ import com.newmedia.deafapi.api.dataservices.docModels.DocAccount;
 import com.newmedia.deafapi.api.dataservices.docModels.DocCategory;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoAccountRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoCategoryRepository;
+import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoFavoriteSignRepository;
 import com.newmedia.deafapi.api.models.Account;
 import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.services.Interfaces.IAccountService;
@@ -45,6 +46,15 @@ public class AccountService implements IAccountService {
         accountRepository.insert(a);
         // return category with ID
         return ObjectMapperUtils.map(a, Account.class);
+    }
+
+    @Override
+    public Account getAccountByUsername(String username_or_email) {
+        DocAccount account = accountRepository.findByUsername(username_or_email);
+        if (account == null){
+            account = accountRepository.findByEmailAddress(username_or_email);
+        }
+        return ObjectMapperUtils.map(account, Account.class);
     }
 
     @Override
