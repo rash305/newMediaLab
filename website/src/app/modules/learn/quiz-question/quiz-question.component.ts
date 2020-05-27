@@ -4,11 +4,11 @@ import {SignModel} from '../../../shared/signs/models/sign.model';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-test-questions',
-  templateUrl: './test-questions.component.html',
-  styleUrls: ['./test-questions.component.css']
+  selector: 'app-quiz-question',
+  templateUrl: './quiz-question.component.html',
+  styleUrls: ['./quiz-question.component.css']
 })
-export class TestQuestionsComponent implements OnInit {
+export class QuizQuestionComponent implements OnInit {
 
   constructor(
     private signService: SignTemplateService,
@@ -49,7 +49,7 @@ export class TestQuestionsComponent implements OnInit {
   goFurther() {
     if (this.correctIndices.includes(this.correctAnswerIndex)) {
       if (this.questionNr === this.maxQuestion) {
-        this.router.navigate(['/learn/test-results']);
+        this.router.navigate(['/learn/quiz-results']);
         console.log('einde');
       } else {
         this.questionNr = this.questionNr + 1;

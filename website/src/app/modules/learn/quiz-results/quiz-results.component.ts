@@ -5,11 +5,11 @@ import {Router} from '@angular/router';
 import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
 
 @Component({
-  selector: 'app-test-results',
-  templateUrl: './test-results.component.html',
-  styleUrls: ['./test-results.component.css']
+  selector: 'app-quiz-results',
+  templateUrl: './quiz-results.component.html',
+  styleUrls: ['./quiz-results.component.css']
 })
-export class TestResultsComponent implements OnInit {
+export class QuizResultsComponent implements OnInit {
 
   learnedSigns: SignModel[];
   addedToPersonal = [];
@@ -40,7 +40,7 @@ export class TestResultsComponent implements OnInit {
   }
 
   removeFromPersonal(sign: SignModel) {
-    //this.isAddedToPersonal = !this.isAddedToPersonal;
+    // this.isAddedToPersonal = !this.isAddedToPersonal;
   }
 
 }
