@@ -34,11 +34,15 @@ export class LearnComponent implements OnInit {
   }
 
   getLearnTask() {
-    this.learnTaskService.getLearnTask()
-      .subscribe(learnTask => this.learnTask = learnTask).add(x => {
+    const temporaryDemoValuePleaseRemove = true;
+    if (temporaryDemoValuePleaseRemove) {
       this.learnTask = new LearnTask();
       this.learnTask.currentLearnTaskIndex = '1';
       this.learnTask.learnTasksIds = ['1', '2'];
-    });
+    } else {
+      this.learnTaskService.getLearnTask()
+        .subscribe(learnTask => this.learnTask = learnTask);
+    }
+
   }
 }
