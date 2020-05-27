@@ -114,7 +114,7 @@ const appRoutes: Routes = [
     SignDetailsComponent,
     SignOfDayComponent,
     QuizQuestionComponent,
-    QuizResultsComponent
+    QuizResultsComponent,
     BackButtonComponent
   ],
   imports: [
