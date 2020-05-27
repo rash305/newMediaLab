@@ -2,16 +2,7 @@
 
 <div class="row" >
   <div class="col-12" (click)="navigateBack()" [hidden]="!this.childType || this.childType === categoryType">
-    <div class="row"  style="margin: 0" >
-      <div class="col-4">
-        <i class="fa fa-arrow-circle-left purple-icon"></i>
-        <span> Terug</span>
-      </div>
-      <div class="col-4" style="text-align: center">
-        <i class="fa fa-paw"></i>
-        <span><b> </b></span>
-      </div>
-    </div>
+  <app-shared-back-button [navigateBackModel]="navigateBackModel"></app-shared-back-button>
   </div>
   <hr>
 </div>

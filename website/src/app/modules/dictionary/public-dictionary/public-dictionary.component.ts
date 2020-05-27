@@ -12,6 +12,7 @@ import {ISignTemplate} from '../../../shared/signs/models/isign-template';
 })
 export class PublicDictionaryComponent implements OnInit {
   @Output() childClickEvents;
+  navigateBackEvent;
   childId: string;
   childType: string;
 
@@ -30,7 +31,6 @@ export class PublicDictionaryComponent implements OnInit {
   }
 
   ObjectClickedEventHandler(object: ISignTemplate) {
-    this.navigateBackModel = object;
     if (object instanceof CategoryModel) {
       this.updateUrl(object.id, this.signType);
       this.childType = this.signType;

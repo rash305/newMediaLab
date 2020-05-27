@@ -5,6 +5,7 @@ export class SignModel implements ISignTemplate {
   id: string;
   title: string;
   category: CategoryModel;
+  image: string;
 
   constructor() {
     }
@@ -14,4 +15,5 @@ export class SignModel implements ISignTemplate {
 
     return this;
   }
+
 }

@@ -34,6 +34,7 @@ import { SignOfDayComponent } from './modules/learn/sign-of-day/sign-of-day.comp
 import { TestQuestionsComponent } from './modules/learn/test-question/test-questions.component';
 import { TestResultsComponent } from './modules/learn/test-results/test-results.component';
 import { PublicDictionaryComponent } from './modules/dictionary/public-dictionary/public-dictionary.component';
+import { BackButtonComponent } from './shared/general/component/back-button/back-button.component';
 
 const appRoutes: Routes = [
   {
@@ -113,7 +114,8 @@ const appRoutes: Routes = [
     SignDetailsComponent,
     SignOfDayComponent,
     TestQuestionsComponent,
-    TestResultsComponent
+    TestResultsComponent,
+    BackButtonComponent
   ],
   imports: [
     BrowserModule,

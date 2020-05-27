@@ -8,12 +8,8 @@ public class SignDto implements Serializable {
     private String id;
     private String title;
     private CategoryDto category;
+    private String image;
 
-    public SignDto(String id, String title, CategoryDto category) {
-        this.id = id;
-        this.title = title;
-        this.category = category;
-    }
 
     public SignDto() {
     }
@@ -32,6 +28,14 @@ public class SignDto implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public CategoryDto getCategory() {

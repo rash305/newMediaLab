@@ -11,6 +11,7 @@ public class DocCategory {
     private String id;
     @Indexed(name = "meta_title_category_index_unique", unique = true)
     private String title;
+    private String image;
 
     public DocCategory() {}
 
@@ -35,4 +36,11 @@ public class DocCategory {
         this.title = title;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
