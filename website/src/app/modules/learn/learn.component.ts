@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SignTemplateService} from '../../shared/signs/services/sign-template.service';
 import {SignModel} from '../../shared/signs/models/sign.model';
+import {LearnTaskService} from '../../shared/learn/service/learn-task.service';
+import {LearnTask} from '../../shared/learn/models/learn-task';
 
 @Component({
   selector: 'app-learn',
@@ -10,8 +12,10 @@ import {SignModel} from '../../shared/signs/models/sign.model';
 export class LearnComponent implements OnInit {
 
   signOfDay: SignModel;
+  learnTask: LearnTask;
 
-  constructor(private signService: SignTemplateService) {
+  constructor(private signService: SignTemplateService, private learnTaskService: LearnTaskService) {
+    this.getLearnTask();
   }
 
   ngOnInit(): void {
@@ -25,6 +29,15 @@ export class LearnComponent implements OnInit {
       signs = s;
       const index = Math.floor(Math.random() * signs.length);
       this.signOfDay = signs[index];
+    });
+  }
+
+  getLearnTask() {
+    this.learnTaskService.getLearnTask()
+      .subscribe(learnTask => this.learnTask = learnTask).add(x => {
+      this.learnTask = new LearnTask();
+      this.learnTask.currentLearnTaskId = '1';
+      this.learnTask.learnTasksIds = ['1', '2'];
     });
   }
 }

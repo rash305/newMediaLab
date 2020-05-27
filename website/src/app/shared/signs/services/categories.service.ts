@@ -12,7 +12,7 @@ import {environment} from '../../../../environments/environment';
 export class CategoriesService {
 
   private handleError: HandleError;
-  categoryUrl = environment.baseUrl + '/categories';  // URL to web api
+  private categoryUrl = environment.baseUrl + '/categories';  // URL to web api
 
   constructor(private http: HttpClient,
               httpErrorHandler: HttpErrorHandler,
