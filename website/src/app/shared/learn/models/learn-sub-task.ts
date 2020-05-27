@@ -1,7 +1,8 @@
 import {SignModel} from '../../signs/models/sign.model';
+import {SignDetailsModel} from '../../signs/models/sign-details.model';
 
 export class LearnSubTask {
-  question: SignModel;
+  question: SignDetailsModel;
   optionalAnswers: SignModel[];
   responses: SignModel[];
 
