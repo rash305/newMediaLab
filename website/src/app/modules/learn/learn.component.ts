@@ -37,7 +37,7 @@ export class LearnComponent implements OnInit {
     this.learnTaskService.getLearnTask()
       .subscribe(learnTask => this.learnTask = learnTask).add(x => {
       this.learnTask = new LearnTask();
-      this.learnTask.currentLearnTaskId = '1';
+      this.learnTask.currentLearnTaskIndex = '1';
       this.learnTask.learnTasksIds = ['1', '2'];
     });
   }

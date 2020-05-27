@@ -1,5 +1,5 @@
 export class LearnTask {
-  currentLearnTaskId: string;
+  currentLearnTaskIndex: string;
   learnTasksIds: string[];
 
   deserialize(input: any): this {

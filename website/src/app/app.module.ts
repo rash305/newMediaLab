@@ -31,8 +31,8 @@ import { SignDetailsComponent } from './shared/signs/components/sign-details/sig
 import {NetworkErrorInterceptor} from './common/network/network-error-interceptor';
 import {JwtAuthInterceptor} from './common/network/jwt-auth-interceptor';
 import { SignOfDayComponent } from './modules/learn/sign-of-day/sign-of-day.component';
-import { TestQuestionsComponent } from './modules/learn/test-question/test-questions.component';
-import { TestResultsComponent } from './modules/learn/test-results/test-results.component';
+import { QuizQuestionComponent } from './modules/learn/quiz-question/quiz-question.component';
+import { QuizResultsComponent } from './modules/learn/quiz-results/quiz-results.component';
 import { PublicDictionaryComponent } from './modules/dictionary/public-dictionary/public-dictionary.component';
 import { BackButtonComponent } from './shared/general/component/back-button/back-button.component';
 
@@ -62,12 +62,12 @@ const appRoutes: Routes = [
     component: SignOfDayComponent,
   },
   {
-    path: 'learn/test-questions/:id',
-    component: TestQuestionsComponent,
+    path: 'learn/quiz-question/:id',
+    component: QuizQuestionComponent,
   },
   {
-    path: 'learn/test-results',
-    component: TestResultsComponent,
+    path: 'learn/quiz-results',
+    component: QuizResultsComponent,
   },
   {
     path: 'dictionary',
@@ -113,8 +113,8 @@ const appRoutes: Routes = [
     PersonalDictionaryComponent,
     SignDetailsComponent,
     SignOfDayComponent,
-    TestQuestionsComponent,
-    TestResultsComponent,
+    QuizQuestionComponent,
+    QuizResultsComponent
     BackButtonComponent
   ],
   imports: [
