@@ -10,8 +10,7 @@
         </div>
       </div>
       <div class="col-1">
-        <i class="fa fa-2x fa-heart-o purple-icon" (click)="addToPersonal(sign)" [hidden]="isAddedToPersonal"></i>
-        <i class="fa fa-2x fa-heart purple-icon" (click)="removeFromPersonal(sign)" [hidden]="!isAddedToPersonal"></i>
+        <i class="fa fa-2x purple-icon" [ngClass]="{'fa-heart': this.addedToPersonal.includes(sign), 'fa-heart-o': !this.addedToPersonal.includes(sign)}" (click)="addToPersonal(sign)"></i>
       </div></div>
     </div>
   </div>

@@ -13,11 +13,11 @@
   <div class="w-100" style="margin: 5px"></div>
   <div class="col-6">
     <div class="row">
-      <div *ngFor="let answer of answers" class="col-6">
-        <div class="tile" (click)="this.checkAnswer(answer.title)">
-          <img class="{{this.imgFocus}}" src="https://picsum.photos/200/200" alt="{{answer.title}}" >
-          <i class="fa fa-4x fa-times wrong" [hidden]="!this.wrong"></i>
-          <i class="fa fa-4x fa-check correct" [hidden]="!this.correct"></i>
+      <div *ngFor="let answer of answers; let i = index" class="col-6">
+        <div class="tile" (click)="this.checkAnswer(i)">
+          <img [ngClass]="{'img-focus': this.wrongIndices.includes(i)||this.correctIndices.includes(i)}" src="https://picsum.photos/200/200" alt="{{answer.title}}" >
+          <i class="fa fa-4x" [ngClass]="{'fa-times': this.wrongIndices.includes(i), 'wrong':this.wrongIndices.includes(i),
+          'fa-check': this.correctIndices.includes(i), 'correct': this.correctIndices.includes(i)}"></i>
           {{answer.title}}
         </div>
       </div>

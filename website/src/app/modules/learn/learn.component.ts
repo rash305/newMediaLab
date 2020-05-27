@@ -21,8 +21,8 @@ export class LearnComponent implements OnInit {
   getSignOfDay() {
     // get sign of the day from the sign service
     let signs: SignModel[];
-    this.signService.personalSigns.subscribe(s => {
-      signs = s.filter(x => x.category.id === '5eb5ebeb0c57e73817dbfb1a');
+    this.signService.publicSigns.subscribe(s => {
+      signs = s;
       const index = Math.floor(Math.random() * signs.length);
       this.signOfDay = signs[index];
     });

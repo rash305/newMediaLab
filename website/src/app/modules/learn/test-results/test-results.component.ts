@@ -12,10 +12,7 @@ import {SignDetailsService} from '../../../shared/signs/services/sign-details.se
 export class TestResultsComponent implements OnInit {
 
   learnedSigns: SignModel[];
-  isAddedToPersonal = false;
-  purpleIcon = {
-    color: '#444444'
-  };
+  addedToPersonal = [];
 
   constructor(
     private signService: SignTemplateService,
@@ -27,25 +24,23 @@ export class TestResultsComponent implements OnInit {
   }
 
   getAnswers(): void {
-    this.signService.personalSigns.subscribe(s => {
-      this.learnedSigns = s.filter(x => x.category.id === '5eb5ebeb0c57e73817dbfb1a');
-      this.learnedSigns = this.learnedSigns.slice(0, 2);
+    this.signService.publicSigns.subscribe(s => {
+      this.learnedSigns = s;
+      this.learnedSigns = this.learnedSigns.slice(0, 4);
     });
   }
 
   addToPersonal(sign: SignModel) {
-    this.purpleIcon = {
-      color: '#593196'
-    };
-    this.isAddedToPersonal = !this.isAddedToPersonal;
+    if (this.addedToPersonal.includes(sign)) {
+      this.addedToPersonal = this.addedToPersonal.filter(s => s !== sign);
+    } else {
+      this.addedToPersonal.push(sign);
+    }
     // this.signDetailsService.favorite(sign).subscribe();
   }
 
   removeFromPersonal(sign: SignModel) {
-    this.purpleIcon = {
-      color: '#444444'
-    };
-    this.isAddedToPersonal = !this.isAddedToPersonal;
+    //this.isAddedToPersonal = !this.isAddedToPersonal;
   }
 
 }
