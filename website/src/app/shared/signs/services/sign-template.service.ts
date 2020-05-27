@@ -28,7 +28,7 @@ export class SignTemplateService {
           const signModels = (res.map((jsonSign: any) =>
             new SignModel().deserialize(jsonSign)));
 
-          this._personalSigns.next(signModels);
+          this._publicSigns.next(signModels);
         },
         err => console.log('Error retrieving personal signs')
       );
