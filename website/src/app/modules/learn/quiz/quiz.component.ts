@@ -28,8 +28,6 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizStatus = 'question';
-    this.quizStatus = 'results';
-
     this.getLearnTask();
   }
 
@@ -93,8 +91,6 @@ export class QuizComponent implements OnInit {
     } else if ($event === 'restart') {
       this.ngOnInit();
     }
-    this.quizStatus = 'results';
-
     this.questionNr = this.learnTask.currentLearnTaskIndex + 1;
   }
 
