@@ -1,6 +1,8 @@
+import {LearnSubTask} from './learn-sub-task';
+
 export class LearnTask {
   currentLearnTaskIndex: string;
-  learnTasksIds: string[];
+  learnTasks: LearnSubTask[];
 
   deserialize(input: any): this {
     Object.assign(this, input);
