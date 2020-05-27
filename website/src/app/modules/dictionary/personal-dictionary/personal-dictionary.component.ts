@@ -31,6 +31,7 @@ export class PersonalDictionaryComponent implements OnInit {
 
   ObjectClickedEventHandler(object: ISignTemplate) {
     if (object instanceof CategoryModel) {
+      this.navigateBackModel = object;
       this.updateUrl(object.id, this.signType);
       this.childType = this.signType;
       this.childId = object.id;

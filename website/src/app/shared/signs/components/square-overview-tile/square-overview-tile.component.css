@@ -1,8 +1,9 @@
 img {
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
   border-radius: 7px;
   bottom: 0;
+  object-fit:fill;
 }
 .image-box {
   height: calc(100% - 35px);
