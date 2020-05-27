@@ -3,6 +3,11 @@ img {
   height: auto;
   object-fit: cover;
   border-radius: 7px;
+  bottom: 0;
+}
+.image-box {
+  height: calc(100% - 35px);
+  width: 100%;
 }
 
 img:hover {
@@ -13,5 +18,8 @@ img:hover {
   width: 100%;
   height: 100%;
   display: block;
-  margin-bottom: 15px;
+  margin-top: 7px;
+  margin-bottom: 8px;
+  overflow: hidden;         /*prevent text from being shown outside the border */
+  text-overflow: ellipsis;  /*cut off text with an ellipsis*/
 }

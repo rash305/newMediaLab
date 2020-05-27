@@ -1,19 +1,19 @@
 package com.newmedia.deafapi.api.controllers;
 
 import com.newmedia.deafapi.api.dtos.CategoryDto;
-import com.newmedia.deafapi.api.dtos.SignDto;
+import com.newmedia.deafapi.api.models.AuthorizedClient;
 import com.newmedia.deafapi.api.models.Category;
-import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.services.Interfaces.ICategoryService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 // Add notation to inform spring boot to create an instance of this class and publish it as a rest controller
 @RestController
@@ -27,8 +27,20 @@ public class CategoryController {
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
     @GetMapping("/api/categories")
-    public List<CategoryDto> getCategoriesList() {
-        List<Category> categories = ICategoryService.getCategories();
+    public List<CategoryDto> getCategoriesList(@RequestParam(value = "personal", required = false) boolean isPersonal) {
+
+        List<Category> categories;
+        if(isPersonal) {
+            String UserId = GetAuthorizedUser();
+            if (UserId == null) {
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "No valid user token is given.");
+            }
+            categories = ICategoryService.getPersonalCategories(UserId);
+        } else {
+            categories = ICategoryService.getCategories();
+        }
+
         if (categories == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No categories can be requested.");
@@ -47,5 +59,17 @@ public class CategoryController {
         }
         categoryModel = ICategoryService.createCategory(categoryModel);
         return ObjectMapperUtils.map(categoryModel, CategoryDto.class);
+    }
+
+    private String GetAuthorizedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            Object principal = authentication.getPrincipal();
+            if(principal != null){
+                return principal.toString();
+            }
+
+        }
+        return null;
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 // A interface describes all accessible functionallity
 public interface IAccountService<C> extends UserDetailsService {
     Account createAccount(Account account);
+    Account getAccountByUsername(String username);
     boolean isEmailAvailable(String email);
     boolean isUsernameAvailable(String username);
 }

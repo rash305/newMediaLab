@@ -2,6 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {CategoryModel} from '../../../shared/signs/models/category.model';
 import {CategoriesService} from '../../../shared/signs/services/categories.service';
+import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
+import {AccountService} from '../../../shared/account/services/account.service';
+import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
 
 @Component({
   selector: 'app-add-sign',
@@ -12,7 +15,7 @@ export class AddSignComponent implements OnInit {
 
   meaning: string;
   meaningError: string;
-  category = '';
+  categoryId = '';
   categoryError: string;
 
   video: string;
@@ -27,7 +30,9 @@ export class AddSignComponent implements OnInit {
   @Output() AddSignMinimalizeEvent = new EventEmitter();
 
   constructor(private router: Router,
-              private categoriesService: CategoriesService) { }
+              private categoriesService: CategoriesService,
+              private signDetailsService: SignDetailsService) {
+  }
 
   ngOnInit(): void {
     this.getCategories();
@@ -43,15 +48,20 @@ export class AddSignComponent implements OnInit {
   addSign(): void {
     // All validation checks
     if ([this.validateMeaning(this.meaning),
-      this.validateCategory(this.category),
+      this.validateCategory(this.categoryId),
       this.validateVideo(this.video)].every(Boolean)) {
 
+      const categoryModel = this.categories.find(x => x.id === this.categoryId);
       // Send object to backend API
-      this.doSomethingInService();
+      const signDetails = new SignDetailsModel().deserialize({
+          title: this.meaning, categoryId: this.categoryId,
+          category: categoryModel, image: 'https://picsum.photos/200/200', video: this.video
+        })
+      ;
+      this.addSignToApp(signDetails);
 
       // Go to categories page (and be logged in)
-      this.AddSignMinimalizeEvent.emit(true);
-      this.router.navigate(['/categories']);
+      // this.router.navigate(['/personal']);
     }
   }
 
@@ -65,8 +75,8 @@ export class AddSignComponent implements OnInit {
     return true;
   }
 
-  validateCategory(category): boolean {
-    if (!category) {
+  validateCategory(categoryId): boolean {
+    if (!categoryId) {
       this.categoryError = 'Categorie' + this.requiredError;
       return false;
     }
@@ -85,8 +95,17 @@ export class AddSignComponent implements OnInit {
     return true;
   }
 
-  private doSomethingInService() {
-    // Add sign to the dictionary and favorieten
+  private addSignToApp(signDetails: SignDetailsModel): void {
+    // Add sign to app
+    this.signDetailsService.addSign(signDetails).subscribe(sign => {
+      if (sign === null) {
+        // Failed to add sign
+        // Toaster message is enough for now
+      } else {
+        // close popup
+        this.AddSignMinimalizeEvent.emit(true);
+      }
+    });
   }
 
   goBack(): void {

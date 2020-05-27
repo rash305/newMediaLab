@@ -2,6 +2,7 @@ package com.newmedia.deafapi.api.dataservices.docModels;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -11,15 +12,12 @@ public class DocSign {
     private String id;
     @Indexed(unique = true)
     private String title;
-    private String categoryId;
+    @DBRef
+    private DocCategory category;
+    private String image;
+    private String video;
 
     public DocSign() {
-    }
-
-    public DocSign(String id, String title, String categoryId) {
-        this.id = id;
-        this.title = title;
-        this.categoryId = categoryId;
     }
 
     public DocSign(String title) {
@@ -42,11 +40,27 @@ public class DocSign {
         this.title = title;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public DocCategory getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(DocCategory category) {
+        this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
     }
 }

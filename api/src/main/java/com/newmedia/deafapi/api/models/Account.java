@@ -6,11 +6,20 @@ import java.io.Serializable;
 
 @JsonSerialize
 public class Account implements Serializable {
+    private String id;
     private String username;
     private String password;
     private String emailAddress;
 
     public Account() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {

@@ -1,14 +1,19 @@
 import {ISignTemplate} from './isign-template';
+import {CategoryModel} from './category.model';
 
 export class SignModel implements ISignTemplate {
   id: string;
   title: string;
-  categoryId: string;
+  category: CategoryModel;
+  image: string;
 
-  constructor(id: string, title: string, categoryId: string) {
-    this.id = id;
-    this.title = title;
-    this.categoryId = categoryId;
+  constructor() {
+    }
+
+  deserialize(input: any): this {
+    Object.assign(this, input);
+
+    return this;
   }
 
 }

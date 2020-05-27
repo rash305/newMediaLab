@@ -1,21 +1,13 @@
 package com.newmedia.deafapi.api.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 public class Category {
 
     private String id;
     private String title;
+    private String image;
 
     public Category() {}
     public Category(String title) {
-        this.title = title;
-    }
-
-    public Category(String id, String title) {
-        this.id = id;
         this.title = title;
     }
 
@@ -35,4 +27,11 @@ public class Category {
         this.title = title;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
