@@ -69,8 +69,10 @@ export class QuizComponent implements OnInit {
       this.learnTask.learnTasks = [subTask1, subTask2, subTask3];
     } else {
       this.learnTaskService.getLearnTask()
-        .subscribe(learnTask => { this.learnTask = learnTask;
-                                  this.questionNr = this.learnTask.currentLearnTaskIndex + 1;
+        .subscribe(learnTask => {
+          this.learnTask = learnTask;
+          this.questionNr = this.learnTask.currentLearnTaskIndex + 1;
+          this.progressPercentage = (this.questionNr / this.maxQuestion) * 100;
         });
     }
   }
@@ -94,6 +96,7 @@ export class QuizComponent implements OnInit {
       this.ngOnInit();
     }
     this.questionNr = this.learnTask.currentLearnTaskIndex + 1;
+    this.progressPercentage = (this.questionNr / this.maxQuestion) * 100;
   }
 
   show(status: string): boolean {
