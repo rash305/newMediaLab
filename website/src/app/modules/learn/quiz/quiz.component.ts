@@ -32,7 +32,7 @@ export class QuizComponent implements OnInit {
   }
 
   getLearnTask() {
-    const temporaryDemoValuePleaseRemove = true;
+    const temporaryDemoValuePleaseRemove = false;
     if (temporaryDemoValuePleaseRemove) {
       this.learnTask = new LearnTask();
       this.learnTask.currentLearnTaskIndex = 0;
@@ -69,20 +69,22 @@ export class QuizComponent implements OnInit {
       this.learnTask.learnTasks = [subTask1, subTask2, subTask3];
     } else {
       this.learnTaskService.getLearnTask()
-        .subscribe(learnTask => this.learnTask = learnTask);
+        .subscribe(learnTask => { this.learnTask = learnTask;
+                                  this.questionNr = this.learnTask.currentLearnTaskIndex + 1;
+        });
     }
   }
 
   receiveQuizStatus($event: string) {
     if ($event === 'back') {
-      if (this.questionNr === 1) {
+      if (this.learnTask.currentLearnTaskIndex === 0) {
         this.router.navigate(['/learn']);
       } else {
         this.learnTask.currentLearnTaskIndex = this.learnTask.currentLearnTaskIndex - 1;
         this.quizStatus = 'question';
       }
     } else if ($event === 'continue') {
-      if (this.questionNr === this.maxQuestion) {
+      if (this.learnTask.currentLearnTaskIndex === this.maxQuestion - 1) {
         this.quizStatus = 'results';
       } else {
         this.learnTask.currentLearnTaskIndex = this.learnTask.currentLearnTaskIndex + 1;

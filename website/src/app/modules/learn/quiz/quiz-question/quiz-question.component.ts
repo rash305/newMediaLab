@@ -24,17 +24,16 @@ export class QuizQuestionComponent implements OnInit {
   }
 
   goFurther() {
-    if (this.learnSubTask.correctResponses.includes(this.learnSubTask.question)) {
+    if (this.learnSubTask.correctResponseIDs.includes(this.learnSubTask.question.id)) {
       this.messageQuizStatus.emit('continue');
     }
   }
 
   checkAnswer(sign: SignModel) {
-    if (this.learnSubTask.question === sign) {
-      this.learnSubTask.addCorrectResponse(sign);
+    if (this.learnSubTask.question.id === sign.id) {
+      this.learnSubTask.addCorrectResponse(sign.id);
     } else {
-      this.learnSubTask.addWrongResponse(sign);
+      this.learnSubTask.addWrongResponse(sign.id);
     }
-    this.learnSubTask.addCorrectResponse(sign);
   }
 }

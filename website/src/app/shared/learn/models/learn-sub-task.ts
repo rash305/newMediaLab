@@ -4,19 +4,19 @@ import {SignDetailsModel} from '../../signs/models/sign-details.model';
 export class LearnSubTask {
   question: SignDetailsModel;
   optionalAnswers: SignModel[];
-  correctResponses: SignModel[] = [];
-  wrongResponses: SignModel[] = [];
+  correctResponseIDs: string[] = [];
+  wrongResponseIDs: string[] = [];
 
   deserialize(input: any): this {
     Object.assign(this, input);
     return this;
   }
 
-  addCorrectResponse(sign: SignModel) {
-    this.correctResponses.push(sign);
+  addCorrectResponse(signID: string) {
+    this.correctResponseIDs.push(signID);
   }
 
-  addWrongResponse(sign: SignModel) {
-    this.wrongResponses.push(sign);
+  addWrongResponse(signID: string) {
+    this.wrongResponseIDs.push(signID);
   }
 }

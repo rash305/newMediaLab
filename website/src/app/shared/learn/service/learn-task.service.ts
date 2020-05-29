@@ -7,6 +7,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {HandleError, HttpErrorHandler} from '../../../common/network/http-error-handler.service';
 import {environment} from '../../../../environments/environment';
 import {LearnTask} from '../models/learn-task';
+import {SignDetailsModel} from '../../signs/models/sign-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class LearnTaskService {
 
   getLearnTask(): Observable<LearnTask> {
     return this.http.get<any[]>(this.learnTaskUrl)
-      .pipe(map(res => res.map(learnTask => new LearnTask().deserialize(learnTask))))
+      .pipe(map(learnTask => new LearnTask().deserialize(learnTask)))
+//      .pipe(map(res => res.map(learnTask => new LearnTask().deserialize(learnTask))))
       .pipe(
         catchError(this.handleError('getLearnTasks', null))
       );

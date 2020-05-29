@@ -9,9 +9,9 @@
     <div class="row">
       <div *ngFor="let answer of this.learnSubTask.optionalAnswers" class="col-6">
         <div class="tile" (click)="this.checkAnswer(answer)">
-          <img [ngClass]="{'img-focus': this.learnSubTask.correctResponses.includes(answer)||this.learnSubTask.wrongResponses.includes(answer)}" src="{{answer.image}}" alt="{{answer.title}}" >
-          <i class="fa fa-4x" [ngClass]="{'fa-times': this.learnSubTask.wrongResponses.includes(answer), 'wrong':this.learnSubTask.wrongResponses.includes(answer),
-          'fa-check': this.learnSubTask.correctResponses.includes(answer), 'correct': this.learnSubTask.correctResponses.includes(answer)}"></i>
+          <img [ngClass]="{'img-focus': this.learnSubTask.correctResponseIDs.includes(answer.id)||this.learnSubTask.wrongResponseIDs.includes(answer.id)}" src="{{answer.image}}" alt="{{answer.title}}" >
+          <i class="fa fa-4x" [ngClass]="{'fa-times': this.learnSubTask.wrongResponseIDs.includes(answer.id), 'wrong':this.learnSubTask.wrongResponseIDs.includes(answer.id),
+          'fa-check': this.learnSubTask.correctResponseIDs.includes(answer.id), 'correct': this.learnSubTask.correctResponseIDs.includes(answer.id)}"></i>
           {{answer.title}}
         </div>
       </div>

@@ -14,7 +14,7 @@ export class QuizResultsComponent implements OnInit {
   @Output() messageQuizStatus = new EventEmitter<string>();
 
   @Input() learnedSigns: SignModel[];
-  addedToPersonal = [];
+  addedToPersonalIDs: string[] = [];
 
   constructor(private signDetailsService: SignDetailsService) {
   }
@@ -23,10 +23,10 @@ export class QuizResultsComponent implements OnInit {
   }
 
   addToPersonal(sign: SignModel) {
-    if (this.addedToPersonal.includes(sign)) {
-      this.addedToPersonal = this.addedToPersonal.filter(s => s !== sign);
+    if (this.addedToPersonalIDs.includes(sign.id)) {
+      this.addedToPersonalIDs = this.addedToPersonalIDs.filter(s => s !== sign.id);
     } else {
-      this.addedToPersonal.push(sign);
+      this.addedToPersonalIDs.push(sign.id);
     }
     // this.signDetailsService.favorite(sign).subscribe();
   }
