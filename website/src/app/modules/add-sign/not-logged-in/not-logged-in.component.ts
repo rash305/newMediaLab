@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 export class NotLoggedInComponent implements OnInit {
 
   @Output() NotLoggedInMinimalizeEvent = new EventEmitter();
+  @Output() GoToSettingsEvent = new EventEmitter();
 
   constructor() { }
 
@@ -19,4 +20,8 @@ export class NotLoggedInComponent implements OnInit {
     this.NotLoggedInMinimalizeEvent.emit(true);
   }
 
+  toSettings() {
+    this.NotLoggedInMinimalizeEvent.emit(true);
+    this.GoToSettingsEvent.emit(true);
+  }
 }

@@ -35,8 +35,10 @@
 
   <router-outlet></router-outlet>
   <app-not-logged-in [hidden]="hideNotLoggedInPopup"
-                     (NotLoggedInMinimalizeEvent)="hideNotLoggedInPopup = $event"></app-not-logged-in>
-  <app-add-sign [hidden]="hideAddSignPopup" (AddSignMinimalizeEvent)="hideAddSignPopup = $event"></app-add-sign>
+                     (NotLoggedInMinimalizeEvent)="hideNotLoggedInPopup = $event"
+                     (GoToSettingsEvent)="hideSettingsPopup = !$event"></app-not-logged-in>
+  <app-add-sign [hidden]="hideAddSignPopup"
+                (AddSignMinimalizeEvent)="hideAddSignPopup = $event"></app-add-sign>
   <app-settings-popup [hidden]="hideSettingsPopup"
                       (SettingsMinimalizeEvent)="hideSettingsPopup = $event"></app-settings-popup>
 </div>
