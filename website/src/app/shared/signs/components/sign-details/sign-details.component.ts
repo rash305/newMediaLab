@@ -15,16 +15,15 @@ export class SignDetailsComponent implements OnInit {
 
   @Output() parentId = new EventEmitter();
 
-  isPersonalDictionary = false;
+  @Input() isPersonalDictionary: boolean;
   isAddedToPersonal = false;
-  purpleIcon = {
-    color: '#444444'
-  };
 
   @Input() currentSignId: string;
   @Input() sign: SignDetailsModel;
+
   likes = 30;
   isDeleted = false;
+  hideDeletePopup = true;
 
   constructor(private route: ActivatedRoute,
               private signDetailsService: SignDetailsService) {
@@ -48,24 +47,18 @@ export class SignDetailsComponent implements OnInit {
   }
 
   addToPersonal() {
-    this.purpleIcon = {
-      color: '#593196'
-    };
     this.likes += 1;
     this.isAddedToPersonal = !this.isAddedToPersonal;
     this.signDetailsService.favorite(this.sign).subscribe();
   }
 
   removeFromPersonal() {
-    this.purpleIcon = {
-      color: '#444444'
-    };
     this.likes -= 1;
     this.isAddedToPersonal = !this.isAddedToPersonal;
   }
 
   delete() {
-    // Do something in service to remove sign from favorites
-    this.isDeleted = true;
+    this.hideDeletePopup = !this.hideDeletePopup;
+    // Open popup to confirm deleting
   }
 }

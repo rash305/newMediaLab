@@ -7,4 +7,4 @@
 
 <app-categories [isPersonalDictionary]=true (clickEventsEmitter)="ObjectClickedEventHandler($event)" *ngIf="childType === categoryType"></app-categories>
 <app-signs [isPersonalDictionary]=true *ngIf="childType === signType" (ObjectClickedEventHandler)="ObjectClickedEventHandler($event)" [currentSignCategory]="childId"></app-signs>
-<app-sign-details [currentSignId]="childId" *ngIf="childType === signDetailsType" (parentId)="navigateBackModel = $event" ></app-sign-details>
+<app-sign-details [isPersonalDictionary]=true [currentSignId]="childId" *ngIf="childType === signDetailsType" (parentId)="navigateBackModel = $event" ></app-sign-details>

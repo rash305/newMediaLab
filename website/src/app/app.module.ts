@@ -36,6 +36,7 @@ import { QuizResultsComponent } from './modules/learn/quiz/quiz-results/quiz-res
 import { PublicDictionaryComponent } from './modules/dictionary/public-dictionary/public-dictionary.component';
 import { BackButtonComponent } from './shared/general/component/back-button/back-button.component';
 import { QuizComponent } from './modules/learn/quiz/quiz.component';
+import { DeletePopupComponent } from './modules/dictionary/personal-dictionary/delete-popup/delete-popup.component';
 
 const appRoutes: Routes = [
   {
@@ -113,7 +114,8 @@ const appRoutes: Routes = [
     QuizQuestionComponent,
     QuizResultsComponent,
     BackButtonComponent,
-    QuizComponent
+    QuizComponent,
+    DeletePopupComponent
   ],
   imports: [
     BrowserModule,
