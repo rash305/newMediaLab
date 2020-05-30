@@ -24,6 +24,8 @@ export class AddSignComponent implements OnInit {
   private requiredError = ' moet worden ingevuld';
 
   videoSelected = false;
+  showConfirmationScreen = false;
+  sign: SignDetailsModel;
 
   categories: CategoryModel[];
 
@@ -56,9 +58,10 @@ export class AddSignComponent implements OnInit {
       const signDetails = new SignDetailsModel().deserialize({
           title: this.meaning, categoryId: this.categoryId,
           category: categoryModel, image: 'https://picsum.photos/200/200', video: this.video
-        })
-      ;
-      this.addSignToApp(signDetails);
+        });
+      // Go to confirmation screen for user to confirm sign
+      this.sign = signDetails;
+      this.showConfirmationScreen = true;
 
       // Go to categories page (and be logged in)
       // this.router.navigate(['/personal']);
@@ -102,7 +105,6 @@ export class AddSignComponent implements OnInit {
         // Failed to add sign
         // Toaster message is enough for now
       } else {
-        // close popup
         this.AddSignMinimalizeEvent.emit(true);
       }
     });
@@ -119,10 +121,38 @@ export class AddSignComponent implements OnInit {
     this.videoSelected = true;
   }
 
-  addGallery() {
+  addUpload() {
     // open gallery to select a video
     this.video = 'Show a pretty video';
     this.validateVideo(this.video);
     this.videoSelected = true;
+  }
+
+  confirm($event: string) {
+    if ($event === 'confirmed') {
+      // Sign is accepted, thus add sign to app and close popup
+      this.addSignToApp(this.sign);
+      this.emptyVariables();
+      this.showConfirmationScreen = false;
+      this.AddSignMinimalizeEvent.emit(true);
+    } else if ($event === 'notConfirmed') {
+      // Sign is not confirmed, thus do nothing and wait for next action of user
+      this.showConfirmationScreen = false;
+    } else if ($event === 'closed') {
+      // User clicked next to the popup, thus do nothing and close both popups
+      this.showConfirmationScreen = false;
+      this.AddSignMinimalizeEvent.emit(true);
+    }
+  }
+
+  private emptyVariables() {
+    this.meaning = '';
+    this.meaningError = '';
+    this.categoryId = '';
+    this.categoryError = '';
+
+    this.video = '';
+    this.videoError = '';
+    this.videoSelected = false;
   }
 }

@@ -14,10 +14,8 @@ import {SignDetailsModel} from '../../shared/signs/models/sign-details.model';
 export class LearnComponent implements OnInit {
 
   signOfDay: SignModel;
-  learnTask: LearnTask;
 
-  constructor(private signService: SignTemplateService, private learnTaskService: LearnTaskService) {
-    this.getLearnTask();
+  constructor(private signService: SignTemplateService) {
   }
 
   ngOnInit(): void {
@@ -33,35 +31,5 @@ export class LearnComponent implements OnInit {
       this.signOfDay = signs[index];
     });
     this.signService.loadNextBatchSigns(null);
-  }
-
-  getLearnTask() {
-    const temporaryDemoValuePleaseRemove = true;
-    if (temporaryDemoValuePleaseRemove) {
-      this.learnTask = new LearnTask();
-      this.learnTask.currentLearnTaskIndex = '1';
-      const subTask1 = new LearnSubTask();
-      const correctAnswer = new SignDetailsModel();
-      correctAnswer.title = 'test';
-      correctAnswer.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
-      correctAnswer.id = '1';
-
-      const option1 = new SignModel();
-      correctAnswer.title = 'Kip';
-      correctAnswer.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
-      correctAnswer.id = '2';
-      const option2 = new SignDetailsModel();
-      correctAnswer.title = 'Honkbal';
-      correctAnswer.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
-      correctAnswer.id = '3';
-      subTask1.question = correctAnswer;
-      subTask1.optionalAnswers = [option1, option2];
-
-      this.learnTask.learnTasks = [subTask1, subTask1, subTask1];
-    } else {
-      this.learnTaskService.getLearnTask()
-        .subscribe(learnTask => this.learnTask = learnTask);
-    }
-
   }
 }

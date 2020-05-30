@@ -1,0 +1,32 @@
+<div class="modal" (click)="this.DeletePopupMinimalizeEvent.emit(true)">
+</div>
+<div class="popup-layer container">
+  <div class="h-100">
+    <div class="content-container">
+      <div class="col-12 purple-border top-container">
+        <i class="fa fa-trash"></i><span><b>Gebaar verwijderen</b></span>
+      </div>
+      <div class="container-border purple-border middle-container middle-container-bar">
+        <div class="row p-4">
+          <div class="col-4">
+            <div class="tile" *ngIf="this.sign">
+              <img src="{{this.sign.image}}" alt="{{this.sign.title}}" >
+              {{this.sign.title}}
+            </div>
+          </div>
+          <div class="col">
+            <span>Weet je zeker dat je dit gebaar uit je
+              Favorieten <i class="fa fa-heart"style="text-align: center"></i>
+              wilt verwijderen?
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 bottom-container">
+        <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+        <button type="button" class="btn btn-primary right-button" (click)="deleteSign()"><i class="fa fa-trash btn-i"></i> Verwijderen</button>
+      </div>
+    </div>
+  </div>
+</div>
+

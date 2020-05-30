@@ -35,16 +35,16 @@
             <div class="col-" [hidden]="videoSelected">
               Video toevoegen:
               <div style="padding-top: 5px; padding-bottom: 5px;">
-                <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-camera btn-i"></i> Camera</button>
-                <button type="button" class="btn btn-outline-primary" (click)="addGallery()"><i class="fa fa-image btn-i"></i> Gallerij</button>
+                <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-video-camera btn-i"></i> Camera</button>
+                <button type="button" class="btn btn-outline-primary" (click)="addUpload()"><i class="fa fa-upload btn-i"></i> Upload</button>
               </div>
             </div>
             <div class="col-8" [hidden]="!videoSelected" style="height: 125px; background-color: #8769e0">
               {{video}}
             </div>
             <div class="col-1 float-left" [hidden]="!videoSelected" style="padding-left: 0">
-              <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-camera btn-i"></i></button>
-              <button type="button" class="btn btn-outline-primary" (click)="addGallery()"><i class="fa fa-image btn-i"></i></button>
+              <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-video-camera btn-i"></i></button>
+              <button type="button" class="btn btn-outline-primary" (click)="addUpload()"><i class="fa fa-upload btn-i"></i></button>
             </div>
           </div>
           <div class="alert-container">
@@ -56,8 +56,11 @@
       </div>
       <div class="col-12 bottom-container">
         <button type="button" class="back-button btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-        <button type="button" class="btn btn-primary right-button" (click)="addSign()"><i class="fa fa-plus-circle btn-i"></i> Toevoegen</button>
+        <button type="button" class="btn btn-primary right-button" (click)="addSign()"><i class="fa fa-arrow-right btn-i"></i> Verder</button>
       </div>
     </div>
   </div>
 </div>
+<app-add-sign-confirm *ngIf="this.showConfirmationScreen"
+                      [sign]="this.sign"
+                      (ConfirmAddSignEvent)="this.confirm($event)"></app-add-sign-confirm>

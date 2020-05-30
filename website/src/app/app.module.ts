@@ -31,10 +31,15 @@ import { SignDetailsComponent } from './shared/signs/components/sign-details/sig
 import {NetworkErrorInterceptor} from './common/network/network-error-interceptor';
 import {JwtAuthInterceptor} from './common/network/jwt-auth-interceptor';
 import { SignOfDayComponent } from './modules/learn/sign-of-day/sign-of-day.component';
-import { QuizQuestionComponent } from './modules/learn/quiz-question/quiz-question.component';
-import { QuizResultsComponent } from './modules/learn/quiz-results/quiz-results.component';
+import { QuizQuestionComponent } from './modules/learn/quiz/quiz-question/quiz-question.component';
+import { QuizResultsComponent } from './modules/learn/quiz/quiz-results/quiz-results.component';
 import { PublicDictionaryComponent } from './modules/dictionary/public-dictionary/public-dictionary.component';
 import { BackButtonComponent } from './shared/general/component/back-button/back-button.component';
+import { QuizComponent } from './modules/learn/quiz/quiz.component';
+import { DeletePopupComponent } from './modules/dictionary/personal-dictionary/delete-popup/delete-popup.component';
+import { ConfirmChangeComponent } from './modules/settings/account/change/confirm-change/confirm-change.component';
+import { ForgotPwConfirmComponent } from './modules/settings/account/login/forgot-pw-confirm/forgot-pw-confirm.component';
+import { AddSignConfirmComponent } from './modules/add-sign/add-sign/add-sign-confirm/add-sign-confirm.component';
 
 const appRoutes: Routes = [
   {
@@ -62,12 +67,8 @@ const appRoutes: Routes = [
     component: SignOfDayComponent,
   },
   {
-    path: 'learn/quiz-question/:id',
-    component: QuizQuestionComponent,
-  },
-  {
-    path: 'learn/quiz-results',
-    component: QuizResultsComponent,
+    path: 'learn/quiz',
+    component: QuizComponent,
   },
   {
     path: 'dictionary',
@@ -115,7 +116,12 @@ const appRoutes: Routes = [
     SignOfDayComponent,
     QuizQuestionComponent,
     QuizResultsComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    QuizComponent,
+    DeletePopupComponent,
+    ConfirmChangeComponent,
+    ForgotPwConfirmComponent,
+    AddSignConfirmComponent
   ],
   imports: [
     BrowserModule,
