@@ -39,6 +39,7 @@ import { QuizComponent } from './modules/learn/quiz/quiz.component';
 import { DeletePopupComponent } from './modules/dictionary/personal-dictionary/delete-popup/delete-popup.component';
 import { ConfirmChangeComponent } from './modules/settings/account/change/confirm-change/confirm-change.component';
 import { ForgotPwConfirmComponent } from './modules/settings/account/login/forgot-pw-confirm/forgot-pw-confirm.component';
+import { AddSignConfirmComponent } from './modules/add-sign/add-sign/add-sign-confirm/add-sign-confirm.component';
 
 const appRoutes: Routes = [
   {
@@ -119,7 +120,8 @@ const appRoutes: Routes = [
     QuizComponent,
     DeletePopupComponent,
     ConfirmChangeComponent,
-    ForgotPwConfirmComponent
+    ForgotPwConfirmComponent,
+    AddSignConfirmComponent
   ],
   imports: [
     BrowserModule,
