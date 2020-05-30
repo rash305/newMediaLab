@@ -41,7 +41,7 @@ export class ChangeAccountComponent implements OnInit {
       this.doSomethingInService();
 
       // Go to account page (and have changes saved)
-      this.messageSettingsStatus.emit('account');
+      this.messageSettingsStatus.emit('confirmChange');
     }
   }
 

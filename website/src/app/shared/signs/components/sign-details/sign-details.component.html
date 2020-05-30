@@ -22,7 +22,7 @@
     <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal()" [hidden]="!isAddedToPersonal"></i>
   </div>
   <div class="col-12">
-    <i class="fa fa-heart" [ngClass]="{'purple-icon': this.isAddedToPersonal, 'purple-icon': this.isPersonalDictionary}"></i> {{this.likes}}x
+    <i class="fa fa-heart" [ngClass]="{'purple-icon': this.isAddedToPersonal}" [ngClass]="{'purple-icon': this.isPersonalDictionary}"></i> {{this.likes}}x
   </div>
 </div>
 

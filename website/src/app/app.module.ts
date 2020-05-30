@@ -37,6 +37,8 @@ import { PublicDictionaryComponent } from './modules/dictionary/public-dictionar
 import { BackButtonComponent } from './shared/general/component/back-button/back-button.component';
 import { QuizComponent } from './modules/learn/quiz/quiz.component';
 import { DeletePopupComponent } from './modules/dictionary/personal-dictionary/delete-popup/delete-popup.component';
+import { ConfirmChangeComponent } from './modules/settings/account/change/confirm-change/confirm-change.component';
+import { ForgotPwConfirmComponent } from './modules/settings/account/login/forgot-pw-confirm/forgot-pw-confirm.component';
 
 const appRoutes: Routes = [
   {
@@ -115,7 +117,9 @@ const appRoutes: Routes = [
     QuizResultsComponent,
     BackButtonComponent,
     QuizComponent,
-    DeletePopupComponent
+    DeletePopupComponent,
+    ConfirmChangeComponent,
+    ForgotPwConfirmComponent
   ],
   imports: [
     BrowserModule,
