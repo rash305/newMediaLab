@@ -1,0 +1,10 @@
+.sign-image {
+  width: 100%;
+  height: auto;
+  border-radius: 7px;
+}
+
+.change-image-button {
+  font-size: 75%;
+  border-radius: 7px;
+}
