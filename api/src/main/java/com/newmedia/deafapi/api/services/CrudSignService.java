@@ -56,6 +56,12 @@ public class CrudSignService implements ISignService {
         return ObjectMapperUtils.mapAll(docCategories, Sign.class);
     }
 
+    @Override
+    public List<Sign> getSearchedSigns(String searchTerm) {
+        List<DocSign> s = signISignRepository.findByTitle(searchTerm);
+        return ObjectMapperUtils.mapAll(s, Sign.class);
+    }
+
     private List<String> getPersonalSignIds(String userid, String categoryId) {
         // Create terms how to match the example with the objects in database
         ExampleMatcher modelMatcher = ExampleMatcher.matching()

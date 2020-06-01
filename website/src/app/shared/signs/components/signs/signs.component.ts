@@ -5,6 +5,7 @@ import {SignModel} from '../../models/sign.model';
 import {SignTemplateService} from '../../services/sign-template.service';
 import {AppComponent} from '../../../../app.component';
 import {ISignTemplate} from '../../models/isign-template';
+import {CategoryModel} from '../../models/category.model';
 
 @Component({
   selector: 'app-signs',
@@ -13,11 +14,19 @@ import {ISignTemplate} from '../../models/isign-template';
 })
 export class SignsComponent implements OnInit {
   @Output() ObjectClickedEventHandler = new EventEmitter<ISignTemplate>();
+
   @Input() isPersonalDictionary: boolean;
   @Input() currentSignCategory: string;
   currentSignCategoryTitle: string;
   noMoreSignsAvailable = false;
   signs: SignModel[];
+
+  searchTerm: string;
+  @Input()
+  public set setSearchTerm(searchTerm: string) {
+    this.searchTerm = searchTerm;
+    this.ngOnInit();
+  }
 
   // ActivatedRoute module is needed to retrieve the URL parameter
   constructor(
@@ -34,12 +43,19 @@ export class SignsComponent implements OnInit {
       this.signService.personalSigns.subscribe(s => {
         this.signs = s.filter(x => x.category.id === this.currentSignCategory);
       });
+    } else if (this.searchTerm) {
+      // this.signs = this.signService.searchSigns(this.searchTerm);
+      this.signService.publicSigns.subscribe(s => {
+        this.signs = s.filter(x => x.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+        if (this.currentSignCategory) {
+          this.signs = this.signs.filter(x => x.category.id === this.currentSignCategory);
+        }
+      });
     } else {
       this.signService.publicSigns.subscribe(s => {
         this.signs = s.filter(x => x.category.id === this.currentSignCategory);
       });
     }
-
     this.getSigns();
   }
 

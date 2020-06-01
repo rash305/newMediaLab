@@ -45,4 +45,15 @@ export class SignTemplateStoreService {
         catchError(this.handleError('getPersonalSigns', []))
       );
   }
+
+  getSearchedSigns(searchTerm): Observable<object[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('searchTerm', searchTerm);
+
+    return this.http.get<object[]>(this.signsUrl + '/search', {params: httpParams})
+      .pipe(map(res => res.map(signData => new SignModel().deserialize(signData))))
+      .pipe(
+        catchError(this.handleError('getSearchedSignList', []))
+      );
+  }
 }

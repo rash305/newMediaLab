@@ -11,6 +11,7 @@ import java.util.List;
 public interface ISignService {
     List<Sign> getSigns(String category);
     List<Sign> getPersonalSigns(String userId, String category);
+    List<Sign> getSearchedSigns(String searchTerm);
     Sign createSign(Sign sign);
     SignDetails createSignDetails(SignDetails signDetails);
     void updateSign(Sign sign);

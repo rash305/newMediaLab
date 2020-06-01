@@ -47,6 +47,15 @@ export class SignTemplateService {
     return promise;
   }
 
+  searchSigns(searchTerm: string): SignModel[] {
+    let searchedSigns;
+    this.signBackendService.getSearchedSigns(searchTerm)
+      .subscribe(searchResults => {
+        searchedSigns = searchResults;
+      });
+    return searchedSigns;
+  }
+
   signsResult(result: any, personal = false): number {
     let addedSigns = 0;
     const signList = this._personalSigns.getValue();

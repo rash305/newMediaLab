@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MongoSignRepository extends MongoRepository<DocSign, String> {
     List<DocSign> findByCategoryId(String categoryId);
-
+    List<DocSign> findByTitle(String title);
 }
