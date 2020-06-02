@@ -54,6 +54,7 @@ export class SignDetailsComponent implements OnInit {
   removeFromPersonal() {
     this.sign.nrOfPersonal -= 1;
     this.sign.isPersonal = !this.sign.isPersonal;
+    this.signDetailsService.unFavorite(this.sign).subscribe();
   }
 
   delete() {

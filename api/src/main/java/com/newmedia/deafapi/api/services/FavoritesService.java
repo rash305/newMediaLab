@@ -26,6 +26,11 @@ public class FavoritesService implements IFavoritesService {
     }
 
     @Override
+    public void unFavoriteSign(String signId, String personId) {
+        favoriteSignRepository.deleteBySignIdAndAndPersonId(signId, personId);
+    }
+
+    @Override
     public List<String> getUsersOfFavoriteSign(String signId) {
         try {
             List<DocFavoriteSign> signs = favoriteSignRepository.findBySignId(signId);
