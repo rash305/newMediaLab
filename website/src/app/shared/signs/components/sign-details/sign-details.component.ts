@@ -16,12 +16,10 @@ export class SignDetailsComponent implements OnInit {
   @Output() parentId = new EventEmitter();
 
   @Input() isPersonalDictionary: boolean;
-  isAddedToPersonal = false;
 
   @Input() currentSignId: string;
   @Input() sign: SignDetailsModel;
 
-  likes = 30;
   isDeleted = false;
   hideDeletePopup = true;
 
@@ -43,18 +41,19 @@ export class SignDetailsComponent implements OnInit {
           this.sign = data;
           this.parentId.emit(data.category);
         }
+        console.log('Marit print de sign details', this.sign);
       });
   }
 
   addToPersonal() {
-    this.likes += 1;
-    this.isAddedToPersonal = !this.isAddedToPersonal;
+    this.sign.nrOfPersonal += 1;
+    this.sign.isPersonal = !this.sign.isPersonal;
     this.signDetailsService.favorite(this.sign).subscribe();
   }
 
   removeFromPersonal() {
-    this.likes -= 1;
-    this.isAddedToPersonal = !this.isAddedToPersonal;
+    this.sign.nrOfPersonal -= 1;
+    this.sign.isPersonal = !this.sign.isPersonal;
   }
 
   delete() {

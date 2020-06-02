@@ -101,15 +101,6 @@ public class CrudSignService implements ISignService {
     }
 
     @Override
-    public void favoriteSign(String signId, String CategoryId, String userId) {
-        DocFavoriteSign probe = new DocFavoriteSign();
-        probe.setSignId(signId);
-        probe.setCategoryId(CategoryId);
-        probe.setPersonId(userId);
-        favoriteSignRepository.save(probe);
-    }
-
-    @Override
     public SignDetails getSignDetails(String id) {
         Optional<DocSign> s = signISignRepository.findById(id);
         if(s.isPresent()) {

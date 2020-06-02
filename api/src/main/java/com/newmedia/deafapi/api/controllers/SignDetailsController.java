@@ -1,13 +1,15 @@
 package com.newmedia.deafapi.api.controllers;
 
 import com.newmedia.deafapi.api.dtos.SignDetailsDto;
-import com.newmedia.deafapi.api.dtos.SignDto;
-import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.models.SignDetails;
+import com.newmedia.deafapi.api.services.Interfaces.IFavoritesService;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,6 +23,8 @@ public class SignDetailsController {
     //https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
     @Autowired
     private ISignService ISignService;
+    @Autowired
+    private IFavoritesService IFavoritesService;
 
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
@@ -31,8 +35,14 @@ public class SignDetailsController {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign can be requested.");
         }
+        
+        // Get all users who have this sign as favorite
+        List<String> users = IFavoritesService.getUsersOfFavoriteSign(signDetails.getId());
+        String UserId = GetAuthorizedUser();
 
         SignDetailsDto signDetailsDto = ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
+        signDetailsDto.setNrOfPersonal(users.size());
+        signDetailsDto.setIsPersonal(users.contains(UserId));
         return signDetailsDto;
     }
 
@@ -47,5 +57,17 @@ public class SignDetailsController {
 
         signDetails = ISignService.createSignDetails(signDetails);
         return ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
+    }
+
+    private String GetAuthorizedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            Object principal = authentication.getPrincipal();
+            if (principal != null) {
+                return principal.toString();
+            }
+
+        }
+        return null;
     }
 }

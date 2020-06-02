@@ -12,7 +12,7 @@ public class DocFavoriteSign implements Serializable {
     @Id
     private String id;
     @Indexed()
-    private String SignId;
+    private String signId;
     @Indexed()
     private String CategoryId;
     //Supports device tokens and account id as Id
@@ -31,11 +31,11 @@ public class DocFavoriteSign implements Serializable {
     }
 
     public String getSignId() {
-        return SignId;
+        return signId;
     }
 
     public void setSignId(String signId) {
-        SignId = signId;
+        this.signId = signId;
     }
 
     public String getCategoryId() {

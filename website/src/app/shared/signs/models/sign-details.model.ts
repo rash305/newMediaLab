@@ -6,6 +6,8 @@ import {CategoryModel} from './category.model';
 export class SignDetailsModel extends SignModel {
   video: string;
   image: string;
+  isPersonal: boolean;
+  nrOfPersonal: number;
 
   constructor() {
     super();

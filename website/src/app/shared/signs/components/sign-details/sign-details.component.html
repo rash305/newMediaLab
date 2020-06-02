@@ -18,11 +18,11 @@
     <i class="fa fa-3x fa-trash purple-icon" (click)="delete()"></i>
   </div>
   <div class="col-2 sidebar" [hidden]="isPersonalDictionary">
-    <i class="fa fa-3x fa-heart-o purple-icon" (click)="addToPersonal()" [hidden]="isAddedToPersonal"></i>
-    <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal()" [hidden]="!isAddedToPersonal"></i>
+    <i class="fa fa-3x fa-heart-o purple-icon" (click)="addToPersonal()" *ngIf="!this.sign.isPersonal"></i>
+    <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal()" *ngIf="this.sign.isPersonal"></i>
   </div>
   <div class="col-12">
-    <i class="fa fa-heart" [ngClass]="{'purple-icon': this.isAddedToPersonal}" [ngClass]="{'purple-icon': this.isPersonalDictionary}"></i> {{this.likes}}x
+    <i class="fa fa-heart" [ngClass]="{'purple-icon': this.sign.isPersonal}"></i> {{this.sign.nrOfPersonal}}x
   </div>
 </div>
 
