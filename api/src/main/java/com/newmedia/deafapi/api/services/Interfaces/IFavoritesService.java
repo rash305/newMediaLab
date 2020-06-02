@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IFavoritesService {
 
-    void favoriteSign(String signId, String CategoryId, String userId);
+    void favoriteSign(String signId, String categoryId, String userId);
     List<String> getUsersOfFavoriteSign(String signId);
 }

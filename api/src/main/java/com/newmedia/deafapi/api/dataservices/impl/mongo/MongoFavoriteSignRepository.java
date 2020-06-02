@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface MongoFavoriteSignRepository extends MongoRepository<DocFavoriteSign, String> {
-    List<DocFavoriteSign> findBySignId(String SignId);
+    List<DocFavoriteSign> findBySignId(String signId);
 }

@@ -17,18 +17,18 @@ public class FavoritesService implements IFavoritesService {
     private MongoFavoriteSignRepository favoriteSignRepository;
 
     @Override
-    public void favoriteSign(String signId, String CategoryId, String userId) {
+    public void favoriteSign(String signId, String categoryId, String userId) {
         DocFavoriteSign probe = new DocFavoriteSign();
         probe.setSignId(signId);
-        probe.setCategoryId(CategoryId);
+        probe.setCategoryId(categoryId);
         probe.setPersonId(userId);
         favoriteSignRepository.save(probe);
     }
 
     @Override
-    public List<String> getUsersOfFavoriteSign(String SignId) {
+    public List<String> getUsersOfFavoriteSign(String signId) {
         try {
-            List<DocFavoriteSign> signs = favoriteSignRepository.findBySignId(SignId);
+            List<DocFavoriteSign> signs = favoriteSignRepository.findBySignId(signId);
 
             List<String> users = new ArrayList<>();
             for (DocFavoriteSign sign : signs) {
