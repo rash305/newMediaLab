@@ -12,7 +12,6 @@ import {CategoryModel} from '../../models/category.model';
 })
 export class SignDetailsComponent implements OnInit {
 
-
   @Output() parentId = new EventEmitter();
 
   @Input() isPersonalDictionary: boolean;
@@ -41,7 +40,6 @@ export class SignDetailsComponent implements OnInit {
           this.sign = data;
           this.parentId.emit(data.category);
         }
-        console.log('Marit print de sign details', this.sign);
       });
   }
 
@@ -58,7 +56,7 @@ export class SignDetailsComponent implements OnInit {
   }
 
   delete() {
-    this.hideDeletePopup = !this.hideDeletePopup;
     // Open popup to confirm deleting
+    this.hideDeletePopup = !this.hideDeletePopup;
   }
 }

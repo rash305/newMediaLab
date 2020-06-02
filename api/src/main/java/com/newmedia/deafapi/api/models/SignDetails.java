@@ -7,6 +7,7 @@ public class SignDetails {
     private Category category;
     private String image;
     private String video;
+    private boolean isPersonal;
 
     public SignDetails(String id, String title, Category category, String image, String video) {
         this.id = id;
@@ -61,5 +62,13 @@ public class SignDetails {
 
     public void setVideo(String video) {
         this.video = video;
+    }
+
+    public boolean getIsPersonal() {
+        return isPersonal;
+    }
+
+    public void setIsPersonal(boolean isPersonal) {
+        this.isPersonal = isPersonal;
     }
 }

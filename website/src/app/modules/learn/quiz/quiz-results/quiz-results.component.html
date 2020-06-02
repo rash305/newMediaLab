@@ -1,5 +1,5 @@
 <div class="div-learn">
-  <i class="fa fa-3x fa-calendar"></i> Deze nieuwe gebaren heb je geleerd:
+  <i class="fa fa-3x fa-lightbulb-o"></i> Deze nieuwe gebaren heb je geleerd:
   <div class="row justify-content-center" style="margin: 7px 0px;">
     <div *ngFor="let sign of learnedSigns" class="col-4">
       <div class="row no-gutters" >
@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="col-1 p-1">
-        <i class="fa fa-2x purple-icon" [ngClass]="{'fa-heart': this.addedToPersonalIDs.includes(sign.id), 'fa-heart-o': !this.addedToPersonalIDs.includes(sign.id)}" (click)="addToPersonal(sign)"></i>
+        <i class="fa fa-2x purple-icon" [ngClass]="{'fa-heart': sign.isPersonal, 'fa-heart-o': !sign.isPersonal}" (click)="addToPersonal(sign)"></i>
       </div></div>
     </div>
   </div>

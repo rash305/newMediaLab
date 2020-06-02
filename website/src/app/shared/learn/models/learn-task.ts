@@ -1,4 +1,5 @@
 import {LearnSubTask} from './learn-sub-task';
+import {SignDetailsModel} from '../../signs/models/sign-details.model';
 
 export class LearnTask {
   currentLearnTaskIndex = 0;
@@ -16,7 +17,7 @@ export class LearnTask {
     return this.learnTasks[this.currentLearnTaskIndex];
   }
 
-  getLearnedSigns() {
+  getLearnedSigns(): SignDetailsModel[] {
     const learnedSigns = [];
     for (const learnSubTask of this.learnTasks) {
       learnedSigns.push(learnSubTask.question);

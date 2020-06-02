@@ -3,6 +3,7 @@ import {SignModel} from '../../../../shared/signs/models/sign.model';
 import {SignTemplateService} from '../../../../shared/signs/services/sign-template.service';
 import {Router} from '@angular/router';
 import {SignDetailsService} from '../../../../shared/signs/services/sign-details.service';
+import {SignDetailsModel} from '../../../../shared/signs/models/sign-details.model';
 
 @Component({
   selector: 'app-quiz-results',
@@ -13,7 +14,7 @@ export class QuizResultsComponent implements OnInit {
 
   @Output() messageQuizStatus = new EventEmitter<string>();
 
-  @Input() learnedSigns: SignModel[];
+  @Input() learnedSigns: SignDetailsModel[];
   addedToPersonalIDs: string[] = [];
 
   constructor(private signDetailsService: SignDetailsService) {
@@ -22,17 +23,12 @@ export class QuizResultsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addToPersonal(sign: SignModel) {
-    if (this.addedToPersonalIDs.includes(sign.id)) {
-      this.addedToPersonalIDs = this.addedToPersonalIDs.filter(s => s !== sign.id);
+  addToPersonal(sign: SignDetailsModel) {
+    if (sign.isPersonal) {
+      this.signDetailsService.unFavorite(sign).subscribe();
     } else {
-      this.addedToPersonalIDs.push(sign.id);
+      this.signDetailsService.favorite(sign).subscribe();
     }
-    // this.signDetailsService.favorite(sign).subscribe();
+    sign.isPersonal = !sign.isPersonal;
   }
-
-  removeFromPersonal(sign: SignModel) {
-    // this.isAddedToPersonal = !this.isAddedToPersonal;
-  }
-
 }
