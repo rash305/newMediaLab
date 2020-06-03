@@ -16,6 +16,7 @@ public class DocSign {
     private DocCategory category;
     private String image;
     private String video;
+    private String creator_id;
 
     public DocSign() {
     }
@@ -62,5 +63,13 @@ public class DocSign {
 
     public void setVideo(String video) {
         this.video = video;
+    }
+
+    public String getCreator_id() {
+        return creator_id;
+    }
+
+    public void setCreator_id(String creator_id) {
+        this.creator_id = creator_id;
     }
 }

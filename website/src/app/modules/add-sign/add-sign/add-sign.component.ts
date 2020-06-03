@@ -63,9 +63,6 @@ export class AddSignComponent implements OnInit {
       // Go to confirmation screen for user to confirm sign
       this.sign = signDetails;
       this.showConfirmationScreen = true;
-
-      // Go to categories page (and be logged in)
-      // this.router.navigate(['/personal']);
     }
   }
 
@@ -106,6 +103,8 @@ export class AddSignComponent implements OnInit {
         // Failed to add sign
         // Toaster message is enough for now
       } else {
+        // Make uploaded sign favorite
+        this.signDetailsService.favorite(sign).subscribe();
         // Add signs to web sign service
         this.signService.AddSignManually(sign);
         this.AddSignMinimalizeEvent.emit(true);

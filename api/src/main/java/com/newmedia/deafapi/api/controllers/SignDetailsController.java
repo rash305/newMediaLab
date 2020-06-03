@@ -54,6 +54,8 @@ public class SignDetailsController {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign is given.");
         }
+        String creator_id = GetAuthorizedUser();
+        signDetails.setCreator_id(creator_id);
 
         signDetails = ISignService.createSignDetails(signDetails);
         return ObjectMapperUtils.map(signDetails, SignDetailsDto.class);

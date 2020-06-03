@@ -8,13 +8,17 @@ public class SignDetails {
     private String image;
     private String video;
     private boolean isPersonal;
+    private String creator_id;
 
-    public SignDetails(String id, String title, Category category, String image, String video) {
+    public SignDetails(String id, String title, Category category,
+                       String image, String video, boolean isPersonal, String creator_id) {
         this.id = id;
         this.title = title;
         this.category = category;
         this.image = image;
         this.video = video;
+        this.isPersonal = isPersonal;
+        this.creator_id = creator_id;
     }
 
     public SignDetails() {
@@ -70,5 +74,13 @@ public class SignDetails {
 
     public void setIsPersonal(boolean isPersonal) {
         this.isPersonal = isPersonal;
+    }
+
+    public String getCreator_id() {
+        return creator_id;
+    }
+
+    public void setCreator_id(String creator_id) {
+        this.creator_id = creator_id;
     }
 }
