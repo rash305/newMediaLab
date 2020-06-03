@@ -41,7 +41,7 @@ export class QuizComponent implements OnInit {
       correctAnswer.title = 'test';
       correctAnswer.image = 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg';
       correctAnswer.id = '1';
-      correctAnswer.video = 'Pretty video';
+      correctAnswer.videos = [];
 
       const option1 = new SignModel();
       option1.title = 'Kip';

@@ -71,5 +71,15 @@ export class SignTemplateService {
     // Notify how many signs are added
     return addedSigns;
   }
+
+  public AddSignManually(sign: SignModel) {
+    const personalSigns = this._personalSigns.getValue();
+    personalSigns.push(sign);
+    this._personalSigns.next(personalSigns);
+
+    const publicSigns = this._publicSigns.getValue();
+    personalSigns.push(sign);
+    this._publicSigns.next(publicSigns);
+  }
 }
 

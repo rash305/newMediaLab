@@ -18,6 +18,7 @@ export class AddSignConfirmComponent implements OnInit {
   }
 
   goBack() {
+    console.log(this.sign);
     this.ConfirmAddSignEvent.emit('notConfirmed');
   }
 

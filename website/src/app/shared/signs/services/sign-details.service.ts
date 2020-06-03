@@ -42,12 +42,9 @@ export class SignDetailsService {
   }
 
   /** Add sign to database */
-  addSign(signDetails: SignDetailsModel): Observable<string> {
+  addSign(signDetails: SignDetailsModel): Observable<SignDetailsModel> {
     return this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
-      .pipe(map(x => {
-          return true;
-        })
-      )
+      .pipe(map(res => new SignDetailsModel().deserialize(res)))
       .pipe(
         catchError(this.handleError('createSignDetails', null))
       );
