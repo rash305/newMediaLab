@@ -58,7 +58,7 @@ public class CrudSignService implements ISignService {
 
     @Override
     public List<Sign> getSearchedSigns(String searchTerm) {
-        List<DocSign> s = signISignRepository.findByTitle(searchTerm);
+        List<DocSign> s = signISignRepository.findByTitleContaining(searchTerm);
         return ObjectMapperUtils.mapAll(s, Sign.class);
     }
 

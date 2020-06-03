@@ -6,6 +6,7 @@ import {SignTemplateService} from '../../services/sign-template.service';
 import {AppComponent} from '../../../../app.component';
 import {ISignTemplate} from '../../models/isign-template';
 import {CategoryModel} from '../../models/category.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-signs',
@@ -20,12 +21,15 @@ export class SignsComponent implements OnInit {
   currentSignCategoryTitle: string;
   noMoreSignsAvailable = false;
   signs: SignModel[];
+  signSubscription: Subscription;
 
   searchTerm: string;
+
   @Input()
   public set setSearchTerm(searchTerm: string) {
     this.searchTerm = searchTerm;
-    this.ngOnInit();
+    this.signSubscription = this.subscribeSigns();
+
   }
 
   // ActivatedRoute module is needed to retrieve the URL parameter
@@ -35,28 +39,33 @@ export class SignsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.currentSignCategory);
-    // Retrieve the parameter value of the parameter defined in the route in app.module.ts
-    // Make sure the sign list gets updated if the available signs change
-    // Todo: process the list mutations only instead of assigning a new list
+    this.signSubscription = this.subscribeSigns();
+    this.getSigns();
+
+  }
+
+  private subscribeSigns(): Subscription {
+    if (this.signSubscription) {
+      this.signSubscription.unsubscribe();
+    }
+
     if (this.isPersonalDictionary) {
-      this.signService.personalSigns.subscribe(s => {
+      return this.signService.personalSigns.subscribe(s => {
         this.signs = s.filter(x => x.category.id === this.currentSignCategory);
-      });
-    } else if (this.searchTerm) {
-      // this.signs = this.signService.searchSigns(this.searchTerm);
-      this.signService.publicSigns.subscribe(s => {
-        this.signs = s.filter(x => x.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
-        if (this.currentSignCategory) {
-          this.signs = this.signs.filter(x => x.category.id === this.currentSignCategory);
-        }
       });
     } else {
-      this.signService.publicSigns.subscribe(s => {
-        this.signs = s.filter(x => x.category.id === this.currentSignCategory);
+      return this.signService.publicSigns.subscribe(s => {
+        if (this.searchTerm) {
+          console.log('test search');
+          this.signs = s.filter(x => x.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+          if (this.currentSignCategory) {
+            this.signs = this.signs.filter(x => x.category.id === this.currentSignCategory);
+          }
+        } else {
+          this.signs = s.filter(x => x.category.id === this.currentSignCategory);
+        }
       });
     }
-    this.getSigns();
   }
 
   getSigns(): void {

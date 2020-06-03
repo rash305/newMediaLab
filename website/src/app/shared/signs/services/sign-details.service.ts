@@ -7,6 +7,7 @@ import {environment} from '../../../../environments/environment';
 import {SignDetailsModel} from '../models/sign-details.model';
 import {Observable, of} from 'rxjs';
 import {Account} from '../../account/models/account';
+import {SignModel} from '../models/sign.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +43,9 @@ export class SignDetailsService {
   }
 
   /** Add sign to database */
-  addSign(signDetails: SignDetailsModel): Observable<string> {
+  addSign(signDetails: SignDetailsModel): Observable<SignModel> {
     return this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
-      .pipe(map(x => {
-          return true;
-        })
-      )
+      .pipe(map(res => new SignDetailsModel().deserialize(res)))
       .pipe(
         catchError(this.handleError('createSignDetails', null))
       );

@@ -58,7 +58,13 @@ export class SignTemplateService {
 
   signsResult(result: any, personal = false): number {
     let addedSigns = 0;
-    const signList = this._personalSigns.getValue();
+    let signList;
+    if (personal) {
+      // Get signList as current list of signs
+      signList = this._personalSigns.getValue();
+    } else {
+      signList = this._publicSigns.getValue();
+    }
     const retrievedSigns = result as SignModel[];
     // Create list with all retrieved signs
     // This approach is not thread safe unfortunately, I should investigate if this is a problem in javascript..
@@ -79,6 +85,16 @@ export class SignTemplateService {
 
     // Notify how many signs are added
     return addedSigns;
+  }
+
+  AddSignManually(sign: SignModel) {
+    const personalSigns = this._personalSigns.getValue();
+    personalSigns.push(sign);
+    this._personalSigns.next(personalSigns);
+
+    const publicSigns = this._publicSigns.getValue();
+    publicSigns.push(sign);
+    this._publicSigns.next(publicSigns);
   }
 }
 

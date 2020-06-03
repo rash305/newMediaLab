@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import {CategoryModel} from '../../../shared/signs/models/category.model';
 import {CategoriesService} from '../../../shared/signs/services/categories.service';
 import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
-import {AccountService} from '../../../shared/account/services/account.service';
 import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
+import {SignTemplateService} from '../../../shared/signs/services/sign-template.service';
 
 @Component({
   selector: 'app-add-sign',
@@ -33,7 +33,8 @@ export class AddSignComponent implements OnInit {
 
   constructor(private router: Router,
               private categoriesService: CategoriesService,
-              private signDetailsService: SignDetailsService) {
+              private signDetailsService: SignDetailsService,
+              private signService: SignTemplateService) {
   }
 
   ngOnInit(): void {
@@ -99,12 +100,14 @@ export class AddSignComponent implements OnInit {
   }
 
   private addSignToApp(signDetails: SignDetailsModel): void {
-    // Add sign to app
+    // Add sign to api
     this.signDetailsService.addSign(signDetails).subscribe(sign => {
       if (sign === null) {
         // Failed to add sign
         // Toaster message is enough for now
       } else {
+        // Add signs to web sign service
+        this.signService.AddSignManually(sign);
         this.AddSignMinimalizeEvent.emit(true);
       }
     });
