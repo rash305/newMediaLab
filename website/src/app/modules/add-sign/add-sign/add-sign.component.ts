@@ -21,7 +21,7 @@ export class AddSignComponent implements OnInit {
   categoryId = '';
   categoryError: string;
 
-  video: VideoModel;
+  video: FileItem;
   videoError: string;
 
   private requiredError = ' moet worden ingevuld';
@@ -43,15 +43,6 @@ export class AddSignComponent implements OnInit {
     this.getCategories();
   }
 
-  receiveVideo(videoFile: FileItem) {
-    const file = videoFile?.file?.rawFile;
-    const videoModel = new VideoModel();
-    videoModel.videoFile = file;
-
-    this.video = videoModel;
-  }
-
-
   getCategories(): void {
     this.categoriesService.getCategories()
       .subscribe(categories => {
@@ -69,7 +60,7 @@ export class AddSignComponent implements OnInit {
       // Send object to backend API
       const signDetails = new SignDetailsModel().deserialize({
         title: this.meaning, categoryId: this.categoryId,
-        category: categoryModel, image: 'https://picsum.photos/200/200', videos: [this.video]
+        category: categoryModel, image: 'https://picsum.photos/200/200'
       });
       // Go to confirmation screen for user to confirm sign
       this.sign = signDetails;
@@ -109,7 +100,7 @@ export class AddSignComponent implements OnInit {
 
   private addSignToApp(signDetails: SignDetailsModel): void {
     // Add sign to api
-    this.signDetailsService.addSign(signDetails).subscribe(sign => {
+    this.signDetailsService.addSign(signDetails, this.video).subscribe(sign => {
       if (sign === null) {
         // Failed to add sign
         // Toaster message is enough for now
