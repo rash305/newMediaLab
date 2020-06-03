@@ -75,6 +75,9 @@ export class SignTemplateService {
       }
     });
 
+    // Sort signs alphabetically
+    signList.sort((a, b) => a.title.localeCompare(b.title));
+
     if (personal) {
       // Set signList as current list of signs
       this._personalSigns.next(signList);
@@ -90,10 +93,14 @@ export class SignTemplateService {
   AddSignManually(sign: SignModel) {
     const personalSigns = this._personalSigns.getValue();
     personalSigns.push(sign);
+    // Sort signs alphabetically
+    personalSigns.sort((a, b) => a.title.localeCompare(b.title));
     this._personalSigns.next(personalSigns);
 
     const publicSigns = this._publicSigns.getValue();
     publicSigns.push(sign);
+    // Sort signs alphabetically
+    publicSigns.sort((a, b) => a.title.localeCompare(b.title));
     this._publicSigns.next(publicSigns);
   }
 }
