@@ -23,3 +23,8 @@ select[type=text] {
 .row {
   margin: 8px 0px 0px;
 }
+
+video{
+  width: 100%;
+  height: 100%;
+}

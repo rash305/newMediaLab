@@ -5,7 +5,7 @@
   <div class=" purple-border middle-container d-flex flex-column">
     <div class="col-12 input-list">
       <i class="fa fa-user-circle"></i>
-      <input type="text" placeholder="Gebruikersnaam of e-mail" name="uname" required [(ngModel)]="username">
+      <input type="text" placeholder="Gebruikersnaam of e-mail" name="uname" required [(ngModel)]="username" (click)="logIn()">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!usernameError">
           {{usernameError}}
@@ -14,7 +14,7 @@
 
 
       <i class="fa fa-unlock-alt"></i>
-      <input type="password" placeholder="Wachtwoord" name="pw" required [(ngModel)]="password">
+      <input type="password" placeholder="Wachtwoord" name="pw" required [(ngModel)]="password" (click)="logIn()">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!passwordError">
           {{passwordError}}

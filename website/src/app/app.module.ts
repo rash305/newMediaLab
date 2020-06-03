@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {FileSelectDirective, FileUploadModule} from 'ng2-file-upload';
 
 import {AppComponent} from './app.component';
 import {CategoriesComponent} from './shared/signs/components/category/categories.component';
@@ -40,6 +41,8 @@ import { DeletePopupComponent } from './modules/dictionary/personal-dictionary/d
 import { ConfirmChangeComponent } from './modules/settings/account/change/confirm-change/confirm-change.component';
 import { ForgotPwConfirmComponent } from './modules/settings/account/login/forgot-pw-confirm/forgot-pw-confirm.component';
 import { AddSignConfirmComponent } from './modules/add-sign/add-sign/add-sign-confirm/add-sign-confirm.component';
+import { VideoUploadComponent } from './shared/general/component/video-upload/video-upload.component';
+import { DomSanitizerPipe } from './common/html/pipes/dom-sanitizer.pipe';
 
 const appRoutes: Routes = [
   {
@@ -121,10 +124,13 @@ const appRoutes: Routes = [
     DeletePopupComponent,
     ConfirmChangeComponent,
     ForgotPwConfirmComponent,
-    AddSignConfirmComponent
+    AddSignConfirmComponent,
+    VideoUploadComponent,
+    DomSanitizerPipe,
   ],
   imports: [
     BrowserModule,
+    FileUploadModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
