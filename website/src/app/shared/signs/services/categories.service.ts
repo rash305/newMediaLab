@@ -15,26 +15,29 @@ export class CategoriesService {
   private categoryUrl = environment.baseUrl + '/categories';  // URL to web api
 
   constructor(private http: HttpClient,
-              httpErrorHandler: HttpErrorHandler,
-  ) {
+              httpErrorHandler: HttpErrorHandler) {
     this.handleError = httpErrorHandler.createHandleError('CategoriesService');
   }
 
-  /** GET heroes from the server */
+  /** GET categories from the server */
   getCategories(): Observable<CategoryModel[]> {
     return this.http.get<any[]>(this.categoryUrl)
-      .pipe(map(res => res.map(categoryData => new CategoryModel().deserialize(categoryData))))
+      .pipe(map(res => res.map(categoryData => new CategoryModel()
+        .deserialize(categoryData))
+        .sort((a, b) => a.title.localeCompare(b.title))))
       .pipe(
         catchError(this.handleError('getCategories', null))
       );
   }
 
-  /** GET heroes from the server */
+  /** GET personal categories from the server */
   getPersonalCategories(): Observable<CategoryModel[]> {
     // Todo: Add user guid in the body to filter categories
     // Todo: User guid might be added by a guard or something -> investigate later
     return this.http.get<CategoryModel[]>(this.categoryUrl, {params: new HttpParams().set('personal', 'true')})
-      .pipe(map(res => res.map(categoryData => new CategoryModel().deserialize(categoryData))))
+      .pipe(map(res => res.map(categoryData => new CategoryModel()
+        .deserialize(categoryData))
+        .sort((a, b) => a.title.localeCompare(b.title))))
       .pipe(
         catchError(this.handleError('getPersonalCategories', null))
       );

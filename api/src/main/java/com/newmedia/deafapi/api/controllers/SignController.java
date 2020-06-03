@@ -53,6 +53,16 @@ public class SignController {
         return signDtos;
     }
 
+    @GetMapping("/api/signs/search")
+    public List<SignDto> getSearchedSignList(@RequestParam( value = "searchTerm") String searchTerm) {
+        List<Sign> signs;
+
+        signs = ISignService.getSearchedSigns(searchTerm);
+
+        List<SignDto> signDtos = ObjectMapperUtils.mapAll(signs, SignDto.class);
+        return signDtos;
+    }
+
 
     @PostMapping("/api/signs")
     public SignDto createSign(@RequestBody SignDto sign) {

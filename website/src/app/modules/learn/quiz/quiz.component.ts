@@ -103,7 +103,7 @@ export class QuizComponent implements OnInit {
     return this.quizStatus === status;
   }
 
-  getLearnedSigns(): SignModel[] {
+  getLearnedSigns(): SignDetailsModel[] {
     return this.learnTask.getLearnedSigns();
   }
 }

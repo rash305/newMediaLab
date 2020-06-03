@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SignDetailsModel} from '../../../../shared/signs/models/sign-details.model';
+import {SignDetailsService} from '../../../../shared/signs/services/sign-details.service';
 
 @Component({
   selector: 'app-delete-popup',
@@ -12,7 +13,7 @@ export class DeletePopupComponent implements OnInit {
 
   @Input() sign: SignDetailsModel;
 
-  constructor() { }
+  constructor(private signDetailsService: SignDetailsService) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +24,9 @@ export class DeletePopupComponent implements OnInit {
 
   deleteSign() {
     // delete sign from favotieten
-
+    this.sign.nrOfPersonal -= 1;
+    this.sign.isPersonal = !this.sign.isPersonal;
+    this.signDetailsService.unFavorite(this.sign).subscribe();
     this.DeletePopupMinimalizeEvent.emit(true);
   }
 }

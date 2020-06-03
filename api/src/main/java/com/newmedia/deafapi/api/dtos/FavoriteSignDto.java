@@ -1,17 +1,13 @@
 package com.newmedia.deafapi.api.dtos;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-
 import java.io.Serializable;
 
 public class FavoriteSignDto implements Serializable {
 
     private String id;
-    private String SignId;
-    private String CategoryId;
-    private String PersonId;
+    private String signId;
+    private String categoryId;
+    private String personId;
 
     public FavoriteSignDto() {
     }
@@ -25,26 +21,26 @@ public class FavoriteSignDto implements Serializable {
     }
 
     public String getSignId() {
-        return SignId;
+        return signId;
     }
 
     public void setSignId(String signId) {
-        SignId = signId;
+        this.signId = signId;
     }
 
     public String getCategoryId() {
-        return CategoryId;
+        return categoryId;
     }
 
     public void setCategoryId(String categoryId) {
-        CategoryId = categoryId;
+        this.categoryId = categoryId;
     }
 
     public String getPersonId() {
-        return PersonId;
+        return personId;
     }
 
     public void setPersonId(String personId) {
-        PersonId = personId;
+        this.personId = personId;
     }
 }

@@ -56,6 +56,12 @@ public class CrudSignService implements ISignService {
         return ObjectMapperUtils.mapAll(docCategories, Sign.class);
     }
 
+    @Override
+    public List<Sign> getSearchedSigns(String searchTerm) {
+        List<DocSign> s = signISignRepository.findByTitleContaining(searchTerm);
+        return ObjectMapperUtils.mapAll(s, Sign.class);
+    }
+
     private List<String> getPersonalSignIds(String userid, String categoryId) {
         // Create terms how to match the example with the objects in database
         ExampleMatcher modelMatcher = ExampleMatcher.matching()
@@ -92,15 +98,6 @@ public class CrudSignService implements ISignService {
     @Override
     public void updateSign(Sign sign) {
 
-    }
-
-    @Override
-    public void favoriteSign(String signId, String CategoryId, String userId) {
-        DocFavoriteSign probe = new DocFavoriteSign();
-        probe.setSignId(signId);
-        probe.setCategoryId(CategoryId);
-        probe.setPersonId(userId);
-        favoriteSignRepository.save(probe);
     }
 
     @Override

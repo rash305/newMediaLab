@@ -1,9 +1,8 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {CategoryModel} from '../../../shared/signs/models/category.model';
 import {CategoriesService} from '../../../shared/signs/services/categories.service';
 import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
-import {AccountService} from '../../../shared/account/services/account.service';
 import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
 import {SignTemplateService} from '../../../shared/signs/services/sign-template.service';
 import {SignModel} from '../../../shared/signs/models/sign.model';
@@ -75,9 +74,6 @@ export class AddSignComponent implements OnInit {
       // Go to confirmation screen for user to confirm sign
       this.sign = signDetails;
       this.showConfirmationScreen = true;
-
-      // Go to categories page (and be logged in)
-      // this.router.navigate(['/personal']);
     }
   }
 
@@ -112,12 +108,15 @@ export class AddSignComponent implements OnInit {
   }
 
   private addSignToApp(signDetails: SignDetailsModel): void {
-    // Add sign to app
+    // Add sign to api
     this.signDetailsService.addSign(signDetails).subscribe(sign => {
       if (sign === null) {
         // Failed to add sign
         // Toaster message is enough for now
       } else {
+        // Make uploaded sign favorite
+        this.signDetailsService.favorite(sign).subscribe();
+        // Add signs to web sign service
         this.signService.AddSignManually(sign);
         this.AddSignMinimalizeEvent.emit(true);
       }

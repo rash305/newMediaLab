@@ -8,6 +8,8 @@ import {VideoModel} from './video.model';
 export class SignDetailsModel extends SignModel {
   videos: VideoModel[] = [];
   image: string;
+  isPersonal: boolean;
+  nrOfPersonal: number;
 
   constructor() {
     super();

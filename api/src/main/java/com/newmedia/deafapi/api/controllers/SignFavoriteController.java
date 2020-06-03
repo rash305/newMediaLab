@@ -1,6 +1,7 @@
 package com.newmedia.deafapi.api.controllers;
 
 import com.newmedia.deafapi.api.dtos.SignDto;
+import com.newmedia.deafapi.api.services.Interfaces.IFavoritesService;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ public class SignFavoriteController {
     // Spring boot dependency injection
     //https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
     @Autowired
-    private ISignService ISignService;
+    private IFavoritesService IFavoritesService;
 
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
@@ -33,9 +34,22 @@ public class SignFavoriteController {
                     HttpStatus.NOT_FOUND, "No valid sign is given.");
         }
 
-        ISignService.favoriteSign(sign.getId(), sign.getCategory().getId(), UserId);
+        IFavoritesService.favoriteSign(sign.getId(), sign.getCategory().getId(), UserId);
+    }
 
+    @PostMapping("/api/signs/unfavorite")
+    public void unFavoriteSign(@RequestBody SignDto sign) {
+        String UserId = GetAuthorizedUser();
+        if (UserId == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "No valid user token is given.");
+        }
+        if (sign == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "No valid sign is given.");
+        }
 
+        IFavoritesService.unFavoriteSign(sign.getId(), UserId);
     }
 
     private String GetAuthorizedUser() {

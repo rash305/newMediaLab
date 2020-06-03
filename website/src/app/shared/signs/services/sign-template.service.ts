@@ -47,9 +47,24 @@ export class SignTemplateService {
     return promise;
   }
 
+  searchSigns(searchTerm: string): SignModel[] {
+    let searchedSigns;
+    this.signBackendService.getSearchedSigns(searchTerm)
+      .subscribe(searchResults => {
+        searchedSigns = searchResults;
+      });
+    return searchedSigns;
+  }
+
   signsResult(result: any, personal = false): number {
     let addedSigns = 0;
-    const signList = this._personalSigns.getValue();
+    let signList;
+    if (personal) {
+      // Get signList as current list of signs
+      signList = this._personalSigns.getValue();
+    } else {
+      signList = this._publicSigns.getValue();
+    }
     const retrievedSigns = result as SignModel[];
     // Create list with all retrieved signs
     // This approach is not thread safe unfortunately, I should investigate if this is a problem in javascript..
@@ -59,6 +74,9 @@ export class SignTemplateService {
         addedSigns++;
       }
     });
+
+    // Sort signs alphabetically
+    signList.sort((a, b) => a.title.localeCompare(b.title));
 
     if (personal) {
       // Set signList as current list of signs
@@ -72,13 +90,17 @@ export class SignTemplateService {
     return addedSigns;
   }
 
-  public AddSignManually(sign: SignModel) {
+  AddSignManually(sign: SignModel) {
     const personalSigns = this._personalSigns.getValue();
     personalSigns.push(sign);
+    // Sort signs alphabetically
+    personalSigns.sort((a, b) => a.title.localeCompare(b.title));
     this._personalSigns.next(personalSigns);
 
     const publicSigns = this._publicSigns.getValue();
-    personalSigns.push(sign);
+    publicSigns.push(sign);
+    // Sort signs alphabetically
+    publicSigns.sort((a, b) => a.title.localeCompare(b.title));
     this._publicSigns.next(publicSigns);
   }
 }

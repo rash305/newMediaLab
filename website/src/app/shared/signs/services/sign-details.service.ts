@@ -7,6 +7,7 @@ import {environment} from '../../../../environments/environment';
 import {SignDetailsModel} from '../models/sign-details.model';
 import {Observable, of} from 'rxjs';
 import {Account} from '../../account/models/account';
+import {SignModel} from '../models/sign.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +58,18 @@ export class SignDetailsService {
         })
       )
       .pipe(
-        catchError(this.handleError('createSignDetails', null))
+        catchError(this.handleError('favoriteSign', null))
+      );
+  }
+
+  unFavorite(sign: SignDetailsModel): Observable<boolean> {
+    return this.http.post<SignDetailsModel>(this.signUrl + '/unfavorite', sign)
+      .pipe(map(x => {
+          return true;
+        })
+      )
+      .pipe(
+        catchError(this.handleError('unFavoriteSign', null))
       );
   }
 }
