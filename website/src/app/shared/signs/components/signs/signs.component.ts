@@ -56,7 +56,6 @@ export class SignsComponent implements OnInit {
     } else {
       return this.signService.publicSigns.subscribe(s => {
         if (this.searchTerm) {
-          console.log('test search');
           this.signs = s.filter(x => x.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
           if (this.currentSignCategory) {
             this.signs = this.signs.filter(x => x.category.id === this.currentSignCategory);
