@@ -35,13 +35,13 @@
             <i class="fa fa-video-camera"></i>
             <div class="col" [hidden]="video">
               Video toevoegen:
-              <app-video-upload (videoFileEmitter)="receiveVideo($event)"></app-video-upload>
+              <app-video-upload (videoFileEmitter)="video = $event"></app-video-upload>
             </div>
-            <div class="col-8" *ngIf="video?.videoFile" style="height: 125px; background-color: #8769e0">
-              <video controls [src]="video.videoFile | domSanitizer: 'VideoSource'"></video>
+            <div class="col-8 p-0" *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #8769e0">
+              <video [src]="video?.file?.rawFile | domSanitizer: 'VideoSource'"></video>
             </div>
             <div class="col-1 float-left" [hidden]="!video" style="padding-left: 0">
-              <app-video-upload (videoFileEmitter)="receiveVideo($event)"></app-video-upload>
+              <app-video-upload (videoFileEmitter)="video = $event"></app-video-upload>
             </div>
           </div>
           <div class="alert-container">
@@ -64,4 +64,5 @@
 </div>
 <app-add-sign-confirm *ngIf="this.showConfirmationScreen"
                       [sign]="this.sign"
+                      [video]="video"
                       (ConfirmAddSignEvent)="this.confirm($event)"></app-add-sign-confirm>

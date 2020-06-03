@@ -1,27 +1,16 @@
 package com.newmedia.deafapi.api.dtos;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SignDetailsDto implements Serializable {
     private String id;
     private String title;
     private CategoryDto category;
     private String image;
-    private String video;
+    private List<VideoDto> videos;
     private boolean isPersonal;
     private int nrOfPersonal;
-
-    public SignDetailsDto(String id, String title, CategoryDto category,
-                          String image, String video,
-                          boolean isPersonal, int nrOfPersonal) {
-        this.id = id;
-        this.title = title;
-        this.category = category;
-        this.image = image;
-        this.video = video;
-        this.isPersonal = isPersonal;
-        this.nrOfPersonal = nrOfPersonal;
-    }
 
     public SignDetailsDto() {
     }
@@ -50,12 +39,20 @@ public class SignDetailsDto implements Serializable {
         this.image = image;
     }
 
-    public String getVideo() {
-        return video;
+    public List<VideoDto> getVideos() {
+        return videos;
     }
 
-    public void setVideo(String video) {
-        this.video = video;
+    public void setVideos(List<VideoDto> videos) {
+        this.videos = videos;
+    }
+
+    public boolean isPersonal() {
+        return isPersonal;
+    }
+
+    public void setPersonal(boolean personal) {
+        isPersonal = personal;
     }
 
     public CategoryDto getCategory() {

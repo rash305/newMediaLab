@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SignDetailsModel} from '../../../../shared/signs/models/sign-details.model';
+import {FileItem} from 'ng2-file-upload';
 
 @Component({
   selector: 'app-add-sign-confirm',
@@ -11,6 +12,7 @@ export class AddSignConfirmComponent implements OnInit {
   @Output() ConfirmAddSignEvent = new EventEmitter();
 
   @Input() sign: SignDetailsModel;
+  @Input() video: FileItem;
 
   constructor() { }
 
