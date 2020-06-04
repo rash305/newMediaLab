@@ -2,7 +2,7 @@
   <div class="col-12" routerLink="/learn" routerLinkActive="active">
     <div class="col-4">
       <i class="fa fa-arrow-circle-left purple-icon"></i>
-      <span> Terug</span>
+      <span> Terug</span>0
     </div>
   </div>
 </div>
@@ -12,8 +12,8 @@
 </div>
 <div class="row">
   <div class="col-12" style="text-align: center">
-      <i class="fa fa-paw"></i>
-      <span><b> Dieren</b></span>
+      <img src="{{category?.image}}" alt="{{category?.title}}" style="height: 15px">
+      <span>&nbsp;<b> {{category?.title}} </b></span>
   </div>
 </div>
-<app-sign-details [currentSignId]="currentSignId" ></app-sign-details>
+<app-sign-details [currentSignId]="signId" ></app-sign-details>
