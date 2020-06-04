@@ -31,13 +31,13 @@
             </div>
           </div>
 
-          <div class="row no-gutters">
+          <div class="row no-gutters mt-2">
             <div class="col-1"><i class="fa fa-video-camera"></i></div>
             <div class="col" [hidden]="video">
-              Video toevoegen:
+              <span style="line-height: 2em;">Video toevoegen:</span>
               <app-video-upload (videoFileEmitter)="video = $event"></app-video-upload>
             </div>
-            <div class="col-8 p-0" *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #8769e0">
+            <div class="col-8 " *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #8769e0">
               <video [src]="video?.file?.rawFile | domSanitizer: 'VideoSource'"></video>
             </div>
             <div class="col-3" [hidden]="!video">
