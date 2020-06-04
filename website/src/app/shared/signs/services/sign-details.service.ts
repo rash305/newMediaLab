@@ -9,6 +9,7 @@ import {Observable, of} from 'rxjs';
 import {Account} from '../../account/models/account';
 import {SignModel} from '../models/sign.model';
 import {FileItem, FileUploader} from 'ng2-file-upload';
+import {VideoModel} from '../models/video.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class SignDetailsService {
 
   private handleError: HandleError;
   signDetailsUrl = environment.baseUrl + '/signdetails/';  // URL to web api
-  signVideoUrl = environment.baseUrl + '/videos/';  // URL to web api
+  signVideoUrl = environment.baseUrl + '/videos';  // URL to web api
   signUrl = environment.baseUrl + '/signs';  // URL to web api
 
   constructor(private http: HttpClient,
@@ -37,39 +38,44 @@ export class SignDetailsService {
 
   /** Add sign to database */
   addSign(signDetails: SignDetailsModel, signVideo: FileItem): Observable<SignDetailsModel> {
-
-
     return new Observable(observer => {
-      const uploader = new FileUploader({
-        url: this.signVideoUrl,
-        disableMultipart: false,
-        autoUpload: false,
-        method: 'post',
-        itemAlias: 'attachment'
-      });
+      const uploader = this.getFileUploader();
       uploader.addToQueue([signVideo._file]);
       uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
         // Check for true result
         if (status === 0) {
           observer.error();
         } else {
+          // Insert video url
+          signDetails.videos = [new VideoModel(response)];
           this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
             .pipe(map(res => {
               observer.next(new SignDetailsModel().deserialize(res));
             }))
             .pipe(
               catchError(this.handleError('createSignDetails', null))
-            );
+            ).subscribe(x => observer.complete());
         }
       };
       uploader.uploadAll();
     });
-
-
   }
 
-  private uploadVideo(signVideo: FileItem, response: any, status: any, headers: any) {
+  private getFileUploader(): FileUploader {
+    const currentJWT = localStorage.getItem('currentUserBearer');
+    const uploader = new FileUploader({
+      url: this.signVideoUrl,
+      disableMultipart: false,
+      autoUpload: false,
+      method: 'post',
+      itemAlias: 'file',
+      authToken: currentJWT
+    });
+    uploader.onBeforeUploadItem = (item) => {
+      item.withCredentials = false;
+    };
 
+    return uploader;
   }
 
   favorite(sign: SignDetailsModel): Observable<boolean> {
