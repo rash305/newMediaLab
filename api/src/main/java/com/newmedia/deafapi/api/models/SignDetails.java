@@ -1,20 +1,16 @@
 package com.newmedia.deafapi.api.models;
 
+import java.util.List;
+
 public class SignDetails {
 
     private String id;
     private String title;
     private Category category;
     private String image;
-    private String video;
-
-    public SignDetails(String id, String title, Category category, String image, String video) {
-        this.id = id;
-        this.title = title;
-        this.category = category;
-        this.image = image;
-        this.video = video;
-    }
+    private List<VideoReference> videos;
+    private boolean isPersonal;
+    private String creator_id;
 
     public SignDetails() {
     }
@@ -55,11 +51,35 @@ public class SignDetails {
         this.image = image;
     }
 
-    public String getVideo() {
-        return video;
+    public List<VideoReference> getVideos() {
+        return videos;
     }
 
-    public void setVideo(String video) {
-        this.video = video;
+    public void setVideos(List<VideoReference> videos) {
+        this.videos = videos;
+    }
+
+    public boolean isPersonal() {
+        return isPersonal;
+    }
+
+    public void setPersonal(boolean personal) {
+        isPersonal = personal;
+    }
+
+    public boolean getIsPersonal() {
+        return isPersonal;
+    }
+
+    public void setIsPersonal(boolean isPersonal) {
+        this.isPersonal = isPersonal;
+    }
+
+    public String getCreator_id() {
+        return creator_id;
+    }
+
+    public void setCreator_id(String creator_id) {
+        this.creator_id = creator_id;
     }
 }

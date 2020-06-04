@@ -16,6 +16,9 @@
                         (messageSettingsStatus)="receiveSettingStatus($event)"></app-create-account>
     <app-change-account [hidden]="!show('change')"
                         (messageSettingsStatus)="receiveSettingStatus($event)"></app-change-account>
+      <app-confirm-change [hidden]="!show('confirmChange')"
+                          (messageSettingsStatus)="receiveSettingStatus($event)"></app-confirm-change>
+
     <app-logout-account [hidden]="!show('logout')"
                         (messageSettingsStatus)="receiveSettingStatus($event)"></app-logout-account>
 
@@ -26,6 +29,8 @@
                         (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-code>
     <app-forgot-pw-new [hidden]="!show('forgotPwNew')"
                        (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-new>
+    <app-forgot-pw-confirm [hidden]="!show('forgotPwConfirm')"
+                       (messageSettingsStatus)="receiveSettingStatus($event)"></app-forgot-pw-confirm>
   </div>
 </div>
 

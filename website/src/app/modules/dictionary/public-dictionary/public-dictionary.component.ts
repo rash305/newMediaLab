@@ -21,6 +21,9 @@ export class PublicDictionaryComponent implements OnInit {
   signType = 'sign';
   signDetailsType = 'sign-details';
 
+  searchTerm: string;
+  private searchByCategory: boolean;
+
   constructor(private router: Router, private route: ActivatedRoute) {
 
   }
@@ -35,6 +38,8 @@ export class PublicDictionaryComponent implements OnInit {
       this.updateUrl(object.id, this.signType);
       this.childType = this.signType;
       this.childId = object.id;
+      this.navigateBackModel = object;
+      this.searchTerm = '';
     }
 
     if (object instanceof SignModel) {
@@ -42,6 +47,7 @@ export class PublicDictionaryComponent implements OnInit {
       this.childType = this.signDetailsType;
       this.childId = object.id;
     }
+    // this.searchTerm = '';
   }
 
   private updateUrl(id: string, type: string) {
@@ -68,10 +74,28 @@ export class PublicDictionaryComponent implements OnInit {
         this.updateUrl('', this.categoryType);
         break;
       case this.signDetailsType:
-        this.childId = this.navigateBackModel.id;
+        if (this.searchTerm && !this.searchByCategory) {
+          this.childId = null;
+          // this.navigateBackModel = null;
+        } else {
+          this.childId = this.navigateBackModel.id;
+        }
         this.childType = this.signType;
         this.updateUrl(this.navigateBackModel.id, this.signType);
         break;
     }
+  }
+
+  search($event: string) {
+    this.searchTerm = $event;
+    if (this.childType !== this.signType) {
+      this.searchByCategory = false;
+      this.childId = null;
+      this.navigateBackModel = null;
+    } else {
+      this.searchByCategory = true;
+    }
+    this.childType = this.signType;
+    this.updateUrl(this.searchTerm, 'search');
   }
 }

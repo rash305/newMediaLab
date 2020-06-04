@@ -1,0 +1,25 @@
+<div class="row justify-content-center" style="margin: 40px 0px 0px;">
+  <div class="col-8">
+    <div style="height:140px; text-align: center; background-color: #a6ffc7">
+      <!--{{this.learnSubTask.question.videos[0]}}-->
+    </div>
+  </div>
+  <div class="w-100" style="margin: 5px"></div>
+  <div class="col-6">
+    <div class="row">
+      <div *ngFor="let answer of this.learnSubTask.optionalAnswers" class="col-6">
+        <div class="tile" (click)="this.checkAnswer(answer)">
+          <img [ngClass]="{'img-focus': this.learnSubTask.correctResponseIDs.includes(answer.id)||this.learnSubTask.wrongResponseIDs.includes(answer.id)}" src="{{answer.image}}" alt="{{answer.title}}" >
+          <i class="fa fa-4x" [ngClass]="{'fa-times': this.learnSubTask.wrongResponseIDs.includes(answer.id), 'wrong':this.learnSubTask.wrongResponseIDs.includes(answer.id),
+          'fa-check': this.learnSubTask.correctResponseIDs.includes(answer.id), 'correct': this.learnSubTask.correctResponseIDs.includes(answer.id)}"></i>
+          {{answer.title}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12" style="position: absolute; bottom: 15px">
+  <button type="button" class="btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left"></i> Terug</button>
+  <button type="button" class="btn btn-primary" style="float: right" (click)="goFurther()">Verder <i class="fa fa-arrow-right"></i></button>
+</div>

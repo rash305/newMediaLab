@@ -1,22 +1,16 @@
 package com.newmedia.deafapi.api.dtos;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SignDetailsDto implements Serializable {
     private String id;
     private String title;
     private CategoryDto category;
     private String image;
-    private String video;
-
-    public SignDetailsDto(String id, String title, CategoryDto category,
-                          String image, String video) {
-        this.id = id;
-        this.title = title;
-        this.category = category;
-        this.image = image;
-        this.video = video;
-    }
+    private List<VideoDto> videos;
+    private boolean isPersonal;
+    private int nrOfPersonal;
 
     public SignDetailsDto() {
     }
@@ -33,6 +27,10 @@ public class SignDetailsDto implements Serializable {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getImage() {
         return image;
     }
@@ -41,16 +39,12 @@ public class SignDetailsDto implements Serializable {
         this.image = image;
     }
 
-    public String getVideo() {
-        return video;
+    public List<VideoDto> getVideos() {
+        return videos;
     }
 
-    public void setVideo(String video) {
-        this.video = video;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setVideos(List<VideoDto> videos) {
+        this.videos = videos;
     }
 
     public CategoryDto getCategory() {
@@ -59,5 +53,21 @@ public class SignDetailsDto implements Serializable {
 
     public void setCategory(CategoryDto category) {
         this.category = category;
+    }
+
+    public boolean getIsPersonal() {
+        return isPersonal;
+    }
+
+    public void setIsPersonal(boolean isPersonal) {
+        this.isPersonal = isPersonal;
+    }
+
+    public int getNrOfPersonal() {
+        return nrOfPersonal;
+    }
+
+    public void setNrOfPersonal(int nrOfPersonal) {
+        this.nrOfPersonal = nrOfPersonal;
     }
 }

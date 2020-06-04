@@ -28,7 +28,7 @@ export class ForgotPwNewComponent implements OnInit {
       this.doSomethingInService();
 
       // Go to log in page
-      this.messageSettingsStatus.emit('login');
+      this.messageSettingsStatus.emit('forgotPwConfirm');
     }
   }
 

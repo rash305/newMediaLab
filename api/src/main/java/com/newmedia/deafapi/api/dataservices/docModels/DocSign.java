@@ -5,6 +5,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document
 public class DocSign {
 
@@ -15,7 +17,8 @@ public class DocSign {
     @DBRef
     private DocCategory category;
     private String image;
-    private String video;
+    private List<DocVideoReference> videos;
+    private String creator_id;
 
     public DocSign() {
     }
@@ -56,11 +59,19 @@ public class DocSign {
         this.image = image;
     }
 
-    public String getVideo() {
-        return video;
+    public List<DocVideoReference> getVideos() {
+        return videos;
     }
 
-    public void setVideo(String video) {
-        this.video = video;
+    public void setVideos(List<DocVideoReference> videos) {
+        this.videos = videos;
+    }
+
+    public String getCreator_id() {
+        return creator_id;
+    }
+
+    public void setCreator_id(String creator_id) {
+        this.creator_id = creator_id;
     }
 }

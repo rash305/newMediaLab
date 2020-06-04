@@ -1,9 +1,9 @@
 img {
   width: 100%;
   height: auto;
-  object-fit: cover;
   border-radius: 7px;
   bottom: 0;
+  object-fit:fill;
 }
 .image-box {
   height: calc(100% - 35px);

@@ -9,7 +9,8 @@
       <div class="purple-border middle-container f-flex flex-column">
         <div class="col-12 input-list">
           <i class="fa fa-question-circle"></i>
-          <input type="text" placeholder="Geef een betekenis" name="meaning" required (focusout)="validateMeaning(meaning)" [(ngModel)]="meaning">
+          <input type="text" placeholder="Geef een betekenis" name="meaning" required
+                 (focusout)="validateMeaning(meaning)" [(ngModel)]="meaning">
           <div class="alert-container">
             <div class="alert-danger" role="alert" [hidden]="!meaningError">
               {{meaningError}}
@@ -30,21 +31,17 @@
             </div>
           </div>
 
-          <div class="row">
-            <i class="fa fa-video-camera"></i>
-            <div class="col-" [hidden]="videoSelected">
-              Video toevoegen:
-              <div style="padding-top: 5px; padding-bottom: 5px;">
-                <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-camera btn-i"></i> Camera</button>
-                <button type="button" class="btn btn-outline-primary" (click)="addGallery()"><i class="fa fa-image btn-i"></i> Gallerij</button>
-              </div>
+          <div class="row no-gutters mt-2">
+            <div class="col-1"><i class="fa fa-video-camera"></i></div>
+            <div class="col" [hidden]="video">
+              <span style="line-height: 2em;">Video toevoegen:</span>
+              <app-video-upload (videoFileEmitter)="video = $event"></app-video-upload>
             </div>
-            <div class="col-8" [hidden]="!videoSelected" style="height: 125px; background-color: #8769e0">
-              {{video}}
+            <div class="col-8 " *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #8769e0">
+              <video [src]="video?.file?.rawFile | domSanitizer: 'VideoSource'"></video>
             </div>
-            <div class="col-1 float-left" [hidden]="!videoSelected" style="padding-left: 0">
-              <button type="button" class="btn btn-outline-primary" (click)="addCamera()"><i class="fa fa-camera btn-i"></i></button>
-              <button type="button" class="btn btn-outline-primary" (click)="addGallery()"><i class="fa fa-image btn-i"></i></button>
+            <div class="col-3" [hidden]="!video">
+              <app-video-upload (videoFileEmitter)="video = $event"></app-video-upload>
             </div>
           </div>
           <div class="alert-container">
@@ -55,9 +52,18 @@
         </div>
       </div>
       <div class="col-12 bottom-container">
-        <button type="button" class="back-button btn btn-primary" (click)="goBack()"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-        <button type="button" class="btn btn-primary right-button" (click)="addSign()"><i class="fa fa-plus-circle btn-i"></i> Toevoegen</button>
+        <button type="button" class="back-button btn btn-primary" (click)="goBack()"><i
+          class="fa fa-arrow-left btn-i"></i> Terug
+        </button>
+        <button type="button" class="btn btn-primary right-button" (click)="addSign()"><i
+          class="fa fa-arrow-right btn-i"></i> Verder
+        </button>
       </div>
     </div>
   </div>
 </div>
+<app-add-sign-confirm *ngIf="this.showConfirmationScreen"
+                      [sign]="this.sign"
+                      [video]="video"
+                      [uploadingVideoisBusy]="this.uploadingVideo"
+                      (ConfirmAddSignEvent)="this.confirm($event)"></app-add-sign-confirm>

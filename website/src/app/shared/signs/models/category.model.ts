@@ -10,5 +10,4 @@ export class CategoryModel implements ISignTemplate {
     Object.assign(this, input);
     return this;
   }
-
 }

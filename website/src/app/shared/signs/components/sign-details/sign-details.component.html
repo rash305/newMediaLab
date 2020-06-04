@@ -1,5 +1,5 @@
 
-<div class="row" style="margin: 0" *ngIf="this.sign">
+<div class="row m-0 mt-2" *ngIf="this.sign">
   <div class="col-3">
     <img src="{{sign.image}}" alt="{{sign.title}}" class="sign-image">
   </div>
@@ -10,18 +10,22 @@
 <hr style="border-color: #593196; margin: 15px">
 <div class="row no-gutters" style="height:170px; margin: 15px 0px 15px 15px;" [hidden]="isDeleted" *ngIf="this.sign">
   <div class="col-10">
-    <div style="height:170px;text-align: center; background-color: #a6ffc7">
-      {{this.sign.video}}
+    <div style="height:170px;text-align: center; background-color: #593196 " *ngIf="sign.videos">
+      <video controls [src]="sign.videos[0]?.videoUrl | domSanitizer: 'resourceUrl'"></video>
     </div>
   </div>
-  <div class="col-2 align-self-end sidebar" [hidden]="!isPersonalDictionary">
+  <div class="col-2 align-self-end sidebar" *ngIf="isPersonalDictionary">
     <i class="fa fa-3x fa-trash purple-icon" (click)="delete()"></i>
   </div>
   <div class="col-2 sidebar" [hidden]="isPersonalDictionary">
-    <i class="fa fa-3x fa-heart-o purple-icon" (click)="addToPersonal()" [hidden]="isAddedToPersonal"></i>
-    <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal()" [hidden]="!isAddedToPersonal"></i>
+    <i class="fa fa-3x fa-heart-o purple-icon" (click)="addToPersonal()" *ngIf="!this.sign.isPersonal"></i>
+    <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal()" *ngIf="this.sign.isPersonal"></i>
   </div>
   <div class="col-12">
-    <i class="fa fa-heart" style="{{this.purpleIcon}}"></i> {{this.likes}}x
+    <i class="fa fa-heart" [ngClass]="{'purple-icon': this.sign.isPersonal}"></i> {{this.sign.nrOfPersonal}}x
   </div>
 </div>
+
+<app-delete-popup [sign]="this.sign"
+                  [hidden]="this.hideDeletePopup"
+                  (DeletePopupMinimalizeEvent)="this.hideDeletePopup = $event"></app-delete-popup>

@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {FileSelectDirective, FileUploadModule} from 'ng2-file-upload';
 
 import {AppComponent} from './app.component';
 import {CategoriesComponent} from './shared/signs/components/category/categories.component';
@@ -31,15 +32,22 @@ import { SignDetailsComponent } from './shared/signs/components/sign-details/sig
 import {NetworkErrorInterceptor} from './common/network/network-error-interceptor';
 import {JwtAuthInterceptor} from './common/network/jwt-auth-interceptor';
 import { SignOfDayComponent } from './modules/learn/sign-of-day/sign-of-day.component';
-import { QuizQuestionComponent } from './modules/learn/quiz-question/quiz-question.component';
-import { QuizResultsComponent } from './modules/learn/quiz-results/quiz-results.component';
+import { QuizQuestionComponent } from './modules/learn/quiz/quiz-question/quiz-question.component';
+import { QuizResultsComponent } from './modules/learn/quiz/quiz-results/quiz-results.component';
 import { PublicDictionaryComponent } from './modules/dictionary/public-dictionary/public-dictionary.component';
 import { BackButtonComponent } from './shared/general/component/back-button/back-button.component';
+import { QuizComponent } from './modules/learn/quiz/quiz.component';
+import { DeletePopupComponent } from './modules/dictionary/personal-dictionary/delete-popup/delete-popup.component';
+import { ConfirmChangeComponent } from './modules/settings/account/change/confirm-change/confirm-change.component';
+import { ForgotPwConfirmComponent } from './modules/settings/account/login/forgot-pw-confirm/forgot-pw-confirm.component';
+import { AddSignConfirmComponent } from './modules/add-sign/add-sign/add-sign-confirm/add-sign-confirm.component';
+import { VideoUploadComponent } from './shared/general/component/video-upload/video-upload.component';
+import { DomSanitizerPipe } from './common/html/pipes/dom-sanitizer.pipe';
 
 const appRoutes: Routes = [
   {
-    path: 'home',
-    component: CategoriesComponent,
+    path: '',
+    component: PersonalDictionaryComponent,
   },
   {
     path: 'personal',
@@ -58,16 +66,12 @@ const appRoutes: Routes = [
     component: LearnComponent,
   },
   {
-    path: 'learn/sign-of-day/:id',
+    path: 'learn/sign-of-day/:category-id/:sign-id',
     component: SignOfDayComponent,
   },
   {
-    path: 'learn/quiz-question/:id',
-    component: QuizQuestionComponent,
-  },
-  {
-    path: 'learn/quiz-results',
-    component: QuizResultsComponent,
+    path: 'learn/quiz',
+    component: QuizComponent,
   },
   {
     path: 'dictionary',
@@ -115,10 +119,18 @@ const appRoutes: Routes = [
     SignOfDayComponent,
     QuizQuestionComponent,
     QuizResultsComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    QuizComponent,
+    DeletePopupComponent,
+    ConfirmChangeComponent,
+    ForgotPwConfirmComponent,
+    AddSignConfirmComponent,
+    VideoUploadComponent,
+    DomSanitizerPipe,
   ],
   imports: [
     BrowserModule,
+    FileUploadModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,

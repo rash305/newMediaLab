@@ -1,6 +1,6 @@
-<app-search></app-search>
+<app-search (SearchTermEventEmitter)="this.search($event)"></app-search>
 
-<div class="row" >
+<div class="row m-0" >
   <div class="col-12" (click)="navigateBack()" [hidden]="!this.childType || this.childType === categoryType">
   <app-shared-back-button [navigateBackModel]="navigateBackModel"></app-shared-back-button>
   </div>
@@ -8,5 +8,5 @@
 </div>
 
 <app-categories [isPersonalDictionary]=false (clickEventsEmitter)="ObjectClickedEventHandler($event)" *ngIf="childType === categoryType"></app-categories>
-<app-signs [isPersonalDictionary]=false *ngIf="childType === signType" (ObjectClickedEventHandler)="ObjectClickedEventHandler($event)" [currentSignCategory]="childId"></app-signs>
-<app-sign-details [currentSignId]="childId" *ngIf="childType === signDetailsType" (parentId)="navigateBackModel = $event" ></app-sign-details>
+<app-signs [isPersonalDictionary]=false *ngIf="childType === signType" (ObjectClickedEventHandler)="ObjectClickedEventHandler($event)" [currentSignCategory]="childId" [setSearchTerm]="this.searchTerm"></app-signs>
+<app-sign-details [isPersonalDictionary]=false [currentSignId]="childId" *ngIf="childType === signDetailsType" (parentId)="navigateBackModel = $event" ></app-sign-details>

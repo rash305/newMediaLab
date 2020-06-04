@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SignDetailsService} from '../../services/sign-details.service';
 import {SignDetailsModel} from '../../models/sign-details.model';
 import {EventEmitter} from '@angular/core';
@@ -12,21 +12,18 @@ import {CategoryModel} from '../../models/category.model';
 })
 export class SignDetailsComponent implements OnInit {
 
-
   @Output() parentId = new EventEmitter();
 
-  isPersonalDictionary = false;
-  isAddedToPersonal = false;
-  purpleIcon = {
-    color: '#444444'
-  };
+  @Input() isPersonalDictionary: boolean;
 
   @Input() currentSignId: string;
   @Input() sign: SignDetailsModel;
-  likes = 30;
+
   isDeleted = false;
+  hideDeletePopup = true;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private signDetailsService: SignDetailsService) {
   }
 
@@ -48,24 +45,34 @@ export class SignDetailsComponent implements OnInit {
   }
 
   addToPersonal() {
-    this.purpleIcon = {
-      color: '#593196'
-    };
-    this.likes += 1;
-    this.isAddedToPersonal = !this.isAddedToPersonal;
-    this.signDetailsService.favorite(this.sign).subscribe();
+    this.sign.nrOfPersonal += 1;
+    this.sign.isPersonal = !this.sign.isPersonal;
+    this.signDetailsService.favorite(this.sign).subscribe(x => {
+      if (x) {
+        this.routeAfterFavorateUpdate();
+      }
+    });
+  }
+
+  routeAfterFavorateUpdate() {
+    const routingString = this.isPersonalDictionary ? '/dictionary' : '/personal';
+    this.router.navigate([routingString], {
+      queryParams: {id: this.sign.id, type: 'sign-details'},
+      queryParamsHandling: 'merge',
+      // preserve the existing query params in the route
+      skipLocationChange: false
+      // do not trigger navigation
+    });
   }
 
   removeFromPersonal() {
-    this.purpleIcon = {
-      color: '#444444'
-    };
-    this.likes -= 1;
-    this.isAddedToPersonal = !this.isAddedToPersonal;
+    this.sign.nrOfPersonal -= 1;
+    this.sign.isPersonal = !this.sign.isPersonal;
+    this.signDetailsService.unFavorite(this.sign).subscribe();
   }
 
   delete() {
-    // Do something in service to remove sign from favorites
-    this.isDeleted = true;
+    // Open popup to confirm deleting
+    this.hideDeletePopup = !this.hideDeletePopup;
   }
 }
