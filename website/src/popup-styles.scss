@@ -16,7 +16,7 @@
 .modal {
   display: block;
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 900; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -24,15 +24,18 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0, 0, 0, 0.1); /* Black w/ opacity */
   padding-top: 160px;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
 }
 
 .popup-layer {
-  z-index: 1; /* Sit on top */
-  position: absolute; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  position: fixed; /* Stay in place */
   display: block;
   top: 100px;
   height: calc(70% - 100px);
   min-height: 380px;
+  width: 90%;
 
 
   /* Full-width inputs */
@@ -55,8 +58,9 @@
     text-align: center;
     font-size: 1.2em;
     line-height: 2.5em;
-    background: #eeeeee;
+    background: #593196;
     height: 45px;
+    color:white;
   }
 
   .middle-container {

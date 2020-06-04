@@ -1,38 +1,41 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary m-0 p-0">
-    <div class="d-flex flex-fill justify-content-between bd-highlight mt-2 mb-1">
-      <div class="col"></div>
-      <div class="bd-highlight navbar-brand col" style="text-align: center">
-        <h2 href="#">WeSign!</h2>
+  <div id="header-bar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary m-0 p-0 text-white ">
+      <div class="d-flex flex-fill justify-content-between bd-highlight mt-2 mb-1">
+        <div class="col"></div>
+        <div class="bd-highlight col" style="text-align: center">
+          <h2 href="#">WeSign!</h2>
+        </div>
+        <div class=" bd-highlight col " style="text-align: right" id="navbarColor01">
+          <button class="btn settings" (click)="ShowNotLoggedInPopup()" *ngIf="!isLoggedIn">
+            <span><i class="fa fa-video-camera" style="color: #8f8f8f"></i></span>
+          </button>
+          <button class="btn settings" (click)="ShowAddSignPopup()" *ngIf="isLoggedIn">
+            <span><i class="fa fa-video-camera"></i></span>
+          </button>
+          <button class="btn settings p-0" (click)="ShowSettingsPopup()">
+            <span><i class="fa fa-cog"></i></span>
+          </button>
+        </div>
       </div>
-      <div class=" bd-highlight col " style="text-align: right" id="navbarColor01">
-        <button class="btn settings" (click)="ShowNotLoggedInPopup()" *ngIf="!isLoggedIn">
-          <span><i class="fa fa-video-camera" style="color: #8f8f8f"></i></span>
-        </button>
-        <button class="btn settings" (click)="ShowAddSignPopup()" *ngIf="isLoggedIn">
-          <span><i class="fa fa-video-camera"></i></span>
-        </button>
-        <button class="btn settings p-0" (click)="ShowSettingsPopup()">
-          <span><i class="fa fa-cog" ></i></span>
-        </button>
-      </div>
+    </nav>
+    <hr>
+
+    <div class="header">
+      <button class="btn btn-secondary col-4" routerLink="/personal" routerLinkActive="active">
+        <span><i class="fa fa-heart fa-3x"></i><br/>Favorieten</span>
+      </button>
+      <button class="btn btn-secondary col-4" routerLink="/learn" routerLinkActive="active">
+        <span><i class="fa fa-graduation-cap fa-3x"></i><br/>Leren</span>
+      </button>
+      <button class="btn btn-secondary col-4" routerLink="/dictionary" routerLinkActive="active">
+        <span><i class="fa fa-search fa-3x"></i><br/>Woordenboek</span>
+      </button>
     </div>
-  </nav>
-  <hr>
-
-  <div class="header">
-    <button class="btn btn-secondary col-4" routerLink="/personal" routerLinkActive="active">
-      <span><i class="fa fa-heart fa-3x"></i><br/>Favorieten</span>
-    </button>
-    <button class="btn btn-secondary col-4" routerLink="/learn" routerLinkActive="active">
-      <span><i class="fa fa-graduation-cap fa-3x"></i><br/>Leren</span>
-    </button>
-    <button class="btn btn-secondary col-4" routerLink="/dictionary" routerLinkActive="active">
-      <span><i class="fa fa-search fa-3x"></i><br/>Woordenboek</span>
-    </button>
+    <hr>
   </div>
-  <hr>
+  <div class="container">
 
+  <div id="content">
   <router-outlet></router-outlet>
   <app-not-logged-in [hidden]="hideNotLoggedInPopup"
                      (NotLoggedInMinimalizeEvent)="hideNotLoggedInPopup = $event"
@@ -41,4 +44,5 @@
                 (AddSignMinimalizeEvent)="hideAddSignPopup = $event"></app-add-sign>
   <app-settings-popup [hidden]="hideSettingsPopup"
                       (SettingsMinimalizeEvent)="hideSettingsPopup = $event"></app-settings-popup>
+  </div>
 </div>

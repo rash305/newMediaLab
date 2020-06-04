@@ -1,11 +1,23 @@
 .container {
-  width: 100%;
   padding: 0;
 }
 
 .header {
   background: #593196;
 
+}
+
+#content{
+  margin-top:140px;
+}
+
+#header-bar{
+  top:0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  z-index: 100;
+  background:white!important;
 }
 
 

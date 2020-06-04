@@ -1,19 +1,19 @@
-<div class="row" >
+<div class="row m-0">
   <div class="col-12" routerLink="/learn" routerLinkActive="active">
-    <div class="col-4">
-      <i class="fa fa-arrow-circle-left purple-icon"></i>
-      <span> Terug</span>
-    </div>
+    <app-shared-back-button></app-shared-back-button>
   </div>
 </div>
 
-<div style="margin: 15px;">
-  <i class="fa fa-3x fa-calendar"></i> Gebaar van de dag:
-</div>
-<div class="row">
-  <div class="col-12" style="text-align: center">
+
+  <div style="margin: 15px;">
+    <i class="fa fa-calendar"></i> Gebaar van de dag:
+  </div>
+<div class="sign-of-day">
+  <div class="row m-0">
+    <div class="col-12" style="text-align: center">
       <img src="{{category?.image}}" alt="{{category?.title}}" style="height: 15px">
       <span>&nbsp;<b> {{category?.title}} </b></span>
+    </div>
   </div>
 </div>
-<app-sign-details [currentSignId]="signId" ></app-sign-details>
+<app-sign-details [currentSignId]="signId"></app-sign-details>
