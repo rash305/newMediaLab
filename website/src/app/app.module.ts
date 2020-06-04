@@ -66,7 +66,7 @@ const appRoutes: Routes = [
     component: LearnComponent,
   },
   {
-    path: 'learn/sign-of-day/:id',
+    path: 'learn/sign-of-day/:category-id/:sign-id',
     component: SignOfDayComponent,
   },
   {

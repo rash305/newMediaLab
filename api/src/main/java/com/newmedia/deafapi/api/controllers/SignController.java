@@ -4,6 +4,7 @@ import com.newmedia.deafapi.api.dtos.CategoryDto;
 import com.newmedia.deafapi.api.dtos.SignDto;
 import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
+import com.newmedia.deafapi.api.services.Interfaces.ISignOfDayService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class SignController {
     //https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
     @Autowired
     private ISignService ISignService;
+    @Autowired
+    private ISignOfDayService ISignOfDayService;
 
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
@@ -61,6 +65,16 @@ public class SignController {
 
         List<SignDto> signDtos = ObjectMapperUtils.mapAll(signs, SignDto.class);
         return signDtos;
+    }
+
+    @GetMapping("/api/signs/sign-of-day")
+    public SignDto getSignOfDay() {
+        String userId = GetAuthorizedUser();
+        LocalDate today = LocalDate.now();
+        Sign sign = ISignOfDayService.getSignOfDay(userId, today);
+
+        SignDto signDto = ObjectMapperUtils.map(sign, SignDto.class);
+        return signDto;
     }
 
 

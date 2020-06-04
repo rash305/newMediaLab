@@ -11,10 +11,10 @@
 <div class="row no-gutters" style="height:170px; margin: 15px 0px 15px 15px;" [hidden]="isDeleted" *ngIf="this.sign">
   <div class="col-10">
     <div style="height:170px;text-align: center; background-color: #a6ffc7">
-      {{this.sign.videos[0]}}
+      <!--{{this.sign.videos[0]}}-->
     </div>
   </div>
-  <div class="col-2 align-self-end sidebar" [hidden]="!isPersonalDictionary">
+  <div class="col-2 align-self-end sidebar" *ngIf="isPersonalDictionary">
     <i class="fa fa-3x fa-trash purple-icon" (click)="delete()"></i>
   </div>
   <div class="col-2 sidebar" [hidden]="isPersonalDictionary">

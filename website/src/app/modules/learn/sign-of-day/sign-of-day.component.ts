@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {CategoryModel} from '../../../shared/signs/models/category.model';
+import {CategoriesService} from '../../../shared/signs/services/categories.service';
 
 @Component({
   selector: 'app-sign-of-day',
@@ -8,11 +10,27 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SignOfDayComponent implements OnInit {
 
-  currentSignId: string;
-  constructor(private route: ActivatedRoute) { }
+  category: CategoryModel;
+  signId: string;
+
+  constructor(private route: ActivatedRoute,
+              private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    this.currentSignId = this.route.snapshot.paramMap.get('id');
+    this.signId = this.route.snapshot.paramMap.get('sign-id');
+    this.getCategory(this.route.snapshot.paramMap.get('category-id'));
+  }
+
+  getCategory(categoryId: string): void {
+    this.categoriesService.getCategories()
+      .subscribe(categories => {
+        for (const cat of categories) {
+          if (cat.id === categoryId) {
+            this.category = cat;
+          }
+        }
+      });
+
   }
 
 }
