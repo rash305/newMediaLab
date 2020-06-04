@@ -31,8 +31,8 @@
             </div>
           </div>
 
-          <div class="row">
-            <i class="fa fa-video-camera"></i>
+          <div class="row no-gutters">
+            <div class="col-1"><i class="fa fa-video-camera"></i></div>
             <div class="col" [hidden]="video">
               Video toevoegen:
               <app-video-upload (videoFileEmitter)="video = $event"></app-video-upload>
@@ -40,7 +40,7 @@
             <div class="col-8 p-0" *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #8769e0">
               <video [src]="video?.file?.rawFile | domSanitizer: 'VideoSource'"></video>
             </div>
-            <div class="col-1 float-left" [hidden]="!video" style="padding-left: 0">
+            <div class="col-3" [hidden]="!video">
               <app-video-upload (videoFileEmitter)="video = $event"></app-video-upload>
             </div>
           </div>

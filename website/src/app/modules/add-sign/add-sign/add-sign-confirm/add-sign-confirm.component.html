@@ -9,7 +9,8 @@
       <div class="purple-border middle-container f-flex flex-column">
         <div class="row">
           <div class="col-12" style="text-align: center">
-            <span><b>{{this.sign.category.title}}</b></span>
+            <img src="{{this.sign.category?.image}}" alt="{{this.sign.category?.title}}" style="height: 15px">
+            <span>&nbsp;<b> {{this.sign.category?.title}} </b></span>
           </div>
         </div>
         <div class="row" style="margin: 0" *ngIf="this.sign">
