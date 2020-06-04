@@ -47,14 +47,6 @@ public class SignDetailsDto implements Serializable {
         this.videos = videos;
     }
 
-    public boolean isPersonal() {
-        return isPersonal;
-    }
-
-    public void setPersonal(boolean personal) {
-        isPersonal = personal;
-    }
-
     public CategoryDto getCategory() {
         return category;
     }
