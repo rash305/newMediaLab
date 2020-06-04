@@ -1,11 +1,11 @@
-package com.newmedia.deafapi.api.dtos;
+package com.newmedia.deafapi.api.models;
 
-import java.io.Serializable;
-
-public class VideoDto implements Serializable {
+public class VideoReference {
     private String videoUrl ;
     private int popularity;
-    public VideoDto() {
+
+    public VideoReference() {
+
     }
 
     public String getVideoUrl() {
