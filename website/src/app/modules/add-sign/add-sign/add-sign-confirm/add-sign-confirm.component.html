@@ -2,7 +2,7 @@
 </div>
 <div class="popup-layer container">
   <div class="h-100">
-    <div class="content-container">
+    <div class="content-container" [hidden] ="uploadingVideoisBusy">
       <div class="col-12 purple-border top-container">
         <i class="fa fa-video-camera"></i><span><b>Gebaar toevoegen</b></span>
       </div>
@@ -42,4 +42,18 @@
       </div>
     </div>
   </div>
+
+  <div class="content-container" *ngIf="uploadingVideoisBusy">
+    <div class="col-12 purple-border top-container">
+      <i class="fa fa-video-camera"></i><span><b>Video uploaden...</b></span>
+    </div>
+    <div class="purple-border middle-container f-flex flex-column">
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          Een moment geduld a.u.b.
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

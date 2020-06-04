@@ -16,6 +16,7 @@ import {VideoModel} from '../../../shared/signs/models/video.model';
 })
 export class AddSignComponent implements OnInit {
 
+  uploadingVideo = false;
   meaning: string;
   meaningError: string;
   categoryId = '';
@@ -100,18 +101,21 @@ export class AddSignComponent implements OnInit {
 
   private addSignToApp(signDetails: SignDetailsModel): void {
     // Add sign to api
+    this.uploadingVideo = true;
     this.signDetailsService.addSign(signDetails, this.video).subscribe(sign => {
-      if (sign === null) {
-        // Failed to add sign
-        // Toaster message is enough for now
-      } else {
-        // Make uploaded sign favorite
-        this.signDetailsService.favorite(sign).subscribe();
-        // Add signs to web sign service
-        this.signService.AddSignManually(sign);
-        this.AddSignMinimalizeEvent.emit(true);
-      }
-    });
+    if (sign === null) {
+      this.uploadingVideo = true;
+      // Failed to add sign
+      // Toaster message is enough for now
+    } else {
+      // Make uploaded sign favorite
+      this.signDetailsService.favorite(sign).subscribe();
+      // Add signs to web sign service
+      this.signService.AddSignManually(sign);
+      this.emptyVariables();
+      this.showConfirmationScreen = false;
+      this.AddSignMinimalizeEvent.emit(true);
+    }});
   }
 
   goBack(): void {
@@ -123,9 +127,6 @@ export class AddSignComponent implements OnInit {
     if ($event === 'confirmed') {
       // Sign is accepted, thus add sign to app and close popup
       this.addSignToApp(this.sign);
-      this.emptyVariables();
-      this.showConfirmationScreen = false;
-      this.AddSignMinimalizeEvent.emit(true);
     } else if ($event === 'notConfirmed') {
       // Sign is not confirmed, thus do nothing and wait for next action of user
       this.showConfirmationScreen = false;
