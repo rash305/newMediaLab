@@ -10,6 +10,9 @@ input[type="file"] {
   display: none;
 }
 
-.knopje {
-  width: 100%;
+.no-padding {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
