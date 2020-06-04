@@ -1,6 +1,10 @@
 import {SafeHtml} from '@angular/platform-browser';
 
 export class VideoModel {
-  videoFile;
+  videoUrl;
   popularity: number;
+
+  constructor(videoUrl: string) {
+    this.videoUrl = videoUrl;
+  }
 }
