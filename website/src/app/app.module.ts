@@ -46,8 +46,8 @@ import { DomSanitizerPipe } from './common/html/pipes/dom-sanitizer.pipe';
 
 const appRoutes: Routes = [
   {
-    path: 'home',
-    component: CategoriesComponent,
+    path: '',
+    component: PersonalDictionaryComponent,
   },
   {
     path: 'personal',
