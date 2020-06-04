@@ -30,6 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         JWTAuthFilter.setFilterProcessesUrl("/api/auth/login");
 
         http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/api/videos/**").permitAll()
                 .antMatchers("/api/validation**").permitAll()
                 .antMatchers("/api/signs**").permitAll()
                 .antMatchers("/api/categories**").permitAll()

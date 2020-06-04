@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SignDetailsService} from '../../services/sign-details.service';
 import {SignDetailsModel} from '../../models/sign-details.model';
 import {EventEmitter} from '@angular/core';
@@ -23,6 +23,7 @@ export class SignDetailsComponent implements OnInit {
   hideDeletePopup = true;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private signDetailsService: SignDetailsService) {
   }
 
@@ -46,7 +47,22 @@ export class SignDetailsComponent implements OnInit {
   addToPersonal() {
     this.sign.nrOfPersonal += 1;
     this.sign.isPersonal = !this.sign.isPersonal;
-    this.signDetailsService.favorite(this.sign).subscribe();
+    this.signDetailsService.favorite(this.sign).subscribe(x => {
+      if (x) {
+        this.routeAfterFavorateUpdate();
+      }
+    });
+  }
+
+  routeAfterFavorateUpdate() {
+    const routingString = this.isPersonalDictionary ? '/dictionary' : '/personal';
+    this.router.navigate([routingString], {
+      queryParams: {id: this.sign.id, type: 'sign-details'},
+      queryParamsHandling: 'merge',
+      // preserve the existing query params in the route
+      skipLocationChange: false
+      // do not trigger navigation
+    });
   }
 
   removeFromPersonal() {

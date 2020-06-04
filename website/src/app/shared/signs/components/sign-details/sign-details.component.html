@@ -10,8 +10,8 @@
 <hr style="border-color: #593196; margin: 15px">
 <div class="row no-gutters" style="height:170px; margin: 15px 0px 15px 15px;" [hidden]="isDeleted" *ngIf="this.sign">
   <div class="col-10">
-    <div style="height:170px;text-align: center; background-color: #a6ffc7">
-      <!--{{this.sign.videos[0]}}-->
+    <div style="height:170px;text-align: center; background-color: #593196 " *ngIf="sign.videos">
+      <video controls [src]="sign.videos[0]?.videoUrl | domSanitizer: 'resourceUrl'"></video>
     </div>
   </div>
   <div class="col-2 align-self-end sidebar" *ngIf="isPersonalDictionary">

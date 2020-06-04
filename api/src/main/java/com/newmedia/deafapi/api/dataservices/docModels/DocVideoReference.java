@@ -8,28 +8,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
 
 @Document
-public class DocVideo {
+public class DocVideoReference {
 
-    @Id
-    private String id;
-    private Binary video;
+    private String videoUrl ;
+    private int popularity;
 
-    public DocVideo() {
+    public DocVideoReference() {
     }
 
-    public String getId() {
-        return id;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
-    public Binary getVideo() {
-        return video;
+    public int getPopularity() {
+        return popularity;
     }
 
-    public void setVideo(Binary video) {
-        this.video = video;
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
     }
 }
