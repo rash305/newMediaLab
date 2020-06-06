@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {AuthenticationService} from '../../shared/account/services/authentication.service';
 
@@ -17,7 +17,7 @@ export class NetworkErrorInterceptor implements HttpInterceptor {
         location.reload(true);
       }
 
-      const error = err.error.message || err.statusText;
+      const error = err.error?.message || err.statusText;
       return throwError(error);
     }));
   }

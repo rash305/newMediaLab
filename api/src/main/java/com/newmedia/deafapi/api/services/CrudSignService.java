@@ -1,12 +1,10 @@
 package com.newmedia.deafapi.api.services;
 
-import com.newmedia.deafapi.api.dataservices.docModels.DocCategory;
 import com.newmedia.deafapi.api.dataservices.docModels.DocFavoriteSign;
 import com.newmedia.deafapi.api.dataservices.docModels.DocSign;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoCategoryRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoFavoriteSignRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
-import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.models.SignDetails;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
@@ -16,13 +14,10 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.ignoreCase;
 
 // By notating this class as service it is possible to autowire this class
 @Service
@@ -32,8 +27,7 @@ public class CrudSignService implements ISignService {
     private MongoSignRepository signISignRepository;
     @Autowired
     private MongoFavoriteSignRepository favoriteSignRepository;
-    @Autowired
-    private MongoCategoryRepository categoryRepository;
+
     @Override
     public List<Sign> getSigns(String categoryId) {
         List<DocSign> all;
@@ -58,7 +52,7 @@ public class CrudSignService implements ISignService {
 
     @Override
     public List<Sign> getSearchedSigns(String searchTerm) {
-        List<DocSign> s = signISignRepository.findByTitleContaining(searchTerm);
+        List<DocSign> s = signISignRepository.findByTitleRegex(searchTerm);
         return ObjectMapperUtils.mapAll(s, Sign.class);
     }
 
