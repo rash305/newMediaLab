@@ -1,14 +1,18 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, observable, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {SignModel} from '../models/sign.model';
 import {SignTemplateStoreService} from './backendCommunication/sign-template-store.service';
-import {CategoryModel} from '../models/category.model';
-import {any} from 'codelyzer/util/function';
+import {catchError, map} from 'rxjs/operators';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
+import {HandleError, HttpErrorHandler} from '../../../common/network/http-error-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignTemplateService {
+  private handleError: HandleError;
+
   private numberOfDownloadedSigns = 0;
   // tslint:disable-next-line:variable-name
   private _personalSigns: BehaviorSubject<SignModel[]> = new BehaviorSubject([]);
@@ -17,8 +21,11 @@ export class SignTemplateService {
   public readonly personalSigns: Observable<SignModel[]> = this._personalSigns.asObservable();
   public readonly publicSigns: Observable<SignModel[]> = this._publicSigns.asObservable();
 
-  constructor(private signBackendService: SignTemplateStoreService) {
+  constructor(private signBackendService: SignTemplateStoreService,
+              private http: HttpClient,
+              httpErrorHandler: HttpErrorHandler) {
     this.loadInitialData();
+    this.handleError = httpErrorHandler.createHandleError('SignStoreService');
   }
 
   private loadInitialData() {
@@ -47,13 +54,18 @@ export class SignTemplateService {
     return promise;
   }
 
-  searchSigns(searchTerm: string): SignModel[] {
-    let searchedSigns;
-    this.signBackendService.getSearchedSigns(searchTerm)
-      .subscribe(searchResults => {
-        searchedSigns = searchResults;
-      });
-    return searchedSigns;
+  getSearchedSigns(searchTerm): Observable<SignModel[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('searchTerm', searchTerm);
+    const signsUrl = environment.baseUrl + '/signs/search';  // URL to web api
+
+    return this.http.get<object[]>(signsUrl, {params: httpParams})
+      .pipe(map(res => res.map(signData => new SignModel()
+        .deserialize(signData))
+        .sort((a, b) => a.title.localeCompare(b.title))))
+      .pipe(
+        catchError(this.handleError('getSearchedSignList', []))
+      );
   }
 
   signsResult(result: any, personal = false): number {
@@ -75,16 +87,12 @@ export class SignTemplateService {
       }
     });
 
-    // Sort signs alphabetically
-    signList.sort((a, b) => a.title.localeCompare(b.title));
-
     if (personal) {
       // Set signList as current list of signs
       this._personalSigns.next(signList);
     } else {
       this._publicSigns.next(signList);
     }
-
 
     // Notify how many signs are added
     return addedSigns;
