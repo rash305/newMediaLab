@@ -13,6 +13,7 @@ export class AddSignConfirmComponent implements OnInit {
 
   @Input() sign: SignDetailsModel;
   @Input() video: FileItem;
+  @Input() uploadingVideoisBusy = true;
 
   constructor() { }
 

@@ -3,7 +3,7 @@
     <i class="fa fa-arrow-circle-left purple-icon"></i>
     <span> Terug</span>
   </div>
-  <div class="col-4" style="text-align: center; margin-left: -12.5px;">
+  <div class="col-4" style="text-align: center; margin-left: -12.5px;" [hidden]="!navigateBackModel">
     <img src="{{navigateBackModel?.image}}" alt="{{navigateBackModel?.title}}" style="height: 15px; width: 15px">
     <span>&nbsp;<b> {{navigateBackModel?.title}} </b></span>
   </div>
