@@ -103,8 +103,9 @@ export class AddSignComponent implements OnInit {
     // Add sign to api
     this.uploadingVideo = true;
     this.signDetailsService.addSign(signDetails, this.video).subscribe(sign => {
-    if (sign === null) {
-      this.uploadingVideo = true;
+      this.uploadingVideo = false;
+
+      if (sign === null) {
       // Failed to add sign
       // Toaster message is enough for now
     } else {
@@ -113,6 +114,8 @@ export class AddSignComponent implements OnInit {
       // Add signs to web sign service
       this.signService.AddSignManually(sign);
       this.emptyVariables();
+      console.log(sign);
+      this.routeAfterUpdate(sign.id);
       this.showConfirmationScreen = false;
       this.AddSignMinimalizeEvent.emit(true);
     }});
@@ -145,5 +148,20 @@ export class AddSignComponent implements OnInit {
 
     this.video = null;
     this.videoError = '';
+  }
+
+  videoErrorFunction($event: any) {
+    this.video = null;
+    this.videoError = 'Dit video formaat kan niet worden afgespeeld.';
+  }
+
+  routeAfterUpdate(id) {
+    this.router.navigate(['/dictionary'], {
+      queryParams: {id, type: 'sign-details'},
+      queryParamsHandling: 'merge',
+      // preserve the existing query params in the route
+      skipLocationChange: false
+      // do not trigger navigation
+    });
   }
 }

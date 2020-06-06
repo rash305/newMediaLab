@@ -42,16 +42,13 @@ export class SignDetailsService {
   addSign(signDetails: SignDetailsModel, signVideo: FileItem): Observable<SignDetailsModel> {
     return new Observable(observer => {
       const uploader = this.getFileUploader();
-      this.messageService.add(`Upload started`);
 
       uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
         // Check for true result
         if (status === 0) {
           observer.error();
-          this.messageService.add(response);
         } else {
           // Insert video url
-          this.messageService.add(`VIdeo uploaded` + response);
           signDetails.videos = [new VideoModel(response)];
           this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
             .pipe(map(res => {
@@ -62,7 +59,6 @@ export class SignDetailsService {
             ).subscribe(x => {
             observer.next(x);
             observer.complete();
-            this.messageService.add(`Upload finished` + x);
           });
         }
       };
