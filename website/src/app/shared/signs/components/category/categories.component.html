@@ -1,7 +1,10 @@
 <div class="row" style="margin: 0;">
   <div class="col-12">
 
-  <span *ngIf="(!loading) && ( categories && categories.length == 0)">U heeft nog geen gebaren opgeslagen.</span>
+  <span *ngIf="(!loading) && ( categories && categories.length == 0)">
+    U heeft nog geen gebaren opgeslagen in uw favorieten.
+    U kunt gebaren die u wilt leren toevoegen toevoegen in het <b class="dictionary" routerLink="/dictionary" routerLinkActive="active">Woordenboek <i class="fa fa-search"style="text-align: center"></i></b>.
+  </span>
   <span *ngIf="(!loading) && (!categories)"> Categorieën kunnen niet worden opgehaald.</span>
   </div>
   <div *ngFor="let category of categories" class="col-md-3 col-4">
