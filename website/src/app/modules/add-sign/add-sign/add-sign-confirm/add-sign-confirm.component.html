@@ -15,7 +15,9 @@
         </div>
         <div class="row" style="margin: 0" *ngIf="this.sign">
           <div class="col-4">
-            <img src="{{sign.image}}" alt="{{sign.title}}" class="sign-image">
+            <div class="sign-image">
+              <img src="{{sign.image}}" alt="{{sign.title}}">
+            </div>
           </div>
           <div class="col-3 align-self-center h5">
             {{sign.title}}
