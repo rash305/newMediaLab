@@ -61,13 +61,13 @@ export class LoginAccountComponent implements OnInit {
   private loginOnApi(): void {
     this.authService.login(this.username, this.password)
       .subscribe(accountId =>       {
-        if (accountId === null) {
+        if (accountId)  {
+          // log user in
+          location.reload(true);
+        } else {
           // Login failed
           // Toaster message is enough for now
           this.incorrectLoginError = 'Combinatie van gebruikersnaam en wachtwoord is incorrect';
-        } else {
-          // log user in
-          location.reload(true);
         }
       });
   }

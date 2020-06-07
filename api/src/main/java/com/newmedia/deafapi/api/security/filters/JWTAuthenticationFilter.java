@@ -67,7 +67,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
 
-        if (req.getRequestURI().equals("/api/auth/login")) {
+        if (req.getRequestURI().contains("/api/auth/login")) {
             ObjectMapper mapper = new ObjectMapper();
             JWTToken tokenModel = new JWTToken();
             tokenModel.setToken(TOKEN_PREFIX + token);
