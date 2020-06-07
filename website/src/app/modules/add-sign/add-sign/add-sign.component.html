@@ -32,16 +32,16 @@
           </div>
 
           <div class="row no-gutters mt-2">
-            <div class="col-1"><i class="fa fa-video-camera"></i></div>
+            <i class="fa fa-video-camera"></i>
             <div class="col" [hidden]="video">
               <span style="line-height: 2em;">Video toevoegen:</span>
               <app-video-upload (videoFileEmitter)="video = $event;  this.videoError = ''"></app-video-upload>
             </div>
-            <div class="col-8 " *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #8769e0">
+            <div class="col-8 " *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #eeeeee;">
               <video [src]="video?.file?.rawFile | domSanitizer: 'VideoSource'"
                      (error)="videoErrorFunction($event)"></video>
             </div>
-            <div class="col-3" [hidden]="!video">
+            <div class="col" [hidden]="!video">
               <app-video-upload (videoFileEmitter)="video = $event"></app-video-upload>
             </div>
           </div>
