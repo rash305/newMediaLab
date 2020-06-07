@@ -21,16 +21,19 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`${environment.baseUrl}/auth/login`, { username, password }, )
+    return this.http.post<any>(`${environment.baseUrl}/auth/login`, {username, password},)
       .pipe(map(response => {
+        console.log(response);
         // login successful if there's a user in the response
         if (response && response.token != null) {
           // store user details and basic auth credentials in local storage
           // to keep user logged in between page refreshes
           localStorage.setItem('currentUserBearer', response.token);
           this.isLoggedIn();
+          return response.token;
+        } else {
+          return null;
         }
-        return response;
       }))
       .pipe(
         catchError(this.handleError('wrongLoginError', null))
