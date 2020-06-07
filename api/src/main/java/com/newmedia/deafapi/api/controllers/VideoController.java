@@ -38,7 +38,7 @@ public class VideoController {
         return fileDownloadUri;
     }
 
-    @GetMapping("/api/videos/{fileName:.+}")
+    @GetMapping("/api/videos/{fileName}")
     public ResponseEntity<Resource > downloadFile(@PathVariable String fileName, HttpServletRequest request) throws IOException, ClassNotFoundException {
         // Load file as Resource
         Resource resource= fileStorageService.loadFileAsResource(fileName);
