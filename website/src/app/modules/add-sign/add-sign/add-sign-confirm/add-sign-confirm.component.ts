@@ -10,6 +10,7 @@ import {FileItem} from 'ng2-file-upload';
 export class AddSignConfirmComponent implements OnInit {
 
   @Output() ConfirmAddSignEvent = new EventEmitter();
+  @Output() ChangeImageEvent = new EventEmitter();
 
   @Input() sign: SignDetailsModel;
   @Input() video: FileItem;
@@ -31,5 +32,6 @@ export class AddSignConfirmComponent implements OnInit {
 
   changeImage() {
     // some fancy function that changes the image
+    this.ChangeImageEvent.emit(true);
   }
 }

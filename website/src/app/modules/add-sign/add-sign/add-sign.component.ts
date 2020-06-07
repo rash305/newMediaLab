@@ -8,6 +8,7 @@ import {SignTemplateService} from '../../../shared/signs/services/sign-template.
 import {SignModel} from '../../../shared/signs/models/sign.model';
 import {FileItem} from 'ng2-file-upload';
 import {VideoModel} from '../../../shared/signs/models/video.model';
+import {ImageService} from '../../../shared/signs/services/image.service';
 
 @Component({
   selector: 'app-add-sign',
@@ -28,6 +29,7 @@ export class AddSignComponent implements OnInit {
   private requiredError = ' moet worden ingevuld';
 
   showConfirmationScreen = false;
+  imageNumber = 1;
   sign: SignDetailsModel;
 
   categories: CategoryModel[];
@@ -37,7 +39,8 @@ export class AddSignComponent implements OnInit {
   constructor(private router: Router,
               private categoriesService: CategoriesService,
               private signDetailsService: SignDetailsService,
-              private signService: SignTemplateService) {
+              private signService: SignTemplateService,
+              private imageService: ImageService) {
   }
 
   ngOnInit(): void {
@@ -59,13 +62,29 @@ export class AddSignComponent implements OnInit {
 
       const categoryModel = this.categories.find(x => x.id === this.categoryId);
       // Send object to backend API
-      const signDetails = new SignDetailsModel().deserialize({
-        title: this.meaning, categoryId: this.categoryId,
-        category: categoryModel, image: 'https://picsum.photos/200/200'
-      });
-      // Go to confirmation screen for user to confirm sign
-      this.sign = signDetails;
-      this.showConfirmationScreen = true;
+      this.imageService.getSignImage(this.imageNumber, this.meaning, categoryModel.title)
+        .subscribe(image => {
+          const signImage = image;
+          const signDetails = new SignDetailsModel().deserialize({
+            title: this.meaning, categoryId: this.categoryId,
+            category: categoryModel, image: signImage
+          });
+          // Go to confirmation screen for user to confirm sign
+          this.sign = signDetails;
+          this.showConfirmationScreen = true;
+        });
+    }
+  }
+
+  changeImage(change: boolean): void {
+    if (change) {
+      this.imageNumber = this.imageNumber + 1;
+      this.imageService.getSignImage(this.imageNumber, this.sign.title, this.sign.category.title)
+        .subscribe(image => {
+          this.sign.image = image;
+          // Go to confirmation screen for user to confirm sign
+          this.showConfirmationScreen = true;
+        });
     }
   }
 
