@@ -25,6 +25,7 @@ video{
   border-radius: 7px;
   bottom: 0;
   object-fit:cover;
+  margin: 0px;
 }
 .tile {
   width: 100%;
@@ -53,7 +54,7 @@ img {
   top: 50%;
   left: 50%;
   position: absolute;
-  transform: translate(-50%, -75%);
+  transform: translate(-50%, -60%);
 }
 
 .correct {

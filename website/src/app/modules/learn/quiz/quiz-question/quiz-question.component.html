@@ -6,13 +6,15 @@
   </div>
   <div class="w-100" style="margin: 5px"></div>
   <div class="col-6">
-    <div class="row">
-      <div *ngFor="let answer of this.learnSubTask.optionalAnswers" class="col-6">
+    <div class="row justify-content-center">
+      <div *ngFor="let answer of this.learnSubTask.optionalAnswers" class="col-5 m-0 p-1">
         <div class="tile" (click)="this.checkAnswer(answer)">
           <img [ngClass]="{'img-focus': this.learnSubTask.correctResponseIDs.includes(answer.id)||this.learnSubTask.wrongResponseIDs.includes(answer.id)}" src="{{answer.image}}" alt="{{answer.title}}" >
           <i class="fa fa-4x" [ngClass]="{'fa-times': this.learnSubTask.wrongResponseIDs.includes(answer.id), 'wrong':this.learnSubTask.wrongResponseIDs.includes(answer.id),
           'fa-check': this.learnSubTask.correctResponseIDs.includes(answer.id), 'correct': this.learnSubTask.correctResponseIDs.includes(answer.id)}"></i>
-          {{answer.title}}
+        </div>
+        <div class="m-0 p-0">
+        {{answer.title}}
         </div>
       </div>
     </div>
@@ -21,7 +23,7 @@
 
 <div class="container" style="position: absolute; bottom: 15px">
 <div class="col-12" >
-  <button type="button" class="btn btn-primary col-3" (click)="goBack()"><i class="fa fa-arrow-left"></i> Terug</button>
-  <button type="button" class="btn btn-primary col-3 offset-6"  (click)="goFurther()">Verder <i class="fa fa-arrow-right"></i></button>
+  <button type="button" class="btn btn-primary col-4" (click)="goBack()"><i class="fa fa-arrow-left"></i> Terug</button>
+  <button type="button" class="btn btn-primary col-4 offset-4"  (click)="goFurther()">Verder <i class="fa fa-arrow-right"></i></button>
 </div>
 </div>
