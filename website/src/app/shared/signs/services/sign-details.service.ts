@@ -94,8 +94,9 @@ export class SignDetailsService {
       );
   }
 
-  unFavorite(sign: SignDetailsModel): Observable<boolean> {
-    return this.http.post<SignDetailsModel>(this.signUrl + '/unfavorite', sign)
+  unFavorite(sign: SignDetailsModel, video: VideoModel): Observable<boolean> {
+    const favoriteVideoModel = new FavoriteVideoModel(sign.id, sign.category.id, video.id);
+    return this.http.post<SignDetailsModel>(this.signUrl + '/unfavorite', favoriteVideoModel)
       .pipe(map(x => {
           return true;
         })

@@ -20,7 +20,7 @@
       </div>
       <div class="col-2 sidebar" [hidden]="isPersonalDictionary">
         <i class="fa fa-3x fa-heart-o purple-icon" (click)="addToPersonal(video)" *ngIf="!video.isFavorite"></i>
-        <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal()" *ngIf="video.isFavorite"></i>
+        <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal(video)" *ngIf="video.isFavorite"></i>
       </div>
       <div class="col-12">
         <i class="fa fa-heart" [ngClass]="{'purple-icon': video.isFavorite}"></i> {{video.popularity}}x

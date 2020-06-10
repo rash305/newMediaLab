@@ -67,10 +67,14 @@ export class SignDetailsComponent implements OnInit {
     });
   }
 
-  removeFromPersonal() {
-    this.sign.nrOfPersonal -= 1;
-    this.sign.isPersonal = !this.sign.isPersonal;
-    this.signDetailsService.unFavorite(this.sign).subscribe();
+  removeFromPersonal(video: VideoModel) {
+    this.signDetailsService.unFavorite(this.sign, video).subscribe(x => {
+      if (x) {
+        video.popularity -= 1;
+        video.isFavorite = !video.isFavorite;
+        this.sign.videos.sort((a, b) => b.popularity - a.popularity);
+      }
+    });
   }
 
   delete(video: VideoModel) {

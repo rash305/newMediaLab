@@ -25,8 +25,11 @@ public class FavoritesService implements IFavoritesService {
     }
 
     @Override
-    public void unFavoriteSign(String signId, String personId) {
-        favoriteSignRepository.deleteBySignIdAndAndPersonId(signId, personId);
+    public void unFavoriteSign(FavoriteSign favoriteSign) {
+        String signId = favoriteSign.getSignId();
+        String personId = favoriteSign.getPersonId();
+        String videoId = favoriteSign.getVideoId();
+        favoriteSignRepository.deleteBySignIdAndPersonIdAndVideoId(signId, personId, videoId);
     }
 
     @Override

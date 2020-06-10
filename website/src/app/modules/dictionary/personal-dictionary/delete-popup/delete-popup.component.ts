@@ -30,7 +30,7 @@ export class DeletePopupComponent implements OnInit {
     // delete sign from favotieten
     this.sign.nrOfPersonal -= 1;
     this.sign.isPersonal = !this.sign.isPersonal;
-    this.signDetailsService.unFavorite(this.sign).subscribe(x => {
+    this.signDetailsService.unFavorite(this.sign, this.video).subscribe(x => {
       this.routeAfterFavorateUpdate();
     });
   }

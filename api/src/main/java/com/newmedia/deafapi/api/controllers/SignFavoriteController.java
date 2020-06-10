@@ -45,18 +45,15 @@ public class SignFavoriteController {
     }
 
     @PostMapping("/api/signs/unfavorite")
-    public void unFavoriteSign(@RequestBody SignDto sign) {
-        String userId = GetAuthorizedUser();
-        if (userId == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "No valid user token is given.");
-        }
-        if (sign == null) {
+    public void unFavoriteSign(@RequestBody FavoriteSignDto favSignDto) {
+        FavoriteSign favSign = ObjectMapperUtils.map(favSignDto, FavoriteSign.class);
+        if (favSign == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No valid sign is given.");
         }
-
-        IFavoritesService.unFavoriteSign(sign.getId(), userId);
+        String userId = GetAuthorizedUser();
+        favSign.setPersonId(userId);
+        IFavoritesService.unFavoriteSign(favSign);
     }
 
     private String GetAuthorizedUser() {
