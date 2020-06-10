@@ -20,6 +20,9 @@ export class SignDetailsModel extends SignModel {
     if (input.category) {
       this.category = new CategoryModel().deserialize(input.category);
     }
+    if (input.videos) {
+      this.videos = input.videos.map(vid => new VideoModel().deserialize(vid));
+    }
     return this;
   }
 }

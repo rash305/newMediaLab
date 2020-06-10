@@ -1,11 +1,13 @@
 package com.newmedia.deafapi.api.services.fileupload;
 
+import com.newmedia.deafapi.api.models.VideoReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -33,19 +35,33 @@ public class FileStorageService {
         }
     }
 
-    public String storeFile(MultipartFile file) {
+    public VideoReference storeFile(MultipartFile file) {
+        VideoReference videoReference = new VideoReference();
+        videoReference.setType(file.getContentType());
+
+        String[] extention = file.getName().split(".");
         String fileName = randomFileName();
+        if(extention.length != 0){
+            fileName += '.';
+            fileName += extention[extention.length - 1];
+        }
+
         try {
             // Check if the file's name contains invalid characters
             if (fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
 
+            // Build a Url to retrieve the video
+            String url = buildUrl(fileName);
+            videoReference.setVideoUrl(url);
+
+
             // Copy file to the target location (Replacing existing file with the same name)
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            return fileName;
+            return videoReference;
         } catch (IOException ex) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
         }
@@ -54,6 +70,15 @@ public class FileStorageService {
     private String randomFileName() {
         UUID uuid = UUID.randomUUID();
         return StringUtils.cleanPath(String.valueOf(uuid));
+    }
+
+    private String buildUrl(String Filename){
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/api/videos/")
+                .path(Filename)
+                .toUriString();
+
+        return fileDownloadUri;
     }
 
     public Resource loadFileAsResource(String fileName) {

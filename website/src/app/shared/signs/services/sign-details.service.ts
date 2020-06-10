@@ -1,13 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HandleError, HttpErrorHandler} from '../../../common/network/http-error-handler.service';
 import {catchError, map} from 'rxjs/operators';
-import {CategoryModel} from '../models/category.model';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {SignDetailsModel} from '../models/sign-details.model';
 import {Observable, of} from 'rxjs';
-import {Account} from '../../account/models/account';
-import {SignModel} from '../models/sign.model';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {VideoModel} from '../models/video.model';
 import {MessagesService} from '../../../common/errors/messages.service';
@@ -49,7 +46,8 @@ export class SignDetailsService {
           observer.error();
         } else {
           // Insert video url
-          signDetails.videos = [new VideoModel(response)];
+          const uploadedVideo = new VideoModel().deserialize(JSON.parse(response));
+          signDetails.videos = [uploadedVideo];
           this.http.post<SignDetailsModel>(this.signDetailsUrl + 'create', signDetails)
             .pipe(map(res => {
               return new SignDetailsModel().deserialize(res);

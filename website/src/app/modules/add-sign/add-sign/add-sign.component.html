@@ -38,7 +38,7 @@
               <app-video-upload (videoFileEmitter)="video = $event;  this.videoError = ''"></app-video-upload>
             </div>
             <div class="col-8 " *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #eeeeee;">
-              <video [src]="video?.file?.rawFile | domSanitizer: 'VideoSource'"
+              <video [src]="video?.file?.rawFile | domSanitizer: 'VideoSource'" playsinline
                      (error)="videoErrorFunction($event)"></video>
             </div>
             <div class="col" [hidden]="!video">

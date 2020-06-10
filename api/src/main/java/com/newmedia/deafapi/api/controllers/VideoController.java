@@ -1,8 +1,12 @@
 package com.newmedia.deafapi.api.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newmedia.deafapi.api.ApiApplication;
-import com.newmedia.deafapi.api.services.Interfaces.IVideoService;
+import com.newmedia.deafapi.api.dataservices.docModels.DocVideoReference;
+import com.newmedia.deafapi.api.dtos.VideoDto;
+import com.newmedia.deafapi.api.models.VideoReference;
 import com.newmedia.deafapi.api.services.fileupload.FileStorageService;
+import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +31,21 @@ public class VideoController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/api/videos")
-    public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        String fileName = fileStorageService.storeFile(file);
+    public VideoDto uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        if(file == null){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Video is not received");
+        }
+        VideoReference videoReference = fileStorageService.storeFile(file);
 
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/api/videos/")
-                .path(fileName)
-                .toUriString();
-
-        return fileDownloadUri;
+        return ObjectMapperUtils.map(videoReference, VideoDto.class);
     }
 
     @GetMapping("/api/videos/{fileName}")
-    public ResponseEntity<Resource > downloadFile(@PathVariable String fileName, HttpServletRequest request) throws IOException, ClassNotFoundException {
+    public ResponseEntity<Resource > downloadFile(@PathVariable String fileName,
+                                                  HttpServletRequest request,
+                                                  @RequestParam(value = "type", required = false, defaultValue = "application/octet-stream")
+                                                              String type) throws IOException, ClassNotFoundException {
         // Load file as Resource
         Resource resource= fileStorageService.loadFileAsResource(fileName);
         if(resource == null){
@@ -48,7 +54,7 @@ public class VideoController {
                     HttpStatus.NOT_FOUND, "Video not available");
         }
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .contentType(MediaType.parseMediaType(type))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
                 .body(resource);
     }

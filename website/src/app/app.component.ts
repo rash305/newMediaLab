@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthenticationService} from './shared/account/services/authentication.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,12 @@ export class AppComponent {
   hideAddSignPopup = true;
   hideNotLoggedInPopup = true;
 
-  constructor(authenticationService: AuthenticationService) {
+  constructor(authenticationService: AuthenticationService,
+              private translate: TranslateService) {
     authenticationService.isLoggedInEmitter.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
+      translate.setDefaultLang('en');
+
     });
     authenticationService.isLoggedIn();
   }
