@@ -50,7 +50,7 @@ export class SignDetailsService {
         } else {
           // Insert video url
           signDetails.videos = [new VideoModel(response)];
-          this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
+          this.http.post<SignDetailsModel>(this.signDetailsUrl + 'create', signDetails)
             .pipe(map(res => {
               return new SignDetailsModel().deserialize(res);
             }))
@@ -79,7 +79,6 @@ export class SignDetailsService {
     uploader.onBeforeUploadItem = (item) => {
       item.withCredentials = false;
     };
-
     return uploader;
   }
 

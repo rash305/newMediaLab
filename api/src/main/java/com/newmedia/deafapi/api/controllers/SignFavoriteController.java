@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 // Add notation to inform spring boot to create an instance of this class and publish it as a rest controller
 @RestController
 public class SignFavoriteController {
@@ -24,17 +26,17 @@ public class SignFavoriteController {
     // https://restfulapi.net/resource-naming/
     @PostMapping("/api/signs/favorite")
     public void favoriteSign(@RequestBody SignDto sign) {
-        String UserId = GetAuthorizedUser();
-        if (UserId == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "No valid user token is given.");
-        }
         if (sign == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No valid sign is given.");
         }
-
-        IFavoritesService.favoriteSign(sign.getId(), sign.getCategory().getId(), UserId);
+        String UserId = GetAuthorizedUser();
+        // Get all users who have this sign as favorite
+        List<String> users = IFavoritesService.getUsersOfFavoriteSign(sign.getId());
+        // Add sign to users favorite when user is does not have it as favorites yet
+        if (!users.contains(UserId)) {
+            IFavoritesService.favoriteSign(sign.getId(), sign.getCategory().getId(), UserId);
+        }
     }
 
     @PostMapping("/api/signs/unfavorite")

@@ -1,5 +1,7 @@
 package com.newmedia.deafapi.api.dataservices.docModels;
 
+import com.newmedia.deafapi.api.models.VideoReference;
+import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -73,5 +75,13 @@ public class DocSign {
 
     public void setCreator_id(String creator_id) {
         this.creator_id = creator_id;
+    }
+
+
+    public void addVideo(List<VideoReference> videos) {
+        for(VideoReference video: videos) {
+            DocVideoReference docVideo = ObjectMapperUtils.map(video, DocVideoReference.class);
+            this.videos.add(docVideo);
+        }
     }
 }

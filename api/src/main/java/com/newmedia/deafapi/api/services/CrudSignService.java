@@ -1,12 +1,14 @@
 package com.newmedia.deafapi.api.services;
 
+import com.newmedia.deafapi.api.dataservices.docModels.DocCategory;
 import com.newmedia.deafapi.api.dataservices.docModels.DocFavoriteSign;
 import com.newmedia.deafapi.api.dataservices.docModels.DocSign;
-import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoCategoryRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoFavoriteSignRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
+import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.models.SignDetails;
+import com.newmedia.deafapi.api.models.VideoReference;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +79,7 @@ public class CrudSignService implements ISignService {
     public Sign createSign(Sign sign) {
         DocSign s = ObjectMapperUtils.map(sign, DocSign.class);
         signISignRepository.insert(s);
-        // return category with ID
+        // return sign with ID
         return ObjectMapperUtils.map(s, Sign.class);
     }
 
@@ -85,7 +87,7 @@ public class CrudSignService implements ISignService {
     public SignDetails createSignDetails(SignDetails sign) {
         DocSign s = ObjectMapperUtils.map(sign, DocSign.class);
         signISignRepository.insert(s);
-        // return category with ID
+        // return signDetail with ID
         return ObjectMapperUtils.map(s, SignDetails.class);
     }
 
@@ -103,5 +105,26 @@ public class CrudSignService implements ISignService {
         else {
             return null;
         }
+    }
+
+    @Override
+    public SignDetails getSignDetails(String title, Category category) {
+        DocCategory docCategory = ObjectMapperUtils.map(category, DocCategory.class);
+        Optional<DocSign> s = signISignRepository.findByTitleAndCategory(title, docCategory);
+        if(s.isPresent()) {
+            return ObjectMapperUtils.map(s.get(), SignDetails.class);
+        }
+        else {
+            return null;
+        }
+    }
+
+    @Override
+    public SignDetails addVideoToSign(SignDetails duplicate, List<VideoReference> videos) {
+        DocSign docDuplicate = ObjectMapperUtils.map(duplicate, DocSign.class);
+        docDuplicate.addVideo(videos);
+        signISignRepository.save(docDuplicate);
+        // return updated signDetails with ID
+        return ObjectMapperUtils.map(docDuplicate, SignDetails.class);
     }
 }

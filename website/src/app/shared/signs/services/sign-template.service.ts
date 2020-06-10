@@ -87,6 +87,10 @@ export class SignTemplateService {
       }
     });
 
+    // Sort signs
+    signList.sort((a, b) => a.title.localeCompare(b.title));
+
+
     if (personal) {
       // Set signList as current list of signs
       this._personalSigns.next(signList);

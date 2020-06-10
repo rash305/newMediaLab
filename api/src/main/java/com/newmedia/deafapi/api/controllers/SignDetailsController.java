@@ -47,18 +47,33 @@ public class SignDetailsController {
     }
 
 
-    @PostMapping("/api/signdetails")
+    @PostMapping("/api/signdetails/create")
     public SignDetailsDto createSignDetails(@RequestBody SignDetailsDto sign) {
         SignDetails signDetails = ObjectMapperUtils.map(sign, SignDetails.class);
         if(signDetails == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign is given.");
         }
-        String creator_id = GetAuthorizedUser();
-        signDetails.setCreator_id(creator_id);
 
-        signDetails = ISignService.createSignDetails(signDetails);
-        return ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
+        // Make title with capital as first letter
+        String title = signDetails.getTitle();
+        String capTitle = title.substring(0, 1).toUpperCase() + title.substring(1).toLowerCase();
+        signDetails.setTitle(capTitle);
+
+        // check whether sign already exists in the database
+        SignDetails duplicate = ISignService.getSignDetails(signDetails.getTitle(), signDetails.getCategory());
+        if(duplicate == null) {
+            // Sign is not in the database yet, thus add a new sign
+            String creator_id = GetAuthorizedUser();
+            signDetails.setCreator_id(creator_id);
+
+            signDetails = ISignService.createSignDetails(signDetails);
+            return ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
+        } else {
+            // Sign is already in the database, thus add video to known sign
+            duplicate = ISignService.addVideoToSign(duplicate, signDetails.getVideos());
+            return ObjectMapperUtils.map(duplicate, SignDetailsDto.class);
+        }
     }
 
     private String GetAuthorizedUser() {

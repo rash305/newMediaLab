@@ -131,7 +131,7 @@ export class AddSignComponent implements OnInit {
       // Make uploaded sign favorite
       this.signDetailsService.favorite(sign).subscribe();
       // Add signs to web sign service
-      this.signService.AddSignManually(sign);
+      // this.signService.AddSignManually(sign);
       this.emptyVariables();
       console.log(sign);
       this.routeAfterUpdate(sign.id);
@@ -175,6 +175,7 @@ export class AddSignComponent implements OnInit {
   }
 
   routeAfterUpdate(id) {
+    this.router.navigate(['/learn']);
     this.router.navigate(['/dictionary'], {
       queryParams: {id, type: 'sign-details'},
       queryParamsHandling: 'merge',

@@ -82,4 +82,10 @@ public class SignDetails {
     public void setCreator_id(String creator_id) {
         this.creator_id = creator_id;
     }
+
+    public void addVideo(List<VideoReference> videos) {
+        for(VideoReference video: videos) {
+            this.videos.add(video);
+        }
+    }
 }

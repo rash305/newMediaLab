@@ -1,7 +1,9 @@
 package com.newmedia.deafapi.api.services.Interfaces;
 
+import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.models.SignDetails;
+import com.newmedia.deafapi.api.models.VideoReference;
 
 
 import java.util.List;
@@ -17,4 +19,7 @@ public interface ISignService {
     void updateSign(Sign sign);
 
     SignDetails getSignDetails(String id);
+    SignDetails getSignDetails(String title, Category category);
+
+    SignDetails addVideoToSign(SignDetails duplicate, List<VideoReference> videos);
 }
