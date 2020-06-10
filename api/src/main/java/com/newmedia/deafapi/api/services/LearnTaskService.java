@@ -6,7 +6,6 @@ import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoCategoryRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoFavoriteSignRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
 import com.newmedia.deafapi.api.models.*;
-import com.newmedia.deafapi.api.services.Interfaces.IFavoritesService;
 import com.newmedia.deafapi.api.services.Interfaces.ILearnTaskService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +64,8 @@ public class LearnTaskService implements ILearnTaskService {
 
             // Get to know whether the user already has the question sign in his favorites
             String userId = GetAuthorizedUser();
-            boolean isFavorite = favoriteSignRepository.existsBySignIdAndAndPersonId(question.getId(), userId);
-            question.setIsPersonal(isFavorite);
+            boolean isFavorite = favoriteSignRepository.existsBySignIdAndAndPersonIdAndVideoId(question.getId(), userId, question.getVideos().get(0).getId());
+            question.getVideos().get(0).setIsFavorite(isFavorite);
             learnSubTasks[i] = new LearnSubTask(question, optionalAnswers);
         }
         return learnSubTasks;

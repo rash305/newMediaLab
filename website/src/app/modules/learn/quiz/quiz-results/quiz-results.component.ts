@@ -1,7 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SignModel} from '../../../../shared/signs/models/sign.model';
-import {SignTemplateService} from '../../../../shared/signs/services/sign-template.service';
-import {Router} from '@angular/router';
 import {SignDetailsService} from '../../../../shared/signs/services/sign-details.service';
 import {SignDetailsModel} from '../../../../shared/signs/models/sign-details.model';
 
@@ -15,7 +12,6 @@ export class QuizResultsComponent implements OnInit {
   @Output() messageQuizStatus = new EventEmitter<string>();
 
   @Input() learnedSigns: SignDetailsModel[];
-  addedToPersonalIDs: string[] = [];
 
   constructor(private signDetailsService: SignDetailsService) {
   }
@@ -24,11 +20,19 @@ export class QuizResultsComponent implements OnInit {
   }
 
   addToPersonal(sign: SignDetailsModel) {
-    if (sign.isPersonal) {
-      this.signDetailsService.unFavorite(sign, sign.videos.pop()).subscribe();
+    const video = sign.videos[0];
+    if (video.isFavorite) {
+      this.signDetailsService.unFavorite(sign, video).subscribe(x => {
+        if (x) {
+          video.isFavorite = !video.isFavorite;
+        }
+      });
     } else {
-      this.signDetailsService.favorite(sign, sign.videos.pop()).subscribe();
+      this.signDetailsService.favorite(sign, video).subscribe(x => {
+        if (x) {
+          video.isFavorite = !video.isFavorite;
+        }
+      });
     }
-    sign.isPersonal = !sign.isPersonal;
   }
 }

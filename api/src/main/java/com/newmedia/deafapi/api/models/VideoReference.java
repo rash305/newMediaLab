@@ -2,8 +2,9 @@ package com.newmedia.deafapi.api.models;
 
 public class VideoReference {
     private String id;
-    private String videoUrl ;
-    private String type ;
+    private String videoUrl;
+    private String type;
+    private boolean isFavorite;
 
     public VideoReference() {
     }
@@ -30,5 +31,13 @@ public class VideoReference {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(boolean isFavorite) {
+        this.isFavorite = isFavorite;
     }
 }

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface MongoFavoriteSignRepository extends MongoRepository<DocFavoriteSign, String> {
     List<DocFavoriteSign> findBySignIdAndVideoId(String signId, String videoId);
-    boolean existsBySignIdAndAndPersonId(String signId, String personId);
+    boolean existsBySignIdAndAndPersonIdAndVideoId(String signId, String personId, String videoId);
     void deleteBySignIdAndPersonIdAndVideoId(String signId, String personId, String videoId);
 }
