@@ -48,7 +48,7 @@ export class SignDetailsService {
           // Insert video url
           const uploadedVideo = new VideoModel().deserialize(JSON.parse(response));
           signDetails.videos = [uploadedVideo];
-          this.http.post<SignDetailsModel>(this.signDetailsUrl + 'create', signDetails)
+          this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
             .pipe(map(res => {
               return new SignDetailsModel().deserialize(res);
             }))

@@ -47,7 +47,7 @@ public class SignDetailsController {
     }
 
 
-    @PostMapping("/api/signdetails/create")
+    @PostMapping("/api/signdetails")
     public SignDetailsDto createSignDetails(@RequestBody SignDetailsDto sign) {
         SignDetails signDetails = ObjectMapperUtils.map(sign, SignDetails.class);
         if(signDetails == null) {
