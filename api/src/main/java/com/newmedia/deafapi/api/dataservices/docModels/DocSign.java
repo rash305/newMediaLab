@@ -19,6 +19,7 @@ public class DocSign {
     @DBRef
     private DocCategory category;
     private String image;
+    @DBRef
     private List<DocVideoReference> videos;
     private String creator_id;
 
@@ -77,11 +78,7 @@ public class DocSign {
         this.creator_id = creator_id;
     }
 
-
-    public void addVideo(List<VideoReference> videos) {
-        for(VideoReference video: videos) {
-            DocVideoReference docVideo = ObjectMapperUtils.map(video, DocVideoReference.class);
-            this.videos.add(docVideo);
-        }
+    public void addVideo(DocVideoReference video) {
+        this.videos.add(video);
     }
 }

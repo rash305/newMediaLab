@@ -3,8 +3,10 @@ package com.newmedia.deafapi.api.services;
 import com.newmedia.deafapi.api.dataservices.docModels.DocCategory;
 import com.newmedia.deafapi.api.dataservices.docModels.DocFavoriteSign;
 import com.newmedia.deafapi.api.dataservices.docModels.DocSign;
+import com.newmedia.deafapi.api.dataservices.docModels.DocVideoReference;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoFavoriteSignRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
+import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoVideoRepository;
 import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.models.SignDetails;
@@ -27,8 +29,12 @@ public class CrudSignService implements ISignService {
 
     @Autowired
     private MongoSignRepository signISignRepository;
+
     @Autowired
     private MongoFavoriteSignRepository favoriteSignRepository;
+
+    @Autowired
+    private MongoVideoRepository videoRepository;
 
     @Override
     public List<Sign> getSigns(String categoryId) {
@@ -86,6 +92,10 @@ public class CrudSignService implements ISignService {
     @Override
     public SignDetails createSignDetails(SignDetails sign) {
         DocSign s = ObjectMapperUtils.map(sign, DocSign.class);
+        for (DocVideoReference doc : s.getVideos()){
+            videoRepository.save(doc);
+        }
+
         signISignRepository.insert(s);
         // return signDetail with ID
         return ObjectMapperUtils.map(s, SignDetails.class);
@@ -120,11 +130,15 @@ public class CrudSignService implements ISignService {
     }
 
     @Override
-    public SignDetails addVideoToSign(SignDetails duplicate, List<VideoReference> videos) {
+    public SignDetails addVideoToSign(SignDetails duplicate, VideoReference video) {
+        DocVideoReference docVideoReference = ObjectMapperUtils.map(video, DocVideoReference.class);
         DocSign docDuplicate = ObjectMapperUtils.map(duplicate, DocSign.class);
-        docDuplicate.addVideo(videos);
+        docDuplicate.addVideo(docVideoReference);
+        videoRepository.insert(docVideoReference);
         signISignRepository.save(docDuplicate);
         // return updated signDetails with ID
         return ObjectMapperUtils.map(docDuplicate, SignDetails.class);
     }
+
+
 }

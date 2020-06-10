@@ -128,8 +128,9 @@ export class AddSignComponent implements OnInit {
       // Failed to add sign
       // Toaster message is enough for now
     } else {
+      console.log('sign:', sign);
       // Make uploaded sign favorite
-      this.signDetailsService.favorite(sign).subscribe();
+      this.signDetailsService.favorite(sign, sign.videos.reverse().pop()).subscribe();
       // Add signs to web sign service
       // this.signService.AddSignManually(sign);
       this.emptyVariables();

@@ -1,8 +1,11 @@
 package com.newmedia.deafapi.api.controllers;
 
+import com.newmedia.deafapi.api.dtos.FavoriteSignDto;
 import com.newmedia.deafapi.api.dtos.SignDto;
+import com.newmedia.deafapi.api.models.FavoriteSign;
+import com.newmedia.deafapi.api.models.SignDetails;
 import com.newmedia.deafapi.api.services.Interfaces.IFavoritesService;
-import com.newmedia.deafapi.api.services.Interfaces.ISignService;
+import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -25,24 +28,26 @@ public class SignFavoriteController {
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
     @PostMapping("/api/signs/favorite")
-    public void favoriteSign(@RequestBody SignDto sign) {
-        if (sign == null) {
+    public void favoriteSign(@RequestBody FavoriteSignDto favSignDto) {
+        FavoriteSign favSign = ObjectMapperUtils.map(favSignDto, FavoriteSign.class);
+        if (favSign == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No valid sign is given.");
         }
-        String UserId = GetAuthorizedUser();
+        String userId = GetAuthorizedUser();
         // Get all users who have this sign as favorite
-        List<String> users = IFavoritesService.getUsersOfFavoriteSign(sign.getId());
+        List<String> users = IFavoritesService.getUsersOfFavoriteSign(favSign.getId(), favSign.getVideoId());
         // Add sign to users favorite when user is does not have it as favorites yet
-        if (!users.contains(UserId)) {
-            IFavoritesService.favoriteSign(sign.getId(), sign.getCategory().getId(), UserId);
+        if (!users.contains(userId)) {
+            favSign.setPersonId(userId);
+            IFavoritesService.favoriteSign(favSign);
         }
     }
 
     @PostMapping("/api/signs/unfavorite")
     public void unFavoriteSign(@RequestBody SignDto sign) {
-        String UserId = GetAuthorizedUser();
-        if (UserId == null) {
+        String userId = GetAuthorizedUser();
+        if (userId == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No valid user token is given.");
         }
@@ -51,7 +56,7 @@ public class SignFavoriteController {
                     HttpStatus.NOT_FOUND, "No valid sign is given.");
         }
 
-        IFavoritesService.unFavoriteSign(sign.getId(), UserId);
+        IFavoritesService.unFavoriteSign(sign.getId(), userId);
     }
 
     private String GetAuthorizedUser() {

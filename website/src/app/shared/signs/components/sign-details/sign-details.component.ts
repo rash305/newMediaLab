@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SignDetailsService} from '../../services/sign-details.service';
 import {SignDetailsModel} from '../../models/sign-details.model';
 import {EventEmitter} from '@angular/core';
-import {CategoryModel} from '../../models/category.model';
+import {VideoModel} from '../../models/video.model';
 
 @Component({
   selector: 'app-sign-details',
@@ -19,7 +19,6 @@ export class SignDetailsComponent implements OnInit {
   @Input() currentSignId: string;
   @Input() sign: SignDetailsModel;
 
-  isDeleted = false;
   hideDeletePopup = true;
 
   constructor(private route: ActivatedRoute,
@@ -44,10 +43,10 @@ export class SignDetailsComponent implements OnInit {
       });
   }
 
-  addToPersonal() {
+  addToPersonal(video: VideoModel) {
     this.sign.nrOfPersonal += 1;
     this.sign.isPersonal = !this.sign.isPersonal;
-    this.signDetailsService.favorite(this.sign).subscribe(x => {
+    this.signDetailsService.favorite(this.sign, video).subscribe(x => {
       if (x) {
         this.routeAfterFavorateUpdate();
       }

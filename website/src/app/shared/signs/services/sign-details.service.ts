@@ -8,6 +8,7 @@ import {Observable, of} from 'rxjs';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {VideoModel} from '../models/video.model';
 import {MessagesService} from '../../../common/errors/messages.service';
+import {FavoriteVideoModel} from '../models/favoriteVideo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -80,8 +81,10 @@ export class SignDetailsService {
     return uploader;
   }
 
-  favorite(sign: SignDetailsModel): Observable<boolean> {
-    return this.http.post<SignDetailsModel>(this.signUrl + '/favorite', sign)
+
+  favorite(sign: SignDetailsModel, video: VideoModel): Observable<boolean> {
+    const favoriteVideoModel = new FavoriteVideoModel(sign.id, sign.category.id, video.id);
+    return this.http.post<SignDetailsModel>(this.signUrl + '/favorite', favoriteVideoModel)
       .pipe(map(x => {
           return true;
         })

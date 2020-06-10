@@ -1,8 +1,6 @@
-package com.newmedia.deafapi.api.dtos;
+package com.newmedia.deafapi.api.models;
 
-import java.io.Serializable;
-
-public class FavoriteSignDto implements Serializable {
+public class FavoriteSign {
 
     private String id;
     private String signId;
@@ -10,7 +8,16 @@ public class FavoriteSignDto implements Serializable {
     private String personId;
     private String videoId;
 
-    public FavoriteSignDto() {
+    public FavoriteSign() {
+    }
+
+    public FavoriteSign(String id, String signId, String categoryId,
+                        String personId, String videoId) {
+        this.id = id;
+        this.signId = signId;
+        this.categoryId = categoryId;
+        this.personId = personId;
+        this.videoId = videoId;
     }
 
     public String getId() {

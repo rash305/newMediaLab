@@ -21,5 +21,5 @@ public interface ISignService {
     SignDetails getSignDetails(String id);
     SignDetails getSignDetails(String title, Category category);
 
-    SignDetails addVideoToSign(SignDetails duplicate, List<VideoReference> videos);
+    SignDetails addVideoToSign(SignDetails duplicate, VideoReference videos);
 }

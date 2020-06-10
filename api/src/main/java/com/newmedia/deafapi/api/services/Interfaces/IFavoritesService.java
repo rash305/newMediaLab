@@ -1,12 +1,12 @@
 package com.newmedia.deafapi.api.services.Interfaces;
 
-import com.newmedia.deafapi.api.models.Sign;
+import com.newmedia.deafapi.api.models.FavoriteSign;
 
 import java.util.List;
 
 public interface IFavoritesService {
 
-    void favoriteSign(String signId, String categoryId, String userId);
+    void favoriteSign(FavoriteSign favoriteSign);
     void unFavoriteSign(String signId, String personId);
-    List<String> getUsersOfFavoriteSign(String signId);
+    List<String> getUsersOfFavoriteSign(String signId, String videoId);
 }

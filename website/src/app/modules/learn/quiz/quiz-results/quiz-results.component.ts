@@ -27,7 +27,7 @@ export class QuizResultsComponent implements OnInit {
     if (sign.isPersonal) {
       this.signDetailsService.unFavorite(sign).subscribe();
     } else {
-      this.signDetailsService.favorite(sign).subscribe();
+      this.signDetailsService.favorite(sign, sign.videos.pop()).subscribe();
     }
     sign.isPersonal = !sign.isPersonal;
   }

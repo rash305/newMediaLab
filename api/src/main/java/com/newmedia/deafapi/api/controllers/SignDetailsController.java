@@ -37,7 +37,7 @@ public class SignDetailsController {
         }
         
         // Get all users who have this sign as favorite
-        List<String> users = IFavoritesService.getUsersOfFavoriteSign(signDetails.getId());
+        List<String> users = IFavoritesService.getUsersOfFavoriteSign(signDetails.getId(), signDetails.getVideos().get(0).getId());
         String UserId = GetAuthorizedUser();
 
         SignDetailsDto signDetailsDto = ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
@@ -49,11 +49,13 @@ public class SignDetailsController {
 
     @PostMapping("/api/signdetails")
     public SignDetailsDto createSignDetails(@RequestBody SignDetailsDto sign) {
+        System.out.println("First videos" + sign.getVideos());
         SignDetails signDetails = ObjectMapperUtils.map(sign, SignDetails.class);
         if(signDetails == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign is given.");
         }
+        System.out.println("Second videos" + signDetails.getVideos());
 
         // Make title with capital as first letter
         String title = signDetails.getTitle();
@@ -68,10 +70,13 @@ public class SignDetailsController {
             signDetails.setCreator_id(creator_id);
 
             signDetails = ISignService.createSignDetails(signDetails);
-            return ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
+            System.out.println("Third videos" + signDetails.getVideos());
+            SignDetailsDto dto = ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
+            System.out.println("Forth videos" + dto.getVideos());
+            return dto;
         } else {
             // Sign is already in the database, thus add video to known sign
-            duplicate = ISignService.addVideoToSign(duplicate, signDetails.getVideos());
+            duplicate = ISignService.addVideoToSign(duplicate, signDetails.getVideos().get(0));
             return ObjectMapperUtils.map(duplicate, SignDetailsDto.class);
         }
     }

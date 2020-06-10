@@ -1,12 +1,19 @@
 package com.newmedia.deafapi.api.models;
 
 public class VideoReference {
+    private String id;
     private String videoUrl ;
     private String type ;
-    private int popularity;
 
     public VideoReference() {
+    }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getVideoUrl() {
@@ -15,14 +22,6 @@ public class VideoReference {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
-    }
-
-    public int getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
     }
 
     public String getType() {
