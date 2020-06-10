@@ -12,6 +12,8 @@ public class DocVideoReference {
 
     private String videoUrl ;
     private int popularity;
+    private String type = "application/mp4" ;
+
 
     public DocVideoReference() {
     }
@@ -30,5 +32,13 @@ public class DocVideoReference {
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

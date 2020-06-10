@@ -49,7 +49,9 @@ export class SignDetailsService {
           observer.error();
         } else {
           // Insert video url
-          signDetails.videos = [new VideoModel(response)];
+          const uploadedVideo = new VideoModel().deserialize(JSON.parse(response));
+
+          signDetails.videos = [uploadedVideo];
           this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
             .pipe(map(res => {
               return new SignDetailsModel().deserialize(res);
