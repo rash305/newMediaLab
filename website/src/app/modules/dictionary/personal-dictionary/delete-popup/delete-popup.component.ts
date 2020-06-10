@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SignDetailsModel} from '../../../../shared/signs/models/sign-details.model';
 import {SignDetailsService} from '../../../../shared/signs/services/sign-details.service';
 import {Router} from '@angular/router';
+import {VideoModel} from '../../../../shared/signs/models/video.model';
 
 @Component({
   selector: 'app-delete-popup',
@@ -13,6 +14,7 @@ export class DeletePopupComponent implements OnInit {
   @Output() DeletePopupMinimalizeEvent = new EventEmitter();
 
   @Input() sign: SignDetailsModel;
+  @Input() video: VideoModel;
 
   constructor(private signDetailsService: SignDetailsService,
               private router: Router) { }

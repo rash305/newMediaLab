@@ -6,6 +6,7 @@ public class VideoDto implements Serializable {
     private String id;
     private String videoUrl;
     private int popularity;
+    private boolean isFavorite;
     private String type;
 
     public VideoDto() {
@@ -33,6 +34,14 @@ public class VideoDto implements Serializable {
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
+    }
+
+    public boolean getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(boolean isFavorite) {
+        this.isFavorite = isFavorite;
     }
 
     public String getType() {

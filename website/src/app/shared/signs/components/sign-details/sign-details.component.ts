@@ -20,6 +20,7 @@ export class SignDetailsComponent implements OnInit {
   @Input() sign: SignDetailsModel;
 
   hideDeletePopup = true;
+  video: VideoModel;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -38,6 +39,8 @@ export class SignDetailsComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           this.sign = data;
+          // Sort videos on popularity
+          this.sign.videos.sort((a, b) => b.popularity - a.popularity);
           this.parentId.emit(data.category);
         }
       });
@@ -48,12 +51,12 @@ export class SignDetailsComponent implements OnInit {
     this.sign.isPersonal = !this.sign.isPersonal;
     this.signDetailsService.favorite(this.sign, video).subscribe(x => {
       if (x) {
-        this.routeAfterFavorateUpdate();
+        this.routeAfterFavoriteUpdate();
       }
     });
   }
 
-  routeAfterFavorateUpdate() {
+  routeAfterFavoriteUpdate() {
     const routingString = this.isPersonalDictionary ? '/dictionary' : '/personal';
     this.router.navigate([routingString], {
       queryParams: {id: this.sign.id, type: 'sign-details'},
@@ -70,8 +73,9 @@ export class SignDetailsComponent implements OnInit {
     this.signDetailsService.unFavorite(this.sign).subscribe();
   }
 
-  delete() {
+  delete(video: VideoModel) {
     // Open popup to confirm deleting
+    this.video = video;
     this.hideDeletePopup = !this.hideDeletePopup;
   }
 }

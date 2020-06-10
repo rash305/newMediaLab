@@ -1,6 +1,7 @@
 package com.newmedia.deafapi.api.controllers;
 
 import com.newmedia.deafapi.api.dtos.SignDetailsDto;
+import com.newmedia.deafapi.api.dtos.VideoDto;
 import com.newmedia.deafapi.api.models.SignDetails;
 import com.newmedia.deafapi.api.services.Interfaces.IFavoritesService;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
@@ -23,6 +24,7 @@ public class SignDetailsController {
     //https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
     @Autowired
     private ISignService ISignService;
+
     @Autowired
     private IFavoritesService IFavoritesService;
 
@@ -31,31 +33,35 @@ public class SignDetailsController {
     @GetMapping("/api/signdetails/{id}")
     public SignDetailsDto getSignDetails(@PathVariable("id") String id) {
         SignDetails signDetails = ISignService.getSignDetails(id);
-        if(signDetails == null){
+        if(signDetails == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign can be requested.");
         }
         
         // Get all users who have this sign as favorite
         List<String> users = IFavoritesService.getUsersOfFavoriteSign(signDetails.getId(), signDetails.getVideos().get(0).getId());
-        String UserId = GetAuthorizedUser();
+        String userId = GetAuthorizedUser();
 
         SignDetailsDto signDetailsDto = ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
+
         signDetailsDto.setNrOfPersonal(users.size());
-        signDetailsDto.setIsPersonal(users.contains(UserId));
+        signDetailsDto.setIsPersonal(users.contains(userId));
+        // Update popularity and favorite status for each video
+        for (VideoDto video: signDetailsDto.getVideos()) {
+            users = IFavoritesService.getUsersOfFavoriteSign(signDetails.getId(), video.getId());
+            video.setPopularity(users.size());
+            video.setIsFavorite(users.contains(userId));
+        }
         return signDetailsDto;
     }
 
-
     @PostMapping("/api/signdetails")
     public SignDetailsDto createSignDetails(@RequestBody SignDetailsDto sign) {
-        System.out.println("First videos" + sign.getVideos());
         SignDetails signDetails = ObjectMapperUtils.map(sign, SignDetails.class);
         if(signDetails == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign is given.");
         }
-        System.out.println("Second videos" + signDetails.getVideos());
 
         // Make title with capital as first letter
         String title = signDetails.getTitle();
@@ -70,9 +76,7 @@ public class SignDetailsController {
             signDetails.setCreator_id(creator_id);
 
             signDetails = ISignService.createSignDetails(signDetails);
-            System.out.println("Third videos" + signDetails.getVideos());
             SignDetailsDto dto = ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
-            System.out.println("Forth videos" + dto.getVideos());
             return dto;
         } else {
             // Sign is already in the database, thus add video to known sign
@@ -88,9 +92,7 @@ public class SignDetailsController {
             if (principal != null) {
                 return principal.toString();
             }
-
         }
         return null;
     }
-
 }

@@ -3,6 +3,7 @@ export class VideoModel {
   public videoUrl;
   public type;
   public popularity: number;
+  public isFavorite: boolean;
 
   constructor() {
   }

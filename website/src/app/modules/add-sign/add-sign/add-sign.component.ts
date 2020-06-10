@@ -5,9 +5,7 @@ import {CategoriesService} from '../../../shared/signs/services/categories.servi
 import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
 import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
 import {SignTemplateService} from '../../../shared/signs/services/sign-template.service';
-import {SignModel} from '../../../shared/signs/models/sign.model';
 import {FileItem} from 'ng2-file-upload';
-import {VideoModel} from '../../../shared/signs/models/video.model';
 import {ImageService} from '../../../shared/signs/services/image.service';
 
 @Component({
@@ -130,7 +128,7 @@ export class AddSignComponent implements OnInit {
     } else {
       console.log('sign:', sign);
       // Make uploaded sign favorite
-      this.signDetailsService.favorite(sign, sign.videos.reverse().pop()).subscribe();
+      this.signDetailsService.favorite(sign, sign.videos.pop()).subscribe();
       // Add signs to web sign service
       // this.signService.AddSignManually(sign);
       this.emptyVariables();
