@@ -21,7 +21,7 @@ public class ImageController {
     public ImageDto getSignImage(@RequestParam(value = "imageNumber", required = false) int imageNumber,
                                @RequestParam(value = "signTitle") String signTitle,
                                @RequestParam(value = "signCategory") String signCategory) throws Exception {
-        String imageUrl = IImageService.getSignImage(imageNumber, signTitle, signCategory);
+        String imageUrl = IImageService.getSignImage(imageNumber, signTitle, signCategory, "");
         ImageDto imageDto = new ImageDto(imageUrl);
         return imageDto;
     }
