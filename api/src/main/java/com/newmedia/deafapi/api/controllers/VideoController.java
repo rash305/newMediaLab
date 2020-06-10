@@ -6,6 +6,7 @@ import com.newmedia.deafapi.api.dataservices.docModels.DocVideoReference;
 import com.newmedia.deafapi.api.dtos.VideoDto;
 import com.newmedia.deafapi.api.models.VideoReference;
 import com.newmedia.deafapi.api.services.fileupload.FileStorageService;
+import com.newmedia.deafapi.api.services.smartImage.TranslateService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +30,8 @@ public class VideoController {
 
     @Autowired
     private FileStorageService fileStorageService;
+    @Autowired
+    private TranslateService translateService;
 
     @PostMapping("/api/videos")
     public VideoDto uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
