@@ -1,0 +1,12 @@
+{
+  "app": {
+    "favorite": "Favorieten",
+    "learn": "Leren",
+    "dictionary": "Woordenboek"
+  },
+  "shared": {
+    "signs" : {
+
+    }
+    }
+}
