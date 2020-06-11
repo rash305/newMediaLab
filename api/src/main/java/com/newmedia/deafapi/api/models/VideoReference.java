@@ -5,6 +5,7 @@ public class VideoReference {
     private String videoUrl;
     private String type;
     private boolean isFavorite;
+    private String creatorId;
 
     public VideoReference() {
     }
@@ -39,5 +40,13 @@ public class VideoReference {
 
     public void setIsFavorite(boolean isFavorite) {
         this.isFavorite = isFavorite;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
     }
 }

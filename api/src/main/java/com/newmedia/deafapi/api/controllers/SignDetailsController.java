@@ -3,6 +3,7 @@ package com.newmedia.deafapi.api.controllers;
 import com.newmedia.deafapi.api.dtos.SignDetailsDto;
 import com.newmedia.deafapi.api.dtos.VideoDto;
 import com.newmedia.deafapi.api.models.SignDetails;
+import com.newmedia.deafapi.api.models.VideoReference;
 import com.newmedia.deafapi.api.services.Interfaces.IFavoritesService;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
@@ -70,17 +71,17 @@ public class SignDetailsController {
 
         // check whether sign already exists in the database
         SignDetails duplicate = ISignService.getSignDetails(signDetails.getTitle(), signDetails.getCategory());
+        String creatorId = GetAuthorizedUser();
         if(duplicate == null) {
             // Sign is not in the database yet, thus add a new sign
-            String creator_id = GetAuthorizedUser();
-            signDetails.setCreator_id(creator_id);
-
+            signDetails.getVideos().get(0).setCreatorId(creatorId);
             signDetails = ISignService.createSignDetails(signDetails);
-            SignDetailsDto dto = ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
-            return dto;
+            return ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
         } else {
             // Sign is already in the database, thus add video to known sign
-            duplicate = ISignService.addVideoToSign(duplicate, signDetails.getVideos().get(0));
+            VideoReference newVideo = signDetails.getVideos().get(0);
+            newVideo.setCreatorId(creatorId);
+            duplicate = ISignService.addVideoToSign(duplicate, newVideo);
             return ObjectMapperUtils.map(duplicate, SignDetailsDto.class);
         }
     }

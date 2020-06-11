@@ -10,6 +10,7 @@ public class DocVideoReference {
     private String id;
     private String videoUrl ;
     private String type = "application/mp4" ;
+    private String creatorId;
 
 
     public DocVideoReference() {
@@ -37,5 +38,13 @@ public class DocVideoReference {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
     }
 }

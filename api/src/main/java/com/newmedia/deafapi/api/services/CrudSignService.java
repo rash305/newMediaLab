@@ -103,7 +103,6 @@ public class CrudSignService implements ISignService {
 
     @Override
     public void updateSign(Sign sign) {
-
     }
 
     @Override
@@ -133,12 +132,13 @@ public class CrudSignService implements ISignService {
     public SignDetails addVideoToSign(SignDetails duplicate, VideoReference video) {
         DocVideoReference docVideoReference = ObjectMapperUtils.map(video, DocVideoReference.class);
         DocSign docDuplicate = ObjectMapperUtils.map(duplicate, DocSign.class);
+        for (DocVideoReference doc : docDuplicate.getVideos()){
+            videoRepository.save(doc);
+        }
         docDuplicate.addVideo(docVideoReference);
         videoRepository.insert(docVideoReference);
         signISignRepository.save(docDuplicate);
         // return updated signDetails with ID
         return ObjectMapperUtils.map(docDuplicate, SignDetails.class);
     }
-
-
 }
