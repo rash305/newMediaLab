@@ -15,7 +15,7 @@ import {ImageService} from '../../../shared/signs/services/image.service';
 })
 export class AddSignComponent implements OnInit {
 
-  uploadingVideo = false;
+  uploadingData = true;
   meaning: string;
   meaningError: string;
   categoryId = '';
@@ -72,18 +72,19 @@ export class AddSignComponent implements OnInit {
         .subscribe(image => {
           const signImage = image;
           signDetails.image = image;
+          this.uploadingData = false;
         });
     }
   }
 
   changeImage(change: boolean): void {
-    this.uploadingVideo = true;
+    this.uploadingData = true;
     if (change) {
       this.imageNumber = this.imageNumber + 1;
       this.imageService.getSignImage(this.imageNumber, this.sign.title, this.sign.category.title)
         .subscribe(image => {
           this.sign.image = image;
-          this.uploadingVideo = false;
+          this.uploadingData = false;
 
           if (!image) {
             // Second try
@@ -129,9 +130,9 @@ export class AddSignComponent implements OnInit {
 
   private addSignToApp(signDetails: SignDetailsModel): void {
     // Add sign to api
-    this.uploadingVideo = true;
+    this.uploadingData = true;
     this.signDetailsService.addSign(signDetails, this.video).subscribe(sign => {
-      this.uploadingVideo = false;
+      this.uploadingData = false;
 
       if (sign === null) {
         // Failed to add sign
