@@ -45,6 +45,7 @@ import { VideoUploadComponent } from './shared/general/component/video-upload/vi
 import { DomSanitizerPipe } from './common/html/pipes/dom-sanitizer.pipe';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { PixabayDisclaimerComponent } from './common/disclaimer/pixabay-disclaimer/pixabay-disclaimer.component';
 
 const appRoutes: Routes = [
   {
@@ -129,6 +130,7 @@ const appRoutes: Routes = [
     AddSignConfirmComponent,
     VideoUploadComponent,
     DomSanitizerPipe,
+    PixabayDisclaimerComponent,
   ],
   imports: [
     BrowserModule,

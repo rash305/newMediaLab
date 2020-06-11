@@ -23,22 +23,23 @@ public class ImageService implements IImageService {
     @Override
     public String getSignImage(int imageNumber, String signTitle, String signCategory, String language) throws Exception {
         try {
+            String originalTitle = signTitle.toLowerCase();
             String englishTitle;
-            Optional<DocTranslatedWord> translation = translateTranslationRepository.findByWordAndLanguage(signTitle, language);
+            Optional<DocTranslatedWord> translation = translateTranslationRepository.findByWordAndLanguage(originalTitle, language);
             if (translation.isPresent()) {
                 englishTitle = translation.get().getEnglishTranslation();
             } else{
-                englishTitle = translateService.getTranslation(signTitle);
+                englishTitle = translateService.getTranslation(signTitle, language);
                 DocTranslatedWord translatedWord = new DocTranslatedWord();
                 translatedWord.setEnglishTranslation(englishTitle);
                 translatedWord.setWord(signTitle);
-                translatedWord.setLanguage("");
+                translatedWord.setLanguage(language);
                 translateTranslationRepository.insert(translatedWord);
             }
 
             String searchTerm =  englishTitle;
             return service.getImage(searchTerm, imageNumber);
-        } catch (FlickrException e) {
+        } catch (Exception e) {
            throw new Exception("Image cannot be found");
         }
 
