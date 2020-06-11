@@ -77,16 +77,22 @@ export class AddSignComponent implements OnInit {
   }
 
   changeImage(change: boolean): void {
+    this.uploadingVideo = true;
     if (change) {
       this.imageNumber = this.imageNumber + 1;
       this.imageService.getSignImage(this.imageNumber, this.sign.title, this.sign.category.title)
         .subscribe(image => {
-          if (!image) {
-            this.imageNumber = 0;
-          }
           this.sign.image = image;
-          // Go to confirmation screen for user to confirm sign
-          this.showConfirmationScreen = true;
+          this.uploadingVideo = false;
+
+          if (!image) {
+            // Second try
+            this.imageNumber = 1;
+            this.imageService.getSignImage(this.imageNumber, this.sign.title, this.sign.category.title)
+              .subscribe(image2 => {
+                this.sign.image = image2;
+              });
+          }
         });
     }
   }

@@ -20,6 +20,15 @@ public class ImageService implements IImageService {
     @Autowired
     private MongoTranslationRepository translateTranslationRepository;
 
+    @Autowired
+    public ImageService(SmartImageSearchService service, TranslateService translateService, MongoTranslationRepository translateTranslationRepository) {
+        this.service = service;
+        this.translateService = translateService;
+        this.translateTranslationRepository = translateTranslationRepository;
+
+
+    }
+
     @Override
     public String getSignImage(int imageNumber, String signTitle, String signCategory, String language) throws Exception {
         try {
