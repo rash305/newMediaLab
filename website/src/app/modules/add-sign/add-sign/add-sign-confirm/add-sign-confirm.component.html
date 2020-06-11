@@ -13,20 +13,23 @@
             <span>&nbsp;<b> {{this.sign.category?.title}} </b></span>
           </div>
         </div>
-        <div class="row" style="margin: 0" *ngIf="this.sign">
-          <div class="col-4">
+        <div class="row no-gutters" *ngIf="this.sign" style="margin: 0px 15px 0px;">
+          <div class="col-3">
             <div class="sign-image">
               <img src="{{sign.image}}" alt="{{sign.title}}">
             </div>
           </div>
-          <div class="col-3 align-self-center h5">
-            {{sign.title}}
+          <div class="col-5 align-self-center h5">
+            &nbsp;{{sign.title}}
           </div>
-          <div class="col-5 align-self-center">
+          <div class="col-4">
             <button type="button" class="btn btn-primary change-image-button" (click)="changeImage()">
               <div><i class="fa fa-rotate-right btn-i"></i></div>
               <div>Verander foto</div>
             </button>
+            <a href="https://pixabay.com/">
+              <img src="https://pixabay.com/static/img/public/leaderboard_b.png" alt="Pixabay" style="width: 100%">
+            </a>
           </div>
         </div>
         <hr style="border-color: #593196; margin: 15px">
