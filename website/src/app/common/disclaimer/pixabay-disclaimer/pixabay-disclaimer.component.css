@@ -5,4 +5,5 @@
   right: 0px;
   opacity: 0.5;
   font-size: 0.8em;
+  z-index: 0.01;
 }

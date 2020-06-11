@@ -32,7 +32,7 @@ public class ImageService implements IImageService {
                 englishTitle = translateService.getTranslation(signTitle, language);
                 DocTranslatedWord translatedWord = new DocTranslatedWord();
                 translatedWord.setEnglishTranslation(englishTitle);
-                translatedWord.setWord(signTitle);
+                translatedWord.setWord(originalTitle);
                 translatedWord.setLanguage(language);
                 translateTranslationRepository.insert(translatedWord);
             }
