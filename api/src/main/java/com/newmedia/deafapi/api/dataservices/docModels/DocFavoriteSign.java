@@ -18,6 +18,8 @@ public class DocFavoriteSign implements Serializable {
     //Supports device tokens and account id as Id
     @Indexed()
     private String personId;
+    @Indexed()
+    private String videoId;
 
     public DocFavoriteSign() {
     }
@@ -52,5 +54,13 @@ public class DocFavoriteSign implements Serializable {
 
     public void setPersonId(String personId) {
         this.personId = personId;
+    }
+
+    public String getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
     }
 }

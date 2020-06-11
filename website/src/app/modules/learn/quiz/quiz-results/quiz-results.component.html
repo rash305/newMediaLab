@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="col-1 p-1">
-          <i class="fa fa-2x purple-icon" [ngClass]="{'fa-heart': sign.isPersonal, 'fa-heart-o': !sign.isPersonal}"
+          <i class="fa fa-2x purple-icon" [ngClass]="{'fa-heart': sign.videos[0]?.isFavorite, 'fa-heart-o': !sign.videos[0]?.isFavorite}"
              (click)="addToPersonal(sign)"></i>
         </div>
       </div>

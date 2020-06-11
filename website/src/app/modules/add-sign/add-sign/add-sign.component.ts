@@ -5,9 +5,7 @@ import {CategoriesService} from '../../../shared/signs/services/categories.servi
 import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
 import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
 import {SignTemplateService} from '../../../shared/signs/services/sign-template.service';
-import {SignModel} from '../../../shared/signs/models/sign.model';
 import {FileItem} from 'ng2-file-upload';
-import {VideoModel} from '../../../shared/signs/models/video.model';
 import {ImageService} from '../../../shared/signs/services/image.service';
 
 @Component({
@@ -81,14 +79,9 @@ export class AddSignComponent implements OnInit {
       this.imageNumber = this.imageNumber + 1;
       this.imageService.getSignImage(this.imageNumber, this.sign.title, this.sign.category.title)
         .subscribe(image => {
-          if (image) {
-            this.sign.image = image;
-            // Go to confirmation screen for user to confirm sign
-            this.showConfirmationScreen = true;
-          } else {
-            this.imageNumber = 0;
-          }
-
+          this.sign.image = image;
+          // Go to confirmation screen for user to confirm sign
+          this.showConfirmationScreen = true;
         });
     }
   }
@@ -130,20 +123,19 @@ export class AddSignComponent implements OnInit {
       this.uploadingVideo = false;
 
       if (sign === null) {
-        // Failed to add sign
-        // Toaster message is enough for now
-      } else {
-        // Make uploaded sign favorite
-        this.signDetailsService.favorite(sign).subscribe();
-        // Add signs to web sign service
-        // this.signService.AddSignManually(sign);
-        this.emptyVariables();
-        console.log(sign);
-        this.routeAfterUpdate(sign.id);
-        this.showConfirmationScreen = false;
-        this.AddSignMinimalizeEvent.emit(true);
-      }
-    });
+      // Failed to add sign
+      // Toaster message is enough for now
+    } else {
+      // Make uploaded sign favorite
+      this.signDetailsService.favorite(sign, sign.videos.pop()).subscribe();
+      // Add signs to web sign service
+      // this.signService.AddSignManually(sign);
+      this.emptyVariables();
+      console.log(sign);
+      this.routeAfterUpdate(sign.id);
+      this.showConfirmationScreen = false;
+      this.AddSignMinimalizeEvent.emit(true);
+    }});
   }
 
   goBack(): void {

@@ -3,11 +3,21 @@ package com.newmedia.deafapi.api.dtos;
 import java.io.Serializable;
 
 public class VideoDto implements Serializable {
-    private String videoUrl ;
+    private String id;
+    private String videoUrl;
     private int popularity;
-    private String type ;
+    private boolean isFavorite;
+    private String type;
 
     public VideoDto() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getVideoUrl() {
@@ -24,6 +34,14 @@ public class VideoDto implements Serializable {
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
+    }
+
+    public boolean getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(boolean isFavorite) {
+        this.isFavorite = isFavorite;
     }
 
     public String getType() {

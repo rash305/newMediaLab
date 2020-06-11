@@ -9,8 +9,6 @@ public class SignDetailsDto implements Serializable {
     private CategoryDto category;
     private String image;
     private List<VideoDto> videos;
-    private boolean isPersonal;
-    private int nrOfPersonal;
 
     public SignDetailsDto() {
     }
@@ -53,21 +51,5 @@ public class SignDetailsDto implements Serializable {
 
     public void setCategory(CategoryDto category) {
         this.category = category;
-    }
-
-    public boolean getIsPersonal() {
-        return isPersonal;
-    }
-
-    public void setIsPersonal(boolean isPersonal) {
-        this.isPersonal = isPersonal;
-    }
-
-    public int getNrOfPersonal() {
-        return nrOfPersonal;
-    }
-
-    public void setNrOfPersonal(int nrOfPersonal) {
-        this.nrOfPersonal = nrOfPersonal;
     }
 }

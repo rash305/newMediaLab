@@ -1,4 +1,3 @@
-
 <div class="row m-0 mt-2" *ngIf="this.sign">
   <div class="col-3">
     <img src="{{sign.image}}" alt="{{sign.title}}" class="sign-image">
@@ -8,24 +7,28 @@
   </div>
 </div>
 <hr style="border-color: #593196; margin: 15px">
-<div class="row no-gutters" style="height:170px; margin: 15px 0px 15px 15px;" [hidden]="isDeleted" *ngIf="this.sign">
-  <div class="col-10">
-    <div style="height:170px; text-align: center; background-color: #eeeeee;">
-      <video controls="true" playsinline  [src]="sign.videos[0]?.getUrl() | domSanitizer: 'resourceUrl'" *ngIf="sign.videos"></video>
+<div *ngIf="this.sign">
+  <div *ngFor="let video of sign.videos" style="margin: 15px">
+    <div class="row no-gutters m-0" [hidden]="this.isPersonalDictionary && !video.isFavorite">
+      <div class="col-10">
+        <div style="height:170px; text-align: center; background-color: #eeeeee;">
+          <video controls="true" playsinline  [src]="video?.getUrl() | domSanitizer: 'resourceUrl'"></video>
+        </div>
+      </div>
+      <div class="col-2 align-self-end sidebar" *ngIf="isPersonalDictionary">
+        <i class="fa fa-3x fa-trash purple-icon" (click)="delete(video)"></i>
+      </div>
+      <div class="col-2 sidebar" [hidden]="isPersonalDictionary">
+        <i class="fa fa-3x fa-heart-o purple-icon" (click)="addToPersonal(video)" *ngIf="!video.isFavorite"></i>
+        <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal(video)" *ngIf="video.isFavorite"></i>
+      </div>
+      <div class="col-12">
+        <i class="fa fa-heart" [ngClass]="{'purple-icon': video.isFavorite}"></i> {{video.popularity}}x
+      </div>
     </div>
-  </div>
-  <div class="col-2 align-self-end sidebar" *ngIf="isPersonalDictionary">
-    <i class="fa fa-3x fa-trash purple-icon" (click)="delete()"></i>
-  </div>
-  <div class="col-2 sidebar" [hidden]="isPersonalDictionary">
-    <i class="fa fa-3x fa-heart-o purple-icon" (click)="addToPersonal()" *ngIf="!this.sign.isPersonal"></i>
-    <i class="fa fa-3x fa-heart purple-icon" (click)="removeFromPersonal()" *ngIf="this.sign.isPersonal"></i>
-  </div>
-  <div class="col-12">
-    <i class="fa fa-heart" [ngClass]="{'purple-icon': this.sign.isPersonal}"></i> {{this.sign.nrOfPersonal}}x
   </div>
 </div>
 
-<app-delete-popup [sign]="this.sign"
+<app-delete-popup [sign]="this.sign" [video]="this.video"
                   [hidden]="this.hideDeletePopup"
                   (DeletePopupMinimalizeEvent)="this.hideDeletePopup = $event"></app-delete-popup>

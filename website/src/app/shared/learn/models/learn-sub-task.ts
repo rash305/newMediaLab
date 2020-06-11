@@ -9,6 +9,12 @@ export class LearnSubTask {
 
   deserialize(input: any): this {
     Object.assign(this, input);
+    if (input.question) {
+      this.question = new SignDetailsModel().deserialize(input.question);
+    }
+    if (input.optionalAnswers) {
+      this.optionalAnswers = input.optionalAnswers.map(answer => new SignModel().deserialize(answer));
+    }
     return this;
   }
 
