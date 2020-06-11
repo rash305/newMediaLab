@@ -14,7 +14,8 @@ import ru.blizzed.pixabaylib.Pixabay;
 import ru.blizzed.pixabaylib.PixabayCallException;
 import ru.blizzed.pixabaylib.PixabayErrorException;
 import ru.blizzed.pixabaylib.model.PixabayImage;
-import ru.blizzed.pixabaylib.params.CategoryParam;
+import ru.blizzed.pixabaylib.params.ColorsParam;
+import ru.blizzed.pixabaylib.params.ImageTypeParam;
 import ru.blizzed.pixabaylib.params.PixabayParams;
 
 import java.util.Optional;
@@ -32,15 +33,15 @@ public class SmartImageSearchService {
         return getPixabayImage(searchTerm, number);
     }
 
-    private String getPixabayImage(String serachTerm, int number) {
+    private String getPixabayImage(String searchTerm, int number) {
         Pixabay.initialize(pixabayKey);
         try {
-            Optional<String> first = Pixabay.search().image(serachTerm)
+            Optional<String> first = Pixabay.search()
+                    .image(PixabayParams.QUERY.of(searchTerm), PixabayParams.PER_PAGE.of(3), PixabayParams.PAGE.of(number))
                     .execute()
                     .getHits()
                     .stream()
-                    .skip(number)
-                    .map(PixabayImage::getLargeImageURL)
+                    .map(PixabayImage::getPreviewURL)
                     .findFirst();
             if(first.isPresent()){
                 return first.get();

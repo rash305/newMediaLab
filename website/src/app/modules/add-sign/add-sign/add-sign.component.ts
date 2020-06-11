@@ -79,6 +79,9 @@ export class AddSignComponent implements OnInit {
       this.imageNumber = this.imageNumber + 1;
       this.imageService.getSignImage(this.imageNumber, this.sign.title, this.sign.category.title)
         .subscribe(image => {
+          if (!image) {
+            this.imageNumber = 0;
+          }
           this.sign.image = image;
           // Go to confirmation screen for user to confirm sign
           this.showConfirmationScreen = true;
@@ -123,19 +126,20 @@ export class AddSignComponent implements OnInit {
       this.uploadingVideo = false;
 
       if (sign === null) {
-      // Failed to add sign
-      // Toaster message is enough for now
-    } else {
-      // Make uploaded sign favorite
-      this.signDetailsService.favorite(sign, sign.videos.pop()).subscribe();
-      // Add signs to web sign service
-      // this.signService.AddSignManually(sign);
-      this.emptyVariables();
-      console.log(sign);
-      this.routeAfterUpdate(sign.id);
-      this.showConfirmationScreen = false;
-      this.AddSignMinimalizeEvent.emit(true);
-    }});
+        // Failed to add sign
+        // Toaster message is enough for now
+      } else {
+        // Make uploaded sign favorite
+        this.signDetailsService.favorite(sign, sign.videos.pop()).subscribe();
+        // Add signs to web sign service
+        // this.signService.AddSignManually(sign);
+        this.emptyVariables();
+        console.log(sign);
+        this.routeAfterUpdate(sign.id);
+        this.showConfirmationScreen = false;
+        this.AddSignMinimalizeEvent.emit(true);
+      }
+    });
   }
 
   goBack(): void {
