@@ -11,6 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MongoTranslationRepository extends MongoRepository<DocTranslatedWord, String> {
-    Optional<DocTranslatedWord> findByWordAndLanguage(String word, String language);
+    Optional<DocTranslatedWord> findFirstByWordAndLanguage(String word, String language);
 
 }

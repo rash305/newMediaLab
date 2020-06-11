@@ -59,17 +59,19 @@ export class AddSignComponent implements OnInit {
       this.validateVideo(this.video)].every(Boolean)) {
 
       const categoryModel = this.categories.find(x => x.id === this.categoryId);
+      const signDetails = new SignDetailsModel().deserialize({
+        title: this.meaning, categoryId: this.categoryId,
+        category: categoryModel, image: null
+      });
+      // Go to confirmation screen for user to confirm sign
+      this.sign = signDetails;
+      this.showConfirmationScreen = true;
+
       // Send object to backend API
       this.imageService.getSignImage(this.imageNumber, this.meaning, categoryModel.title)
         .subscribe(image => {
           const signImage = image;
-          const signDetails = new SignDetailsModel().deserialize({
-            title: this.meaning, categoryId: this.categoryId,
-            category: categoryModel, image: signImage
-          });
-          // Go to confirmation screen for user to confirm sign
-          this.sign = signDetails;
-          this.showConfirmationScreen = true;
+          signDetails.image = image;
         });
     }
   }

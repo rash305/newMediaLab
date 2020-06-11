@@ -25,7 +25,7 @@ public class ImageService implements IImageService {
         try {
             String originalTitle = signTitle.toLowerCase();
             String englishTitle;
-            Optional<DocTranslatedWord> translation = translateTranslationRepository.findByWordAndLanguage(originalTitle, language);
+            Optional<DocTranslatedWord> translation = translateTranslationRepository.findFirstByWordAndLanguage(originalTitle, language);
             if (translation.isPresent()) {
                 englishTitle = translation.get().getEnglishTranslation();
             } else{

@@ -30,7 +30,15 @@ public class SmartImageSearchService {
     private String pixabayKey;
 
     public String getImage(String searchTerm, int number) {
-        return getPixabayImage(searchTerm, number);
+        String image = getPixabayImage(searchTerm, number);
+        if(image == null){
+            try {
+                image = getFlickrImage(searchTerm, number);
+            } catch (FlickrException e) {
+                e.printStackTrace();
+            }
+        }
+        return  image;
     }
 
     private String getPixabayImage(String searchTerm, int number) {

@@ -16,7 +16,7 @@
         <div class="row no-gutters" *ngIf="this.sign" style="margin: 0px 15px 0px;">
           <div class="col-3">
             <div class="sign-image">
-              <img src="{{sign.image}}" alt="{{sign.title}}">
+              <img src="{{sign.image}}" alt="Verplichte afbeelding" onerror="this.src='/assets/missing.jpg'">
             </div>
           </div>
           <div class="col-5 align-self-center h5">
@@ -45,7 +45,7 @@
         <button type="button" class="back-button btn btn-primary" (click)="goBack()"><i
           class="fa fa-arrow-left btn-i"></i> Terug
         </button>
-        <button type="button" class="btn btn-primary right-button" (click)="addSign()"><i
+        <button type="button" class="btn btn-primary right-button" (click)="addSign()" [disabled]="!this.sign.image"><i
           class="fa fa-plus-circle btn-i"></i> Toevoegen
         </button>
       </div>
