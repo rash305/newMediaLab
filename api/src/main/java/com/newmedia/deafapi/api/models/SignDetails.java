@@ -9,8 +9,6 @@ public class SignDetails {
     private Category category;
     private String image;
     private List<VideoReference> videos;
-    private boolean isPersonal;
-    private String creator_id;
 
     public SignDetails() {
     }
@@ -57,30 +55,6 @@ public class SignDetails {
 
     public void setVideos(List<VideoReference> videos) {
         this.videos = videos;
-    }
-
-    public boolean isPersonal() {
-        return isPersonal;
-    }
-
-    public void setPersonal(boolean personal) {
-        isPersonal = personal;
-    }
-
-    public boolean getIsPersonal() {
-        return isPersonal;
-    }
-
-    public void setIsPersonal(boolean isPersonal) {
-        this.isPersonal = isPersonal;
-    }
-
-    public String getCreator_id() {
-        return creator_id;
-    }
-
-    public void setCreator_id(String creator_id) {
-        this.creator_id = creator_id;
     }
 
     public void addVideo(List<VideoReference> videos) {

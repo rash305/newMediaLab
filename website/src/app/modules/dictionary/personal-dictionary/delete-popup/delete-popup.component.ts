@@ -27,15 +27,13 @@ export class DeletePopupComponent implements OnInit {
   }
 
   deleteSign() {
-    // delete sign from favotieten
-    this.sign.nrOfPersonal -= 1;
-    this.sign.isPersonal = !this.sign.isPersonal;
+    // delete sign from favorites
     this.signDetailsService.unFavorite(this.sign, this.video).subscribe(x => {
-      this.routeAfterFavorateUpdate();
+      this.routeAfterFavoriteUpdate();
     });
   }
 
-  routeAfterFavorateUpdate() {
+  routeAfterFavoriteUpdate() {
     this.router.navigate(['/dictionary'], {
       queryParams: {id: this.sign.id, type: 'sign-details'},
       queryParamsHandling: 'merge',

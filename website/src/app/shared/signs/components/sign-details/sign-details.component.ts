@@ -47,8 +47,6 @@ export class SignDetailsComponent implements OnInit {
   }
 
   addToPersonal(video: VideoModel) {
-    this.sign.nrOfPersonal += 1;
-    this.sign.isPersonal = !this.sign.isPersonal;
     this.signDetailsService.favorite(this.sign, video).subscribe(x => {
       if (x) {
         this.routeAfterFavoriteUpdate();

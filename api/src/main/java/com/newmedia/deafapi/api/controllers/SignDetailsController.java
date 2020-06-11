@@ -38,18 +38,15 @@ public class SignDetailsController {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign can be requested.");
         }
-        
-        // Get all users who have this sign as favorite
-        List<String> users = IFavoritesService.getUsersOfFavoriteSign(signDetails.getId(), signDetails.getVideos().get(0).getId());
+
+        // Get current user
         String userId = GetAuthorizedUser();
 
         SignDetailsDto signDetailsDto = ObjectMapperUtils.map(signDetails, SignDetailsDto.class);
-
-        signDetailsDto.setNrOfPersonal(users.size());
-        signDetailsDto.setIsPersonal(users.contains(userId));
         // Update popularity and favorite status for each video
         for (VideoDto video: signDetailsDto.getVideos()) {
-            users = IFavoritesService.getUsersOfFavoriteSign(signDetails.getId(), video.getId());
+            // Get all users who have this video of the sign as favorite
+            List<String> users = IFavoritesService.getUsersOfFavoriteSign(signDetails.getId(), video.getId());
             video.setPopularity(users.size());
             video.setIsFavorite(users.contains(userId));
         }
