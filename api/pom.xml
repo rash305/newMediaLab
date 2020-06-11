@@ -32,6 +32,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>ru.blizzed</groupId>
+            <artifactId>pixabay-lib</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-translate</artifactId>
         </dependency>

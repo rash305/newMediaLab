@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Service
 public class TranslateService {
@@ -23,9 +24,9 @@ public class TranslateService {
     public TranslateService() {
     }
 
-    public String getTranslation(String name) throws IOException {
+    public String getTranslation(String name, String language) throws IOException {
         Translate translate = TranslateOptions.newBuilder().setApiKey(key).build().getService();
-        Translation translation = translate.translate(name);
+        Translation translation = translate.translate(name, Translate.TranslateOption.sourceLanguage(language));
         return translation.getTranslatedText();
     }
 }
