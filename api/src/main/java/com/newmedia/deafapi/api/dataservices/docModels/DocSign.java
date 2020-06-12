@@ -12,7 +12,7 @@ public class DocSign {
 
     @Id
     private String id;
-    @Indexed(unique = true)
+    @Indexed()
     private String title;
     @DBRef
     private DocCategory category;
