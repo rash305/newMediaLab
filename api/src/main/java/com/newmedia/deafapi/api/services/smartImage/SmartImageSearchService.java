@@ -10,6 +10,7 @@ import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.blizzed.pixabaylib.Pixabay;
@@ -38,6 +39,7 @@ public class SmartImageSearchService {
     private RequestContext requestContext;
     private Properties properties;
 
+    @Autowired
     public SmartImageSearchService() {
         String apiKey = "9c171ede50099b7a558151593371061a";
         String sharedSecret = "076463b1d1ef7dc6";

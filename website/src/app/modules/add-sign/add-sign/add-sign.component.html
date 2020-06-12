@@ -66,6 +66,6 @@
 <app-add-sign-confirm *ngIf="this.showConfirmationScreen"
                       [sign]="this.sign"
                       [video]="video"
-                      [uploadingVideoisBusy]="this.uploadingVideo"
+                      [uploadingVideoisBusy]="this.uploadingData"
                       (ConfirmAddSignEvent)="this.confirm($event)"
                       (ChangeImageEvent)="this.changeImage($event)"></app-add-sign-confirm>
