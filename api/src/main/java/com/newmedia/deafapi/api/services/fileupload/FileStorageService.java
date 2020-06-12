@@ -9,6 +9,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -27,7 +31,6 @@ public class FileStorageService {
     public FileStorageService(FileStorageProperties fileStorageProperties) {
             this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                     .toAbsolutePath().normalize();
-
             try {
                 Files.createDirectories(this.fileStorageLocation);
             } catch (Exception ex) {
@@ -35,7 +38,23 @@ public class FileStorageService {
             }
     }
 
-    public VideoReference storeFile(MultipartFile file) {
+    public String storeImage(String imageExtention, BufferedImage image) {
+        String fileName = randomFileName() + '.' + imageExtention;
+
+        // Copy file to the target location (Replacing existing file with the same name)
+        Path targetLocation = this.fileStorageLocation.resolve("images").resolve(fileName);
+        try {
+            ImageIO.write(image, imageExtention, new File(targetLocation.toUri()));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        String url = buildUrl(fileName, "images");
+
+        return url;
+    }
+
+        public VideoReference storeFile(MultipartFile file) {
         VideoReference videoReference = new VideoReference();
         videoReference.setType(file.getContentType());
 
@@ -53,7 +72,7 @@ public class FileStorageService {
             }
 
             // Build a Url to retrieve the video
-            String url = buildUrl(fileName);
+            String url = buildUrl(fileName, "videos");
             videoReference.setVideoUrl(url);
 
 
@@ -72,9 +91,9 @@ public class FileStorageService {
         return StringUtils.cleanPath(String.valueOf(uuid));
     }
 
-    private String buildUrl(String Filename){
+    private String buildUrl(String Filename, String fileType){
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/api/videos/")
+                .path("/api/" + fileType + '/')
                 .path(Filename)
                 .toUriString();
 

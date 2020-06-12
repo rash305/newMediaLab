@@ -5,7 +5,9 @@ import com.newmedia.deafapi.api.dtos.VideoDto;
 import com.newmedia.deafapi.api.models.SignDetails;
 import com.newmedia.deafapi.api.models.VideoReference;
 import com.newmedia.deafapi.api.services.Interfaces.IFavoritesService;
+import com.newmedia.deafapi.api.services.Interfaces.IImageService;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
+import com.newmedia.deafapi.api.services.smartImage.ImageService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 // Add notation to inform spring boot to create an instance of this class and publish it as a rest controller
@@ -28,6 +31,9 @@ public class SignDetailsController {
 
     @Autowired
     private IFavoritesService IFavoritesService;
+
+    @Autowired
+    private IImageService IImageService;
 
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
@@ -59,6 +65,14 @@ public class SignDetailsController {
         if(signDetails == null) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "No sign is given.");
+        }
+
+        try {
+            String s = IImageService.saveImage(signDetails.getImage());
+            signDetails.setImage(s);
+        } catch (MalformedURLException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.I_AM_A_TEAPOT, "");
         }
 
         // Make title with capital as first letter

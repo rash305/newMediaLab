@@ -12,7 +12,7 @@ import {environment} from '../../../../environments/environment';
 export class ImageService {
 
   private handleError: HandleError;
-  private imageUrl = environment.baseUrl + '/image';  // URL to web api
+  private imageUrl = environment.baseUrl + '/images';  // URL to web api
 
   constructor(private http: HttpClient,
               httpErrorHandler: HttpErrorHandler) {
