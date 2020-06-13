@@ -31,7 +31,7 @@
         </div>
       </button>
     </div>
-    <div class="purple-border-b" *ngIf="isLoggedIn">
+    <div class="purple-border-b" *ngIf="isLoggedIn" [hidden]="true">
       <button class="btn btn-block btn-lg" (click)="toAccount()">
         <div class="row">
           <div class="col-10">

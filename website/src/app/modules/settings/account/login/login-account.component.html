@@ -16,13 +16,14 @@
       <input type="password" placeholder="{{ 'settings.login.password' | translate }}" name="pw" required [(ngModel)]="password" (click)="logIn()">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!passwordError">
-          {{passwordError| translate }}
+          {{ passwordError| translate }}
         </div>
       </div>
 
-      <div style="text-align: center; padding-bottom: 5px">
+      <div style="text-align: center; padding-bottom: 5px" [hidden]="true">
         <a (click)="toForgotPW();">{{ 'settings.login.forgot-password' | translate }}</a>
       </div>
+
       <div class="alert-danger" role="alert" style="padding: 15px; font-size: 100%;" [hidden]="!incorrectLoginError">
         {{incorrectLoginError| translate }}
       </div>
