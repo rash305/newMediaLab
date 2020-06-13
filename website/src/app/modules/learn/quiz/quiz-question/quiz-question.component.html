@@ -23,7 +23,7 @@
 
 <div class="container" style="position: absolute; bottom: 15px">
 <div class="col-12" >
-  <button type="button" class="btn btn-primary col-4" (click)="goBack()"><i class="fa fa-arrow-left"></i> Terug</button>
-  <button type="button" class="btn btn-primary col-4 offset-4"  (click)="goFurther()">Verder <i class="fa fa-arrow-right"></i></button>
+  <button type="button" class="btn btn-primary col-4" (click)="goBack()"><i class="fa fa-arrow-left"></i> {{ 'back' | translate }}</button>
+  <button type="button" class="btn btn-primary col-4 offset-4"  (click)="goFurther()">{{ 'continue' | translate }} <i class="fa fa-arrow-right"></i></button>
 </div>
 </div>

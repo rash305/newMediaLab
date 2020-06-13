@@ -4,22 +4,22 @@
   <div class="h-100">
     <div class="content-container">
       <div class="col-12 purple-border top-container">
-        <i class="fa fa-video-camera"></i><span><b>Gebaar toevoegen</b></span>
+        <i class="fa fa-video-camera"></i><span><b>{{ 'add-sign.add-sign' | translate }}</b></span>
       </div>
       <div class="purple-border middle-container f-flex flex-column">
         <div class="col-12 input-list">
           <i class="fa fa-question-circle"></i>
-          <input type="text" placeholder="Geef een betekenis" name="meaning" required
+          <input type="text" placeholder="{{ 'add-sign.meaning' | translate }}" name="meaning" required
                  (focusout)="validateMeaning(meaning)" [(ngModel)]="meaning">
           <div class="alert-container">
             <div class="alert-danger" role="alert" [hidden]="!meaningError">
-              {{meaningError}}
+              {{ meaningError | translate }}
             </div>
           </div>
 
           <i class="fa fa-list"></i>
           <select type="text" name="category" (focusout)="validateCategory(categoryId)" [(ngModel)]="categoryId">
-            <option value="" selected>Kies een categorie</option>
+            <option value="" selected>{{ 'add-sign.category' | translate }}</option>
             <option *ngFor="let category of categories"
                     [value]="category.id">
               {{category.title}}
@@ -34,7 +34,7 @@
           <div class="row no-gutters mt-2">
             <i class="fa fa-video-camera"></i>
             <div class="col" [hidden]="video">
-              <span style="line-height: 2em;">Video toevoegen:</span>
+              <span style="line-height: 2em;">{{ 'add-sign.add-sign' | translate }}:</span>
               <app-video-upload (videoFileEmitter)="video = $event;  this.videoError = ''"></app-video-upload>
             </div>
             <div class="col-8 " *ngIf="video?.file?.rawFile" style="height: 125px; background-color: #eeeeee;">
@@ -54,10 +54,10 @@
       </div>
       <div class="col-12 bottom-container">
         <button type="button" class="back-button btn btn-primary" (click)="goBack()"><i
-          class="fa fa-arrow-left btn-i"></i> Terug
+          class="fa fa-arrow-left btn-i"></i> {{ 'back' | translate }}
         </button>
         <button type="button" class="btn btn-primary right-button" (click)="addSign()"><i
-          class="fa fa-arrow-right btn-i"></i> Verder
+          class="fa fa-arrow-right btn-i"></i> {{ 'continue' | translate }}
         </button>
       </div>
     </div>

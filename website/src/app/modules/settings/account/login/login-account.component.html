@@ -1,41 +1,42 @@
 <div class="content-container">
   <div class="col-12 purple-border top-container">
-    <i class="fa fa-sign-in"></i><span><b>Inloggen</b></span>
+    <i class="fa fa-sign-in"></i><span><b>{{ 'settings.login.login' | translate }}</b></span>
   </div>
   <div class=" purple-border middle-container d-flex flex-column">
     <div class="col-12 input-list">
       <i class="fa fa-user-circle"></i>
-      <input type="text" placeholder="Gebruikersnaam of e-mail" name="uname" required [(ngModel)]="username" (click)="logIn()">
+      <input type="text" placeholder="{{ 'settings.login.username-email' | translate }}" name="uname" required [(ngModel)]="username" (click)="logIn()">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!usernameError">
-          {{usernameError}}
+          {{ usernameError | translate }}
         </div>
       </div>
-
 
       <i class="fa fa-unlock-alt"></i>
-      <input type="password" placeholder="Wachtwoord" name="pw" required [(ngModel)]="password" (click)="logIn()">
+      <input type="password" placeholder="{{ 'settings.login.password' | translate }}" name="pw" required [(ngModel)]="password" (click)="logIn()">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!passwordError">
-          {{passwordError}}
+          {{passwordError| translate }}
         </div>
       </div>
-      <div style="text-align: center; padding-bottom: 5px">
-        <a (click)="toForgotPW();">Wachtwoord vergeten? Klik hier.</a>
-      </div>
 
+      <div style="text-align: center; padding-bottom: 5px">
+        <a (click)="toForgotPW();">{{ 'settings.login.forgot-password' | translate }}</a>
+      </div>
       <div class="alert-danger" role="alert" style="padding: 15px; font-size: 100%;" [hidden]="!incorrectLoginError">
-        {{incorrectLoginError}}
+        {{incorrectLoginError| translate }}
       </div>
     </div>
-
   </div>
-  <div class="col-12 bottom-container">
-    <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i>
-      Terug
-    </button>
 
-    <button type="button" class="btn btn-primary right-button" (click)="logIn()"><i class="fa fa-sign-in btn-i"></i>Inloggen
+  <div class="col-12 bottom-container">
+    <button (click)="goBack()" class="back-button btn btn-primary" type="button">
+      <i class="fa fa-arrow-left btn-i"></i>
+      {{ 'back' | translate }}
+    </button>
+    <button type="button" class="btn btn-primary right-button" (click)="logIn()">
+      <i class="fa fa-sign-in btn-i"></i>
+      {{ 'settings.login.login' | translate }}
     </button>
   </div>
 </div>

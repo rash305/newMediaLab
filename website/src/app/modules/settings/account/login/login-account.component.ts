@@ -40,7 +40,7 @@ export class LoginAccountComponent implements OnInit {
 
   validateUsername(username): boolean {
     if (!username) {
-      this.usernameError = 'Gebruikersnaam' + this.requiredError;
+      this.usernameError = 'settings.login.error.username-email';
       return false;
     }
 
@@ -50,7 +50,7 @@ export class LoginAccountComponent implements OnInit {
 
   validatePassword(password): boolean {
     if (!password) {
-      this.passwordError = 'Wachtwoord' + this.requiredError;
+      this.passwordError = 'settings.login.error.password';
       return false;
     }
 
@@ -67,7 +67,7 @@ export class LoginAccountComponent implements OnInit {
         } else {
           // Login failed
           // Toaster message is enough for now
-          this.incorrectLoginError = 'Combinatie van gebruikersnaam en wachtwoord is incorrect';
+          this.incorrectLoginError = 'settings.login.error.incorrect-login';
         }
       });
   }

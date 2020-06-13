@@ -1,7 +1,7 @@
 <div class="content-container">
   <div class="col-12 purple-border top-container">
     <div class="col-12">
-      <i class="fa fa-cog"></i><span><b>Instellingen</b></span>
+      <i class="fa fa-cog"></i><span><b>{{ 'settings.settings' | translate }}</b></span>
     </div>
   </div>
   <div class=" purple-border middle-container d-flex flex-column ">
@@ -9,7 +9,8 @@
       <button class="btn btn-block btn-lg" (click)="toLogin()">
         <div class="row">
           <div class="col-10">
-            <i class="fa fa-sign-in btn-i"></i> Inloggen
+            <i class="fa fa-sign-in btn-i"></i>
+            {{ 'settings.login.login' | translate }}
           </div>
           <div class="col-2">
             <i class="fa fa-chevron-right float-right"></i>
@@ -21,7 +22,8 @@
       <button class="btn btn-block btn-lg" (click)="toRegister()">
         <div class="row">
           <div class="col-10">
-            <i class="fa fa-user-plus btn-i"></i> Registreren
+            <i class="fa fa-user-plus btn-i"></i>
+            {{ 'settings.register.register' | translate }}
           </div>
           <div class="col-2">
             <i class="fa fa-chevron-right float-right"></i>
@@ -33,7 +35,8 @@
       <button class="btn btn-block btn-lg" (click)="toAccount()">
         <div class="row">
           <div class="col-10">
-            <i class="fa fa-user-circle btn-i"></i> Account
+            <i class="fa fa-user-circle btn-i"></i>
+            {{ 'settings.account.account' | translate }}
           </div>
           <div class="col-2">
             <i class="fa fa-chevron-right float-right"></i>
@@ -46,7 +49,7 @@
         <div class="row">
           <div class="col-10">
             <i class="fa fa-sign-out btn-i"></i>
-            Uitloggen
+            {{ 'settings.logout.logout' | translate }}
           </div>
           <div class="col-2">
             <i class="fa fa-chevron-right float-right"></i>
@@ -55,21 +58,23 @@
       </button>
     </div>
     <div class="purple-border-b">
-    <button class="btn btn-block btn-lg" (click)="toHelp()">
-      <div class="row">
-        <div class="col-10">
-          <i class="fa fa-question-circle btn-i"></i> Help
+      <button class="btn btn-block btn-lg" (click)="toHelp()">
+        <div class="row">
+          <div class="col-10">
+            <i class="fa fa-question-circle btn-i"></i>
+            {{ 'settings.help.help' | translate }}
+          </div>
+          <div class="col-2">
+            <i class="fa fa-chevron-right float-right"></i>
+          </div>
         </div>
-        <div class="col-2">
-          <i class="fa fa-chevron-right float-right"></i>
-        </div>
-      </div>
-    </button>
+      </button>
     </div>
-
   </div>
   <div class="col-12 bottom-container">
-    <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug
+    <button (click)="goBack()" class="back-button btn btn-primary" type="button">
+      <i class="fa fa-arrow-left btn-i"></i>
+      {{ 'back' | translate }}
     </button>
   </div>
 </div>

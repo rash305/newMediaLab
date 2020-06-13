@@ -1,7 +1,7 @@
 <div class="row m-0 mt-1 back-bar">
   <div class="col-4 pl-0">
     <i class="fa fa-arrow-circle-left purple-icon"></i>
-    <span> Terug</span>
+    <span> {{ 'back' | translate }}</span>
   </div>
   <div class="col-4" style="text-align: center; margin-left: -12.5px;" [hidden]="!navigateBackModel">
     <img src="{{navigateBackModel?.image}}" alt="{{navigateBackModel?.title}}" style="height: 15px; width: 15px">

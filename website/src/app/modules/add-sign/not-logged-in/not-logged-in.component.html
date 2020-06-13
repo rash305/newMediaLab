@@ -4,19 +4,20 @@
   <div class="h-100">
     <div class="content-container">
       <div class="col-12 purple-border top-container">
-        <i class="fa fa-video-camera"></i><span><b>Gebaar toevoegen</b></span>
+        <i class="fa fa-video-camera"></i><span><b>{{ 'add-sign.add-sign' | translate }}</b></span>
       </div>
       <div class="container-border purple-border middle-container middle-container-bar">
         <div class="p-4">
-          <span>Om gebaren op te nemen en aan het Woordenboek toe te voegen,
-                moet je ingelogd zijn.
-                Ga naar Instellingen<i class="fa fa-cog"style="text-align: center"></i>om in te loggen.
+          <span>
+            {{ 'add-sign.not-logged-in.message-part1' | translate }}
+            <i class="fa fa-cog"style="text-align: center"></i>
+            {{ 'add-sign.not-logged-in.message-part2' | translate }}
           </span>
         </div>
       </div>
       <div class="col-12 bottom-container">
-        <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-        <button type="button" class="btn btn-primary right-button" (click)="toSettings()"><i class="fa fa-cog btn-i"></i> Instellingen</button>
+        <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> {{ 'back' | translate }}</button>
+        <button type="button" class="btn btn-primary right-button" (click)="toSettings()"><i class="fa fa-cog btn-i"></i> {{ 'add-sign.not-logged-in.settings' | translate }}</button>
       </div>
     </div>
   </div>
