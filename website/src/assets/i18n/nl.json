@@ -97,7 +97,7 @@
         "username-5chars": "Gebruikersnaam moet minimaal 5 tekens bevatten",
         "username-inuse": "Gebruikersnaam kan niet worden gebruikt",
         "emailadress": "E-mailadress moet worden ingevuld",
-        "emailadress-wrong-format": "E-mailadres heeft het verkeerde opbouw",
+        "emailadress-wrong-format": "E-mailadres heeft de verkeerde opbouw",
         "emailadress-validate": "Valideren...",
         "emailadress-inuse": "E-mailadres kan niet worden gebruikt",
         "password": "Wachtwoord moet worden ingevuld",
