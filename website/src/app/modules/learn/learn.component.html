@@ -1,6 +1,6 @@
 
 <div class="col-12 pt-4" >
-  <i class="fa fa-calendar"></i> {{ 'learn.sign-of-day' | translate }}:
+  <span class="title"><i class="fa fa-2x fa-calendar"></i> {{ 'learn.sign-of-day' | translate }}:</span>
   <button class="btn btn-learn" [routerLink]="['/learn/sign-of-day/', this.signOfDay?.category.id, this.signOfDay?.id]" routerLinkActive="active"  *ngIf="this.signOfDay">
     <div class="row justify-content-between">
       <div class="col-4 col-lg-2">
@@ -14,7 +14,7 @@
 </div>
 
 <div class="col-12  pt-4">
-  <i class="fa fa-graduation-cap"></i> {{ 'learn.learn' | translate }}:
+  <span class="title"><i class="fa fa-2x fa-graduation-cap"></i> {{ 'learn.learn' | translate }}:</span>
   <button class="btn btn-learn" routerLink="/learn/quiz" routerLinkActive="active">
     <div class="row justify-content-between">
       <div class="col-4 col-lg-2">

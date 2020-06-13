@@ -1,3 +1,14 @@
 .back-bar{
   font-size: 1.2em;
 }
+
+.back-button-icon {
+  color:#593196!important;
+  font-size: 1.8em;
+  padding-top: 4px;
+}
+.category-title {
+  line-height: 1.7em;
+  vertical-align: bottom;
+  font-size: 1.2em;
+}
