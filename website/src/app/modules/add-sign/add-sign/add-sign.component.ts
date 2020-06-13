@@ -24,8 +24,6 @@ export class AddSignComponent implements OnInit {
   video: FileItem;
   videoError: string;
 
-  private requiredError = ' moet worden ingevuld';
-
   showConfirmationScreen = false;
   imageNumber = 1;
   sign: SignDetailsModel;
@@ -100,7 +98,7 @@ export class AddSignComponent implements OnInit {
 
   validateMeaning(meaning): boolean {
     if (!meaning) {
-      this.meaningError = 'Betekenis' + this.requiredError;
+      this.meaningError = 'add-sign.error.meaning';
       return false;
     }
 
@@ -110,7 +108,7 @@ export class AddSignComponent implements OnInit {
 
   validateCategory(categoryId): boolean {
     if (!categoryId) {
-      this.categoryError = 'Categorie' + this.requiredError;
+      this.categoryError = 'add-sign.error.category';
       return false;
     }
 
@@ -120,7 +118,7 @@ export class AddSignComponent implements OnInit {
 
   validateVideo(video): boolean {
     if (!video) {
-      this.videoError = 'Video moet worden geselecteerd';
+      this.videoError = 'add-sign.error.video';
       return false;
     }
 
@@ -182,7 +180,7 @@ export class AddSignComponent implements OnInit {
 
   videoErrorFunction($event: any) {
     this.video = null;
-    this.videoError = 'Dit video formaat kan niet worden afgespeeld.';
+    this.videoError = 'add-sign.error.video-format';
   }
 
   routeAfterUpdate(id) {

@@ -1,11 +1,18 @@
 <div class="row" style="margin: 0;">
   <div class="col-12">
 
-  <span *ngIf="(!loading) && ( categories && categories.length == 0)">
-    U heeft nog geen gebaren opgeslagen in uw favorieten.
-    U kunt gebaren die u wilt leren toevoegen in het <b class="dictionary" routerLink="/dictionary" routerLinkActive="active">Woordenboek <i class="fa fa-search"style="text-align: center"></i></b>.
-  </span>
-  <span *ngIf="(!loading) && (!categories)"> Categorieën kunnen niet worden opgehaald.</span>
+    <span *ngIf="(!loading) && ( categories && categories.length == 0)">
+      {{ 'shared.signs.categories.message-part1' | translate}}
+      <b class="dictionary" routerLink="/dictionary" routerLinkActive="active">
+        {{ 'shared.signs.categories.dictionary' | translate}}
+        <i class="fa fa-search"style="text-align: center"></i>
+      </b>
+      {{ 'shared.signs.categories.message-part2' | translate}}
+    </span>
+
+    <span *ngIf="(!loading) && (!categories)">
+      {{ 'shared.signs.categories.no-categories' | translate}}
+    </span>
   </div>
   <div *ngFor="let category of categories" class="col-md-3 col-4">
     <app-square-overview-tile [content]="category" (clickNavigationEmitter)="clickEventsEmitter.emit($event)"></app-square-overview-tile>

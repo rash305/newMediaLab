@@ -1,6 +1,6 @@
 
 <div class="col-12 pt-4" >
-  <i class="fa fa-calendar"></i> Gebaar van de dag:
+  <i class="fa fa-calendar"></i> {{ 'learn.sign-of-day' | translate }}:
   <button class="btn btn-learn" [routerLink]="['/learn/sign-of-day/', this.signOfDay?.category.id, this.signOfDay?.id]" routerLinkActive="active"  *ngIf="this.signOfDay">
     <div class="row justify-content-between">
       <div class="col-4 col-lg-2">
@@ -14,12 +14,12 @@
 </div>
 
 <div class="col-12  pt-4">
-  <i class="fa fa-graduation-cap"></i> Leren:
+  <i class="fa fa-graduation-cap"></i> {{ 'learn.learn' | translate }}:
   <button class="btn btn-learn" routerLink="/learn/quiz" routerLinkActive="active">
     <div class="row justify-content-between">
       <div class="col-4 col-lg-2">
         <i class="fa fa-check-square-o" style="font-size: 90px"></i>
-        Quiz
+        {{ 'learn.quiz' | translate }}
       </div>
       <div class="col-2 align-self-center">
         <i class="fa fa-chevron-right"></i>

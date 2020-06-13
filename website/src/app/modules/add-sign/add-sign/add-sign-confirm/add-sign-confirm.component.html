@@ -4,7 +4,7 @@
   <div class="h-100">
     <div class="content-container" [hidden]="uploadingVideoisBusy">
       <div class="col-12 purple-border top-container">
-        <i class="fa fa-video-camera"></i><span><b>Gebaar toevoegen</b></span>
+        <i class="fa fa-video-camera"></i><span><b>{{ 'add-sign.add-sign' | translate }}</b></span>
       </div>
       <div class="purple-border middle-container f-flex flex-column">
         <div class="row">
@@ -16,7 +16,7 @@
         <div class="row no-gutters" *ngIf="this.sign" style="margin: 0px 15px 0px;">
           <div class="col-3">
             <div class="sign-image">
-              <img src="{{sign.image}}" alt="Verplichte afbeelding" onerror="this.src='/assets/missing.jpg'">
+              <img src="{{sign.image}}" alt="Required image" onerror="this.src='/assets/missing.jpg'">
             </div>
           </div>
           <div class="col-5 align-self-center h5">
@@ -25,7 +25,7 @@
           <div class="col-4">
             <button type="button" class="btn btn-primary change-image-button" (click)="changeImage()">
               <div><i class="fa fa-rotate-right btn-i"></i></div>
-              <div>Verander foto</div>
+              <div>{{ 'add-sign.add-sign-confirm.change-image' | translate }}</div>
             </button>
             <a href="https://pixabay.com/">
               <img src="https://pixabay.com/static/img/public/leaderboard_b.png" alt="Pixabay" style="width: 100%">
@@ -43,27 +43,25 @@
       </div>
       <div class="col-12 bottom-container">
         <button type="button" class="back-button btn btn-primary" (click)="goBack()"><i
-          class="fa fa-arrow-left btn-i"></i> Terug
+          class="fa fa-arrow-left btn-i"></i> {{ 'back' | translate }}
         </button>
         <button type="button" class="btn btn-primary right-button" (click)="addSign()" [disabled]="!this.sign.image"><i
-          class="fa fa-plus-circle btn-i"></i> Toevoegen
+          class="fa fa-plus-circle btn-i"></i> {{ 'add-sign.add-sign-confirm.add' | translate }}
         </button>
       </div>
     </div>
 
-
     <div class="content-container" *ngIf="uploadingVideoisBusy">
       <div class="col-12 purple-border top-container">
-        <i class="fa fa-video-camera"></i><span><b>Gebaar uploaden...</b></span>
+        <i class="fa fa-video-camera"></i><span><b>{{ 'add-sign.add-sign-confirm.uploading' | translate }}...</b></span>
       </div>
       <div class="purple-border middle-container f-flex flex-column">
         <div class="row">
-          <div class="col-12" style="text-align: center">
-            Een moment geduld a.u.b.
+          <div class="col-12 p-4" style="text-align: center">
+            <span>{{ 'add-sign.add-sign-confirm.patience' | translate }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
