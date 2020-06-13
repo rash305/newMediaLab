@@ -1,40 +1,39 @@
 <div id="header-bar">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary m-0 p-0 text-white ">
-      <div class="d-flex flex-fill justify-content-between bd-highlight mt-2 mb-1">
-        <div class="col"></div>
-        <div class="bd-highlight col" style="text-align: center">
-          <h2 href="#">WeSign!</h2>
-        </div>
-        <div class=" bd-highlight col " style="text-align: right" id="navbarColor01">
-          <button class="btn settings" (click)="ShowNotLoggedInPopup()" *ngIf="!isLoggedIn">
-            <span><i class="fa fa-video-camera" style="color: #8f8f8f"></i></span>
-          </button>
-          <button class="btn settings" (click)="ShowAddSignPopup()" *ngIf="isLoggedIn">
-            <span><i class="fa fa-video-camera"></i></span>
-          </button>
-          <button class="btn settings p-0 pl-2" (click)="ShowSettingsPopup()">
-            <span><i class="fa fa-cog"></i></span>
-          </button>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary m-0 p-0 text-white ">
+    <div class="d-flex flex-fill justify-content-between bd-highlight mt-2 mb-1">
+      <div class="col"></div>
+      <div class="bd-highlight col" style="text-align: center">
+        <h2 href="#">WeSign!</h2>
       </div>
-    </nav>
-  <div class="container">
-
-
-<div class="header">
-      <button class="btn btn-secondary col-4" routerLink="/personal" routerLinkActive="active">
-        <span><i class="fa fa-heart fa-2x"></i><br/>{{ 'app.favorite' | translate }}</span>
-      </button>
-      <button class="btn btn-secondary col-4 center-button" routerLink="/learn" routerLinkActive="active">
-        <span><i class="fa fa-graduation-cap fa-2x"></i><br/>{{ 'app.learn' | translate }}</span>
-      </button>
-      <button class="btn btn-secondary col-4" routerLink="/dictionary" routerLinkActive="active">
-        <span><i class="fa fa-th-large fa-2x"></i><br/>{{ 'app.dictionary' | translate }}</span>
-      </button>
+      <div class=" bd-highlight col " style="text-align: right" id="navbarColor01">
+        <button class="btn settings" (click)="ShowNotLoggedInPopup()" *ngIf="!isLoggedIn">
+          <span><i class="fa fa-video-camera" style="color: #8f8f8f"></i></span>
+        </button>
+        <button class="btn settings" (click)="ShowAddSignPopup()" *ngIf="isLoggedIn">
+          <span><i class="fa fa-video-camera"></i></span>
+        </button>
+        <button class="btn settings p-0 pl-2" (click)="ShowSettingsPopup()">
+          <span><i class="fa fa-cog"></i></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="gray-bar">
+    <div class="container">
+      <div class="header">
+        <button class="btn btn-secondary col-4" routerLink="/personal" routerLinkActive="active">
+          <span><i class="fa fa-heart fa-2x"></i><br/>{{ 'app.favorite' | translate }}</span>
+        </button>
+        <button class="btn btn-secondary col-4 center-button" routerLink="/learn" routerLinkActive="active">
+          <span><i class="fa fa-graduation-cap fa-2x"></i><br/>{{ 'app.learn' | translate }}</span>
+        </button>
+        <button class="btn btn-secondary col-4" routerLink="/dictionary" routerLinkActive="active">
+          <span><i class="fa fa-th-large fa-2x"></i><br/>{{ 'app.dictionary' | translate }}</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
-
 <div class="container">
 
   <div id="content">

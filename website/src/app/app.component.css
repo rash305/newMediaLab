@@ -16,6 +16,10 @@
   background:white!important;
 }
 
+.gray-bar {
+  background: rgb(245,245,245);
+}
+
 
 .btn-settings {
   float: right;
@@ -25,8 +29,8 @@
 
 .btn-secondary {
   color: #444444;
-  /*background-color: rgb(245, 245, 245);*/
-  background: #eee;
+  background-color: rgb(245, 245, 245);
+  /*background: #eee;*/
   border-color: #ccc!important;
   border-bottom: 1px solid #cccccc !important;
   /*  border-radius: 5px;*/
