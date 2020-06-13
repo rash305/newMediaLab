@@ -18,7 +18,7 @@ export class AppComponent {
               private translate: TranslateService) {
     authenticationService.isLoggedInEmitter.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-      translate.setDefaultLang('nl');
+      translate.setDefaultLang('sw');
 
     });
     authenticationService.isLoggedIn();
