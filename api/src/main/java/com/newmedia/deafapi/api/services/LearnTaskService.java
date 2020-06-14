@@ -27,8 +27,8 @@ public class LearnTaskService implements ILearnTaskService {
     private MongoFavoriteSignRepository favoriteSignRepository;
 
 
-    private List<Category> getCategories() {
-        List<DocCategory> all = categoryICategoryRepository.findAll();
+    private List<Category> getCategories(String acceptLanguage) {
+        List<DocCategory> all = categoryICategoryRepository.findByLanguage(acceptLanguage);
         return ObjectMapperUtils.mapAll(all, Category.class);
     }
 
@@ -83,8 +83,8 @@ public class LearnTaskService implements ILearnTaskService {
     }
 
     @Override
-    public LearnTask getLearnTask() {
-        List<Category> categories = this.getCategories();
+    public LearnTask getLearnTask(String acceptLanguage) {
+        List<Category> categories = this.getCategories(acceptLanguage);
         Random rand = new Random();
         Category randomCat = categories.get(rand.nextInt(categories.size()));
         List<Sign> signs = this.getSigns(randomCat.getId());
