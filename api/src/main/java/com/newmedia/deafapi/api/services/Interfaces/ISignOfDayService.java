@@ -8,6 +8,6 @@ import java.time.LocalDate;
 // By notating this class as service it is possible to autowire this class
 @Service
 public interface ISignOfDayService {
-    Sign getSignOfDay(String userId, LocalDate today);
-    Sign createSignOfDay(String userId, LocalDate today);
+    Sign getSignOfDay(String userId, LocalDate today, String acceptLanguage);
+    Sign createSignOfDay(String userId, LocalDate today, String acceptLanguage);
 }

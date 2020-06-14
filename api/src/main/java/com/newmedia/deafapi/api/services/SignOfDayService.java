@@ -1,9 +1,12 @@
 package com.newmedia.deafapi.api.services;
 
+import com.newmedia.deafapi.api.dataservices.docModels.DocCategory;
 import com.newmedia.deafapi.api.dataservices.docModels.DocSign;
 import com.newmedia.deafapi.api.dataservices.docModels.DocSignOfDay;
+import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoCategoryRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignOfDayRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
+import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.services.Interfaces.ISignOfDayService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
@@ -22,9 +25,11 @@ public class SignOfDayService implements ISignOfDayService {
     private MongoSignOfDayRepository signOfDayRepository;
     @Autowired
     private MongoSignRepository signRepository;
+    @Autowired
+    private MongoCategoryRepository categoryICategoryRepository;
 
     @Override
-    public Sign getSignOfDay(String userId, LocalDate today) {
+    public Sign getSignOfDay(String userId, LocalDate today, String acceptLanguage) {
         Optional<DocSignOfDay> signOfDay = signOfDayRepository.findByUserIdAndAndDay(userId, today);
         String signId;
         // Check whether a sign exists for that day for the user
@@ -38,14 +43,19 @@ public class SignOfDayService implements ISignOfDayService {
         else {
             // User has no sign of that day
             // Thus create one for that day
-            return createSignOfDay(userId, today);
+            return createSignOfDay(userId, today, acceptLanguage);
         }
     }
 
     @Override
-    public Sign createSignOfDay(String userId, LocalDate today) {
-        List<DocSign> allSigns = signRepository.findAll();
+    public Sign createSignOfDay(String userId, LocalDate today, String acceptLanguage) {
+        // Get categories of given language
+        List<Category> categories = getCategories(acceptLanguage);
+        // Select a random category
         Random rand = new Random();
+        Category randomCat = categories.get(rand.nextInt(categories.size()));
+        // Get all signs for language
+        List<DocSign> allSigns = signRepository.findByCategoryId(randomCat.getId());
         DocSign sign = allSigns.get(rand.nextInt(allSigns.size()));
 
         // Save the newly generated sign of the day in the database
@@ -53,5 +63,10 @@ public class SignOfDayService implements ISignOfDayService {
         signOfDayRepository.insert(signOfDay);
 
         return ObjectMapperUtils.map(sign, Sign.class);
+    }
+
+    private List<Category> getCategories(String acceptLanguage) {
+        List<DocCategory> all = categoryICategoryRepository.findByLanguage(acceptLanguage);
+        return ObjectMapperUtils.mapAll(all, Category.class);
     }
 }

@@ -68,10 +68,10 @@ public class SignController {
     }
 
     @GetMapping("/api/signs/sign-of-day")
-    public SignDto getSignOfDay() {
+    public SignDto getSignOfDay(@RequestHeader(value="Accept-Language") String acceptLanguage) {
         String userId = GetAuthorizedUser();
         LocalDate today = LocalDate.now();
-        Sign sign = ISignOfDayService.getSignOfDay(userId, today);
+        Sign sign = ISignOfDayService.getSignOfDay(userId, today, acceptLanguage);
 
         SignDto signDto = ObjectMapperUtils.map(sign, SignDto.class);
         return signDto;
