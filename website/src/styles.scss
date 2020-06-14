@@ -8,6 +8,9 @@ $fa-font-path: "~font-awesome/fonts";
 .purple-icon {
   color: #593196 !important;
 }
-body {
-  //background: rgb(250, 250, 250);
+
+.limit-phone-size {
+  max-width: 575px !important;
+  margin: auto;
 }
+
