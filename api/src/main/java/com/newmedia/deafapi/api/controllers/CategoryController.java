@@ -27,7 +27,7 @@ public class CategoryController {
     // API PATH based on guidelines of REST
     // https://restfulapi.net/resource-naming/
     @GetMapping("/api/categories")
-    public List<CategoryDto> getCategoriesList(@RequestParam(value = "personal", required = false) boolean isPersonal) {
+    public List<CategoryDto> getCategoriesList(@RequestParam(value = "personal", required = false) boolean isPersonal, @RequestHeader(value="Accept-Language") String acceptLanguage) {
 
         List<Category> categories;
         if(isPersonal) {
@@ -36,9 +36,9 @@ public class CategoryController {
                 throw new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "No valid user token is given.");
             }
-            categories = ICategoryService.getPersonalCategories(UserId);
+            categories = ICategoryService.getPersonalCategories(UserId, acceptLanguage);
         } else {
-            categories = ICategoryService.getCategories();
+            categories = ICategoryService.getCategories(acceptLanguage);
         }
 
         if (categories == null) {

@@ -12,6 +12,7 @@ public class DocCategory {
     @Indexed(name = "meta_title_category_index_unique", unique = true)
     private String title;
     private String image;
+    private String language;
 
     public DocCategory() {}
 
@@ -42,5 +43,13 @@ public class DocCategory {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }
