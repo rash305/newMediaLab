@@ -16,7 +16,7 @@ export class AppComponent {
   hideAddSignPopup = true;
   hideNotLoggedInPopup = true;
   acceptedLanguages = ['nl', 'sw'];
-  hideOnderzoeksPopup = false;
+  hideOnderzoeksPopup: boolean;
 
   constructor(authenticationService: AuthenticationService,
               private translate: TranslateService,
@@ -35,6 +35,7 @@ export class AppComponent {
       });
     });
     authenticationService.isLoggedIn();
+    this.hideOnderzoeksPopup = localStorage.getItem('onderzoekPopupRead') === 'True';
   }
 
   ShowSettingsPopup() {

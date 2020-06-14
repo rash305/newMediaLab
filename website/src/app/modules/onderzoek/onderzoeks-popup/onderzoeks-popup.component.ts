@@ -15,6 +15,7 @@ export class OnderzoeksPopupComponent implements OnInit {
   }
 
   goBack(): void {
+    localStorage.setItem('onderzoekPopupRead', 'True' );
     this.MinimalizeOnderzoekPopupEvent.emit(true);
   }
 }
