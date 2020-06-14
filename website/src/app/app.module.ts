@@ -48,6 +48,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { PixabayDisclaimerComponent } from './common/disclaimer/pixabay-disclaimer/pixabay-disclaimer.component';
 import { SignRouterComponent } from './modules/add-sign/add-sign/sign-router/sign-router.component';
 import {LanguageInterceptor} from './common/network/language-interceptor';
+import { OnderzoeksPopupComponent } from './modules/onderzoek/onderzoeks-popup/onderzoeks-popup.component';
 
 const appRoutes: Routes = [
   {
@@ -138,6 +139,7 @@ const appRoutes: Routes = [
     DomSanitizerPipe,
     PixabayDisclaimerComponent,
     SignRouterComponent,
+    OnderzoeksPopupComponent,
   ],
   imports: [
     BrowserModule,

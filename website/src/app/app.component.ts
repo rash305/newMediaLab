@@ -16,6 +16,7 @@ export class AppComponent {
   hideAddSignPopup = true;
   hideNotLoggedInPopup = true;
   acceptedLanguages = ['nl', 'sw'];
+  hideOnderzoeksPopup = false;
 
   constructor(authenticationService: AuthenticationService,
               private translate: TranslateService,
