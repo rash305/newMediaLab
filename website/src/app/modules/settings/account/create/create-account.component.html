@@ -33,7 +33,7 @@
 
       <i class="fa fa-unlock-alt"></i>
       <input type="password" placeholder="{{ 'settings.register.password2' | translate }}" name="pw2" required
-             (focusout)="validatePassword2(password, password2)" [(ngModel)]="password2">
+             (focusout)="validatePassword2(password, password2)" (keyup.enter)="createAccount()" [(ngModel)]="password2">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!password2Error">
           {{ password2Error | translate }}
