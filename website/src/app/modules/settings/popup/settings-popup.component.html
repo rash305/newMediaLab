@@ -4,7 +4,7 @@
 -->
 <div class="modal" (click)="receiveSettingStatus('close')">
 </div>
-<div class="popup-layer container">
+<div class="popup-layer container limit-phone-size">
   <div class="h-100">
     <app-settings-start [hidden]="!show('start')"
                         (messageSettingsStatus)="receiveSettingStatus($event)"></app-settings-start>
