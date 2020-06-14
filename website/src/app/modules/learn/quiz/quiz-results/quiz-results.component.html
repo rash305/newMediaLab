@@ -1,5 +1,5 @@
 <div class="col-12  pt-2">
-  <i class="fa fa-3x fa-lightbulb-o"></i> {{ 'learn.quiz-results.learned-signs' | translate }}:
+  <span class="title"><i class="fa fa-2x fa-lightbulb-o"></i> {{ 'learn.quiz-results.learned-signs' | translate }}:</span>
   <div class="row justify-content-center" style="margin: 7px 0px;">
     <div *ngFor="let sign of learnedSigns" class="col-4">
       <div class="row no-gutters">
@@ -19,7 +19,7 @@
 </div>
 
 <div class="col-12 pt-4">
-  <i class="fa fa-3x fa-graduation-cap"></i> {{ 'learn.quiz-results.learn-more' | translate }}:
+  <span class="title"><i class="fa fa-2x fa-graduation-cap"></i> {{ 'learn.quiz-results.learn-more' | translate }}:</span>
   <button class="btn btn-learn" (click)="this.messageQuizStatus.emit('restart')">
     <div class="row justify-content-between">
       <div class="col-4 col-lg-2">

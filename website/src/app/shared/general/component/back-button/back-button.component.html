@@ -1,9 +1,9 @@
 <div class="row m-0 mt-1 back-bar">
-  <div class="col-4 pl-0 p-1">
+  <div class="col-1 pl-0 p-1">
     <i class="fa back-button-icon  fa-arrow-circle-left"></i>
 <!--        <span> {{ 'back' | translate }}</span>-->
   </div>
-  <div class="col-4" style="text-align: center;" [hidden]="!navigateBackModel">
+  <div class="col-10" style="text-align: center;" [hidden]="!navigateBackModel">
     <span class="category-title">
       <img src="{{navigateBackModel?.image}}" alt="{{navigateBackModel?.title}}" style="height: 25px; width: 25px; margin-left: -5.5px;">
       <b> {{navigateBackModel?.title}} </b>
