@@ -27,7 +27,6 @@ export class AddSignComponent implements OnInit {
   showConfirmationScreen = false;
   imageNumber = 1;
   sign: SignDetailsModel;
-
   categories: CategoryModel[];
 
   @Output() AddSignMinimalizeEvent = new EventEmitter();
@@ -153,7 +152,6 @@ export class AddSignComponent implements OnInit {
     this.AddSignMinimalizeEvent.emit(true);
   }
 
-
   confirm($event: string) {
     if ($event === 'confirmed') {
       // Sign is accepted, thus add sign to app and close popup
@@ -184,9 +182,8 @@ export class AddSignComponent implements OnInit {
   }
 
   routeAfterUpdate(id) {
-    this.router.navigate(['/learn']);
-    this.router.navigate(['/dictionary'], {
-      queryParams: {id, type: 'sign-details'},
+    this.router.navigate(['/sign-router'], {
+      queryParams: {id},
       queryParamsHandling: 'merge',
       // preserve the existing query params in the route
       skipLocationChange: false
