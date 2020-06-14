@@ -46,6 +46,7 @@ import { DomSanitizerPipe } from './common/html/pipes/dom-sanitizer.pipe';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { PixabayDisclaimerComponent } from './common/disclaimer/pixabay-disclaimer/pixabay-disclaimer.component';
+import {LanguageInterceptor} from './common/network/language-interceptor';
 
 const appRoutes: Routes = [
   {
@@ -157,6 +158,7 @@ const appRoutes: Routes = [
     HttpErrorHandler,
     { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: NetworkErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LanguageInterceptor, multi: true },
   ],
 bootstrap: [AppComponent]
 })
