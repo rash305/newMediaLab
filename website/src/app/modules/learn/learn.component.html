@@ -3,7 +3,7 @@
   <span class="title"><i class="fa fa-2x fa-calendar"></i> {{ 'learn.sign-of-day' | translate }}:</span>
   <button class="btn btn-learn" [routerLink]="['/learn/sign-of-day/', this.signOfDay?.category.id, this.signOfDay?.id]" routerLinkActive="active"  *ngIf="this.signOfDay">
     <div class="row justify-content-between">
-      <div class="col-4 col-lg-2">
+      <div class="col-4 ">
         <app-square-overview-tile [content]="this.signOfDay" [referencedDomain]="['learn/sign-of-day/', this.signOfDay?.category.id]"></app-square-overview-tile>
       </div>
       <div class="col-2 align-self-center">
@@ -17,7 +17,7 @@
   <span class="title"><i class="fa fa-2x fa-graduation-cap"></i> {{ 'learn.learn' | translate }}:</span>
   <button class="btn btn-learn" routerLink="/learn/quiz" routerLinkActive="active">
     <div class="row justify-content-between">
-      <div class="col-4 col-lg-2">
+      <div class="col-4 ">
         <i class="fa fa-check-square-o" style="font-size: 90px"></i>
         {{ 'learn.quiz' | translate }}
       </div>

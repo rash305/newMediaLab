@@ -10,7 +10,11 @@ $fa-font-path: "~font-awesome/fonts";
 }
 
 .limit-phone-size {
-  max-width: 575px !important;
+  max-width: 400px !important;
   margin: auto;
 }
 
+.container {
+  max-width: 400px !important;
+
+}
