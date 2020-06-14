@@ -13,7 +13,6 @@ import {HandleError, HttpErrorHandler} from '../../../common/network/http-error-
 export class SignTemplateService {
   private handleError: HandleError;
 
-  private numberOfDownloadedSigns = 0;
   // tslint:disable-next-line:variable-name
   private _personalSigns: BehaviorSubject<SignModel[]> = new BehaviorSubject([]);
   // tslint:disable-next-line:variable-name
@@ -34,7 +33,6 @@ export class SignTemplateService {
         res => {
           const signModels = (res.map((jsonSign: any) =>
             new SignModel().deserialize(jsonSign)));
-
           this._publicSigns.next(signModels);
         },
         err => console.log('Error retrieving personal signs')
@@ -50,7 +48,6 @@ export class SignTemplateService {
         this.signBackendService.getSigns(category).subscribe(result => resolve(this.signsResult(result)));
       }
     });
-
     return promise;
   }
 
@@ -62,6 +59,7 @@ export class SignTemplateService {
     return this.http.get<object[]>(signsUrl, {params: httpParams})
       .pipe(map(res => res.map(signData => new SignModel()
         .deserialize(signData))
+        // Sort signs alphabetically
         .sort((a, b) => a.title.localeCompare(b.title))))
       .pipe(
         catchError(this.handleError('getSearchedSignList', []))
@@ -73,7 +71,8 @@ export class SignTemplateService {
     let signList;
     if (personal) {
       // Get signList as current list of signs
-      signList = this._personalSigns.getValue();
+      // signList = this._personalSigns.getValue();
+      signList = [];
     } else {
       signList = this._publicSigns.getValue();
     }
@@ -90,30 +89,14 @@ export class SignTemplateService {
     // Sort signs
     signList.sort((a, b) => a.title.localeCompare(b.title));
 
-
+    // Set signList as current list of signs
     if (personal) {
-      // Set signList as current list of signs
       this._personalSigns.next(signList);
     } else {
       this._publicSigns.next(signList);
     }
-
     // Notify how many signs are added
     return addedSigns;
-  }
-
-  AddSignManually(sign: SignModel) {
-    const personalSigns = this._personalSigns.getValue();
-    personalSigns.push(sign);
-    // Sort signs alphabetically
-    personalSigns.sort((a, b) => a.title.localeCompare(b.title));
-    this._personalSigns.next(personalSigns);
-
-    const publicSigns = this._publicSigns.getValue();
-    publicSigns.push(sign);
-    // Sort signs alphabetically
-    publicSigns.sort((a, b) => a.title.localeCompare(b.title));
-    this._publicSigns.next(publicSigns);
   }
 }
 

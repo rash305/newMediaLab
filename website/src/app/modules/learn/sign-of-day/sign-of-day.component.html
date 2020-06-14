@@ -5,15 +5,15 @@
 </div>
 
 
-  <div style="margin: 15px;">
-    <span class="title"> <i class="fa fa-2x fa-calendar"></i> {{ 'learn.sign-of-day' | translate }}: </span>
-  </div>
-<div class="sign-of-day">
-  <div class="row m-0">
-    <div class="col-12" style="text-align: center">
-      <img src="{{category?.image}}" alt="{{category?.title}}" style="height: 15px">
-      <span>&nbsp;<b> {{category?.title}} </b></span>
-    </div>
+<div class="col-12 pt-2">
+  <span class="title"> <i class="fa fa-2x fa-calendar"></i> {{ 'learn.sign-of-day' | translate }}: </span>
+</div>
+<div class="row m-0 sign-of-day">
+  <div class="col-12" style="text-align: center">
+    <span class="category-title">
+      <img src="{{category?.image}}" alt="{{category?.title}}" style="height: 25px; width: 25px; margin-left: -5.5px;">
+      <b> {{category?.title}} </b>
+    </span>
   </div>
 </div>
 <app-sign-details [currentSignId]="signId"></app-sign-details>

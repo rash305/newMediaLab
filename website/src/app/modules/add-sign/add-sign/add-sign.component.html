@@ -27,7 +27,7 @@
           </select>
           <div class="alert-container">
             <div class="alert-danger" role="alert" [hidden]="!categoryError">
-              {{categoryError}}
+              {{ categoryError | translate }}
             </div>
           </div>
 
@@ -47,7 +47,7 @@
           </div>
           <div class="alert-container">
             <div class="alert-danger" role="alert" [hidden]="!videoError">
-              {{videoError}}
+              {{ videoError | translate }}
             </div>
           </div>
         </div>

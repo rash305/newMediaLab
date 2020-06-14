@@ -5,7 +5,7 @@
   "app": {
     "favorite": "Vipendwa",
     "learn": "Jifunze",
-    "dictionary": "Kamusi"
+    "dictionary": "Ishara zote"
   },
   "shared": {
     "general": {
@@ -16,7 +16,7 @@
     "signs": {
       "categories": {
         "message-part1": "Bado haujahifadhi ishara zozote katika vipendwa vyako. Unaweza kuongeza ishara unazotaka kujifunza kwenye",
-        "dictionary": "Kamusi",
+        "dictionary": "Ishara zote",
         "message-part2": ".",
         "no-categories": "Jamii haiwezi kupatikana tena."
       },
@@ -45,7 +45,7 @@
       "patience": "Tafadhali subiri kidogo"
     },
     "not-logged-in": {
-      "message-part1": "Ili kurekodi ishara na kuziongeza kwenye Kamusi, lazima uwe umeingia. Nenda kwenye Mipangilio",
+      "message-part1": "Ili kurekodi ishara na kuziongeza kwenye Ishara zote, lazima uwe umeingia. Nenda kwenye Mipangilio",
       "message-part2": "ya kuingia.",
       "settings": "Mipangilio"
     }
@@ -55,7 +55,7 @@
       "delete-popup": {
         "delete-sign": "Ondoa ishara",
         "message-part1": "Je! Una uhakika unataka kuondoa ishara hii kutoka kwa vipendwa ",
-        "message-part2": "vyako?",
+        "message-part2": " vyako?",
         "delete": "Ondoa"
       }
     },
@@ -89,7 +89,7 @@
       "register": "Jiandikishe",
       "signup": "Jisajili",
       "username": "Jina la mtumiaji",
-      "emailadress": "Barua-pepe",
+      "emailadress": "Anwani ya barua-pepe",
       "password": "Nywila",
       "password2": "Rudia nywila",
       "error": {
@@ -98,7 +98,7 @@
         "username-inuse": "Jina la mtumiaji haliwezi kutumiwa",
         "emailadress": "Anwani ya barua-pepe lazima ijazwe",
         "emailadress-wrong-format": "Anwani ya barua-pepe ina muundo usiofaa",
-        "emailadress-validate": "Valideren...",
+        "validate": "Kuhalalisha...",
         "emailadress-inuse": "Anwani ya barua-pepe haliwezi kutumiwa",
         "password": "Nywila lazima ijazwe",
         "password-8chars": "Nywila lazima liwe na herufi 8 angalau",
@@ -119,7 +119,7 @@
     "logout": {
       "logout": "Ondoka",
       "message-part1": "Lazima uwe umeingia ili ujumuishe ishara ",
-      "message-part2": "na uiongeze kwenye kamusi. Una uhakika unataka ondoka?"
+      "message-part2": "na uiongeze kwenye Ishara zote. Una uhakika unataka ondoka?"
     },
     "help": {
       "help": "Msaada",

@@ -5,7 +5,8 @@
   <div class=" purple-border middle-container d-flex flex-column">
     <div class="col-12 input-list">
       <i class="fa fa-user-circle"></i>
-      <input type="text" placeholder="{{ 'settings.login.username-email' | translate }}" name="uname" required [(ngModel)]="username" (click)="logIn()">
+      <input type="text" placeholder="{{ 'settings.login.username-email' | translate }}" name="uname" required
+             (focusout)="validateUsername(username)" [(ngModel)]="username">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!usernameError">
           {{ usernameError | translate }}
@@ -13,7 +14,8 @@
       </div>
 
       <i class="fa fa-unlock-alt"></i>
-      <input type="password" placeholder="{{ 'settings.login.password' | translate }}" name="pw" required [(ngModel)]="password" (click)="logIn()">
+      <input type="password" placeholder="{{ 'settings.login.password' | translate }}" name="pw" required
+             (focusout)="validatePassword(password)" (keyup.enter)="logIn()" [(ngModel)]="password">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!passwordError">
           {{ passwordError| translate }}
