@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FileSelectDirective, FileUploadModule} from 'ng2-file-upload';
+import {FileUploadModule} from 'ng2-file-upload';
 
 import {AppComponent} from './app.component';
 import {CategoriesComponent} from './shared/signs/components/category/categories.component';
@@ -46,6 +46,7 @@ import { DomSanitizerPipe } from './common/html/pipes/dom-sanitizer.pipe';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { PixabayDisclaimerComponent } from './common/disclaimer/pixabay-disclaimer/pixabay-disclaimer.component';
+import { SignRouterComponent } from './modules/add-sign/add-sign/sign-router/sign-router.component';
 import {LanguageInterceptor} from './common/network/language-interceptor';
 
 const appRoutes: Routes = [
@@ -90,6 +91,10 @@ const appRoutes: Routes = [
     component: AddSignComponent,
   },
   {
+    path: 'sign-router',
+    component: SignRouterComponent,
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'
@@ -132,6 +137,7 @@ const appRoutes: Routes = [
     VideoUploadComponent,
     DomSanitizerPipe,
     PixabayDisclaimerComponent,
+    SignRouterComponent,
   ],
   imports: [
     BrowserModule,
