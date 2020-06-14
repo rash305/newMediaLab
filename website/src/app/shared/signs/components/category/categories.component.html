@@ -14,7 +14,7 @@
       {{ 'shared.signs.categories.no-categories' | translate}}
     </span>
   </div>
-  <div *ngFor="let category of categories" class="col-md-3 col-4">
+  <div *ngFor="let category of categories" class="col-md-4 col-4">
     <app-square-overview-tile [content]="category" (clickNavigationEmitter)="clickEventsEmitter.emit($event)"></app-square-overview-tile>
   </div>
 </div>
