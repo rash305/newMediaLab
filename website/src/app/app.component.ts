@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthenticationService} from './shared/account/services/authentication.service';
 import {TranslateService} from '@ngx-translate/core';
+import {ActivatedRoute} from '@angular/router';
+import {CurrentLanguageService} from './shared/general/services/current-language.service';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +15,23 @@ export class AppComponent {
   hideSettingsPopup = true;
   hideAddSignPopup = true;
   hideNotLoggedInPopup = true;
+  acceptedLanguages = ['nl', 'sw'];
 
   constructor(authenticationService: AuthenticationService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private route: ActivatedRoute,
+              private languageService: CurrentLanguageService) {
+    translate.setDefaultLang(languageService.getLanguage());
+
     authenticationService.isLoggedInEmitter.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-      translate.setDefaultLang('sw');
-
+      this.route.queryParams.subscribe(params => {
+        const lang = params.lang;
+        if (this.acceptedLanguages.find(x => x === lang)) {
+          languageService.setLanguage(lang);
+          translate.setDefaultLang(lang);
+        }
+      });
     });
     authenticationService.isLoggedIn();
   }
