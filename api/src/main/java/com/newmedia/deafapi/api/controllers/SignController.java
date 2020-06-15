@@ -1,8 +1,6 @@
 package com.newmedia.deafapi.api.controllers;
 
-import com.newmedia.deafapi.api.dtos.CategoryDto;
 import com.newmedia.deafapi.api.dtos.SignDto;
-import com.newmedia.deafapi.api.models.Category;
 import com.newmedia.deafapi.api.models.Sign;
 import com.newmedia.deafapi.api.services.Interfaces.ISignOfDayService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
@@ -11,13 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import com.newmedia.deafapi.api.services.Interfaces.ISignService;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 // Add notation to inform spring boot to create an instance of this class and publish it as a rest controller
@@ -53,18 +49,13 @@ public class SignController {
                     HttpStatus.NOT_FOUND, "No signs can be requested.");
         }
 
-        List<SignDto> signDtos = ObjectMapperUtils.mapAll(signs, SignDto.class);
-        return signDtos;
+        return ObjectMapperUtils.mapAll(signs, SignDto.class);
     }
 
     @GetMapping("/api/signs/search")
-    public List<SignDto> getSearchedSignList(@RequestParam( value = "searchTerm") String searchTerm) {
-        List<Sign> signs;
-
-        signs = ISignService.getSearchedSigns(searchTerm);
-
-        List<SignDto> signDtos = ObjectMapperUtils.mapAll(signs, SignDto.class);
-        return signDtos;
+    public List<SignDto> getSearchedSignList(@RequestParam( value = "searchTerm") String searchTerm, @RequestHeader(value="Accept-Language") String acceptLanguage) {
+        List<Sign> signs = ISignService.getSearchedSigns(searchTerm, acceptLanguage);
+        return ObjectMapperUtils.mapAll(signs, SignDto.class);
     }
 
     @GetMapping("/api/signs/sign-of-day")
@@ -72,9 +63,7 @@ public class SignController {
         String userId = GetAuthorizedUser();
         LocalDate today = LocalDate.now();
         Sign sign = ISignOfDayService.getSignOfDay(userId, today, acceptLanguage);
-
-        SignDto signDto = ObjectMapperUtils.map(sign, SignDto.class);
-        return signDto;
+        return ObjectMapperUtils.map(sign, SignDto.class);
     }
 
 
@@ -96,7 +85,6 @@ public class SignController {
             if(principal != null){
                 return principal.toString();
             }
-
         }
         return null;
     }

@@ -4,6 +4,7 @@ import com.newmedia.deafapi.api.dataservices.docModels.DocCategory;
 import com.newmedia.deafapi.api.dataservices.docModels.DocFavoriteSign;
 import com.newmedia.deafapi.api.dataservices.docModels.DocSign;
 import com.newmedia.deafapi.api.dataservices.docModels.DocVideoReference;
+import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoCategoryRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoFavoriteSignRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoVideoRepository;
@@ -36,10 +37,12 @@ public class CrudSignService implements ISignService {
     @Autowired
     private MongoVideoRepository videoRepository;
 
+    @Autowired
+    private MongoCategoryRepository categoryICategoryRepository;
+
     @Override
     public List<Sign> getSigns(String categoryId) {
         List<DocSign> all;
-
         if(categoryId == null){
             all = signISignRepository.findAll();
         } else {
@@ -59,9 +62,19 @@ public class CrudSignService implements ISignService {
     }
 
     @Override
-    public List<Sign> getSearchedSigns(String searchTerm) {
-        List<DocSign> s = signISignRepository.findByTitleRegex(searchTerm);
-        return ObjectMapperUtils.mapAll(s, Sign.class);
+    public List<Sign> getSearchedSigns(String searchTerm, String acceptLanguage) {
+        List<DocSign> allResults = signISignRepository.findByTitleRegex(searchTerm);
+
+        List<DocSign> correctResults = allResults.stream()
+                .filter(result ->
+                        result.getCategory().getLanguage().equals(acceptLanguage))
+                .collect(Collectors.toList());
+        return ObjectMapperUtils.mapAll(correctResults, Sign.class);
+    }
+
+    private List<Category> getCategories(String acceptLanguage) {
+        List<DocCategory> all = categoryICategoryRepository.findByLanguage(acceptLanguage);
+        return ObjectMapperUtils.mapAll(all, Category.class);
     }
 
     private List<String> getPersonalSignIds(String userid, String categoryId) {
