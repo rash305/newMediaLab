@@ -5,7 +5,6 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SignModel} from '../../models/sign.model';
 import {catchError, map} from 'rxjs/operators';
-import {CategoryModel} from '../../models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +14,7 @@ export class SignTemplateStoreService {
   signsUrl = environment.baseUrl + '/signs';  // URL to web api
 
   constructor(private http: HttpClient,
-              httpErrorHandler: HttpErrorHandler,
-  ) {
+              httpErrorHandler: HttpErrorHandler) {
     this.handleError = httpErrorHandler.createHandleError('SignStoreService');
   }
 
@@ -27,7 +25,9 @@ export class SignTemplateStoreService {
       httpParams = httpParams.append('category', category);
     }
     return this.http.get<object[]>(this.signsUrl, {params: httpParams})
-      .pipe(map(res => res.map(signData => new SignModel().deserialize(signData))))
+      .pipe(map(res => res.map(signData => new SignModel()
+        .deserialize(signData))
+        .sort((a, b) => a.title.localeCompare(b.title))))
       .pipe(
         catchError(this.handleError('getSigns', []))
       );
@@ -40,20 +40,11 @@ export class SignTemplateStoreService {
     httpParams = httpParams.append('personal', 'true');
 
     return this.http.get<object[]>(this.signsUrl, {params: httpParams})
-      .pipe(map(res => res.map(signData => new SignModel().deserialize(signData))))
+      .pipe(map(res => res.map(signData => new SignModel()
+        .deserialize(signData))
+        .sort((a, b) => a.title.localeCompare(b.title))))
       .pipe(
         catchError(this.handleError('getPersonalSigns', []))
-      );
-  }
-
-  getSearchedSigns(searchTerm): Observable<object[]> {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('searchTerm', searchTerm);
-
-    return this.http.get<object[]>(this.signsUrl + '/search', {params: httpParams})
-      .pipe(map(res => res.map(signData => new SignModel().deserialize(signData))))
-      .pipe(
-        catchError(this.handleError('getSearchedSignList', []))
       );
   }
 }

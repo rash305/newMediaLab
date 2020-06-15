@@ -13,7 +13,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -30,14 +29,14 @@ public class CrudCategoryService implements ICategoryService<Category> {
     private MongoFavoriteSignRepository favoriteSignRepository;
 
     @Override
-    public List<Category> getCategories() {
-        List<DocCategory> all = categoryICategoryRepository.findAll();
+    public List<Category> getCategories(String acceptLanguage) {
+        List<DocCategory> all = categoryICategoryRepository.findByLanguage(acceptLanguage);
 
         return ObjectMapperUtils.mapAll(all, Category.class);
     }
 
     @Override
-    public List<Category> getPersonalCategories(String id) {
+    public List<Category> getPersonalCategories(String id, String acceptLanguage) {
         List<String> categoryIds = getPersonalCategoryIds(id);
         Iterable<DocCategory> allById = categoryICategoryRepository.findAllById(categoryIds);
         // Map iterable to a list

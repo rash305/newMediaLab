@@ -1,0 +1,129 @@
+{
+  "back": "Nyuma",
+  "continue": "Zaidi",
+
+  "app": {
+    "favorite": "Vipendwa",
+    "learn": "Jifunze",
+    "dictionary": "Ishara zote"
+  },
+  "shared": {
+    "general": {
+      "video-upload": {
+        "upload": "Pakia"
+      }
+    },
+    "signs": {
+      "categories": {
+        "message-part1": "Bado haujahifadhi ishara zozote katika vipendwa vyako. Unaweza kuongeza ishara unazotaka kujifunza kwenye",
+        "dictionary": "Ishara zote",
+        "message-part2": ".",
+        "no-categories": "Jamii haiwezi kupatikana tena."
+      },
+      "signs": {
+        "no-signs": "Hakuna ishara.",
+        "no-signs-for-searchterm": "Hakuna ishara kwa '{{searchTerm}}' ya muda wa utaftaji.",
+        "search-results": "Kuna matokeo {{number}} ya kutafuta '{{searchTerm}}'."
+      }
+    }
+  },
+  "add-sign": {
+    "add-sign": "Ongeza ishara",
+    "meaning": "Toa maana",
+    "category": "Chagua jamii",
+    "video": "Ongeza video",
+    "error": {
+      "meaning": "Maana lazima ijazwe",
+      "category": "Jamii lazima ijazwe",
+      "video": "Video lazima ichaguliwe",
+      "video-format": "Fomati ya video hii haiwezi kuchezwa"
+    },
+    "add-sign-confirm": {
+      "change-image": "Badilisha picha",
+      "add": "Ongeza",
+      "uploading": "Pakia ishara",
+      "patience": "Tafadhali subiri kidogo"
+    },
+    "not-logged-in": {
+      "message-part1": "Ili kurekodi ishara na kuziongeza kwenye Ishara zote, lazima uwe umeingia. Nenda kwenye Mipangilio",
+      "message-part2": "ya kuingia.",
+      "settings": "Mipangilio"
+    }
+  },
+  "dictionary": {
+    "personal": {
+      "delete-popup": {
+        "delete-sign": "Ondoa ishara",
+        "message-part1": "Je! Una uhakika unataka kuondoa ishara hii kutoka kwa vipendwa ",
+        "message-part2": " vyako?",
+        "delete": "Ondoa"
+      }
+    },
+    "public": {
+      "search": "Tafuta"
+    }
+  },
+  "learn": {
+    "sign-of-day": "Ishara ya siku",
+    "learn": "Jifunze",
+    "quiz": "Jaribio",
+    "quiz-results": {
+      "learned-signs": "Ulijifunza ishara hizi mpya",
+      "learn-more": "Jifunze zaidi"
+    }
+  },
+  "settings": {
+    "settings": "Mipangilio",
+    "login":{
+      "login": "Ingia",
+      "username-email": "Jina la mtumiaji au barua-pepe",
+      "password": "Nywila",
+      "forgot-password": "Umesahau nywila? Bonyeza hapa.",
+      "error": {
+        "username-email": "Jina la mtumiaji au barua-pepe lazima ijazwe",
+        "password": "Nywila lazima ijazwe",
+        "incorrect-login": "Mchanganyiko wa jina la mtumiaji na nywila sio sahihi"
+      }
+    },
+    "register": {
+      "register": "Jiandikishe",
+      "signup": "Jisajili",
+      "username": "Jina la mtumiaji",
+      "emailadress": "Anwani ya barua-pepe",
+      "password": "Nywila",
+      "password2": "Rudia nywila",
+      "error": {
+        "username": "Jina la mtumiaji lazima ijazwe",
+        "username-5chars": "Jina la mtumiaji lazima liwe na herufi 5 angalau",
+        "username-inuse": "Jina la mtumiaji haliwezi kutumiwa",
+        "emailadress": "Anwani ya barua-pepe lazima ijazwe",
+        "emailadress-wrong-format": "Anwani ya barua-pepe ina muundo usiofaa",
+        "validate": "Kuhalalisha...",
+        "emailadress-inuse": "Anwani ya barua-pepe haliwezi kutumiwa",
+        "password": "Nywila lazima ijazwe",
+        "password-8chars": "Nywila lazima liwe na herufi 8 angalau",
+        "password-specialchar": "Nywila lazima liwe na tabia maalum 1 angalau",
+        "password2": "Nywila lazima kurudiwa",
+        "password2-unequal": "Nywila lazima zifanane"
+      }
+    },
+    "account": {
+      "account": "Akaunti",
+      "username": "Jina la mtumiaji",
+      "email": "Barua-pepe",
+      "this-password": "Nywila la sasa",
+      "new-password": "Nywila mpya",
+      "new-password2": "Rudia nywila mpya",
+      "save": "Kuokoa"
+    },
+    "logout": {
+      "logout": "Ondoka",
+      "message-part1": "Lazima uwe umeingia ili ujumuishe ishara ",
+      "message-part2": "na uiongeze kwenye Ishara zote. Una uhakika unataka ondoka?"
+    },
+    "help": {
+      "help": "Msaada",
+      "message": "Video hii inaelezea jinsi ya kutumia programu hii."
+    }
+  }
+}

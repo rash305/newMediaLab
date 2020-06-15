@@ -4,5 +4,5 @@ import com.newmedia.deafapi.api.models.LearnTask;
 
 public interface ILearnTaskService {
 
-    LearnTask getLearnTask();
+    LearnTask getLearnTask(String acceptLanguage);
 }

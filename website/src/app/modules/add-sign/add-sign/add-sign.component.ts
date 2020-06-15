@@ -5,9 +5,8 @@ import {CategoriesService} from '../../../shared/signs/services/categories.servi
 import {SignDetailsModel} from '../../../shared/signs/models/sign-details.model';
 import {SignDetailsService} from '../../../shared/signs/services/sign-details.service';
 import {SignTemplateService} from '../../../shared/signs/services/sign-template.service';
-import {SignModel} from '../../../shared/signs/models/sign.model';
 import {FileItem} from 'ng2-file-upload';
-import {VideoModel} from '../../../shared/signs/models/video.model';
+import {ImageService} from '../../../shared/signs/services/image.service';
 
 @Component({
   selector: 'app-add-sign',
@@ -16,7 +15,7 @@ import {VideoModel} from '../../../shared/signs/models/video.model';
 })
 export class AddSignComponent implements OnInit {
 
-  uploadingVideo = false;
+  uploadingData = true;
   meaning: string;
   meaningError: string;
   categoryId = '';
@@ -25,11 +24,9 @@ export class AddSignComponent implements OnInit {
   video: FileItem;
   videoError: string;
 
-  private requiredError = ' moet worden ingevuld';
-
   showConfirmationScreen = false;
+  imageNumber = 1;
   sign: SignDetailsModel;
-
   categories: CategoryModel[];
 
   @Output() AddSignMinimalizeEvent = new EventEmitter();
@@ -37,7 +34,8 @@ export class AddSignComponent implements OnInit {
   constructor(private router: Router,
               private categoriesService: CategoriesService,
               private signDetailsService: SignDetailsService,
-              private signService: SignTemplateService) {
+              private signService: SignTemplateService,
+              private imageService: ImageService) {
   }
 
   ngOnInit(): void {
@@ -58,20 +56,48 @@ export class AddSignComponent implements OnInit {
       this.validateVideo(this.video)].every(Boolean)) {
 
       const categoryModel = this.categories.find(x => x.id === this.categoryId);
-      // Send object to backend API
       const signDetails = new SignDetailsModel().deserialize({
         title: this.meaning, categoryId: this.categoryId,
-        category: categoryModel, image: 'https://picsum.photos/200/200'
+        category: categoryModel, image: null
       });
       // Go to confirmation screen for user to confirm sign
       this.sign = signDetails;
       this.showConfirmationScreen = true;
+
+      // Send object to backend API
+      this.imageService.getSignImage(this.imageNumber, this.meaning, categoryModel.title)
+        .subscribe(image => {
+          const signImage = image;
+          signDetails.image = image;
+          this.uploadingData = false;
+        });
+    }
+  }
+
+  changeImage(change: boolean): void {
+    this.uploadingData = true;
+    if (change) {
+      this.imageNumber = this.imageNumber + 1;
+      this.imageService.getSignImage(this.imageNumber, this.sign.title, this.sign.category.title)
+        .subscribe(image => {
+          this.sign.image = image;
+          this.uploadingData = false;
+
+          if (!image) {
+            // Second try
+            this.imageNumber = 1;
+            this.imageService.getSignImage(this.imageNumber, this.sign.title, this.sign.category.title)
+              .subscribe(image2 => {
+                this.sign.image = image2;
+              });
+          }
+        });
     }
   }
 
   validateMeaning(meaning): boolean {
     if (!meaning) {
-      this.meaningError = 'Betekenis' + this.requiredError;
+      this.meaningError = 'add-sign.error.meaning';
       return false;
     }
 
@@ -81,7 +107,7 @@ export class AddSignComponent implements OnInit {
 
   validateCategory(categoryId): boolean {
     if (!categoryId) {
-      this.categoryError = 'Categorie' + this.requiredError;
+      this.categoryError = 'add-sign.error.category';
       return false;
     }
 
@@ -91,7 +117,7 @@ export class AddSignComponent implements OnInit {
 
   validateVideo(video): boolean {
     if (!video) {
-      this.videoError = 'Video moet worden geselecteerd';
+      this.videoError = 'add-sign.error.video';
       return false;
     }
 
@@ -101,27 +127,30 @@ export class AddSignComponent implements OnInit {
 
   private addSignToApp(signDetails: SignDetailsModel): void {
     // Add sign to api
-    this.uploadingVideo = true;
+    this.uploadingData = true;
     this.signDetailsService.addSign(signDetails, this.video).subscribe(sign => {
-    if (sign === null) {
-      this.uploadingVideo = true;
-      // Failed to add sign
-      // Toaster message is enough for now
-    } else {
-      // Make uploaded sign favorite
-      this.signDetailsService.favorite(sign).subscribe();
-      // Add signs to web sign service
-      this.signService.AddSignManually(sign);
-      this.emptyVariables();
-      this.showConfirmationScreen = false;
-      this.AddSignMinimalizeEvent.emit(true);
-    }});
+      this.uploadingData = false;
+
+      if (sign === null) {
+        // Failed to add sign
+        // Toaster message is enough for now
+      } else {
+        // Make uploaded sign favorite
+        this.signDetailsService.favorite(sign, sign.videos.pop()).subscribe();
+        // Add signs to web sign service
+        // this.signService.AddSignManually(sign);
+        this.emptyVariables();
+        console.log(sign);
+        this.routeAfterUpdate(sign.id);
+        this.showConfirmationScreen = false;
+        this.AddSignMinimalizeEvent.emit(true);
+      }
+    });
   }
 
   goBack(): void {
     this.AddSignMinimalizeEvent.emit(true);
   }
-
 
   confirm($event: string) {
     if ($event === 'confirmed') {
@@ -145,5 +174,20 @@ export class AddSignComponent implements OnInit {
 
     this.video = null;
     this.videoError = '';
+  }
+
+  videoErrorFunction($event: any) {
+    this.video = null;
+    this.videoError = 'add-sign.error.video-format';
+  }
+
+  routeAfterUpdate(id) {
+    this.router.navigate(['/sign-router'], {
+      queryParams: {id},
+      queryParamsHandling: 'merge',
+      // preserve the existing query params in the route
+      skipLocationChange: false
+      // do not trigger navigation
+    });
   }
 }

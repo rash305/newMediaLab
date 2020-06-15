@@ -1,7 +1,13 @@
-i {
-  font-size: 300%;
+.sign-of-day{
+  font-size: 1.2em;
 }
 
-.sign-of-day{
+.title {
+  font-size: 1.3em;
+}
+
+.category-title {
+  line-height: 1.7em;
+  vertical-align: bottom;
   font-size: 1.2em;
 }

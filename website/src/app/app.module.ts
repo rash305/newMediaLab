@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FileSelectDirective, FileUploadModule} from 'ng2-file-upload';
+import {FileUploadModule} from 'ng2-file-upload';
 
 import {AppComponent} from './app.component';
 import {CategoriesComponent} from './shared/signs/components/category/categories.component';
@@ -9,7 +9,7 @@ import {LearnComponent} from './modules/learn/learn.component';
 import {SearchComponent} from './modules/dictionary/public-dictionary/search/search.component';
 import {CreateAccountComponent} from './modules/settings/account/create/create-account.component';
 import {LoginAccountComponent} from './modules/settings/account/login/login-account.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {HttpErrorHandler} from './common/network/http-error-handler.service';
 import {SignsComponent} from './shared/signs/components/signs/signs.component';
 import {SettingsPopupComponent} from './modules/settings/popup/settings-popup.component';
@@ -43,6 +43,12 @@ import { ForgotPwConfirmComponent } from './modules/settings/account/login/forgo
 import { AddSignConfirmComponent } from './modules/add-sign/add-sign/add-sign-confirm/add-sign-confirm.component';
 import { VideoUploadComponent } from './shared/general/component/video-upload/video-upload.component';
 import { DomSanitizerPipe } from './common/html/pipes/dom-sanitizer.pipe';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { PixabayDisclaimerComponent } from './common/disclaimer/pixabay-disclaimer/pixabay-disclaimer.component';
+import { SignRouterComponent } from './modules/add-sign/add-sign/sign-router/sign-router.component';
+import {LanguageInterceptor} from './common/network/language-interceptor';
+import { OnderzoeksPopupComponent } from './modules/onderzoek/onderzoeks-popup/onderzoeks-popup.component';
 
 const appRoutes: Routes = [
   {
@@ -86,6 +92,10 @@ const appRoutes: Routes = [
     component: AddSignComponent,
   },
   {
+    path: 'sign-router',
+    component: SignRouterComponent,
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'
@@ -127,6 +137,9 @@ const appRoutes: Routes = [
     AddSignConfirmComponent,
     VideoUploadComponent,
     DomSanitizerPipe,
+    PixabayDisclaimerComponent,
+    SignRouterComponent,
+    OnderzoeksPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -139,6 +152,13 @@ const appRoutes: Routes = [
         useHash: false
       }
     ),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     FormsModule
   ],
   providers: [
@@ -146,8 +166,15 @@ const appRoutes: Routes = [
     HttpErrorHandler,
     { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: NetworkErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LanguageInterceptor, multi: true },
   ],
 bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  // Find more implementation stuff at:
+  // https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-angular8-app-with-ngx-translate
+  return new TranslateHttpLoader(http);
 }

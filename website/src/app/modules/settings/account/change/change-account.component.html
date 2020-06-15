@@ -1,17 +1,17 @@
 <div class="content-container">
   <div class="col-12 purple-border top-container">
-    <i class="fa fa-user-circle"></i><span><b>Account</b></span>
+    <i class="fa fa-user-circle"></i><span><b>{{ 'settings.account.account' | translate }}</b></span>
   </div>
   <div class=" purple-border middle-container d-flex flex-column ">
     <div class="col-12 input-list">
       <i class="fa fa-user-circle"></i>
-      <input type="text" placeholder="Gebruikersnaam" name="uname" required [(ngModel)]="username">
+      <input type="text" placeholder="{{ 'settings.account.username' | translate }}" name="uname" required [(ngModel)]="username">
 
       <i class="fa fa-at"></i>
-      <input type="text" placeholder="E-mailadress" name="email" required [(ngModel)]="emailAddress">
+      <input type="text" placeholder="{{ 'settings.account.email' | translate }}" name="email" required [(ngModel)]="emailAddress">
 
       <i class="fa fa-unlock-alt"></i>
-      <input type="password" placeholder="Huidig wachtwoord" name="opw" required [(ngModel)]="oldPassword">
+      <input type="password" placeholder="{{ 'settings.account.this-password' | translate }}" name="opw" required [(ngModel)]="oldPassword">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!oldPasswordError">
           {{oldPasswordError}}
@@ -19,10 +19,10 @@
       </div>
 
       <i class="fa fa-unlock-alt"></i>
-      <input type="password" placeholder="Nieuw wachtwoord" name="npw" required [(ngModel)]="newPassword">
+      <input type="password" placeholder="{{ 'settings.account.new-password' | translate }}" name="npw" required [(ngModel)]="newPassword">
 
       <i class="fa fa-unlock-alt"></i>
-      <input type="password" placeholder="Herhaal nieuw wachtwoord" name="npw2" required [(ngModel)]="newPassword2">
+      <input type="password" placeholder="{{ 'settings.account.new-password2' | translate }}" name="npw2" required [(ngModel)]="newPassword2">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!newPasswordError">
           {{newPasswordError}}
@@ -31,10 +31,11 @@
     </div>
   </div>
   <div class="col-12 bottom-container">
-      <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-
+      <button (click)="goBack()" class="back-button btn btn-primary" type="button">
+        <i class="fa fa-arrow-left btn-i"></i> {{ 'back' | translate }}
+      </button>
       <button type="button" class="btn btn-primary right-button" (click)="saveChanges()"><i
-        class="fa fa-save btn-i"></i>Opslaan
+        class="fa fa-save btn-i"></i>{{ 'settings.account.save' | translate }}
       </button>
   </div>
 </div>

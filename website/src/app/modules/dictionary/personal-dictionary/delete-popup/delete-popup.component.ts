@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SignDetailsModel} from '../../../../shared/signs/models/sign-details.model';
 import {SignDetailsService} from '../../../../shared/signs/services/sign-details.service';
 import {Router} from '@angular/router';
+import {VideoModel} from '../../../../shared/signs/models/video.model';
 
 @Component({
   selector: 'app-delete-popup',
@@ -13,6 +14,7 @@ export class DeletePopupComponent implements OnInit {
   @Output() DeletePopupMinimalizeEvent = new EventEmitter();
 
   @Input() sign: SignDetailsModel;
+  @Input() video: VideoModel;
 
   constructor(private signDetailsService: SignDetailsService,
               private router: Router) { }
@@ -25,15 +27,13 @@ export class DeletePopupComponent implements OnInit {
   }
 
   deleteSign() {
-    // delete sign from favotieten
-    this.sign.nrOfPersonal -= 1;
-    this.sign.isPersonal = !this.sign.isPersonal;
-    this.signDetailsService.unFavorite(this.sign).subscribe(x => {
-      this.routeAfterFavorateUpdate();
+    // delete sign from favorites
+    this.signDetailsService.unFavorite(this.sign, this.video).subscribe(x => {
+      this.routeAfterFavoriteUpdate();
     });
   }
 
-  routeAfterFavorateUpdate() {
+  routeAfterFavoriteUpdate() {
     this.router.navigate(['/dictionary'], {
       queryParams: {id: this.sign.id, type: 'sign-details'},
       queryParamsHandling: 'merge',

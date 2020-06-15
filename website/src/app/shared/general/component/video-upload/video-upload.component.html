@@ -1,13 +1,13 @@
 <div>
-
-  <div class="col no-padding">
+  <div class="col no-padding ml-1">
     <label for="video-upload" class="btn btn-outline-primary no-padding" style="width: 100%">
         <span>
-          <i class="fa fa-upload" style="width: 100%"></i><br/>Upload
+          <i class="fa fa-upload" style="width: 100%"></i><br/>
+          {{ 'shared.general.video-upload.upload' | translate }}
         </span>
     </label>
   </div>
-  <input type="file" id="video-upload" accept="video/*" ng2FileSelect [uploader]="uploader"/>
+  <input type="file" id="video-upload" accept="video/webm, video/mp4 " ng2FileSelect [uploader]="uploader"/>
 
   <!-- <button type="button" class="btn btn-success btn-s"
            (click)="uploader.uploadAll()"

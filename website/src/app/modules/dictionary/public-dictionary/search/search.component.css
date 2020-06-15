@@ -1,0 +1,11 @@
+.search-bar {
+  border: 0px;
+  height:40px;
+  font-size: 1.3em;
+  background: #eeeeee;
+
+}
+
+.search-bar:focus {
+  background: white;
+}

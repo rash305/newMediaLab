@@ -6,7 +6,6 @@ import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoCategoryRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoFavoriteSignRepository;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoSignRepository;
 import com.newmedia.deafapi.api.models.*;
-import com.newmedia.deafapi.api.services.Interfaces.IFavoritesService;
 import com.newmedia.deafapi.api.services.Interfaces.ILearnTaskService;
 import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,8 @@ public class LearnTaskService implements ILearnTaskService {
     private MongoFavoriteSignRepository favoriteSignRepository;
 
 
-    private List<Category> getCategories() {
-        List<DocCategory> all = categoryICategoryRepository.findAll();
+    private List<Category> getCategories(String acceptLanguage) {
+        List<DocCategory> all = categoryICategoryRepository.findByLanguage(acceptLanguage);
         return ObjectMapperUtils.mapAll(all, Category.class);
     }
 
@@ -65,8 +64,8 @@ public class LearnTaskService implements ILearnTaskService {
 
             // Get to know whether the user already has the question sign in his favorites
             String userId = GetAuthorizedUser();
-            boolean isFavorite = favoriteSignRepository.existsBySignIdAndAndPersonId(question.getId(), userId);
-            question.setIsPersonal(isFavorite);
+            boolean isFavorite = favoriteSignRepository.existsBySignIdAndAndPersonIdAndVideoId(question.getId(), userId, question.getVideos().get(0).getId());
+            question.getVideos().get(0).setIsFavorite(isFavorite);
             learnSubTasks[i] = new LearnSubTask(question, optionalAnswers);
         }
         return learnSubTasks;
@@ -84,8 +83,8 @@ public class LearnTaskService implements ILearnTaskService {
     }
 
     @Override
-    public LearnTask getLearnTask() {
-        List<Category> categories = this.getCategories();
+    public LearnTask getLearnTask(String acceptLanguage) {
+        List<Category> categories = this.getCategories(acceptLanguage);
         Random rand = new Random();
         Category randomCat = categories.get(rand.nextInt(categories.size()));
         List<Sign> signs = this.getSigns(randomCat.getId());

@@ -1,9 +1,17 @@
-
 <div class="row" style="margin: 0;">
-  <div *ngIf="(this.searchTerm && signs.length != 0)" class="col-12">Er zijn {{this.signs.length}} zoekresultaten voor '{{this.searchTerm}}'.</div>
-  <div *ngFor="let sign of signs" class="col-md-3 col-4">
+  <div *ngIf="(this.searchTerm && this.signs && this.signs.length != 0)" class="col-12">
+    {{ 'shared.signs.signs.search-results' | translate:{'number':this.signs.length, 'searchTerm':this.searchTerm} }}
+  </div>
+  <div *ngFor="let sign of signs" class="col-md-4 col-4">
     <app-square-overview-tile [content]="sign" [referencedDomain]="'signs/details'"
                               (click)="ObjectClickedEventHandler.emit(sign)"></app-square-overview-tile>
   </div>
 </div>
-<span *ngIf="(noMoreSignsAvailable && signs.length == 0)" style="margin: 15px">Er zijn geen gebaren<span *ngIf="this.searchTerm"> voor de zoekterm '{{this.searchTerm}}'</span>.</span>
+<span *ngIf="(noMoreSignsAvailable && signs.length == 0 && !this.searchTerm)" style="margin: 15px">
+  {{ 'shared.signs.signs.no-signs' | translate }}
+</span>
+<span *ngIf="(noMoreSignsAvailable && signs.length == 0 && this.searchTerm)" style="margin: 15px">
+  {{ 'shared.signs.signs.no-signs-for-searchterm' | translate:{'searchTerm':this.searchTerm} }}
+</span>
+
+<p-disclaimer></p-disclaimer>

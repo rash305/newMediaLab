@@ -8,6 +8,7 @@ public class FavoriteSignDto implements Serializable {
     private String signId;
     private String categoryId;
     private String personId;
+    private String videoId;
 
     public FavoriteSignDto() {
     }
@@ -42,5 +43,13 @@ public class FavoriteSignDto implements Serializable {
 
     public void setPersonId(String personId) {
         this.personId = personId;
+    }
+
+    public String getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
     }
 }

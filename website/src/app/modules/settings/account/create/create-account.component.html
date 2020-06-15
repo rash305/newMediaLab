@@ -1,52 +1,55 @@
 <div class="content-container">
   <div class="col-12 purple-border top-container">
-    <i class="fa fa-user-plus"></i><span><b>Registreren</b></span>
+    <i class="fa fa-user-plus"></i><span><b>{{ 'settings.register.register' | translate }}</b></span>
   </div>
   <div class=" purple-border middle-container d-flex flex-column ">
     <div class="col-12 input-list">
       <i class="fa fa-user-circle"></i>
-      <input type="text" placeholder="Gebruikersnaam" name="uname" required (focusout)="validateUsername(username)"
+      <input type="text" placeholder="{{ 'settings.register.username' | translate }}" name="uname" required (focusout)="validateUsername(username)"
              [(ngModel)]="username">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!usernameError">
-          {{usernameError}}
+          {{ usernameError | translate }}
         </div>
       </div>
 
       <i class="fa fa-at"></i>
-      <input type="text" placeholder="E-mailadress" name="email" required (focusout)="validateEmail(emailAddress)"
+      <input type="text" placeholder="{{ 'settings.register.emailadress' | translate }}" name="email" required (focusout)="validateEmail(emailAddress)"
              [(ngModel)]="emailAddress">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!emailError">
-          {{emailError}}
+          {{ emailError | translate }}
         </div>
       </div>
 
       <i class="fa fa-unlock-alt"></i>
-      <input type="password" placeholder="Wachtwoord" name="pw" required (focusout)="validatePassword(password)"
+      <input type="password" placeholder="{{ 'settings.register.password' | translate }}" name="pw" required (focusout)="validatePassword(password)"
              [(ngModel)]="password">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!passwordError">
-          {{passwordError}}
+          {{ passwordError | translate }}
         </div>
       </div>
 
       <i class="fa fa-unlock-alt"></i>
-      <input type="password" placeholder="Herhaal wachtwoord" name="pw2" required
-             (focusout)="validatePassword2(password, password2)" [(ngModel)]="password2">
+      <input type="password" placeholder="{{ 'settings.register.password2' | translate }}" name="pw2" required
+             (focusout)="validatePassword2(password, password2)" (keyup.enter)="createAccount()" [(ngModel)]="password2">
       <div class="alert-container">
         <div class="alert-danger" role="alert" [hidden]="!password2Error">
-          {{password2Error}}
+          {{ password2Error | translate }}
         </div>
       </div>
 
     </div>
   </div>
   <div class="col-12 bottom-container">
-    <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-
-    <button type="button" class="btn btn-primary right-button" (click)="createAccount()"><i
-      class="fa fa-sign-in btn-i"></i>Aanmelden
+    <button (click)="goBack()" class="back-button btn btn-primary" type="button">
+      <i class="fa fa-arrow-left btn-i"></i>
+      {{ 'back' | translate }}
+    </button>
+    <button type="button" class="btn btn-primary right-button" (click)="createAccount()">
+      <i class="fa fa-sign-in btn-i"></i>
+      {{ 'settings.register.signup' | translate }}
     </button>
   </div>
 </div>

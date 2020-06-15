@@ -1,13 +1,20 @@
 <div class="content-container">
   <div class="col-12 purple-border top-container">
-<i class="fa fa-question-circle"></i><span><b>Help</b></span>
+<i class="fa fa-question-circle"></i><span><b>{{ 'settings.help.help' | translate }}</b></span>
 </div>
 <div class="container-border purple-border middle-container middle-container-bar">
   <div class="p-4">
-    <span>Something helpfull</span>
+    <span [hidden]="true">{{ 'settings.help.message' | translate }}</span> <br>
+    <span class="pt-1"><br/> Hey participant, you need any help? <br/> We have bad news. There is no instruction video available at this time.</span>
+    <br>
+    <span ><br/> Please mention your struggles in the questionary. If there are any technical blocking issues you can contact one of our developers: <br/> E-mail: s.dijk.nl@gmail.com <br>
+      Good luck!</span>
   </div>
 </div>
   <div class="col-12 bottom-container">
-    <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
+    <button (click)="goBack()" class="back-button btn btn-primary" type="button">
+      <i class="fa fa-arrow-left btn-i"></i>
+      {{ 'back' | translate }}
+    </button>
   </div>
 </div>

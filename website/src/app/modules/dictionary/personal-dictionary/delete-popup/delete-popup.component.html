@@ -1,10 +1,10 @@
 <div class="modal" (click)="this.DeletePopupMinimalizeEvent.emit(true)">
 </div>
-<div class="popup-layer container">
+<div class="popup-layer container limit-phone-size">
   <div class="h-100">
     <div class="content-container">
       <div class="col-12 purple-border top-container">
-        <i class="fa fa-trash"></i><span><b>Gebaar verwijderen</b></span>
+        <i class="fa fa-trash"></i><span><b>{{ 'dictionary.personal.delete-popup.delete-sign' | translate }}</b></span>
       </div>
       <div class="container-border purple-border middle-container middle-container-bar">
         <div class="row p-4">
@@ -15,16 +15,17 @@
             </div>
           </div>
           <div class="col">
-            <span>Weet je zeker dat je dit gebaar uit je
-              Favorieten <i class="fa fa-heart"style="text-align: center"></i>
-              wilt verwijderen?
+            <span>
+              {{ 'dictionary.personal.delete-popup.message-part1' | translate }}
+              <i class="fa fa-heart"style="text-align: center"></i>
+              {{ 'dictionary.personal.delete-popup.message-part2' | translate }}
             </span>
           </div>
         </div>
       </div>
       <div class="col-12 bottom-container">
-        <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> Terug</button>
-        <button type="button" class="btn btn-primary right-button" (click)="deleteSign()"><i class="fa fa-trash btn-i"></i> Verwijderen</button>
+        <button (click)="goBack()" class="back-button btn btn-primary" type="button"><i class="fa fa-arrow-left btn-i"></i> {{ 'back' | translate }}</button>
+        <button type="button" class="btn btn-primary right-button" (click)="deleteSign()"><i class="fa fa-trash btn-i"></i> {{ 'dictionary.personal.delete-popup.delete' | translate }}</button>
       </div>
     </div>
   </div>

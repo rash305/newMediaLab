@@ -12,13 +12,13 @@ public class DocSign {
 
     @Id
     private String id;
-    @Indexed(unique = true)
+    @Indexed()
     private String title;
     @DBRef
     private DocCategory category;
     private String image;
+    @DBRef
     private List<DocVideoReference> videos;
-    private String creator_id;
 
     public DocSign() {
     }
@@ -67,11 +67,7 @@ public class DocSign {
         this.videos = videos;
     }
 
-    public String getCreator_id() {
-        return creator_id;
-    }
-
-    public void setCreator_id(String creator_id) {
-        this.creator_id = creator_id;
+    public void addVideo(DocVideoReference video) {
+        this.videos.add(video);
     }
 }

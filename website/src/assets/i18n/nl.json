@@ -1,0 +1,129 @@
+{
+  "back": "Terug",
+  "continue": "Verder",
+
+  "app": {
+    "favorite": "Favorieten",
+    "learn": "Leren",
+    "dictionary": "Alle gebaren"
+  },
+  "shared": {
+    "general": {
+      "video-upload": {
+        "upload": "Upload"
+      }
+    },
+    "signs": {
+      "categories": {
+        "message-part1": "U heeft nog geen gebaren opgeslagen in uw favorieten. U kunt gebaren toevoegen vanuit",
+        "dictionary": "Alle gebaren",
+        "message-part2": ".",
+        "no-categories": "Categorieën kunnen niet worden opgehaald."
+      },
+      "signs": {
+        "no-signs": "Er zijn geen gebaren.",
+        "no-signs-for-searchterm": "Er zijn geen gebaren voor de zoekterm '{{searchTerm}}'.",
+        "search-results": "Er zijn {{number}} zoekresultaten voor '{{searchTerm}}'."
+      }
+    }
+  },
+  "add-sign": {
+    "add-sign": "Gebaar toevoegen",
+    "meaning": "Geef een betekenis",
+    "category": "Kies een categorie",
+    "video": "Video toevoegen",
+    "error": {
+      "meaning": "Betekenis moet worden ingevuld",
+      "category": "Categorie moet worden ingevuld",
+      "video": "Video moet worden geselecteerd",
+      "video-format": "Dit video formaat kan niet worden afgespeeld"
+    },
+    "add-sign-confirm": {
+      "change-image": "Verander foto",
+      "add": "Toevoegen",
+      "uploading": "Gebaar uploaden",
+      "patience": "Een moment geduld a.u.b."
+    },
+    "not-logged-in": {
+      "message-part1": "Om gebaren op te nemen en aan het Alle gebaren toe te voegen, moet je ingelogd zijn. Ga naar Instellingen",
+      "message-part2": "om in te loggen.",
+      "settings": "Instellingen"
+    }
+  },
+  "dictionary": {
+    "personal": {
+      "delete-popup": {
+        "delete-sign": "Gebaar verwijderen",
+        "message-part1": "Weet je zeker dat je dit gebaar uit je Favorieten ",
+        "message-part2": " wilt verwijderen?",
+        "delete": "Verwijderen"
+      }
+    },
+    "public": {
+      "search": "Zoeken"
+    }
+  },
+  "learn": {
+    "sign-of-day": "Gebaar van de dag",
+    "learn": "Leren",
+    "quiz": "Quiz",
+    "quiz-results": {
+      "learned-signs": "Deze nieuwe gebaren heb je geleerd",
+      "learn-more": "Meer leren"
+    }
+  },
+  "settings": {
+    "settings": "Instellingen",
+    "login":{
+      "login": "Inloggen",
+      "username-email": "Gebruikersnaam of e-mail",
+      "password": "Wachtwoord",
+      "forgot-password": "Wachtwoord vergeten? Klik hier.",
+      "error": {
+        "username-email": "Gebruikersnaam of e-mail moet worden ingevuld",
+        "password": "Wachtwoord moet worden ingevuld",
+        "incorrect-login": "Combinatie van gebruikersnaam en wachtwoord is incorrect"
+      }
+    },
+    "register": {
+      "register": "Registreren",
+      "signup": "Aanmelden",
+      "username": "Gebruikersnaam",
+      "emailadress": "E-mailadres",
+      "password": "Wachtwoord",
+      "password2": "Herhaal wachtwoord",
+      "error": {
+        "username": "Gebruikersnaam moet worden ingevuld",
+        "username-5chars": "Gebruikersnaam moet minimaal 5 tekens bevatten",
+        "username-inuse": "Gebruikersnaam kan niet worden gebruikt",
+        "emailadress": "E-mailadress moet worden ingevuld",
+        "emailadress-wrong-format": "E-mailadres heeft de verkeerde opbouw",
+        "validate": "Valideren...",
+        "emailadress-inuse": "E-mailadres kan niet worden gebruikt",
+        "password": "Wachtwoord moet worden ingevuld",
+        "password-8chars": "Wachtwoord moet minimaal 8 tekens bevatten",
+        "password-specialchar": "Wachtwoord moet tenminste 1 speciaal teken bevatten",
+        "password2": "Wachtwoord moet worden herhaald",
+        "password2-unequal": "Wachtwoorden moeten overeenkomen"
+      }
+    },
+    "account": {
+      "account": "Account",
+      "username": "Gebruikersnaam",
+      "email": "E-mailadres",
+      "this-password": "Huidig wachtwoord",
+      "new-password": "Nieuw wachtwoord",
+      "new-password2": "Herhaal nieuw wachtwoord",
+      "save": "Opslaan"
+    },
+    "logout": {
+      "logout": "Uitloggen",
+      "message-part1": "Om gebaren op te nemen ",
+      "message-part2": "en aan het Alle gebaren toe te voegen, moet je ingelogd zijn. Weet je zeker dat je wilt uitloggen?"
+    },
+    "help": {
+      "help": "Help",
+      "message": "Deze video legt uit hoe je deze app kan gebruiken."
+    }
+  }
+}

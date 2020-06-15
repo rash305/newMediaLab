@@ -1,16 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HandleError, HttpErrorHandler} from '../../../common/network/http-error-handler.service';
 import {catchError, map} from 'rxjs/operators';
-import {CategoryModel} from '../models/category.model';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {SignDetailsModel} from '../models/sign-details.model';
 import {Observable, of} from 'rxjs';
-import {Account} from '../../account/models/account';
-import {SignModel} from '../models/sign.model';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {VideoModel} from '../models/video.model';
 import {MessagesService} from '../../../common/errors/messages.service';
+import {FavoriteVideoModel} from '../models/favoriteVideo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,17 +40,15 @@ export class SignDetailsService {
   addSign(signDetails: SignDetailsModel, signVideo: FileItem): Observable<SignDetailsModel> {
     return new Observable(observer => {
       const uploader = this.getFileUploader();
-      this.messageService.add(`Upload started`);
 
       uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
         // Check for true result
         if (status === 0) {
           observer.error();
-          this.messageService.add(response);
         } else {
           // Insert video url
-          this.messageService.add(`VIdeo uploaded` + response);
-          signDetails.videos = [new VideoModel(response)];
+          const uploadedVideo = new VideoModel().deserialize(JSON.parse(response));
+          signDetails.videos = [uploadedVideo];
           this.http.post<SignDetailsModel>(this.signDetailsUrl, signDetails)
             .pipe(map(res => {
               return new SignDetailsModel().deserialize(res);
@@ -62,7 +58,6 @@ export class SignDetailsService {
             ).subscribe(x => {
             observer.next(x);
             observer.complete();
-            this.messageService.add(`Upload finished` + x);
           });
         }
       };
@@ -83,12 +78,13 @@ export class SignDetailsService {
     uploader.onBeforeUploadItem = (item) => {
       item.withCredentials = false;
     };
-
     return uploader;
   }
 
-  favorite(sign: SignDetailsModel): Observable<boolean> {
-    return this.http.post<SignDetailsModel>(this.signUrl + '/favorite', sign)
+
+  favorite(sign: SignDetailsModel, video: VideoModel): Observable<boolean> {
+    const favoriteVideoModel = new FavoriteVideoModel(sign.id, sign.category.id, video.id);
+    return this.http.post<SignDetailsModel>(this.signUrl + '/favorite', favoriteVideoModel)
       .pipe(map(x => {
           return true;
         })
@@ -98,8 +94,9 @@ export class SignDetailsService {
       );
   }
 
-  unFavorite(sign: SignDetailsModel): Observable<boolean> {
-    return this.http.post<SignDetailsModel>(this.signUrl + '/unfavorite', sign)
+  unFavorite(sign: SignDetailsModel, video: VideoModel): Observable<boolean> {
+    const favoriteVideoModel = new FavoriteVideoModel(sign.id, sign.category.id, video.id);
+    return this.http.post<SignDetailsModel>(this.signUrl + '/unfavorite', favoriteVideoModel)
       .pipe(map(x => {
           return true;
         })

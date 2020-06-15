@@ -21,8 +21,6 @@ export class CreateAccountComponent implements OnInit {
   password2: string;
   password2Error: string;
 
-  private requiredError = ' moet worden ingevuld';
-
   @Output() messageSettingsStatus = new EventEmitter<string>();
 
   constructor(private router: Router,
@@ -35,7 +33,6 @@ export class CreateAccountComponent implements OnInit {
 
   createAccount(): void {
     // All validation checks
-
     if ([this.validateUsername(this.username),
       this.validateEmail(this.emailAddress),
       this.validatePassword(this.password),
@@ -45,22 +42,23 @@ export class CreateAccountComponent implements OnInit {
       // Send object to backend API
       this.createAccountOnServer(account);
 
-      // Go to categories page (and be logged in)
-      // this.router.navigate(['/categories']);
+      // Close popup (and be logged in)
       this.messageSettingsStatus.emit('close');
     }
   }
 
   validateUsername(username): boolean {
     if (!username) {
-      this.usernameError = 'Gebruikersnaam' + this.requiredError;
-      return false;
-    }
-    if (username.length < 5) {
-      this.usernameError = 'Gebruikersnaam moet minimaal 5 tekens bevatten';
+      this.usernameError = 'settings.register.error.username';
       return false;
     }
 
+    if (username.length < 5) {
+      this.usernameError = 'settings.register.error.username-5chars';
+      return false;
+    }
+
+    this.usernameError = 'settings.register.error.validate';
     let returnValue = true;
     this.accountService.checkUsernameAvailability(username)
       .toPromise().then(result => {
@@ -68,31 +66,25 @@ export class CreateAccountComponent implements OnInit {
           this.usernameError = '';
           returnValue = true;
         } else {
-          this.usernameError = 'Gebruikersnaam kan niet worden gebruikt';
+          this.usernameError = 'settings.register.error.username-inuse';
           returnValue = false;
         }
       });
-
     return returnValue;
   }
 
    validateEmail(email): boolean {
      if (!email) {
-       this.emailError = 'E-mailadres' + this.requiredError;
-       return false;
-     }
-
-     if (email.length < 1) {
-       this.emailError = 'E-mailadres is te kort';
+       this.emailError = 'settings.register.error.emailadress';
        return false;
      }
 
      if (!this.validateEmailRegex(email)) {
-       this.emailError = 'E-mailadres heeft het verkeerde opbouw';
+       this.emailError = 'settings.register.error.emailadress-wrong-format';
        return false;
      }
 
-     this.emailError = 'Valideren...';
+     this.emailError = 'settings.register.error.validate';
      let returnValue = true;
      this.accountService.checkEmailAvailability(email)
        .toPromise().then(result => {
@@ -100,7 +92,7 @@ export class CreateAccountComponent implements OnInit {
            this.emailError = '';
            returnValue = true;
          } else {
-           this.emailError = 'E-mailadres kan niet worden gebruikt';
+           this.emailError = 'settings.register.error.emailadress-inuse';
            returnValue =  false;         }
 
        });
@@ -115,17 +107,17 @@ export class CreateAccountComponent implements OnInit {
 
   validatePassword(password): boolean {
     if (!password) {
-      this.passwordError = 'Wachtwoord' + this.requiredError;
+      this.passwordError = 'settings.register.error.password';
       return false;
     }
 
     if (password.length < 8) {
-      this.passwordError = 'Wachtwoord moet minimaal 8 tekens bevatten';
+      this.passwordError = 'settings.register.error.password-8chars';
       return false;
     }
 
     if (!this.validatePasswordRegex(password)) {
-      this.passwordError = 'Wachtwoord moet tenminste 1 speciaal teken bevatten';
+      this.passwordError = 'settings.register.error.password-specialchar';
       return false;
     }
 
@@ -141,12 +133,12 @@ export class CreateAccountComponent implements OnInit {
 
   validatePassword2(password2, password): boolean {
     if (!password2) {
-      this.password2Error = 'Wachtwoord' + this.requiredError;
+      this.password2Error = 'settings.register.error.password2';
       return false;
     }
 
     if (!(password2 === password)) {
-      this.password2Error = 'Wachtwoorden moeten overeenkomen';
+      this.password2Error = 'settings.register.error.password2-unequal';
       return false;
     }
 
