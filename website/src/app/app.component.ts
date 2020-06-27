@@ -15,7 +15,7 @@ export class AppComponent {
   hideSettingsPopup = true;
   hideAddSignPopup = true;
   hideNotLoggedInPopup = true;
-  acceptedLanguages = ['nl', 'sw'];
+  acceptedLanguages = ['nl', 'sw', 'en'];
   hideOnderzoeksPopup: boolean;
 
   constructor(authenticationService: AuthenticationService,
@@ -49,9 +49,4 @@ export class AppComponent {
   ShowNotLoggedInPopup() {
     this.hideNotLoggedInPopup = !this.hideNotLoggedInPopup;
   }
-
-  receiveLoginStatus($event: boolean) {
-    this.isLoggedIn = $event;
-  }
-
 }
