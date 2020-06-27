@@ -4,14 +4,12 @@ import com.newmedia.deafapi.api.ApiApplication;
 import com.newmedia.deafapi.api.dtos.ImageDto;
 import com.newmedia.deafapi.api.services.Interfaces.IImageService;
 import com.newmedia.deafapi.api.services.fileupload.FileStorageService;
-import com.newmedia.deafapi.api.utils.ObjectMapperUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -37,9 +35,10 @@ public class ImageController {
     // https://restfulapi.net/resource-naming/
     @GetMapping("/api/images")
     public ImageDto getSignImage(@RequestParam(value = "imageNumber", required = false) int imageNumber,
-                               @RequestParam(value = "signTitle") String signTitle,
-                               @RequestParam(value = "signCategory") String signCategory) throws Exception {
-        String imageUrl = IImageService.getSignImage(imageNumber, signTitle, signCategory, "nl");
+                                 @RequestParam(value = "signTitle") String signTitle,
+                                 @RequestParam(value = "signCategory") String signCategory,
+                                 @RequestHeader(value="Accept-Language") String acceptLanguage) throws Exception {
+        String imageUrl = IImageService.getSignImage(imageNumber, signTitle, signCategory, acceptLanguage);
         ImageDto imageDto = new ImageDto(imageUrl);
         return imageDto;
     }
