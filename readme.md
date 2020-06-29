@@ -20,10 +20,10 @@ The environment variables can be changed in the following files:
 ``` Config
 ./website/src/environments/environment.prod.ts => config the URL of the backend API (Before building the Angular app)
 ./api/src/main/resources/application-prod.properties => config all environment values the API usage (Can changed during production)
-./api/src/main/resources/googlekeys.json => The API key to communication with the Google translate API (Can changed during production)
+./api/src/main/resources/googlekeys.json => The API key to communication with the Google translate API (Can be changed during production)
 ```
 
-We personally preferred to develop the Angular project in Webstorm and the API in IntelliJ. Yet, any Idea will do.  
+We preferred to develop the Angular project in Webstorm and the API in IntelliJ. Yet, any Idea will do.  
 The angular website can be served by Node.JS with the command: 
 ```bash
 ng serve
@@ -70,7 +70,7 @@ cordova run browser
 # Each device could have his own configuration steps for example we tested the API 
 # on an http server for demo purposes and therefor we had to add HTTP support in the Cordova config.xml:
 <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
-	<application android:usesCleartextTraffic="true" />
+    <application android:usesCleartextTraffic="true" />
 </edit-config>
     
 
@@ -86,10 +86,10 @@ We are aware that the source code contains some passwords, keys and tokens. All 
 
 The master repository contains all versions that are used during deliveries of the project 
 
-The Test branch was to automatically build and deploy a version to the hosted server. This gives room to do bug fixes just before delivery. If a fix causes new problems we still have a stable version in the master.
+The Test branch was to automatically build and deploy a version to the Ubuntu server. This gives room to do bug fixes just before delivery. If a fix causes new problems we still have a stable version in the master.
 Unfortunately, this branch is not used as the Jenkins Build server crashed because there was not enough ram available on our server. Updating the VPS would cost too much, as the VPS was already 5 dollar a month.
 
-The Acc branch was set up to automatically build and deploy a version to the hosted server. With this branch the code directly comming from dev could be tested with a database containing clean data only. Also differentes between the local development environment and the server environment could be noted.  
+The Acc branch was set up to automatically build and deploy a version to the Ubuntu server. With this branch, the code directly coming from dev could be tested with a database containing clean data only. Also, differences between the local development environment and the server environment could be noted.  
 Unfortunately, this branch is not used as the Jenkins Build server crashed because there was not enough ram available on our server. Updating the VPS would cost too much, as the VPS was already 5 dollar a month.
 
 The dev branch is used for development. 
