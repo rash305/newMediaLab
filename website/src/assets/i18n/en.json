@@ -1,7 +1,129 @@
 {
+  "back": "Back",
+  "continue": "Continue",
+
   "app": {
-    "favorite": "",
-    "learn": "",
-    "dictionary": ""
+    "favorite": "Favorites",
+    "learn": "Learn",
+    "dictionary": "All signs"
+  },
+  "shared": {
+    "general": {
+      "video-upload": {
+        "upload": "Upload"
+      }
+    },
+    "signs": {
+      "categories": {
+        "message-part1": "You have not saved any signs in your favorites yet. You can add signs from",
+        "dictionary": "All signs",
+        "message-part2": ".",
+        "no-categories": "Categories cannot be loaded."
+      },
+      "signs": {
+        "no-signs": "There are no signs.",
+        "no-signs-for-searchterm": "There are no signs for the search term '{{searchTerm}}'.",
+        "search-results": "There are {{number}} results for '{{searchTerm}}'."
+      }
+    }
+  },
+  "add-sign": {
+    "add-sign": "Add sign",
+    "meaning": "Give a meaning",
+    "category": "Select a category",
+    "video": "Add video",
+    "error": {
+      "meaning": "Meaning has to be filled in",
+      "category": "Category has to be filled in",
+      "video": "Video has to be selected",
+      "video-format": "This video format cannot be played"
+    },
+    "add-sign-confirm": {
+      "change-image": "Change image",
+      "add": "Add",
+      "uploading": "Uploading sign",
+      "patience": "Please wait a moment."
+    },
+    "not-logged-in": {
+      "message-part1": "To record signs and to add them to All signs, you have to be logged in. Go to Settings",
+      "message-part2": "to log in.",
+      "settings": "Settings"
+    }
+  },
+  "dictionary": {
+    "personal": {
+      "delete-popup": {
+        "delete-sign": "Delete sign",
+        "message-part1": "Are you sure you want to remove this signs from your Favorites ",
+        "message-part2": "?",
+        "delete": "Delete"
+      }
+    },
+    "public": {
+      "search": "Search"
+    }
+  },
+  "learn": {
+    "sign-of-day": "Sign of the day",
+    "learn": "Learn",
+    "quiz": "Quiz",
+    "quiz-results": {
+      "learned-signs": "You have learnt these new signs",
+      "learn-more": "Learn more"
+    }
+  },
+  "settings": {
+    "settings": "Settings",
+    "login":{
+      "login": "Log in",
+      "username-email": "Username or e-mailadress",
+      "password": "Password",
+      "forgot-password": "Forgot password? Click here.",
+      "error": {
+        "username-email": "Username or e-mailadress has to be filled in",
+        "password": "Password has to be filled in",
+        "incorrect-login": "Combination of username and password is incorrect"
+      }
+    },
+    "register": {
+      "register": "Register",
+      "signup": "Sign up",
+      "username": "Username",
+      "emailadress": "E-mailadress",
+      "password": "Password",
+      "password2": "Repeat password",
+      "error": {
+        "username": "Username has to be filled in",
+        "username-5chars": "Username needs to have at least 5 characters",
+        "username-inuse": "Username cannot be used",
+        "emailadress": "E-mailadress has to be filled in",
+        "emailadress-wrong-format": "E-mailadress has the wrong format",
+        "validate": "Validate...",
+        "emailadress-inuse": "E-mailadress cannot be used",
+        "password": "Password has to be filled in",
+        "password-8chars": "Password needs to have at least 8 characters",
+        "password-specialchar": "Password needs to have at least 1 special character",
+        "password2": "Password has to be repeated",
+        "password2-unequal": "Passwords have to match"
+      }
+    },
+    "account": {
+      "account": "Account",
+      "username": "Username",
+      "email": "E-mailadress",
+      "this-password": "Current password",
+      "new-password": "New password",
+      "new-password2": "Repeat new password",
+      "save": "Save"
+    },
+    "logout": {
+      "logout": "Log out",
+      "message-part1": "To record signs ",
+      "message-part2": "and to add them to All signs, you have to be logged in. Are you sure you want to log out?"
+    },
+    "help": {
+      "help": "Help",
+      "message": "This video will explain how to use this app."
+    }
   }
 }

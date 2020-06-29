@@ -1,6 +1,5 @@
 package com.newmedia.deafapi.api.services.smartImage;
 
-import com.flickr4java.flickr.FlickrException;
 import com.newmedia.deafapi.api.dataservices.docModels.DocTranslatedWord;
 import com.newmedia.deafapi.api.dataservices.impl.mongo.MongoTranslationRepository;
 import com.newmedia.deafapi.api.services.Interfaces.IImageService;
@@ -11,10 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
@@ -37,16 +33,20 @@ public class ImageService implements IImageService {
         try {
             String originalTitle = signTitle.toLowerCase();
             String englishTitle;
-            Optional<DocTranslatedWord> translation = translateTranslationRepository.findFirstByWordAndLanguage(originalTitle, language);
-            if (translation.isPresent()) {
-                englishTitle = translation.get().getEnglishTranslation();
-            } else{
-                englishTitle = translateService.getTranslation(signTitle, language);
-                DocTranslatedWord translatedWord = new DocTranslatedWord();
-                translatedWord.setEnglishTranslation(englishTitle);
-                translatedWord.setWord(originalTitle);
-                translatedWord.setLanguage(language);
-                translateTranslationRepository.insert(translatedWord);
+            if(language.equals("en")) {
+                englishTitle = signTitle;
+            } else {
+                Optional<DocTranslatedWord> translation = translateTranslationRepository.findFirstByWordAndLanguage(originalTitle, language);
+                if (translation.isPresent()) {
+                    englishTitle = translation.get().getEnglishTranslation();
+                } else {
+                    englishTitle = translateService.getTranslation(signTitle, language);
+                    DocTranslatedWord translatedWord = new DocTranslatedWord();
+                    translatedWord.setEnglishTranslation(englishTitle);
+                    translatedWord.setWord(originalTitle);
+                    translatedWord.setLanguage(language);
+                    translateTranslationRepository.insert(translatedWord);
+                }
             }
 
             String searchTerm =  englishTitle;

@@ -9,7 +9,7 @@ export class LanguageInterceptor implements HttpInterceptor {
     let language = localStorage.getItem('lang');
 
     if (language === null) {
-      language = 'nl';
+      language = 'en';
     }
     request = request.clone({
       setHeaders: {

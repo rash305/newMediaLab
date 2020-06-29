@@ -167,7 +167,7 @@ export class CreateAccountComponent implements OnInit {
           // Toaster message is enough for now
         } else {
           // log user in
-          location.reload(true);
+          location.href = './index.html';
         }
       });
   }
