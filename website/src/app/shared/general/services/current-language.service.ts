@@ -14,7 +14,7 @@ export class CurrentLanguageService {
     let lang = localStorage.getItem('lang');
 
     if (!lang) {
-      lang = 'nl';
+      lang = 'en';
     }
     return lang;
   }

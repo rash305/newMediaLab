@@ -149,7 +149,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes, {
-        useHash: false
+        useHash: true
       }
     ),
     TranslateModule.forRoot({
@@ -176,5 +176,5 @@ export class AppModule {
 export function HttpLoaderFactory(http: HttpClient) {
   // Find more implementation stuff at:
   // https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-angular8-app-with-ngx-translate
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, 'assets/i18n/');
 }

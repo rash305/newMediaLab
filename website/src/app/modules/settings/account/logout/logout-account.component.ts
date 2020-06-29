@@ -23,6 +23,6 @@ export class LogoutAccountComponent implements OnInit {
   logout(): void {
     // Do some service magic
     this.authServer.logout();
-    location.reload(true);
+    location.href = './index.html';
   }
 }

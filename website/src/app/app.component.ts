@@ -23,6 +23,7 @@ export class AppComponent {
               private route: ActivatedRoute,
               private languageService: CurrentLanguageService) {
     translate.setDefaultLang(languageService.getLanguage());
+    languageService.setLanguage(languageService.getLanguage());
 
     authenticationService.isLoggedInEmitter.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
