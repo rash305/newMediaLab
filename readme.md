@@ -81,3 +81,15 @@ The app uses a MongoDB as database. The connection has to be configured in the A
 
 # Data leak in source code
 We are aware that the source code contains some passwords, keys and tokens. All these values are uploaded to the Github to make the development process easier as we all used the same remote development resources (Same dev database and same external API accounts). For this reason, the repository is private and the environment properties are changed when the API is deployed to a demo server.
+
+# Branches
+
+The master repository contains all versions that are used during deliveries of the project 
+
+The Test branch was to automatically build and deploy a version to the hosted server. This gives room to do bug fixes just before delivery. If a fix causes new problems we still have a stable version in the master.
+Unfortunately, this branch is not used as the Jenkins Build server crashed because there was not enough ram available on our server. Updating the VPS would cost too much, as the VPS was already 5 dollar a month.
+
+The Acc branch was set up to automatically build and deploy a version to the hosted server. With this branch the code directly comming from dev could be tested with a database containing clean data only. Also differentes between the local development environment and the server environment could be noted.  
+Unfortunately, this branch is not used as the Jenkins Build server crashed because there was not enough ram available on our server. Updating the VPS would cost too much, as the VPS was already 5 dollar a month.
+
+The dev branch is used for development. 
