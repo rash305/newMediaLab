@@ -4,7 +4,7 @@
 This app is created to help the Fynn foundation with the education of parents of deaf children in developing countries. The app is designed with a pocket dictionary feel. Because of the wide variety in sign language in all the different languages that are spoken in developing countries, the database has to be extended by the users of the app. 
 
 ## Installation
-The backend API is written in Java with the Spring boot framework and thus should be hosted by a Java web engine. We used Tomcat on a Ubunutu server for this. 
+The backend API is written in Java with the Spring boot framework and thus should be hosted by a Java web engine. We used Tomcat on a Ubuntu server for this. 
 
 If the app is hosted as a web application any web server engine will do. The app is written in Angular and exported as a SPA application. Note to get the URL routing of SPA applications working the URL routing has to be forwarded to the Index.html
 
@@ -23,7 +23,7 @@ The environment variables can be changed in the following files:
 ./api/src/main/resources/googlekeys.json => The API key to communication with the Google translate API (Can be changed during production)
 ```
 
-We preferred to develop the Angular project in Webstorm and the API in IntelliJ. Yet, any Idea will do.  
+We preferred to develop the Angular project in Webstorm and the API in IntelliJ. Yet, any IDE will do.  
 The angular website can be served by Node.JS with the command: 
 ```bash
 ng serve
